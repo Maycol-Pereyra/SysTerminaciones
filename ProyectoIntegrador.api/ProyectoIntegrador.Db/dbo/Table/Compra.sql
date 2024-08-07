@@ -1,0 +1,21 @@
+﻿CREATE TABLE [dbo].[Compra] (
+	[Id] INT PRIMARY KEY IDENTITY,
+	[SuplidorId] INT NOT NULL,
+	[NumeroFactura] VARCHAR(15) NOT NULL,
+	[MedioPagoId] INT NOT NULL,
+	[Monto] DECIMAL(18, 2) NOT NULL,
+	[BalancePendiente] DECIMAL(18, 2) NOT NULL,
+	[Descuento] DECIMAL(18, 2) NOT NULL,
+	[Impuesto] DECIMAL(18, 2) NOT NULL,
+	[TipoComprobanteId] INT NOT NULL,
+	[Comprobante] VARCHAR(8) NOT NULL,
+	[Concepto] VARCHAR(100) NOT NULL,
+	[UsuarioCreacionId] INT NOT NULL,
+	[FechaModificacion] DATETIME NOT NULL DEFAULT GETDATE(),
+	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
+	[EstaActivo] BIT NOT NULL,
+	FOREIGN KEY (SuplidorId) REFERENCES Suplidor(Id),
+	FOREIGN KEY (MedioPagoId) REFERENCES Registro(Id),
+	FOREIGN KEY (TipoComprobanteId) REFERENCES Registro(Id),
+	FOREIGN KEY (UsuarioCreacionId) REFERENCES Usuario(Id)
+)

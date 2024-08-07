@@ -1,0 +1,219 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="vm">
+        <ng-container *ngIf="vm.id">Editar</ng-container>
+        <ng-container *ngIf="!vm.id">Crear</ng-container>
+        Usuario
+        <ng-container *ngIf="vm.id">'{{vm.nombre}}'</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body" style="min-height: 404px;">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent fixed-top">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="vm">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+        <div class="form-group row">
+          
+          <div class="col-lg-12">
+            <label class="form-label">Nombre</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="nombre"
+              placeholder="Nombre" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('nombre')"
+              [class.is-valid]="isControlValid('nombre')"
+              formControlName="nombre" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'nombre')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'nombre')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'nombre')">Debe tener máximo 100 caracteres</div>
+          </div>         
+          
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Apellido</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="apellido"
+              placeholder="Apellido" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('apellido')"
+              [class.is-valid]="isControlValid('apellido')"
+              formControlName="apellido" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'apellido')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'apellido')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'apellido')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+        
+
+        <div class="form-group row">
+
+          <div class="col-lg-12">
+            <label class="form-label">Correo</label>
+            <input 
+              type="email" 
+              class="form-control form-control-lg " 
+              name="correo"
+              placeholder="Correo" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('correo')"
+              [class.is-valid]="isControlValid('correo')"
+              formControlName="correo" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'correo')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('email', 'correo') || controlHasError('pattern', 'correo')">Debe ser un correo válido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'correo')">Debe tener máximo 100 caracteres</div>
+          </div>          
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Perfil</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="perfilId"  
+            formControlName="perfilId"
+            [class.is-invalid]="isControlInvalid('perfilId')">
+            <option [ngValue]="null">Seleccione Uno</option>
+            <ng-container *ngFor="let item of perfiles$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>                
+          <!-- <span class="form-text text-muted">Comité de evaluación a asignar para las solicitudes de la sucursal, moneda y rango de monto seleccionado.</span> -->
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'perfilId')">Es requerido</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Usuario del Core</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="usuarioCoreId"  
+            formControlName="usuarioCoreId"
+            [class.is-invalid]="isControlInvalid('usuarioCoreId')">
+            <option [ngValue]="null">-</option>
+            <ng-container *ngFor="let item of usuarioCore$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>                
+          <!-- <span class="form-text text-muted">Comité de evaluación a asignar para las solicitudes de la sucursal, moneda y rango de monto seleccionado.</span> -->
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'usuarioCoreId')">Es requerido</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Sucursal / Agencia por Defecto</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="sucursalAgenciaId"  
+            formControlName="sucursalAgenciaId"
+            [class.is-invalid]="isControlInvalid('sucursalAgenciaId')">
+            <option [ngValue]="null">-</option>
+            <ng-container *ngFor="let item of sucursalAgencia$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>                
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'sucursalAgenciaId')">Es requerido</div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Nota</label>
+            <textarea 
+              type="text" 
+              class="form-control " 
+              name="nota"
+              placeholder="Nota" 
+              autocomplete="off"
+              rows="3"
+              [class.is-invalid]="isControlInvalid('nota')"
+              [class.is-valid]="isControlValid('nota')"
+              formControlName="nota"></textarea>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'nota')">Debe tener máximo 250 caracteres</div>
+          </div>
+        </div>
+
+        <div class="separator separator-dashed my-8"></div>
+
+        <h3 class="font-size-lg text-dark-75 font-weight-bold mb-10">
+          Datos de Acceso
+        </h3>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Usuario</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="login"
+              placeholder="Usuario" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('login')"
+              [class.is-valid]="isControlValid('login')"
+              formControlName="login" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'login')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'login')">Debe tener al menos 4 caracteres</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'login')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Contraseña</label>
+            <input 
+              type="password" 
+              class="form-control form-control-lg " 
+              name="password"
+              placeholder="Contraseña" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('password')"
+              [class.is-valid]="isControlValid('password')"
+              formControlName="password" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'password')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'password')">Debe tener mínimo 4 caracteres</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'password')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Confirmación de la Contraseña</label>
+            <input 
+              type="password" 
+              class="form-control form-control-lg " 
+              name="confirmacionPassword"
+              placeholder="Confirmación de la Contraseña" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('confirmacionPassword')"
+              [class.is-valid]="isControlValid('confirmacionPassword')"
+              formControlName="confirmacionPassword" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'confirmacionPassword')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'confirmacionPassword')">Debe tener máximo 100 caracteres</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('passwordSonIguales', 'confirmacionPassword')">La nueva contraseña y la confirmación deben ser iguales</div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancelar</button>
+    <ng-container *ngIf="vm">
+
+      <button type="submit" class="btn btn-primary btn-elevate" (click)="save()"
+        [disabled]="formGroup.invalid || procesando">Guardar</button>
+    </ng-container>
+  </div>
+</div>

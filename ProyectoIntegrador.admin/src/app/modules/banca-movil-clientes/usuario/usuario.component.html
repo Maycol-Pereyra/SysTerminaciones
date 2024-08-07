@@ -1,0 +1,317 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Cliente</h3>
+    </div>
+    <div class="card-toolbar">
+      <button
+          type="button" 
+          class="btn btn-primary btn-round ripple light mr-2" (click)="descargaExcelNo1()">
+          <i class="fa fa-spinner fa-spin" *ngIf="cargandoArchivoExcel"></i>
+          <i class="icofont icofont-file-excel" *ngIf="!cargandoArchivoExcel"></i>
+          Exportar a Excel
+      </button>
+      <button type="button" class="btn btn-primary mr-2" (click)="refrescar()">Refrescar</button>
+      <button type="button" class="btn btn-primary" (click)="create()">Nuevo</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <div class="form form-label-right">
+      
+      <ng-container *ngIf="!mostrarMasFiltros" class="mb-5">
+        <div class="form-group row">
+          
+          <div class="col-md-3 col-lg-4" [formGroup]="searchGroup">
+            <label class="form-label">Búsqueda General</label>
+            <input type="text" class="form-control" name="searchText" placeholder="Búsqueda" value="" formControlName="searchTerm" />
+            <small class="form-text text-muted">Búsqueda en <b>nombre y apellido, cédula, pasaporte, RNC, correo y/o usuario</b> </small>
+          </div>
+  
+          <div class="col-md-3 col-lg-2">
+            <div [formGroup]="filterGroup">
+              <label class="form-label">Estado</label>
+              <select 
+                class="form-control selectpicker"
+                data-size="7"
+                data-live-search="true"
+                name="estadoId"  
+                formControlName="estadoId">
+                <option [ngValue]="null">Todos</option>
+                <option value="1">Activo</option>
+                <option value="2">Inactivo</option>
+              </select>   
+            </div>             
+          </div>
+  
+  
+          <div class="col-md-3 col-lg-2">
+            <div [formGroup]="filterGroup">
+              <label class="form-label">Contraseña</label>
+              <select 
+                class="form-control selectpicker"
+                data-size="7"
+                data-live-search="true"
+                name="contrasenaVerificadaId"  
+                formControlName="contrasenaVerificadaId">
+                <option [ngValue]="null">Todos</option>
+                <option value="1">Pendiente</option>
+                <option value="2">Actualizada</option>
+              </select>   
+            </div>             
+          </div>
+  
+          <div class="col-md-3 col-lg-2">
+            <div [formGroup]="filterGroup">
+              <label class="form-label">Autenticación 2FA</label>
+              <select 
+                class="form-control selectpicker"
+                data-size="7"
+                data-live-search="true"
+                name="twoFactorMetodoId"
+                formControlName="twoFactorMetodoId">
+                <option [ngValue]="null">Todos</option>
+                <option value="2">Aplicación</option>
+                <option value="1">Correo</option>
+              </select>   
+            </div>             
+          </div>
+  
+          <div class="col-md-3 col-lg-2">
+            <div [formGroup]="filterGroup">
+              <label class="form-label">Bloqueo</label>
+              <select 
+                class="form-control selectpicker"
+                data-size="7"
+                data-live-search="true"
+                name="bloqueoId"  
+                formControlName="bloqueoId">
+                <option [ngValue]="null">Todos</option>
+                <option value="1">Con Bloqueo</option>
+                <option value="2">Sin Bloqueo</option>
+              </select>   
+            </div>             
+          </div>
+  
+        </div>
+  
+        <a href="javascript:;" (click)="mostrarMasFiltros = !mostrarMasFiltros">
+          <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Angle-double-down.svg'" cacheSVG="true" class="svg-icon svg-icon-md svg-icon-primary mr-2"></span>
+          Mostrar más filtros
+        </a>
+      </ng-container>
+
+      <ng-container *ngIf="mostrarMasFiltros" class="mb-5">
+        <div class="form-group row">
+          
+          <div class="col-md-3 col-lg-4" [formGroup]="searchGroup">
+            <label class="form-label">Búsqueda General</label>
+            <input type="text" class="form-control" name="searchText" placeholder="Búsqueda" value="" formControlName="searchTerm" />
+            <small class="form-text text-muted">Búsqueda en <b>nombre y apellido, cédula, pasaporte, RNC, correo y/o usuario</b> </small>
+          </div>
+  
+          <div class="col-md-3 col-lg-2">
+            <div [formGroup]="filterGroup">
+              <label class="form-label">Estado</label>
+              <select 
+                class="form-control selectpicker"
+                data-size="7"
+                data-live-search="true"
+                name="estadoId"  
+                formControlName="estadoId">
+                <option [ngValue]="null">Todos</option>
+                <option value="1">Activo</option>
+                <option value="2">Inactivo</option>
+              </select>   
+            </div>             
+          </div>
+  
+  
+          <div class="col-md-3 col-lg-2">
+            <div [formGroup]="filterGroup">
+              <label class="form-label">Contraseña</label>
+              <select 
+                class="form-control selectpicker"
+                data-size="7"
+                data-live-search="true"
+                name="contrasenaVerificadaId"  
+                formControlName="contrasenaVerificadaId">
+                <option [ngValue]="null">Todos</option>
+                <option value="1">Pendiente</option>
+                <option value="2">Actualizada</option>
+              </select>   
+            </div>             
+          </div>
+  
+          <div class="col-md-3 col-lg-2">
+            <div [formGroup]="filterGroup">
+              <label class="form-label">Autenticación 2FA</label>
+              <select 
+                class="form-control selectpicker"
+                data-size="7"
+                data-live-search="true"
+                name="twoFactorMetodoId"
+                formControlName="twoFactorMetodoId">
+                <option [ngValue]="null">Todos</option>
+                <option value="2">Aplicación</option>
+                <option value="1">Correo</option>
+              </select>   
+            </div>             
+          </div>
+  
+          <div class="col-md-3 col-lg-2">
+            <div [formGroup]="filterGroup">
+              <label class="form-label">Bloqueo</label>
+              <select 
+                class="form-control selectpicker"
+                data-size="7"
+                data-live-search="true"
+                name="bloqueoId"  
+                formControlName="bloqueoId">
+                <option [ngValue]="null">Todos</option>
+                <option value="1">Con Bloqueo</option>
+                <option value="2">Sin Bloqueo</option>
+              </select>   
+            </div>             
+          </div>
+  
+        </div>
+
+        <div class="form-froup row mb-5">
+          <div class="col-md-3 col-lg-2">
+            <label class="form-label">Fecha Inicial</label>
+            <div class="input-group" [formGroup]="filterGroup">
+              <input   
+                type="text" 
+                name="fechaCreacionInicio" 
+                class="form-control" 
+                autocomplete="off"
+                placeholder="dd/mm/yyyy"
+                ngbDatepicker #d="ngbDatepicker"              
+                formControlName="fechaCreacionInicio"/>
+              <div class="input-group-append" (click)="d.toggle()">
+                <span class="input-group-text">
+                  <i class="text-dark-50 flaticon-calendar"></i>
+                </span>
+              </div>
+            </div>
+            <small class="form-text text-muted">Filtro por <b>fecha de creación inicial</b></small>
+          </div>
+  
+          <div class="col-md-3 col-lg-2">
+            <label class="form-label">Fecha Final</label>
+            <div class="input-group" [formGroup]="filterGroup">
+              <input  
+                type="text" 
+                name="fechaCreacionFin" 
+                class="form-control" 
+                autocomplete="off"
+                placeholder="dd/mm/yyyy"
+                ngbDatepicker #d2="ngbDatepicker"              
+                formControlName="fechaCreacionFin"/>
+              <div class="input-group-append" (click)="d2.toggle()">
+                <span class="input-group-text">
+                  <i class="text-dark-50 flaticon-calendar"></i>
+                </span>
+              </div>
+            </div>
+            <small class="form-text text-muted">Filtro por <b>fecha de creación final</b></small>
+          </div>
+        </div>
+  
+        <a href="javascript:;" (click)="mostrarMasFiltros = !mostrarMasFiltros">
+          <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Angle-double-up.svg'" cacheSVG="true" class="svg-icon svg-icon-md svg-icon-primary mr-2"></span>
+          Mostrar menos filtros
+        </a>
+      </ng-container>
+    </div>
+    <!-- end: Filtration form -->
+
+    <!-- begin:Table -->
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table table-head-custom table-vertical-center overflow-hidden">
+        <thead>
+          <th>
+            Nombre
+            <app-sort-icon column="nombre" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th>
+            Identificación
+            <app-sort-icon column="cedula" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th>
+            Correo
+            <app-sort-icon column="correo" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th>
+            Usuario
+            <app-sort-icon column="login" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+         
+          <th class="text-center">
+            Estado
+            <app-sort-icon column="estaActivo" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th class="text-center">
+            Autenticación
+            <app-sort-icon column="twoFactorMetodoId" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+          
+          <th class="pr-0 text-right" style="min-width: 130px">Acciones</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of service.items$ | async">
+            <td>
+              {{ row.nombre }} {{ row.apellido }}
+              <ng-container *ngIf="row.requiereCambioPassword || row.twoFactorMetodoId || row.bloqueoTransaccionPorCodigoFallido || row.bloqueoEntradaFallida">
+                <br/>
+                <small><span class="badge badge-secondary mr-2" *ngIf="row.requiereCambioPassword">Pendiente Contraseña</span></small>
+                <small><span class="badge badge-danger mr-2" *ngIf="row.bloqueoTransaccionPorCodigoFallido || row.bloqueoEntradaFallida">Bloqueado</span></small>
+              </ng-container>
+              
+            </td>
+            <td>
+              {{ row.cedula }}
+              <span *ngIf="row.cedula && row.pasaporte">; </span>
+              {{ row.pasaporte }}
+              <span *ngIf="(row.cedula || row.pasaporte) && row.rnc">; </span>
+              {{ row.rnc }}
+            </td>
+            <td>{{ row.correo }}</td>
+            <td>
+              {{ row.login }}
+              <small class="text-muted">
+                <br>
+                {{ row.fechaCreacionLocal | date: 'dd/MM/yyyy'}}
+              </small>
+            </td>
+            
+            <td class="text-center">
+              <span *ngIf="row.estaActivo===true" class="label label-lg label-light-primary label-inline">Activo</span>
+              <span *ngIf="row.estaActivo===false" class="label label-lg label-light-danger label-inline">Inactivo</span>
+            </td>
+
+            <td class="text-center">
+              <span class="badge badge-info mr-2" *ngIf="row.twoFactorMetodoId===1">Correo</span>
+              <span class="badge badge-success mr-2" *ngIf="row.twoFactorMetodoId===2">App</span>
+            </td>
+            
+            <td class="pr-0 text-right">
+              <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3" (click)="edit(row.id)">
+                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true" class="svg-icon svg-icon-md svg-icon-primary">
+                </span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- end: Table -->
+    <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="paginator" [isLoading]="isLoading" (paginate)="paginate($event)">
+    </app-paginator>
+  </div>
+</div>

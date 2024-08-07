@@ -1,0 +1,106 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="vm">
+        <ng-container *ngIf="vm.id">Editar</ng-container>
+        <ng-container *ngIf="!vm.id">Crear</ng-container>
+        Cajero
+        <ng-container *ngIf="vm.id">'{{vm.nombreEstablecimiento}}'</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body" style="min-height: 404px;">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent fixed-top">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="vm">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Nombre del Establecimiento</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="nombreEstablecimiento"
+              placeholder="Nombre del Establecimiento" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('nombreEstablecimiento')"
+              [class.is-valid]="isControlValid('nombreEstablecimiento')"
+              formControlName="nombreEstablecimiento" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'nombreEstablecimiento')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'nombreEstablecimiento')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'nombreEstablecimiento')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Dirección</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="direccion"
+              placeholder="Dirección" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('direccion')"
+              [class.is-valid]="isControlValid('direccion')"
+              formControlName="direccion" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'direccion')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'direccion')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'direccion')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Ciudad</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="ciudad"
+              placeholder="Ciudad" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('ciudad')"
+              [class.is-valid]="isControlValid('ciudad')"
+              formControlName="ciudad" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'ciudad')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'ciudad')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'ciudad')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Geolocalización</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="geolocalizacion"
+              placeholder="Especifique la Latitud y Longitud"
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('geolocalizacion')"
+              [class.is-valid]="isControlValid('geolocalizacion')"
+              formControlName="geolocalizacion" />
+              <!-- A FUTURO VER ESTA MASCARA CON ESTE REGEX -->
+            <!-- ^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$ -->
+            <span class="form-text text-muted">Colocar en formato: latitud, longitud. Ejemplo. 19.4568319,-70.6938289</span>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'geolocalizacion')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'geolocalizacion')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'geolocalizacion')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancelar</button>
+    <ng-container *ngIf="vm">
+      <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid">Guardar</button>
+    </ng-container>
+  </div>
+</div>

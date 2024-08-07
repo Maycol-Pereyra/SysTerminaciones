@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[Bitacora] (
+	[Id] INT PRIMARY KEY IDENTITY,
+	[Accion] VARCHAR(10) NOT NULL, -- INSERT, UPDATE, DELETE
+	[Tabla] VARCHAR(100) NOT NULL,
+	[Campo] VARCHAR(100) NOT NULL,
+	[ValorAnterior] VARCHAR(MAX) NULL,
+	[ValorActual] VARCHAR(MAX) NOT NULL,
+	[UsuarioCreacionId] INT NOT NULL,
+	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
+	FOREIGN KEY (UsuarioCreacionId) REFERENCES Usuario(Id)
+)

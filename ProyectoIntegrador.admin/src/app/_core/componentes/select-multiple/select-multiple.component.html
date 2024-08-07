@@ -1,0 +1,21 @@
+<div class="form-group mb-0">
+  <label *ngIf="titulo" class="form-label">{{titulo}}</label>
+  <div class="input-group">
+    <label [ngClass]="{'adv-input-data': esParaEditar, 'adv-input-data-disabled': !esParaEditar}">
+      <div class="d-flex justify-content-between align-items-center">
+        <div *ngIf="listaOpcionesPresentacion && listaOpcionesPresentacion.length > 0; else sinDatos">
+          <span *ngFor="let item of listaOpcionesPresentacion" class="badge badge-success mr-1 mb-1 mt-1">{{item}}</span>
+        </div>
+
+        <ng-template #sinDatos>
+          <span class="text-muted">Seleccione múltiples...</span>
+        </ng-template>
+
+        <div *ngIf="esParaEditar">
+          <a (click)="editarDetalle" title="Seleccionar Opciones" href="javascript:;" (click)="editarDetalle()"><i class="fa fa-list icon-md text-primary"></i></a> 
+        </div>
+      </div>
+    </label>
+  </div>
+  <span *ngIf="textoAyuda" class="form-text text-muted">{{textoAyuda}}</span>
+</div>

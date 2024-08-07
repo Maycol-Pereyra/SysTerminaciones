@@ -1,0 +1,53 @@
+//
+// Print Mode
+//
+
+@media print  {
+    .print-content-only {
+        padding: 0 !important;
+        background: none !important;
+        position: absolute; // agregado por advansys para que las impresiones algan al inicio de la pagina
+        left: 0; // agregado por advansys
+        top: 0; // agregado por advansys
+
+        .wrapper,
+        .page,
+        .content,
+        .container,
+        .container-fluid {
+            background: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .aside,
+        .sidebar,
+        .sticky-toolbar,
+        .scrolltop,
+        .header,
+        .header-mobile,
+        .footer,
+        .subheader,
+        .offcanvas {
+            display: none !important;
+        }
+    }
+
+    // agregado por advansys
+    #kt_body {
+        background: white !important;
+    }
+
+    .aside {
+        display: none !important;
+    }
+
+    // agregado por advansys
+    .no-imprimible {
+        display: none !important;
+    }
+
+    .page-break {
+        page-break-before: always !important;
+    }
+}

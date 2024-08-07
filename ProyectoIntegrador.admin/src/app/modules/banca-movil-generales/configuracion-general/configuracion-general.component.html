@@ -1,0 +1,31 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Configuración General</h3>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- begin:Table -->
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table table-head-custom table-vertical-center overflow-hidden">
+        <thead>
+          <th>
+            Descripción
+          </th>        
+          <th class="pr-0 text-right" style="min-width: 150px">Acciones</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of service.items$ | async">
+            <td>Configuración general</td>
+            <td class="pr-0 text-right">
+              <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3" (click)="edit(row.id)">
+                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true" class="svg-icon svg-icon-md svg-icon-primary">
+                </span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

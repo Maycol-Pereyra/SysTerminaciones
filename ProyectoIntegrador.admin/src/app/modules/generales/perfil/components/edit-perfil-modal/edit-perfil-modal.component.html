@@ -1,0 +1,128 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="vm">
+        <ng-container *ngIf="vm.id">Editar</ng-container>
+        <ng-container *ngIf="!vm.id">Crear</ng-container>
+        Perfil
+        <ng-container *ngIf="vm.id">'{{vm.descripcion}}'</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body" style="min-height: 404px;">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent fixed-top">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="vm">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Descripción</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="descripcion"
+              placeholder="Descripción" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('descripcion')"
+              [class.is-valid]="isControlValid('descripcion')"
+              formControlName="descripcion" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'descripcion')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'descripcion')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'descripcion')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+
+        <div class="mt-10">
+          <div class="row align-items-center">
+            <div class="col-md-8 margin-bottom-10-mobile">          
+              <h3 class="font-size-lg text-dark-75 font-weight-bold mb-10">
+                Lista de Accesos
+              </h3>
+            </div>
+            <!-- <div class="col-md-4 text-right margin-bottom-10-mobile">
+            </div> -->
+          </div>
+
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="modulo"
+              placeholder="Módulo" 
+              autocomplete="off" 
+              formControlName="modulo" />
+              <small class="form-text text-muted">Búsqueda en <b>módulo</b></small>
+            </div>
+          
+            <div class="col-lg-4">
+              <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="opcion"
+              placeholder="Opción" 
+              autocomplete="off" 
+              formControlName="opcion" />
+              <small class="form-text text-muted">Búsqueda en <b>opción</b></small>
+            </div>
+
+            <div class="col-lg-4">
+              <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="permiso"
+              placeholder="Permiso" 
+              autocomplete="off" 
+              formControlName="permiso" />
+              <small class="form-text text-muted">Búsqueda en <b>permiso</b></small>
+            </div>
+          </div>
+          
+          <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <div class="table-responsive angular-bootstrap-table ">
+              <table class="table table-head-custom table-vertical-center overflow-hidden table-bordered">
+                <thead>
+                  <th class="selection-cell">
+                    <label class="checkbox checkbox-single">
+                      <input type="checkbox" (click)="cambioSeleccionTodos()" [checked]="seleccionTodos"/>
+                      <span></span>
+                    </label>
+                  </th>
+                  <th>Módulo</th>
+                  <th>Opción</th>
+                  <th>Permiso</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of listaAccesoFiltrada">
+                    <td class="selection-cell">
+                      <label class="checkbox checkbox-single">
+                        <input type="checkbox" (click)="row.seleccionado = !row.seleccionado; cambio()" [checked]="row.seleccionado"/>
+                        <span></span>
+                      </label>
+                    </td>
+                    <td>{{ row.modulo }}</td>
+                    <td>{{ row.opcion }}</td>
+                    <td>{{ row.permiso }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancelar</button>
+    <ng-container *ngIf="vm">
+      <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid">Guardar</button>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<form [formGroup]="formGroup">
+    <ng-select
+        class="custom"
+        [ngClass]="{'normal': !large, 'large': large}"
+        formControlName="ngSelect"
+        [items]="items"
+        bindLabel="descripcion"
+        bindValue="id"
+        [trackByFn]="trackByFn"
+        [loading]="loading"    
+        [typeToSearchText]="placeHolder"
+        [typeahead]="textInput$"
+        [placeholder]="placeHolder"
+        >
+        <ng-template ng-label-tmp let-item="item">
+            {{item.descripcion}}
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item">
+            {{item.descripcion}}<br/>
+        </ng-template>
+    </ng-select>
+</form>

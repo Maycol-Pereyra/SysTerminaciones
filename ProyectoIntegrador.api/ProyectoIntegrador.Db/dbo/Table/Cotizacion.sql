@@ -1,0 +1,21 @@
+﻿CREATE TABLE [dbo].[Cotizacion] (
+	[Id] INT PRIMARY KEY IDENTITY,
+	[ClienteId] INT NOT NULL,
+	[NumeroCotizacion] VARCHAR(15) NOT NULL,
+	[Monto] DECIMAL(18, 2) NOT NULL,
+	[Descuento] DECIMAL(18, 2) NOT NULL,
+	[Impuesto] DECIMAL(18, 2) NOT NULL,
+	[TipoComprobanteId] INT NOT NULL,
+	[Comprobante] VARCHAR(8) NOT NULL,
+	[Nota] VARCHAR(100) NOT NULL,
+	[LlevaEnvio] BIT NOT NULL,
+	[LlevaInstalacion] BIT NOT NULL,
+	[UsuarioCreacionId] INT NOT NULL,
+	[DireccionId] INT NULL,
+	[SolicitudTomaMedidaId] INT NULL,
+	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
+	[EstaActivo] BIT NOT NULL,
+	FOREIGN KEY (ClienteId) REFERENCES Cliente(Id),
+	FOREIGN KEY (TipoComprobanteId) REFERENCES Registro(Id),
+	FOREIGN KEY (UsuarioCreacionId) REFERENCES Usuario(Id)
+)

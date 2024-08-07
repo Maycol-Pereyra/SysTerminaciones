@@ -1,0 +1,212 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700");
+// Global vendors
+@import "~bootstrap/dist/css/bootstrap.css";
+// => Material
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+@import "~highlight.js/styles/googlecode.css";
+@import "~perfect-scrollbar/css/perfect-scrollbar.css";
+
+// Global fonts
+@import "~socicon/css/socicon.css";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "./assets/plugins/flaticon/flaticon.css";
+@import "./assets/plugins/flaticon2/flaticon.css";
+@import "./assets/plugins/keenthemes-icons/font/ki.css";
+
+// Metronic styles (replace these path when using RTL css below)
+@import "./assets/sass/style.angular.scss";
+
+// For RTL, check this documentation https://keenthemes.com/metronic/?page=docs&section=angular-rtl
+// @import "./assets/sass/style.angular.rtl.css";
+
+// Default Layout themes
+@import "./assets/sass/themes/layout/header/base/light.scss";
+@import "./assets/sass/themes/layout/header/menu/light.scss";
+@import "./assets/sass/themes/layout/brand/dark.scss";
+@import "./assets/sass/themes/layout/aside/dark.scss";
+
+// Header themes
+// .header-base-light {
+//     @import "./assets/sass/themes/layout/header/base/light.scss";
+// }
+
+// .header-base-dark {
+//     @import "./assets/sass/themes/layout/header/base/dark.scss";
+// }
+
+// Header Menu themes
+// .header-menu-light {
+//     @import "./assets/sass/themes/layout/header/menu/light.scss";
+// }
+// .header-menu-dark {
+//     @import "./assets/sass/themes/layout/header/menu/dark.scss";
+// }
+
+// Brand themes
+.brand-dark {
+  @import "./assets/sass/themes/layout/brand/dark.scss";
+}
+
+.brand-light {
+  @import "./assets/sass/themes/layout/brand/light.scss";
+}
+
+// @ng-select/ng-select
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+// Aside themes
+// .aside-dark {
+//   @import "./assets/sass/themes/layout/aside/dark.scss";
+// }
+
+// .aside-light {
+//   @import "./assets/sass/themes/layout/aside/light.scss";
+// }
+
+// hide bootstrap dropdown arrow globally
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.angular-bootstrap-table {
+  overflow-x: auto;
+}
+.angular-bootstrap-table {
+  th {
+    outline: none;
+
+    &.sortable {
+      .svg-icon-sort {
+        opacity: 0;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        .svg-icon-sort {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .table.table-head-custom thead th.sortable-active {
+    color: #3699FF !important;
+  }
+}
+
+.cursor-default {
+  cursor: default !important;
+}
+
+.progress-modal {
+  height: 3px;
+  width: 100%;
+}
+
+.svg-icon {
+  pointer-events: none;
+}
+
+
+///advansys otros stylos
+.adv-overlay {
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: hsla(0, 0%, 100%, .6);
+  cursor: default; 
+}
+
+.spinner.adv-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.adv-input-data {
+  background-color: #F3F6F9;
+  opacity: 1;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #E4E6EF;
+  padding: 0.15rem 0.70rem;
+  border-radius: 0.28rem;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 0px;
+}
+
+.iconSize {
+  font-size: smaller;
+}
+
+.iconSizeM {
+  font-size: small;
+}
+
+.fa-horizontal {
+  transform: scaleX(-1);
+}
+
+.no-resize {
+  resize: none;
+  overflow: hidden;
+}
+
+.adv-div-scroll {
+  max-height:420px;
+  overflow-y:auto;
+}
+
+
+
+// PARA LOS TOAST de sweatalert tengan color
+.colored-toast.swal2-icon-success {
+  background-color: #14a44d !important;
+}
+
+.colored-toast.swal2-icon-error {
+  background-color: #dc4c64 !important;
+}
+
+.colored-toast.swal2-icon-warning {
+  background-color: #d9991a !important;
+}
+
+.colored-toast.swal2-icon-info {
+  background-color: #54b4d3 !important;
+}
+
+.colored-toast.swal2-icon-question {
+  background-color: #e3ebf7 !important;
+}
+
+.colored-toast .swal2-title {
+  color: white;
+}
+
+.colored-toast .swal2-close {
+  color: white;
+}
+
+.colored-toast .swal2-html-container {
+  color: white;
+}
+
+.table-scroll-sm {
+  max-height:260px;
+  overflow:auto;  
+}
+
+.table-scroll-md {
+  max-height:410px;
+  overflow:auto;  
+}

@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Caja] (
+	[Id] INT PRIMARY KEY IDENTITY,
+	[Descripcion] VARCHAR(50) NOT NULL,
+	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
+	[EstaActivo] BIT NOT NULL
+)

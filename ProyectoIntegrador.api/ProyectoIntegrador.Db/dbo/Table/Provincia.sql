@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[Provincia]
+(
+	[Id] INT PRIMARY KEY IDENTITY,
+	[Descripcion] VARCHAR(100) UNIQUE NOT NULL,
+	[PaisId] INT NOT NULL,
+	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
+	[EstaActivo] BIT NOT NULL
+	FOREIGN KEY (PaisId) REFERENCES Pais(Id)
+)

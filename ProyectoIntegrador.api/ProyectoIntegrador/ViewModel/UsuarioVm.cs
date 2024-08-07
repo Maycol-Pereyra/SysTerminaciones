@@ -1,0 +1,24 @@
+﻿namespace ProyectoIntegrador.Api.ViewModel
+{
+    public class UsuarioVm
+    {
+        public int Id { get; set; }
+        public int? EmpleadoId { get; set; }
+        public string Login { get; set; } = "";
+        public string Password { get; set; } = "";
+        public DateTime FechaModificacion { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public bool EstaActivo { get; set; }
+        public string Token { get; set; } = "";
+
+        //Propiedades que vienen de entidad
+        public string Nombre { get; set; } = "";
+        public string Apellido { get; set; } = "";
+        public int TipoIdentificacionId { get; set; }
+        public string Identificacion { get; set; } = "";
+        public string Correo { get; set; } = "";
+
+
+        public virtual List<UsuarioPerfilVm> ListaUsuarioPerfil { get; set; } = new ();
+    }
+}

@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Perfil]
+(
+	[Id] INT PRIMARY KEY IDENTITY,
+	[Descripcion] VARCHAR(100) NOT NULL,
+	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
+	[EstaActivo] BIT NOT NULL
+)

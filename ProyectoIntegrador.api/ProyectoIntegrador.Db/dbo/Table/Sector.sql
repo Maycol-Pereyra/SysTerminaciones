@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Sector] (
+	[Id] INT PRIMARY KEY IDENTITY,
+	[Descripcion] VARCHAR(100) NOT NULL UNIQUE,
+	[CiudadId] INT NOT NULL,
+	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
+	[EstaActivo] BIT NOT NULL,
+	FOREIGN KEY (CiudadId) REFERENCES Ciudad(Id)
+)

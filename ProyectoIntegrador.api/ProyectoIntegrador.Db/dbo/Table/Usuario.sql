@@ -1,0 +1,11 @@
+CREATE TABLE [dbo].[Usuario] (
+	[Id] INT PRIMARY KEY IDENTITY,
+	[EmpleadoId] INT NULL,
+	[Login] VARCHAR(50) NOT NULL UNIQUE,
+	[PasswordHash] VARBINARY(64) NOT NULL,
+	[PasswordSalt] VARBINARY(128) NOT NULL,
+	[FechaModificacion] DATETIME NOT NULL DEFAULT GETDATE(),
+	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
+	[EstaActivo] BIT NOT NULL,
+	FOREIGN KEY (EmpleadoId) REFERENCES Empleado(Id)
+)

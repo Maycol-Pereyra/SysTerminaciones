@@ -1,0 +1,18 @@
+.ng-select.custom ::ng-deep .ng-select-container  {            
+    border-color: #e4e6ef;
+    color: black;
+    border-radius: 5px;
+}
+
+.ng-select.large ::ng-deep .ng-select-container  {            
+    min-height: 45px;
+}
+
+.ng-select.normal ::ng-deep .ng-select-container  {            
+    min-height: 38px;
+}
+
+
+.ng-select.custom.ng-invalid.ng-touched ::ng-deep .ng-select-container {
+    border-color: #f64e60;
+}

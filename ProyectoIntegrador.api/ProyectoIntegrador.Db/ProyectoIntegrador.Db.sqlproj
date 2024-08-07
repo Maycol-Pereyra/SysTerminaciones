@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>ProyectoIntegrador.Db</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{788501c2-0b65-463b-8c5a-3687680376fc}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>ProyectoIntegrador.Db</RootNamespace>
+    <AssemblyName>ProyectoIntegrador.Db</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo" />
+    <Folder Include="dbo\Table" />
+    <Folder Include="_Core" />
+    <Folder Include="_Core\Scripts" />
+    <Folder Include="dbo\Trigger" />
+    <Folder Include="dbo\StoredProcedure" />
+    <Folder Include="dbo\View" />
+    <Folder Include="_Core\Compare" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Table\Usuario.sql" />
+    <Build Include="dbo\Table\Entidad.sql" />
+    <Build Include="dbo\Table\Empleado.sql" />
+    <Build Include="dbo\Table\Cliente.sql" />
+    <Build Include="dbo\Table\Ciudad.sql" />
+    <Build Include="dbo\Table\Sector.sql" />
+    <Build Include="dbo\Table\Direccion.sql" />
+    <Build Include="dbo\Table\Unidad.sql" />
+    <Build Include="dbo\Table\EntidadTelefono.sql" />
+    <Build Include="dbo\Table\EntidadDireccion.sql" />
+    <Build Include="dbo\Table\Registro.sql" />
+    <Build Include="dbo\Table\TipoRegistro.sql" />
+    <Build Include="dbo\Table\Vehiculo.sql" />
+    <Build Include="dbo\Table\Herramienta.sql" />
+    <Build Include="dbo\Table\EmpleadoHerramienta.sql" />
+    <Build Include="dbo\Table\SolicitudTomaMedida.sql" />
+    <None Include="_Core\Scripts\RegistraTipoRegistro.sql" />
+    <None Include="_Core\PostDeployment.sql" />
+    <Build Include="dbo\Table\SolicitudTomaMedidaDetalle.sql" />
+    <Build Include="dbo\Table\Suplidor.sql" />
+    <Build Include="dbo\Table\Producto.sql" />
+    <Build Include="dbo\Table\Pais.sql" />
+    <Build Include="dbo\Table\TipoProducto.sql" />
+    <Build Include="dbo\Table\Almacen.sql" />
+    <Build Include="dbo\Table\ProductoUnidad.sql" />
+    <Build Include="dbo\Table\Inventario.sql" />
+    <Build Include="dbo\Table\MovimientoInventario.sql" />
+    <Build Include="dbo\Trigger\Trigger1.sql" />
+    <Build Include="dbo\StoredProcedure\RegistrarBitacora.sql" />
+    <Build Include="dbo\Trigger\TrgRegistraAuditoriaProducto.sql" />
+    <Build Include="dbo\Table\Bitacora.sql" />
+    <Build Include="dbo\Table\Factura.sql" />
+    <Build Include="dbo\Table\FacturaDetalle.sql" />
+    <Build Include="dbo\Table\Caja.sql" />
+    <Build Include="dbo\Table\AperturaCaja.sql" />
+    <Build Include="dbo\Table\DesgloseEfectivoAsignadoCaja.sql" />
+    <Build Include="dbo\Table\ErrorCuadreCaja.sql" />
+    <Build Include="dbo\Table\CuadreCaja.sql" />
+    <Build Include="dbo\Table\MovimientoPagoCaja.sql" />
+    <Build Include="dbo\Table\DesgloseCorredera.sql" />
+    <Build Include="dbo\Table\DesgloseCorrederaDetalle.sql" />
+    <Build Include="dbo\Table\DesgloseCorrederaEmpleado.sql" />
+    <Build Include="dbo\Table\Despacho.sql" />
+    <Build Include="dbo\Table\Ensamblado.sql" />
+    <Build Include="dbo\Table\PerfilPermiso.sql" />
+    <Build Include="dbo\Table\Programa.sql" />
+    <Build Include="dbo\Table\UsuarioPerfil.sql" />
+    <Build Include="dbo\Table\Compra.sql" />
+    <Build Include="dbo\Table\CompraDetalle.sql" />
+    <Build Include="dbo\Table\Perfil.sql" />
+    <Build Include="dbo\Table\Permiso.sql" />
+    <Build Include="dbo\Table\Cotizacion.sql" />
+    <Build Include="dbo\Table\CotizacionDetalle.sql" />
+    <Build Include="dbo\Table\TomaMedida.sql" />
+    <Build Include="dbo\Table\EnsambladoDetalle.sql" />
+    <Build Include="dbo\Table\InventarioVenta.sql" />
+    <Build Include="dbo\Table\InventarioProductoGastable.sql" />
+    <Build Include="dbo\Table\DespachoDetalle.sql" />
+    <Build Include="dbo\Table\RectificarMedida.sql" />
+    <Build Include="dbo\Table\RectificarMedidaDetalle.sql" />
+    <Build Include="dbo\Table\Provincia.sql" />
+    <Build Include="dbo\Table\Envio.sql" />
+    <Build Include="dbo\Table\EnvioDetalle.sql" />
+    <Build Include="dbo\Table\DistribucionEnvio.sql" />
+    <Build Include="dbo\Table\DistribucionEnvioVehiculo.sql" />
+    <Build Include="dbo\Table\CargamentoVehiculo.sql" />
+    <Build Include="dbo\Table\Conduce.sql" />
+    <Build Include="dbo\Table\ConduceDetalle.sql" />
+    <Build Include="dbo\Table\Nomina.sql" />
+    <Build Include="dbo\Table\NominaDetalle.sql" />
+    <Build Include="dbo\Table\Concepto.sql" />
+    <Build Include="dbo\Table\CuentaContable.sql" />
+    <Build Include="dbo\Table\ClasificacionContable.sql" />
+    <None Include="_Core\Scripts\RegistraDatosBaseTablaRegistro.sql" />
+    <None Include="_Core\Scripts\CreaPrimerUsuario.sql" />
+    <Build Include="dbo\View\Esquema.sql" />
+    <None Include="_Core\Scripts\RegistraPrograma.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="_Core\Scripts\RegistraTipoProducto.sql" />
+  </ItemGroup>
+</Project>

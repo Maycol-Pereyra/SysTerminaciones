@@ -1,0 +1,6 @@
+CREATE TABLE [dbo].[Pais] (
+	[Id] INT PRIMARY KEY IDENTITY,
+	[Descripcion] VARCHAR(100) UNIQUE NOT NULL,
+	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
+	[EstaActivo] BIT NOT NULL
+)

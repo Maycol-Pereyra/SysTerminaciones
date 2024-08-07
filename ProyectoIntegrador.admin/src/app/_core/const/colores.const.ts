@@ -1,0 +1,23 @@
+export const listaColores: any [] = [
+    { id: 1, color: '#F44336' },
+    { id: 2, color: '#E91E63' },
+    { id: 3, color: '#9C27B0' },
+    { id: 4, color: '#673AB7' },
+    { id: 5, color: '#3F51B5' },
+    { id: 6, color: '#2196F3' },
+    { id: 7, color: '#03A9F4' },
+    { id: 8, color: '#00BCD4' },
+    { id: 9, color: '#009688' },
+    { id: 10, color: '#039BE5' },
+    { id: 11, color: '#00ACC1' },
+    { id: 12, color: '#00897B' },
+    { id: 13, color: '#4CAF50' },
+    { id: 14, color: '#8BC34A' },
+    { id: 15, color: '#CDDC39' },
+    { id: 16, color: '#FFC107' },
+    { id: 17, color: '#FF9800' },
+    { id: 18, color: '#FF5722' },
+    { id: 19, color: '#795548' },
+    { id: 20, color: '#9E9E9E' },
+    { id: 21, color: '#607D8B' }
+];
