@@ -51,13 +51,11 @@ namespace ProyectoIntegrador.Controllers
             var lista = _dbContext.Perfil
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
-            lista = lista.OrderBy(o => o.Id);
-
             lista = lista.Where(o => o.EstaActivo);
+            lista = lista.OrderBy(o => o.Id);
+            var pl = await lista.ToPagedList(parameter);
 
-            var items = await lista.ToListAsync();
-
-            return Ok(_mapper.Map<List<ItemSelect>>(items));
+            return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
         }
 
 
@@ -145,7 +143,7 @@ namespace ProyectoIntegrador.Controllers
         {
             if (destino.ListaDetalle == null)
             {
-                destino.ListaDetalle = new List<PerfilPermiso>();
+                destino.ListaDetalle = new List<PerfilAcceso>();
             }
 
             int cantidad = destino.ListaDetalle.Count();
@@ -155,7 +153,7 @@ namespace ProyectoIntegrador.Controllers
 
                 var itemVm = origen
                     .ListaDetalle?
-                    .FirstOrDefault(o => o.PermisoId == item.PermisoId);
+                    .FirstOrDefault(o => o.AccesoId == item.AccesoId);
 
                 if (itemVm == null)
                 {
@@ -173,9 +171,9 @@ namespace ProyectoIntegrador.Controllers
             // agregar
             if (origen.ListaDetalle?.Any() ?? false)
             {
-                foreach (var itemVm in origen.ListaDetalle.Where(o => o.PermisoId <= 0))
+                foreach (var itemVm in origen.ListaDetalle.Where(o => string.IsNullOrWhiteSpace(o.AccesoId) == false))
                 {
-                    var item = _mapper.Map<PerfilPermiso>(itemVm);
+                    var item = _mapper.Map<PerfilAcceso>(itemVm);
 
                     destino.ListaDetalle.Add(item);
                 }

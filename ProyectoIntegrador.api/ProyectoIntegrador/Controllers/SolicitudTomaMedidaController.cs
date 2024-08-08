@@ -70,12 +70,9 @@ namespace ProyectoIntegrador.Controllers
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
             lista = lista.OrderBy(o => o.Id);
+            var pl = await lista.ToPagedList(parameter);
 
-            lista = lista.Where(o => o.Estado.Descripcion == "Concluido");
-
-            var items = await lista.ToListAsync();
-
-            return Ok(_mapper.Map<List<ItemSelect>>(items));
+            return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
         }
 
         [HttpPost]

@@ -60,16 +60,14 @@ namespace ProyectoIntegrador.Controllers
         {
             var lista = _dbContext.DesgloseCorredera
                 .Include(o => o.EstadoId)
+                .Include(o => o.Despacho)
+                .Include(o => o.ListaDetalle)
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
             lista = lista.OrderBy(o => o.Id);
+            var pl = await lista.ToPagedList(parameter);
 
-            //TODO: averiguar klk con esto
-            //lista = lista.Where(o => o.Estado.Descripcion == "Concluido");
-
-            var items = await lista.ToListAsync();
-
-            return Ok(_mapper.Map<List<ItemSelect>>(items));
+            return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
         }
 
         [HttpPost]

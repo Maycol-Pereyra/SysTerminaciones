@@ -56,8 +56,9 @@ namespace ProyectoIntegrador.Controllers
             {
                 return BadRequest("Usuario o contraseña incorrecto");
             }
-           
+
             var obj = await _dbContext.Usuario
+                .Include(o => o.Empleado)
                 .Include(o => o.Entidad)
                 .Where(o => string.Equals(o.Login, vm.Login))
                 .FirstOrDefaultAsync();
@@ -78,323 +79,9 @@ namespace ProyectoIntegrador.Controllers
                 return BadRequest("El usuario está inactivo");
             }
 
+
             return Ok(usuario);
         }
-
-        //[AllowAnonymous]
-        //[HttpPost("olvide-contrasena")]
-        //public async Task<IActionResult> OlvideContrasena([FromBody] UsuarioOlvideContrasenaParameter vm)
-        //{
-        //    if (string.IsNullOrWhiteSpace(vm.Login))
-        //    {
-        //        return BadRequest("Debe especificar el usuario");
-        //    }
-
-        //    var usuario = await _dbContext.Usuario
-        //        .AsNoTracking()
-        //        .Where(o => o.Login.ToLower() == vm.Login.ToLower())
-        //        .FirstOrDefaultAsync();
-        //    if (usuario == null)
-        //    {
-        //        return BadRequest("El usuario es inválido.");
-        //    }
-
-        //    if (usuario.EstaActivo == false)
-        //    {
-        //        return BadRequest("El usuario está inactivo");
-        //    }
-
-        //    if (usuario.BloqueoEntradaFallida)
-        //    {
-        //        return BadRequest("El usuario está bloqueado");
-        //    }
-
-        //    var codigoSeguridad = new CodigoSeguridad();
-
-        //    if (usuario.TwoFactorMetodoId == (byte)TwoFactorMetodo.Correo)
-        //    {
-        //        codigoSeguridad = new CodigoSeguridad
-        //        {
-        //            FechaVencimientoUtc = DateTimeOffset.UtcNow.AddMinutes(5),
-        //            Codigo = PasswordHelper.GeneraCodigoSeguridad()
-        //        };
-
-        //        _dbContext.CodigoSeguridad.Add(codigoSeguridad);
-        //        _dbContext.SaveChanges();
-
-        //        await _envioCorreo.UsuarioOlvideContrasenaEnvioCodigo(usuario, codigoSeguridad);
-        //    }
-
-        //    return Ok(new { CodigoSeguridadId = codigoSeguridad.Id, TwoFactorMetodoId = (byte)usuario.TwoFactorMetodoId });
-        //}
-
-        //[AllowAnonymous]
-        //[HttpPost("codigo-seguridad-reenvio")]
-        //public async Task<IActionResult> ReenviaCodigoSeguridad([FromBody] UsuarioOlvideContrasenaParameter vm)
-        //{
-        //    if (string.IsNullOrWhiteSpace(vm.Login))
-        //    {
-        //        return BadRequest("Debe especificar el usuario");
-        //    }
-
-        //    if (string.IsNullOrWhiteSpace(vm.CodigoSeguridadId))
-        //    {
-        //        return BadRequest("Debe especificar el código de verificación");
-        //    }
-
-        //    var usuario = await _dbContext.Usuario
-        //        .Where(o => o.Login.ToLower() == vm.Login.ToLower())
-        //        .AsNoTracking()
-        //        .FirstOrDefaultAsync();
-        //    if (usuario == null)
-        //    {
-        //        return BadRequest("El usuario es inválido.");
-        //    }
-
-        //    if (usuario.EstaActivo == false)
-        //    {
-        //        return BadRequest("El usuario está inactivo");
-        //    }
-
-        //    if (usuario.BloqueoEntradaFallida)
-        //    {
-        //        return BadRequest("El usuario está bloqueado");
-        //    }
-
-        //    var value = new Guid(vm.CodigoSeguridadId);
-
-        //    var codigoSeguridad = await _dbContext.CodigoSeguridad.FirstOrDefaultAsync(o => o.Id == value);
-        //    if (codigoSeguridad == null || codigoSeguridad.FechaVencimientoUtc < DateTimeOffset.UtcNow)
-        //    {
-        //        codigoSeguridad = new CodigoSeguridad
-        //        {
-        //            FechaVencimientoUtc = DateTimeOffset.UtcNow.AddMinutes(5),
-        //            Codigo = PasswordHelper.GeneraCodigoSeguridad()
-        //        };
-        //        _dbContext.CodigoSeguridad.Add(codigoSeguridad);
-        //    }
-        //    else
-        //    {
-        //        codigoSeguridad.FechaVencimientoUtc = DateTimeOffset.UtcNow.AddMinutes(5);
-        //        _dbContext.CodigoSeguridad.Update(codigoSeguridad);
-        //    }
-
-        //    await _dbContext.SaveChangesAsync();
-
-        //    await _envioCorreo.UsuarioOlvideContrasenaEnvioCodigo(usuario, codigoSeguridad);
-
-        //    return Ok(new { codigoSeguridadId = codigoSeguridad.Id });
-        //}
-
-        //[AllowAnonymous]
-        //[HttpPost("codigo-seguridad-valida")]
-        //public async Task<IActionResult> ValidarCodigoSeguridad([FromBody] UsuarioOlvideContrasenaParameter vm)
-        //{
-        //    if (string.IsNullOrWhiteSpace(vm.Login))
-        //    {
-        //        return BadRequest("Debe especificar el usuario");
-        //    }
-
-        //    if (string.IsNullOrWhiteSpace(vm.CodigoSeguridadId))
-        //    {
-        //        return BadRequest("Debe especificar el código de verificación");
-        //    }
-
-        //    if (string.IsNullOrWhiteSpace(vm.CodigoSeguridad))
-        //    {
-        //        return BadRequest("Debe especificar el código de verificación");
-        //    }
-
-        //    if (vm.CodigoSeguridad.Length != 6)
-        //    {
-        //        return BadRequest("Debe especificar un código de verificación válido");
-        //    }
-
-        //    var usuario = await _dbContext.Usuario
-        //        .Where(o => o.Login.ToLower() == vm.Login.ToLower())
-        //        .AsNoTracking()
-        //        .FirstOrDefaultAsync();
-        //    if (usuario == null)
-        //    {
-        //        return BadRequest("El usuario es inválido.");
-        //    }
-
-        //    var result = await _usuarioCodigoSeguridadService.ValidarCodigoSeguridad(usuario, vm.CodigoSeguridad, vm.CodigoSeguridadId, esParaTransacciono: false);
-        //    if (result.EsInvalido)
-        //    {
-        //        return BadRequest(result.PrimerMensaje);
-        //    }
-
-        //    return Ok(true);
-        //}
-
-        //[AllowAnonymous]
-        //[HttpPost("olvide-contrasena-actualiza")]
-        //public async Task<IActionResult> OlvideContrasenaActualiza([FromBody] UsuarioOlvideContrasenaParameter vm)
-        //{
-        //    if (string.IsNullOrWhiteSpace(vm.Login))
-        //    {
-        //        return BadRequest("Debe especificar el usuario");
-        //    }
-
-        //    if (string.IsNullOrWhiteSpace(vm.CodigoSeguridadId))
-        //    {
-        //        return BadRequest("Debe especificar el código de verificación");
-        //    }
-
-        //    if (string.IsNullOrWhiteSpace(vm.CodigoSeguridad))
-        //    {
-        //        return BadRequest("Debe especificar el código de verificación");
-        //    }
-
-        //    if (vm.CodigoSeguridad.Length != 6)
-        //    {
-        //        return BadRequest("Debe especificar un código de verificación válido");
-        //    }
-
-        //    var usuario = await _dbContext.Usuario
-        //        .AsNoTracking()
-        //        .Where(o => o.Login.ToLower() == vm.Login.ToLower())
-        //        .FirstOrDefaultAsync();
-        //    if (usuario == null)
-        //    {
-        //        return BadRequest("El usuario es inválido.");
-        //    }
-
-        //    if (usuario.EstaActivo == false)
-        //    {
-        //        return BadRequest("El usuario está inactivo");
-        //    }
-
-        //    if (usuario.BloqueoEntradaFallida)
-        //    {
-        //        return BadRequest("El usuario está bloqueado");
-        //    }
-
-        //    var result = await _usuarioCodigoSeguridadService.ValidarCodigoSeguridad(usuario, vm.CodigoSeguridad, vm.CodigoSeguridadId, esParaTransacciono: false);
-        //    if (result.EsInvalido)
-        //    {
-        //        return BadRequest(result.PrimerMensaje);
-        //    }
-
-        //    if (string.IsNullOrWhiteSpace(vm.Password))
-        //    {
-        //        return BadRequest("Debe especificar la nueva contraseña");
-        //    }
-
-        //    var obj = await _dbContext.Usuario.FirstOrDefaultAsync(o => o.Id == usuario.Id);
-        //    if (obj == null)
-        //    {
-        //        return BadRequest("El usuario no existe.");
-        //    }
-
-        //    byte[] passwordHash, passwordSalt;
-
-        //    UsuarioHelper.CreatePasswordHash(vm.Password, out passwordHash, out passwordSalt);
-
-        //    obj.PasswordHash = passwordHash;
-        //    obj.PasswordSalt = passwordSalt;
-        //    obj.RequiereCambioPassword = false;
-
-        //    _dbContext.Usuario.Update(obj);
-        //    await _dbContext.SaveChangesAsync();
-
-        //    return Ok(true);
-        //}
-
-
-        //[HttpPost("cambio-password")]
-        //public async Task<IActionResult> CambioPassword([FromBody] UsuarioCambioPasswordVm vm)
-        //{
-        //    if (vm == null)
-        //    {
-        //        return BadRequest("Debe especificar los datos.");
-        //    }
-
-        //    if (string.IsNullOrWhiteSpace(vm.PasswordNuevo) || string.IsNullOrWhiteSpace(vm.PasswordViejo))
-        //    {
-        //        return BadRequest("Debe especificar los password");
-        //    }
-
-        //    if (vm.PasswordNuevo.CompareTo(vm.PasswordViejo) == 0)
-        //    {
-        //        return BadRequest("La contraseña no debe ser igual al anterior.");
-        //    }
-
-        //    var usuario = VerificaParaCambioContrasena(GetLogin(), vm.PasswordViejo);
-        //    if (usuario == null)
-        //    {
-        //        return BadRequest("La contraseña anterior es incorrecta.");
-        //    }
-
-        //    var resultado = PasswordCumpleCondiciones(vm.PasswordNuevo);
-        //    if (resultado.EsInvalido) { return BadRequest(resultado.PrimerMensaje); }
-
-        //    var obj = _dbContext.Usuario.FirstOrDefault(o => o.Id == usuario.Id);
-        //    if (obj == null)
-        //    {
-        //        return BadRequest("No se pudo buscar el usuario.");
-        //    }
-
-        //    if (obj.EstaActivo == false)
-        //    {
-        //        return BadRequest("El usuario está inactivo");
-        //    }
-
-        //    byte[] passwordHash, passwordSalt;
-        //    UsuarioHelper.CreatePasswordHash(vm.PasswordNuevo, out passwordHash, out passwordSalt);
-        //    obj.PasswordHash = passwordHash;
-        //    obj.PasswordSalt = passwordSalt;
-
-        //    lock (_object)
-        //    {
-        //        _dbContext.Usuario.Update(obj);
-        //        _dbContext.SaveChanges();
-        //    }
-
-        //    return Ok(true);
-        //}
-
-        //[HttpPost("cambio-password-primera-vez")]
-        //public ActionResult<bool> CambioPasswordPrimeraVez([FromBody] UsuarioCambioPasswordVm vm)
-        //{
-        //    if (vm == null)
-        //    {
-        //        return BadRequest("Debe especificar los datos.");
-        //    }
-
-        //    if (string.IsNullOrWhiteSpace(vm.PasswordNuevo))
-        //    {
-        //        return BadRequest("Debe especificar la contraseña");
-        //    }
-
-        //    var resultado = PasswordCumpleCondiciones(vm.PasswordNuevo);
-        //    if (resultado.EsInvalido) { return BadRequest(resultado.PrimerMensaje); }
-
-        //    var obj = _dbContext.Usuario.FirstOrDefault(o => o.Id == GetUsuarioId());
-        //    if (obj == null)
-        //    {
-        //        return BadRequest("No se pudo buscar el usuario.");
-        //    }
-
-        //    if (obj.EstaActivo == false)
-        //    {
-        //        return BadRequest("El usuario está inactivo");
-        //    }
-
-        //    byte[] passwordHash, passwordSalt;
-        //    UsuarioHelper.CreatePasswordHash(vm.PasswordNuevo, out passwordHash, out passwordSalt);
-        //    obj.PasswordHash = passwordHash;
-        //    obj.PasswordSalt = passwordSalt;
-
-        //    lock (_object)
-        //    {
-        //        _dbContext.Usuario.Update(obj);
-        //        _dbContext.SaveChanges();
-        //    }
-
-        //    return Ok(true);
-        //}
 
         [HttpPost("existencia")]
         public async Task<ActionResult<List<EntidadVm>>> Get([FromBody] EntidadVm entidad)
@@ -415,11 +102,43 @@ namespace ProyectoIntegrador.Controllers
             return Ok(new List<EntidadVm>());
         }
 
+        [HttpGet("{id}/acceso")]
+        public async Task<IActionResult> GetAcceso(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest("Debe especificar el id.");
+            }
+
+            //TODO; quitar de comentario
+            //var perfiles = await _dbContext.UsuarioPerfil
+            //    .Where(o => o.UsuarioId == id)
+            //    .Select(o => o.PerfilId)
+            //    .ToListAsync();
+
+            //if (perfiles.SinElementos())
+            //{
+            //    return NotFound();
+            //}
+
+            //var lista = await _dbContext.PerfilAcceso
+            //    .Where(o => perfiles.Contains(o.PerfilId))
+            //    .Select(o => o.AccesoId)
+            //    .ToListAsync() ?? new List<string>();
+
+            var lista = await _dbContext.Acceso
+                .Select(o => o.Id)
+                .ToListAsync() ?? new List<string>();
+
+            return Ok(lista);
+        }
+
 
         [HttpGet]
         public async Task<ActionResult<PagedList<UsuarioIndex>>> Get([FromQuery] UsuarioParameters parameter)
         {
             var lista = _dbContext.Usuario
+                .Include(o => o.Empleado)
                 .Include(o => o.Entidad)
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
@@ -433,16 +152,15 @@ namespace ProyectoIntegrador.Controllers
         public async Task<ActionResult<List<ItemSelect>>> GetItemSelect([FromQuery] UsuarioParameters parameter)
         {
             var lista = _dbContext.Usuario
+                .Include(o => o.Empleado)
                 .Include(o => o.Entidad)
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
-            lista = lista.OrderBy(o => o.Id);
-
             lista = lista.Where(o => o.EstaActivo);
+            lista = lista.OrderBy(o => o.Id);
+            var pl = await lista.ToPagedList(parameter);
 
-            var items = await lista.ToListAsync();
-
-            return Ok(_mapper.Map<List<ItemSelect>>(items));
+            return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
         }
 
         [HttpPost]
@@ -658,8 +376,9 @@ namespace ProyectoIntegrador.Controllers
             {
                 new("name", string.Format("{0} {1}", usuario.Entidad.Nombre, usuario.Entidad.Apellido)),
                 new("usuarioId", usuario.Id.ToString()),
-                new("identificacion", usuario.Entidad.Identificacion.ToString()),
-                new("tipoIdentificacionId", usuario.Entidad.TipoIdentificacionId.ToString()),
+                new("cedula", usuario.Entidad.Cedula),
+                new("rnc", usuario.Entidad.Rnc),
+                new("pasaporte", usuario.Entidad.Pasaporte),
                 new("login", usuario.Login.ToString()),
                 new("rol", "admin"),
                 new("login", usuario.Login.ToString()),

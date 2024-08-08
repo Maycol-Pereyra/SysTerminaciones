@@ -59,13 +59,11 @@ namespace ProyectoIntegrador.Controllers
 
             var lista = _dbContext.Registro.AsNoTracking();
             lista = Filtrar(lista, parameter);
-            lista = lista.OrderBy(o => o.Id);
-
             lista = lista.Where(o => o.EstaActivo);
+            lista = lista.OrderBy(o => o.Id);
+            var pl = await lista.ToPagedList(parameter);
 
-            var items = await lista.ToListAsync();
-
-            return Ok(_mapper.Map<List<ItemSelect>>(items));
+            return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
         }
 
         [HttpPost]

@@ -75,18 +75,8 @@ export class PerfilComponent
 
   filterForm() {
     this.filterGroup = this.fb.group({
-      // status: [''],
-      // type: [''],
       searchTerm: [this.service.searchTerm],
     });
-    // this.subscriptions.push(
-    //   this.filterGroup.controls.status.valueChanges.subscribe(() =>
-    //     this.filter()
-    //   )
-    // );
-    // this.subscriptions.push(
-    //   this.filterGroup.controls.type.valueChanges.subscribe(() => this.filter())
-    // );
   }
 
   // search
@@ -97,10 +87,6 @@ export class PerfilComponent
 
     const searchEvent = this.searchGroup.controls.searchTerm.valueChanges
       .pipe(
-        /*
-      The user can type quite quickly in the input box, and that could trigger a lot of server requests. With this operator,
-      we are limiting the amount of server requests emitted to a maximum of one every 150ms
-      */
         debounceTime(150),
         distinctUntilChanged()
       )
@@ -110,15 +96,6 @@ export class PerfilComponent
 
   filter() {
     const filter = {};
-    // const status = this.filterGroup.get('status').value;
-    // if (status) {
-    //   filter['status'] = status;
-    // }
-
-    // const type = this.filterGroup.get('type').value;
-    // if (type) {
-    //   filter['type'] = type;
-    // }
     this.service.patchState({ filter });
   }
 
@@ -177,18 +154,6 @@ export class PerfilComponent
           this.service.fetch(),
           () => { }
         );
-      });
-    }
-  }
-
-  delete(id: number) {
-    if (this.accesosService.puedeBorrar('generales.perfil.borrar')) {
-      const modalRef = this.modalService.open(DeletePerfilModalComponent, { backdrop: 'static'});
-      modalRef.componentInstance.id = id;
-      modalRef.result.then(() => this.service.fetch(), (msg: any) => {
-        if (msg) {
-          this.mensajeValidacion(msg);
-        }
       });
     }
   }

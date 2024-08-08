@@ -10,7 +10,6 @@ export class User {
         public estaActivo: boolean,
         public login: string,
         public password: string,
-        public token: string | null,
-        public rol: string,
+        public token: string | null
     ) { }
 }

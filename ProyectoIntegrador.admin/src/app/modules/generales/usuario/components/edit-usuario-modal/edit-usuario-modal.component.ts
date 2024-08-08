@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, of, Subscription } from 'rxjs';
-import { catchError, first, tap } from 'rxjs/operators';
+import { of, Subscription } from 'rxjs';
+import { catchError, first } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../../_core/services/authentication.service';
 import { Usuario } from '../../shared/usuario.model';
 import { UsuarioService } from '../../shared/usuario.service';
@@ -11,7 +11,6 @@ import { ItemSelectService } from 'src/app/_core/item-select/item-select.service
 import { AppConfig } from 'src/app/_core/services/app-config.service';
 import { AccesosService } from 'src/app/_core/services/acceso.service';
 import { EndPointSelect } from 'src/app/_core/const/app.const';
-import { ItemSelect } from 'src/app/_core/item-select/item-select.model';
 import { regexCorreo } from 'src/app/_core/const/regexp.const';
 
 @Component({
@@ -26,10 +25,8 @@ export class EditUsuarioModalComponent extends FormBase implements OnInit, OnDes
 
   vm: Usuario;
   presentaEstado = true;
-  perfiles$;
-  sucursalAgencia$;
-  usuarioCore$: Observable<ItemSelect[]>;
-
+  empleados$;
+  
   private usuarioActualId = null;
   private subscriptions: Subscription[] = [];
 
@@ -46,14 +43,8 @@ export class EditUsuarioModalComponent extends FormBase implements OnInit, OnDes
   ngOnInit(): void {
     this.isLoading$ = this.service.isLoading$;
 
-    this.perfiles$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.generalesPerfil}`);
-    this.sucursalAgencia$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.solicitudPrestamosSucursalAgencia}`);
-
-    const filtroUsuarioCore = ItemSelectService.defaultFilter();
-    filtroUsuarioCore.filter.push({ criterio: 'estaActivoId', valor: '1'});
-    this.usuarioCore$ = this.itemSelectService.get(
-      `${AppConfig.settings.api}${EndPointSelect.solicitudPrestamosUsuarioCore}`, filtroUsuarioCore);
-
+    this.empleados$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.empleado}`);
+  
     this.loadUsuario();
   }
 
@@ -92,11 +83,8 @@ export class EditUsuarioModalComponent extends FormBase implements OnInit, OnDes
         Validators.pattern(regexCorreo),
         Validators.maxLength(100)])
       ],
-      nota: [this.vm.nota, Validators.compose([Validators.maxLength(250)])],
       estaActivo: [this.vm.estaActivo],
-      perfilId: [this.vm.perfilId, Validators.compose([Validators.required])],
-      sucursalAgenciaId: [this.vm.sucursalAgenciaId, Validators.compose([Validators.nullValidator])],
-      usuarioCoreId: [this.vm.usuarioCoreId, Validators.compose([Validators.nullValidator])],
+      empleadoId: [this.vm.empleadoId, Validators.compose([Validators.required])],
       login: [this.vm.login, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(100)])],
     });
 
@@ -107,27 +95,6 @@ export class EditUsuarioModalComponent extends FormBase implements OnInit, OnDes
           this.presentaEstado = +this.usuarioActualId !== + this.vm.id;
         })
     );
-  }
-
-  quitarBloqueoEntradaFallida() {
-    if (this.accesosService.puede(
-      'generales.usuario.quitar-bloqueo',
-      'Usted no tiene acceso a quitar bloqueo de acceso')
-    ) {
-      this.confirmacion('¿Está seguro de quitar el bloqueo de acceso?', 'Confirmación', ()=>{
-        const sb = this.service
-        .quitarBloqueoEntradaFallida(this.vm.id)
-        .subscribe((res: any) => {
-          if (res && res.id) {
-            this.mensajeOk('El bloqueo de acceso del cliente fue retirado.');
-            this.modal.close();
-          } else {
-            this.mensajeValidacion(res.msg);
-          }
-        });
-      this.subscriptions.push(sb);
-      });
-    }
   }
 
   save() {
@@ -143,31 +110,6 @@ export class EditUsuarioModalComponent extends FormBase implements OnInit, OnDes
         }
       });
     this.subscriptions.push(sbUpdate);
-  }
-
-  // helpers for View
-  reiniciarClave(): void {
-    if (this.accesosService.puede('generales.usuario.reiniciar-contrasena', 'Usted no tiene acceso para reiniciar contraseña.')) {
-      const formData = this.formGroup.value;
-
-      if (formData.correo === '') {
-        this.mensajeValidacion ('Debe especificar el correo del usuario para poder proceder con el reinicio de clave');
-        return;
-      }
-
-      this.confirmacion('¿Está seguro de reiniciar la contraseña?', 'Confirmación', () => {
-        const sb = this.authService
-          .solicitarPassword(this.vm.login)
-          .subscribe((res: any) => {
-            if (res && res.id) {
-              this.mensajeOk('La nueva contraseña fue enviada al correo electrónico del usuario');
-            } else {
-              this.mensajeValidacion(res.msg);
-            }
-          });
-        this.subscriptions.push(sb);
-      });
-    }
   }
 
   activar(): void {
@@ -206,35 +148,16 @@ export class EditUsuarioModalComponent extends FormBase implements OnInit, OnDes
   }
 
   private getEmty(): Usuario {
-    return {
-      id: 0,
-      identificador: '',
-      nombre: '',
-      apellido: '',
-      nota: '',
-      correo: '',
-      estaActivo: true,
-      login: '',
-      password: '',
-      token: '',
-      requiereCambioPassword: true,
-      perfilId: null,
-      usuarioCoreId: null,
-      sucursalAgenciaId: null,
-      bloqueoEntradaFallida: false
-    };
+    return new Usuario(null);
   }
 
   private prepareVm() {
     const formData = this.formGroup.value;
     this.vm.nombre = formData.nombre;
     this.vm.apellido = formData.apellido;
-    this.vm.nota = formData.nota;
     this.vm.correo = formData.correo;
     this.vm.login = formData.login;
     this.vm.estaActivo = formData.estaActivo;
-    this.vm.perfilId = formData.perfilId;
-    this.vm.usuarioCoreId = formData.usuarioCoreId;
-    this.vm.sucursalAgenciaId = formData.sucursalAgenciaId;
+    this.vm.empleadoId = formData.empleadoId;
   }
 }

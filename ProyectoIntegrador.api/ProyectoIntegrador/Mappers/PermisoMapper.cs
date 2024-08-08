@@ -8,8 +8,8 @@ namespace ProyectoIntegrador.Mappers
     {
         public PermisoMapper()
         {
-            CreateMap<Permiso, PermisoVm>();
-            CreateMap<PermisoVm, Permiso>();
+            CreateMap<Acceso, PermisoVm>();
+            CreateMap<PermisoVm, Acceso>();
         }
     }
 }

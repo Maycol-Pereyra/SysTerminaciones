@@ -23,15 +23,21 @@ namespace ProyectoIntegrador.Mappers
                         : "")
                 )
                 .ForMember(
-                    des => des.TipoIdentificacionId,
+                    des => des.Cedula,
                     opt => opt.MapFrom(ori => ori.Entidad != null
-                        ? ori.Entidad.TipoIdentificacionId
-                        : 0)
+                        ? ori.Entidad.Cedula
+                        : "")
                 )
                 .ForMember(
-                    des => des.Identificacion,
+                    des => des.Rnc,
                     opt => opt.MapFrom(ori => ori.Entidad != null
-                        ? ori.Entidad.Identificacion
+                        ? ori.Entidad.Rnc
+                        : "")
+                )
+                .ForMember(
+                    des => des.Pasaporte,
+                    opt => opt.MapFrom(ori => ori.Entidad != null
+                        ? ori.Entidad.Pasaporte
                         : "")
                 )
                 .ForMember(
@@ -64,15 +70,21 @@ namespace ProyectoIntegrador.Mappers
                         : "")
                 )
                 .ForMember(
-                    des => des.TipoIdentificacionId,
+                    des => des.Cedula,
                     opt => opt.MapFrom(ori => ori.Entidad != null
-                        ? ori.Entidad.TipoIdentificacionId
-                        : 0)
+                        ? ori.Entidad.Cedula
+                        : "")
                 )
                 .ForMember(
-                    des => des.Identificacion,
+                    des => des.Rnc,
                     opt => opt.MapFrom(ori => ori.Entidad != null
-                        ? ori.Entidad.Identificacion
+                        ? ori.Entidad.Rnc
+                        : "")
+                )
+                .ForMember(
+                    des => des.Pasaporte,
+                    opt => opt.MapFrom(ori => ori.Entidad != null
+                        ? ori.Entidad.Pasaporte
                         : "")
                 )
                 .ForMember(

@@ -22,8 +22,7 @@ namespace ProyectoIntegrador.Api.Services
 
             var existe = await _dbContext.Entidad
                 .AsNoTracking()
-                .Where(o => o.TipoIdentificacionId == entidad.TipoIdentificacionId && o.Identificacion == entidad.Identificacion
-                    || (o.Nombre == entidad.Nombre && o.Apellido == entidad.Apellido))
+                .Where(o => o.Cedula == entidad.Cedula || o.Rnc == entidad.Rnc || o.Pasaporte == entidad.Pasaporte)
                 .AnyAsync();
 
             return existe;
@@ -35,8 +34,7 @@ namespace ProyectoIntegrador.Api.Services
 
             var entidades = await _dbContext.Entidad
                 .AsNoTracking()
-                .Where(o => o.TipoIdentificacionId == entidad.TipoIdentificacionId && o.Identificacion == entidad.Identificacion
-                    || (o.Nombre == entidad.Nombre && o.Apellido == entidad.Apellido))
+                .Where(o => o.Cedula == entidad.Cedula || o.Rnc == entidad.Rnc || o.Pasaporte == entidad.Pasaporte)
                 .ToListAsync();
 
             var entidadesVm = _mapper.Map<List<EntidadVm>>(entidades);

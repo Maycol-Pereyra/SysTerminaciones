@@ -71,15 +71,8 @@ export class UsuarioComponent
 
   filterForm() {
     this.filterGroup = this.fb.group({
-      // status: [''],
-      // type: [''],
-      searchTerm: [this.service.searchTerm],
-      bloqueoId: [null]
+      searchTerm: [this.service.searchTerm]
     });
-
-    this.subscriptions.push(
-      this.filterGroup.controls.bloqueoId.valueChanges.subscribe(() => this.filter())
-    );
   }
 
   // search
@@ -99,13 +92,6 @@ export class UsuarioComponent
 
   filter() {
     const filter = {};
-
-    const bloqueoId = this.filterGroup.get('bloqueoId').value;
-
-    if (bloqueoId){
-      filter['bloqueoId'] = bloqueoId;
-    }
-
     this.service.patchState({ filter });
   }
 

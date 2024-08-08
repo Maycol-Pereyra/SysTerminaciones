@@ -3,6 +3,7 @@
     public class Cliente
     {
         public int Id { get; set; }
+        public int EntidadId { get; set; }
         public byte TiempoCredito { get; set; }
         public decimal LimiteCredito { get; set; }
         public DateTime FechaModificacion { get; set; }

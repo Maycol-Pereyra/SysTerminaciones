@@ -17,9 +17,13 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("int")
                     .IsRequired();
 
+                etb.Property(e => e.EntidadId)
+                    .HasColumnType("int")
+                    .IsRequired();
+
                 etb.Property(e => e.EmpleadoId)
                     .HasColumnType("int")
-                    .IsRequired(false);
+                    .IsRequired();
 
                 etb.Property(e => e.Login)
                     .HasColumnType("varchar(50)")
@@ -45,9 +49,14 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("bit")
                     .IsRequired();
 
-                etb.HasOne(e => e.Entidad)
+                etb.HasOne(e => e.Empleado)
                     .WithMany()
                     .HasForeignKey(e => e.EmpleadoId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                etb.HasOne(e => e.Entidad)
+                    .WithMany()
+                    .HasForeignKey(e => e.EntidadId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 etb.HasMany(e => e.ListaUsuarioPerfil)

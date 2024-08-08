@@ -7,6 +7,6 @@
         public DateTime FechaCreacion { get; set; }
         public bool EstaActivo { get; set; }
 
-        public virtual List<PerfilPermiso> ListaDetalle { get; set; } = [];
+        public virtual List<PerfilAcceso> ListaDetalle { get; set; } = [];
     }
 }

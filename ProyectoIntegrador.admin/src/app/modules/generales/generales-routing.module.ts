@@ -5,13 +5,13 @@ import { GeneralesComponent } from './generales.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { ConfiguracionGeneralComponent } from './configuracion-general/configuracion-general.component';
+import { PaisComponent } from './pais/pais.component';
 
 const routes: Routes = [
   {
     path: '',
     component: GeneralesComponent,
     children: [
-      
       {
         path: 'perfil',
         component: PerfilComponent,
@@ -33,6 +33,14 @@ const routes: Routes = [
         component: ConfiguracionGeneralComponent,
         data: {
           acceso: 'generales.configuracion-general.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'pais',
+        component: PaisComponent,
+        data: {
+          acceso: 'generales.pais.acceder'
         },
         canActivate: [AppAuthGuard]
       },

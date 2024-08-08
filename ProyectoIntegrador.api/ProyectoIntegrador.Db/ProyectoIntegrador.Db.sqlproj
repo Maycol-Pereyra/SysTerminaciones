@@ -110,13 +110,13 @@
     <Build Include="dbo\Table\DesgloseCorrederaEmpleado.sql" />
     <Build Include="dbo\Table\Despacho.sql" />
     <Build Include="dbo\Table\Ensamblado.sql" />
-    <Build Include="dbo\Table\PerfilPermiso.sql" />
+    <Build Include="dbo\Table\PerfilAcceso.sql" />
     <Build Include="dbo\Table\Programa.sql" />
     <Build Include="dbo\Table\UsuarioPerfil.sql" />
     <Build Include="dbo\Table\Compra.sql" />
     <Build Include="dbo\Table\CompraDetalle.sql" />
     <Build Include="dbo\Table\Perfil.sql" />
-    <Build Include="dbo\Table\Permiso.sql" />
+    <Build Include="dbo\Table\Acceso.sql" />
     <Build Include="dbo\Table\Cotizacion.sql" />
     <Build Include="dbo\Table\CotizacionDetalle.sql" />
     <Build Include="dbo\Table\TomaMedida.sql" />
@@ -146,5 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="_Core\Scripts\RegistraTipoProducto.sql" />
+    <None Include="_Core\Scripts\RegistraAcceso.sql" />
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
     public class Empleado
     {
         public int Id { get; set; }
+        public int EntidadId { get; set; }
         public decimal Sueldo { get; set; }
         public int? PosicionId { get; set; }
         public int? DepartamentoId { get; set; }

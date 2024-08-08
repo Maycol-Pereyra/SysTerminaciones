@@ -14,8 +14,8 @@ namespace ProyectoIntegrador.Mappers
             CreateMap<Perfil, ItemSelect>();
             CreateMap<PerfilVm, Perfil>();
 
-            CreateMap<PerfilPermiso, PerfilPermisoVm>();
-            CreateMap<PerfilPermisoVm, PerfilPermiso>();
+            CreateMap<PerfilAcceso, PerfilPermisoVm>();
+            CreateMap<PerfilPermisoVm, PerfilAcceso>();
         }
     }
 }

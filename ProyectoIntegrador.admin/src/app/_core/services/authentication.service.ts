@@ -39,8 +39,7 @@ export class AuthenticationService {
         user.estaActivo === undefined ? false : user.estaActivo,
         user.login || '',
         '',
-        user.token || '',
-        user.rol || '',
+        user.token || ''
       );
       this.currentUserSubject = new BehaviorSubject<User>(x);
       this.applicationInsightsMonitoringService.setUserId(user.login);
@@ -78,6 +77,7 @@ export class AuthenticationService {
       .pipe(
         map(user => {
           // login successful if there's a jwt token in the response
+          debugger;
           if (user && user.token) {
 
             const x = new User(
@@ -87,8 +87,7 @@ export class AuthenticationService {
               user.estaActivo === undefined ? false : user.estaActivo,
               user.login || '',
               '',
-              user.token || '',
-              user.rol || '',
+              user.token || ''
             );
 
             // store user details and jwt token in local storage to keep user logged in between page refreshes

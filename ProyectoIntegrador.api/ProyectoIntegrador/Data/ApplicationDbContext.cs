@@ -60,8 +60,8 @@ namespace ProyectoIntegrador.Data
         public DbSet<NominaDetalle> NominaDetalle { get; set; }
         public DbSet<Pais> Pais { get; set; }
         public DbSet<Perfil> Perfil { get; set; }
-        public DbSet<PerfilPermiso> PerfilPermiso { get; set; }
-        public DbSet<Permiso> Permiso { get; set; }
+        public DbSet<PerfilAcceso> PerfilAcceso { get; set; }
+        public DbSet<Acceso> Acceso { get; set; }
         public DbSet<Producto> Producto { get; set; }
         public DbSet<ProductoUnidad> ProductoUnidad { get; set; }
         public DbSet<Programa> Programa { get; set; }

@@ -75,75 +75,21 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">Perfil</label>
+          <label class="form-label">Empleado</label>
           <select 
             class="form-control selectpicker"
             data-size="7"
             data-live-search="true"
-            name="perfilId"  
-            formControlName="perfilId"
-            [class.is-invalid]="isControlInvalid('perfilId')">
+            name="empleadoId"  
+            formControlName="empleadoId"
+            [class.is-invalid]="isControlInvalid('empleadoId')">
             <option [ngValue]="null">Seleccione Uno</option>
-            <ng-container *ngFor="let item of perfiles$ | async">
+            <ng-container *ngFor="let item of empleados$ | async">
               <option [value]="item.id">{{item.descripcion}}</option>
             </ng-container>
           </select>                
-          <!-- <span class="form-text text-muted">Comité de evaluación a asignar para las solicitudes de la sucursal, moneda y rango de monto seleccionado.</span> -->
-          <div class="invalid-feedback" *ngIf="controlHasError('required', 'perfilId')">Es requerido</div>
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'empleadoId')">Es requerido</div>
         </div>
-
-        <div class="form-group">
-          <label class="form-label">Usuario del Core</label>
-          <select 
-            class="form-control selectpicker"
-            data-size="7"
-            data-live-search="true"
-            name="usuarioCoreId"  
-            formControlName="usuarioCoreId"
-            [class.is-invalid]="isControlInvalid('usuarioCoreId')">
-            <option [ngValue]="null">-</option>
-            <ng-container *ngFor="let item of usuarioCore$ | async">
-              <option [value]="item.id">{{item.descripcion}}</option>
-            </ng-container>
-          </select>                
-          <!-- <span class="form-text text-muted">Comité de evaluación a asignar para las solicitudes de la sucursal, moneda y rango de monto seleccionado.</span> -->
-          <div class="invalid-feedback" *ngIf="controlHasError('required', 'usuarioCoreId')">Es requerido</div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Sucursal / Agencia por Defecto</label>
-          <select 
-            class="form-control selectpicker"
-            data-size="7"
-            data-live-search="true"
-            name="sucursalAgenciaId"  
-            formControlName="sucursalAgenciaId"
-            [class.is-invalid]="isControlInvalid('sucursalAgenciaId')">
-            <option [ngValue]="null">-</option>
-            <ng-container *ngFor="let item of sucursalAgencia$ | async">
-              <option [value]="item.id">{{item.descripcion}}</option>
-            </ng-container>
-          </select>                
-          <div class="invalid-feedback" *ngIf="controlHasError('required', 'sucursalAgenciaId')">Es requerido</div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-lg-12">
-            <label class="form-label">Nota</label>
-            <textarea 
-              type="text" 
-              class="form-control " 
-              name="nota"
-              placeholder="Nota" 
-              autocomplete="off"
-              rows="3"
-              [class.is-invalid]="isControlInvalid('nota')"
-              [class.is-valid]="isControlValid('nota')"
-              formControlName="nota"></textarea>
-            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'nota')">Debe tener máximo 250 caracteres</div>
-          </div>
-        </div>
-
 
         <div class="separator separator-dashed my-8"></div>
         <h3 class="font-size-lg text-dark-75 font-weight-bold mb-10">
@@ -191,21 +137,10 @@
           <span class="form-text text-muted">El usuario actual no puede cambiar esta propiedad a sí mismo.</span>
         </div>
 
-        <ng-container *ngIf="vm.bloqueoEntradaFallida">
-          <div class="separator separator-dashed my-8"></div>
-
-          <div class="form-group row" >
-            <div class="col-lg-12">
-              <button type="button" class="btn btn-light-primary font-weight-bold btn-sm" (click)="quitarBloqueoEntradaFallida()">Quitar bloqueo de acceso</button>
-            </div>
-          </div>
-        </ng-container>
-
       </form>
     </ng-container>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary btn-elevate" (click)="reiniciarClave()" *ngIf="vm && vm.estaActivo">Reiniciar contraseña de usuario</button>
     <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancelar</button>
     
     <ng-container *ngIf="vm">

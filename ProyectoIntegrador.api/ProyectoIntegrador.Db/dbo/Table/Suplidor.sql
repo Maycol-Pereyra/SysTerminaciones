@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [dbo].[Suplidor] (
-	[Id] INT PRIMARY KEY,
+	[Id] INT PRIMARY KEY IDENTITY,
+	[EntidadId] INT NOT NULL,
 	[FechaModificacion] DATETIME NOT NULL DEFAULT GETDATE(),
 	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
 	[EstaActivo] BIT NOT NULL,
-	FOREIGN KEY (Id) REFERENCES Entidad(Id)
+	FOREIGN KEY (EntidadId) REFERENCES Entidad(Id)
 )

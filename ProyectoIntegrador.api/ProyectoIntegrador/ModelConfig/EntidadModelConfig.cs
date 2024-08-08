@@ -26,11 +26,15 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("varchar(100)")
                     .IsRequired();
 
-                etb.Property(e => e.TipoIdentificacionId)
-                    .HasColumnType("int")
+                etb.Property(e => e.Cedula)
+                    .HasColumnType("varchar(13)")
                     .IsRequired();
 
-                etb.Property(e => e.Identificacion)
+                etb.Property(e => e.Rnc)
+                    .HasColumnType("varchar(13)")
+                    .IsRequired();
+
+                etb.Property(e => e.Pasaporte)
                     .HasColumnType("varchar(30)")
                     .IsRequired();
 
@@ -45,11 +49,6 @@ namespace ProyectoIntegrador.DataModelConfig
                 etb.Property(e => e.EstaActivo)
                     .HasColumnType("bit")
                     .IsRequired();
-
-                etb.HasOne(e => e.TipoIdentificacion)
-                    .WithMany()
-                    .HasForeignKey(e => e.TipoIdentificacionId)
-                    .OnDelete(DeleteBehavior.Restrict);
 
                 etb.HasMany(e => e.ListaEntidadDireccion)
                     .WithOne(x => x.Entidad)

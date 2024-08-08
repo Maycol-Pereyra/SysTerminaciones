@@ -1,5 +1,6 @@
 CREATE TABLE [dbo].[Usuario] (
 	[Id] INT PRIMARY KEY IDENTITY,
+	[EntidadId] INT NOT NULL DEFAULT 1,
 	[EmpleadoId] INT NULL,
 	[Login] VARCHAR(50) NOT NULL UNIQUE,
 	[PasswordHash] VARBINARY(64) NOT NULL,

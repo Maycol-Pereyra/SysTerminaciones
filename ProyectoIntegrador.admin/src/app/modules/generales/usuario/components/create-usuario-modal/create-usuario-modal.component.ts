@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FormBase } from 'src/app/_core/clase-base/form-base';
 import { ItemSelectService } from 'src/app/_core/item-select/item-select.service';
 import { AccesosService } from 'src/app/_core/services/acceso.service';
@@ -10,7 +10,6 @@ import { Usuario } from '../../shared/usuario.model';
 import { UsuarioService } from '../../shared/usuario.service';
 import { ConfirmacionPasswordValidator } from './confirmacion-password.validator';
 import { EndPointSelect } from 'src/app/_core/const/app.const';
-import { ItemSelect } from 'src/app/_core/item-select/item-select.model';
 import { finalize, first } from 'rxjs/operators';
 import { regexCorreo } from 'src/app/_core/const/regexp.const';
 
@@ -23,9 +22,7 @@ export class CreateUsuarioModalComponent extends FormBase implements OnInit, OnD
   isLoading$;
 
   vm: Usuario;
-  perfiles$;
-  sucursalAgencia$;
-  usuarioCore$: Observable<ItemSelect[]>;
+  empleados$;
   procesando = false;
 
   private subscriptions: Subscription[] = [];
@@ -43,13 +40,8 @@ export class CreateUsuarioModalComponent extends FormBase implements OnInit, OnD
   ngOnInit(): void {
     this.isLoading$ = this.service.isLoading$;
 
-    this.perfiles$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.generalesPerfil}`);
-    this.sucursalAgencia$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.solicitudPrestamosSucursalAgencia}`);
+    this.empleados$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.empleado}`);
 
-    const filtroUsuarioCore = ItemSelectService.defaultFilter();
-    filtroUsuarioCore.filter.push({ criterio: 'estaActivoId', valor: '1'});
-    this.usuarioCore$ = this.itemSelectService.get(
-      `${AppConfig.settings.api}${EndPointSelect.solicitudPrestamosUsuarioCore}`, filtroUsuarioCore);
     this.loadCustomer();
   }
 
@@ -72,11 +64,8 @@ export class CreateUsuarioModalComponent extends FormBase implements OnInit, OnD
         Validators.pattern(regexCorreo),
         Validators.maxLength(100)])
       ],
-      nota: [this.vm.nota, Validators.compose([Validators.maxLength(250)])],
-      perfilId: [this.vm.perfilId, Validators.compose([Validators.required])],
-      sucursalAgenciaId: [this.vm.sucursalAgenciaId, Validators.compose([Validators.nullValidator])],
-      usuarioCoreId: [this.vm.usuarioCoreId, Validators.compose([Validators.nullValidator])],
-      login: [this.vm.login, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(100)])],
+      empleadoId: [this.vm.empleadoId, Validators.compose([Validators.required])],
+      login: [this.vm.login, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(50)])],
       password: [this.vm.password, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(100)])],
       confirmacionPassword: ['', Validators.compose([Validators.required])],
     }, {
@@ -110,32 +99,13 @@ export class CreateUsuarioModalComponent extends FormBase implements OnInit, OnD
     const formData = this.formGroup.value;
     this.vm.nombre = formData.nombre;
     this.vm.apellido = formData.apellido;
-    this.vm.nota = formData.nota;
     this.vm.correo = formData.correo;
-    this.vm.perfilId = formData.perfilId;
-    this.vm.usuarioCoreId = formData.usuarioCoreId;
-    this.vm.sucursalAgenciaId = formData.sucursalAgenciaId;
+    this.vm.empleadoId = formData.empleadoId;
     this.vm.login = formData.login;
     this.vm.password = formData.password;
   }
 
   private getEmty(): Usuario {
-    return {
-      id: 0,
-      identificador: '',
-      nombre: '',
-      apellido: '',
-      nota: '',
-      correo: '',
-      estaActivo: true,
-      perfilId: null,
-      usuarioCoreId: null,
-      sucursalAgenciaId: null,
-      login: '',
-      password: '',
-      token: '',
-      requiereCambioPassword: true,
-      bloqueoEntradaFallida: false
-    };
+    return new Usuario(null);
   }
 }

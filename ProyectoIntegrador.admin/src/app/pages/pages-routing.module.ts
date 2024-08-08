@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FeatureFlagGuard } from '../_core/guards/feature-flag.guard';
 import { LayoutComponent } from './_layout/layout.component';
 
 const routes: Routes = [
@@ -18,28 +17,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('../modules/generales/generales.module').then(
             (m) => m.GeneralesModule
-          ),
-      },
-      {
-        path: 'banca-movil-generales',
-        data: {
-          feature: 'BancaMovil'
-        },
-        canActivate: [FeatureFlagGuard],
-        loadChildren: () =>
-          import('../modules/banca-movil-generales/banca-movil-generales.module').then(
-            (m) => m.BancaMovilGeneralesModule
-          ),
-      },
-      {
-        path: 'banca-movil-clientes',
-        data: {
-          feature: 'BancaMovil'
-        },
-        canActivate: [FeatureFlagGuard],
-        loadChildren: () =>
-          import('../modules/banca-movil-clientes/banca-movil-clientes.module').then(
-            (m) => m.BancaMovilClientesModule
           ),
       },
       {

@@ -19,6 +19,8 @@ import { ConfiguracionGeneralComponent } from './configuracion-general/configura
 import {
   EditConfiguracionGeneralModalComponent
 } from './configuracion-general/components/edit-configuracion-general-modal/edit-configuracion-general-modal.component';
+import { PaisComponent } from './pais/pais.component';
+import { EditPaisModalComponent } from './pais/components/edit-pais-modal/edit-pais-modal.component';
 
 
 @NgModule({
@@ -34,6 +36,9 @@ import {
 
     ConfiguracionGeneralComponent,
     EditConfiguracionGeneralModalComponent,
+
+    PaisComponent,
+    EditPaisModalComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +59,7 @@ import {
     CreateUsuarioModalComponent,
     EditPerfilModalComponent,
     DeletePerfilModalComponent,
+    EditPaisModalComponent
   ]
 })
 export class GeneralesModule {}

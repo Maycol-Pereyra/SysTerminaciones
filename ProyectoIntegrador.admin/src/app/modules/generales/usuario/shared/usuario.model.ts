@@ -1,36 +1,41 @@
+import { UsuarioPerfil } from "./usuario-perfil.model";
+
 export class Usuario {
     public id: number;
-    public identificador: string;
-    public nombre: string;
-    public apellido: string;
-    public correo: string;
-    public nota: string;
-    public estaActivo: boolean;
-    public perfilId: number;
-    public usuarioCoreId: number;
+    public empleadoId: number | null;
     public login: string;
     public password: string;
-    public requiereCambioPassword: boolean;
+    public fechaModificacion: Date;
+    public fechaCreacion: Date;
+    public estaActivo: boolean;
     public token: string;
-    public bloqueoEntradaFallida: boolean;
-    public sucursalAgenciaId: number;
 
+    //Propiedades que vienen de entidad
+    public nombre: string;
+    public apellido: string;
+    public cedula: string;
+    public rnc: string;
+    public pasaporte: string;
+    public correo: string;
+
+    public listaUsuarioPerfil: UsuarioPerfil[];
+        
     constructor(vm: any) {
         vm = vm || {};
-        this.id = vm.id || 0;
-        this.identificador = vm.identificador || '';
-        this.nombre = vm.nombre || '';
-        this.apellido = vm.apellido || '';
-        this.correo = vm.correo || '';
-        this.nota = vm.nota || '';
-        this.perfilId = !vm.perfilId ? null : vm.perfilId;
-        this.sucursalAgenciaId = !vm.sucursalAgenciaId ? null : vm.sucursalAgenciaId;
-        this.usuarioCoreId = !vm.usuarioCoreId ? null : vm.usuarioCoreId;
-        this.login = vm.login || '';
-        this.password = vm.password || '';
-        this.token = vm.token || '';
-        this.estaActivo = vm.estaActivo === undefined ? false : vm.estaActivo;
-        this.requiereCambioPassword = vm.requiereCambioPassword === undefined ? false : vm.requiereCambioPassword;
-        this.bloqueoEntradaFallida = vm.bloqueoEntradaFallida || false;
+        this.id = vm.id || 0,
+        this.empleadoId = vm.empleadoId || null,
+        this.login = vm.login || '',
+        this.password = vm.password || '',
+        this.fechaModificacion = !vm.fechaModificacion ? null : vm.fechaModificacion,
+        this.fechaCreacion = !vm.fechaCreacion ? null : vm.fechaCreacion,
+        this.estaActivo = vm.estaActivo || false,
+        this.token = vm.token || '',
+        this.nombre = vm.nombre || '',
+        this.apellido = vm.apellido || '',
+        this.cedula = vm.cedula || '',
+        this.rnc = vm.rnc || '',
+        this.pasaporte = vm.pasaporte || '',
+        this.correo = vm.correo || '',
+        this.listaUsuarioPerfil = !vm.listaUsuarioPerfil ? [] : vm.listaUsuarioPerfil
     }
 }

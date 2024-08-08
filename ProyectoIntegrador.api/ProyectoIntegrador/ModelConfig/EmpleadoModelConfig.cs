@@ -17,6 +17,10 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("int")
                     .IsRequired();
 
+                etb.Property(e => e.EntidadId)
+                    .HasColumnType("int")
+                    .IsRequired();
+
                 etb.Property(e => e.Sueldo)
                     .HasColumnType("decimal(18, 2)")
                     .IsRequired();
@@ -47,7 +51,7 @@ namespace ProyectoIntegrador.DataModelConfig
 
                 etb.HasOne(e => e.Entidad)
                     .WithMany()
-                    .HasForeignKey(e => e.Id)
+                    .HasForeignKey(e => e.EntidadId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 etb.HasOne(e => e.Posicion)
