@@ -30,6 +30,6 @@
         public string Nota { get; set; } = "";
         public int EstadoId { get; set; }
 
-        public virtual DesgloseCorredera DesgloseCorredera { get; set; } = new();
+        public virtual DesgloseCorredera DesgloseCorredera { get; set; }
     }
 }

@@ -19,8 +19,22 @@ import { ConfiguracionGeneralComponent } from './configuracion-general/configura
 import {
   EditConfiguracionGeneralModalComponent
 } from './configuracion-general/components/edit-configuracion-general-modal/edit-configuracion-general-modal.component';
-import { PaisComponent } from './pais/pais.component';
+import { CiudadComponent } from './ciudad/ciudad.component';
+import { EditCiudadModalComponent } from './ciudad/components/edit-ciudad-modal/edit-ciudad-modal.component';
+import { ProvinciaComponent } from './provincia/provincia.component';
+import { EditProvinciaModalComponent } from './provincia/components/edit-provincia-modal/edit-provincia-modal.component';
+import { SectorComponent } from './sector/sector.component';
+import { EditSectorModalComponent } from './sector/components/edit-ciudad-modal/edit-sector-modal.component';
+import { HerramientaComponent } from './herramienta/herramienta.component';
+import { EditHerramientaModalComponent } from './herramienta/components/edit-herramienta-modal/edit-herramienta-modal.component';
+import { UnidadComponent } from './unidad/unidad.component';
+import { EditUnidadModalComponent } from './unidad/components/edit-unidad-modal/edit-unidad-modal.component';
+import { VehiculoComponent } from './vehiculo/vehiculo.component';
+import { EditVehiculoModalComponent } from './vehiculo/components/edit-vehiculo-modal/edit-vehiculo-modal.component';
 import { EditPaisModalComponent } from './pais/components/edit-pais-modal/edit-pais-modal.component';
+import { PaisComponent } from './pais/pais.component';
+import { ComponentesModule } from 'src/app/_core/componentes/componentes.module';
+import { ColorComponent } from './color/color.component';
 
 
 @NgModule({
@@ -38,7 +52,25 @@ import { EditPaisModalComponent } from './pais/components/edit-pais-modal/edit-p
     EditConfiguracionGeneralModalComponent,
 
     PaisComponent,
-    EditPaisModalComponent
+    EditPaisModalComponent,
+
+    CiudadComponent,
+    EditCiudadModalComponent,
+
+    ProvinciaComponent,
+    EditProvinciaModalComponent,
+
+    SectorComponent,
+    EditSectorModalComponent,
+
+    HerramientaComponent,
+    EditHerramientaModalComponent,
+
+    UnidadComponent,
+    EditUnidadModalComponent,
+
+    VehiculoComponent,
+    EditVehiculoModalComponent
   ],
   imports: [
     CommonModule,
@@ -52,14 +84,16 @@ import { EditPaisModalComponent } from './pais/components/edit-pais-modal/edit-p
     NgbDatepickerModule,
     NgbModule,
     NgApexchartsModule,
-    DxHtmlEditorModule
+    DxHtmlEditorModule,
+    ComponentesModule
   ],
   entryComponents: [
     EditUsuarioModalComponent,
     CreateUsuarioModalComponent,
     EditPerfilModalComponent,
     DeletePerfilModalComponent,
-    EditPaisModalComponent
+    EditPaisModalComponent,
+    ColorComponent
   ]
 })
 export class GeneralesModule {}

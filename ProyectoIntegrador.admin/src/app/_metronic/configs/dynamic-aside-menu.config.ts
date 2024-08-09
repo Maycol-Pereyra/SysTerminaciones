@@ -34,6 +34,34 @@ export const DynamicAsideMenuConfig = {
           page: '/generales/pais',
         },
         {
+          title: 'Provincia',
+          page: '/generales/provincia',
+        },
+        {
+          title: 'Ciudad',
+          page: '/generales/ciudad',
+        },
+        {
+          title: 'Sector',
+          page: '/generales/sector',
+        },
+        {
+          title: 'Unidad',
+          page: '/generales/unidad',
+        },
+        {
+          title: 'Vehiculo',
+          page: '/generales/vehiculo',
+        },
+        {
+          title: 'Color',
+          page: '/generales/color',
+        },
+        {
+          title: 'Herramienta',
+          page: '/generales/herramienta',
+        },
+        {
           title: 'Configuración general',
           page: '/generales/configuracion-general',
         },

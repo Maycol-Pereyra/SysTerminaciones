@@ -6,6 +6,6 @@
         public int PerfilId { get; set; }
         public DateTime FechaCreacion { get; set; }
 
-        public virtual UsuarioVm Usuario { get; set; } = new();
+        public virtual UsuarioVm Usuario { get; set; }
     }
 }

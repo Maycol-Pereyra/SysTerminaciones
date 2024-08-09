@@ -2,54 +2,73 @@
 
 SET NOCOUNT ON
 
-DELETE FROM Acceso
-GO
-
 MERGE INTO Acceso AS Target
 USING (VALUES
 
-  (N'generales.usuario.acceder', N'Generales - Usuarios', N'Acceso de Usuarios', N'Acceder', N'')
-, (N'generales.usuario.crear', N'Generales - Usuarios', N'Acceso de Usuarios', N'Crear', N'')
-, (N'generales.usuario.editar', N'Generales - Usuarios', N'Acceso de Usuarios', N'Editar', N'')
-, (N'generales.perfil.acceder', N'Generales - Perfil', N'Acceso de Perfil', N'Acceder', N'')
-, (N'generales.perfil.crear', N'Generales - Perfil', N'Acceso de Perfil', N'Crear', N'')
-, (N'generales.perfil.editar', N'Generales - Perfil', N'Acceso de Perfil', N'Editar', N'')
-, (N'generales.pais.acceder', N'Generales - País', N'Acceso de País', N'Acceder', N'')
-, (N'generales.pais.crear', N'Generales - País', N'Acceso de País', N'Crear', N'')
-, (N'generales.pais.editar', N'Generales - País', N'Acceso de País', N'Editar', N'')
-, (N'generales.provincia.acceder', N'Generales - Provincia', N'Acceso de Provincia', N'Acceder', N'')
-, (N'generales.provincia.crear', N'Generales - Provincia', N'Acceso de Provincia', N'Crear', N'')
-, (N'generales.provincia.editar', N'Generales - Provincia', N'Acceso de Provincia', N'Editar', N'')
-, (N'generales.ciudad.acceder', N'Generales - Ciudad', N'Acceso de Ciudad', N'Acceder', N'')
-, (N'generales.ciudad.crear', N'Generales - Ciudad', N'Acceso de Ciudad', N'Crear', N'')
-, (N'generales.ciudad.editar', N'Generales - Ciudad', N'Acceso de Ciudad', N'Editar', N'')
+  (N'generales.usuario.acceder', N'Generales', N'Acceso de Usuarios', N'Acceder', N'')
+, (N'generales.usuario.crear', N'Generales', N'Acceso de Usuarios', N'Crear', N'')
+, (N'generales.usuario.editar', N'Generales', N'Acceso de Usuarios', N'Editar', N'')
+, (N'generales.usuario.activar', N'Generales', N'Acceso de Usuarios', N'Activar', N'')
+, (N'generales.usuario.inactivar', N'Generales', N'Acceso de Usuarios', N'Inactivar', N'')
+, (N'generales.perfil.acceder', N'Generales', N'Acceso de Perfil', N'Acceder', N'')
+, (N'generales.perfil.crear', N'Generales', N'Acceso de Perfil', N'Crear', N'')
+, (N'generales.perfil.editar', N'Generales', N'Acceso de Perfil', N'Editar', N'')
+, (N'generales.perfil.activar', N'Generales', N'Acceso de Perfil', N'Activar', N'')
+, (N'generales.perfil.inactivar', N'Generales', N'Acceso de Perfil', N'Inactivar', N'')
+, (N'generales.pais.acceder', N'Generales', N'Acceso de País', N'Acceder', N'')
+, (N'generales.pais.crear', N'Generales', N'Acceso de País', N'Crear', N'')
+, (N'generales.pais.editar', N'Generales', N'Acceso de País', N'Editar', N'')
+, (N'generales.pais.activar', N'Generales', N'Acceso de País', N'Activar', N'')
+, (N'generales.pais.inactivar', N'Generales', N'Acceso de País', N'Inactivar', N'')
+, (N'generales.provincia.acceder', N'Generales', N'Acceso de Provincia', N'Acceder', N'')
+, (N'generales.provincia.crear', N'Generales', N'Acceso de Provincia', N'Crear', N'')
+, (N'generales.provincia.editar', N'Generales', N'Acceso de Provincia', N'Editar', N'')
+, (N'generales.provincia.activar', N'Generales', N'Acceso de Provincia', N'Activar', N'')
+, (N'generales.provincia.inactivar', N'Generales', N'Acceso de Provincia', N'Inactivar', N'')
+, (N'generales.ciudad.acceder', N'Generales', N'Acceso de Ciudad', N'Acceder', N'')
+, (N'generales.ciudad.crear', N'Generales', N'Acceso de Ciudad', N'Crear', N'')
+, (N'generales.ciudad.editar', N'Generales', N'Acceso de Ciudad', N'Editar', N'')
+, (N'generales.ciudad.activar', N'Generales', N'Acceso de Ciudad', N'Activar', N'')
+, (N'generales.ciudad.inactivar', N'Generales', N'Acceso de Ciudad', N'Inactivar', N'')
+, (N'generales.sector.acceder', N'Generales', N'Acceso de Sector', N'Acceder', N'')
+, (N'generales.sector.crear', N'Generales', N'Acceso de Sector', N'Crear', N'')
+, (N'generales.sector.editar', N'Generales', N'Acceso de Sector', N'Editar', N'')
+, (N'generales.sector.activar', N'Generales', N'Acceso de Sector', N'Activar', N'')
+, (N'generales.sector.inactivar', N'Generales', N'Acceso de Sector', N'Inactivar', N'')
+, (N'generales.herramienta.acceder', N'Generales', N'Acceso de Herramienta', N'Acceder', N'')
+, (N'generales.herramienta.crear', N'Generales', N'Acceso de Herramienta', N'Crear', N'')
+, (N'generales.herramienta.editar', N'Generales', N'Acceso de Herramienta', N'Editar', N'')
+, (N'generales.herramienta.activar', N'Generales', N'Acceso de Herramienta', N'Activar', N'')
+, (N'generales.herramienta.inactivar', N'Generales', N'Acceso de Herramienta', N'Inactivar', N'')
+, (N'generales.unidad.acceder', N'Generales', N'Acceso de Unidad', N'Acceder', N'')
+, (N'generales.unidad.crear', N'Generales', N'Acceso de Unidad', N'Crear', N'')
+, (N'generales.unidad.editar', N'Generales', N'Acceso de Unidad', N'Editar', N'')
+, (N'generales.unidad.activar', N'Generales', N'Acceso de Unidad', N'Activar', N'')
+, (N'generales.unidad.inactivar', N'Generales', N'Acceso de Unidad', N'Inactivar', N'')
+, (N'generales.vehiculo.acceder', N'Generales', N'Acceso de Vehiculo', N'Acceder', N'')
+, (N'generales.vehiculo.crear', N'Generales', N'Acceso de Vehiculo', N'Crear', N'')
+, (N'generales.vehiculo.editar', N'Generales', N'Acceso de Vehiculo', N'Editar', N'')
+, (N'generales.vehiculo.activar', N'Generales', N'Acceso de Vehiculo', N'Activar', N'')
+, (N'generales.vehiculo.inactivar', N'Generales', N'Acceso de Vehiculo', N'Inactivar', N'')
+, (N'generales.color.acceder', N'Generales', N'Acceso de Color', N'Acceder', N'')
+, (N'generales.color.crear', N'Generales', N'Acceso de Color', N'Crear', N'')
+, (N'generales.color.editar', N'Generales', N'Acceso de Color', N'Editar', N'')
+, (N'generales.color.activar', N'Generales', N'Acceso de Color', N'Activar', N'')
+, (N'generales.color.inactivar', N'Generales', N'Acceso de Color', N'Inactivar', N'')
 
 
 ) 
-AS Source (Id,Modulo,Opcion,Permiso,Descripcion)
-ON (Target.Id = Source.Id)
-
-WHEN MATCHED AND (
-    NULLIF(Source.Modulo, Target.Modulo) IS NOT NULL 
- OR NULLIF(Target.Modulo, Source.Modulo) IS NOT NULL 
- OR NULLIF(Source.Opcion, Target.Opcion) IS NOT NULL 
- OR NULLIF(Target.Opcion, Source.Opcion) IS NOT NULL 
- OR NULLIF(Source.Permiso, Target.Permiso) IS NOT NULL 
- OR NULLIF(Target.Permiso, Source.Permiso) IS NOT NULL 
- OR	NULLIF(Source.Descripcion, Target.Descripcion) IS NOT NULL 
- OR NULLIF(Target.Descripcion, Source.Descripcion) IS NOT NULL
-) 
-THEN
-  UPDATE SET 
-  Target.Modulo = Source.Modulo,
-  Target.Opcion = Source.Opcion,
-  Target.Permiso = Source.Permiso,  
-  Target.Descripcion = Source.Descripcion  
-WHEN NOT MATCHED BY TARGET THEN
- INSERT(Id,Modulo,Opcion,Permiso,Descripcion)
- VALUES(Source.Id, Source.Modulo, Source.Opcion, Source.Permiso,Source.Descripcion)
-WHEN NOT MATCHED BY SOURCE THEN 
- DELETE;
+AS source (Id,Modulo,Opcion,Permiso,Descripcion)
+ON target.Id = source.Id
+WHEN MATCHED THEN 
+    UPDATE SET 
+		target.Modulo = source.Modulo,
+		target.Opcion = source.Opcion,
+		target.Permiso = source.Permiso,
+		target.Descripcion = source.Descripcion
+WHEN NOT MATCHED THEN
+    INSERT (Id,Modulo,Opcion,Permiso,Descripcion)
+    VALUES (source.Id, source.Modulo, source.Opcion, source.Permiso, source.Descripcion);
 
 GO
 

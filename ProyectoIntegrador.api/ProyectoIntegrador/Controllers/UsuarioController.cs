@@ -124,6 +124,7 @@ namespace ProyectoIntegrador.Controllers
             //var lista = await _dbContext.PerfilAcceso
             //    .Where(o => perfiles.Contains(o.PerfilId))
             //    .Select(o => o.AccesoId)
+            //    .Distinct()
             //    .ToListAsync() ?? new List<string>();
 
             var lista = await _dbContext.Acceso
@@ -176,6 +177,7 @@ namespace ProyectoIntegrador.Controllers
                 var objNew = _mapper.Map<Usuario>(vm);
                 objNew.FechaCreacion = DateTime.Now;
                 objNew.FechaModificacion = DateTime.Now;
+                objNew.EstaActivo = true;
 
                 MapUsuarioPerfil(vm, objNew);
 
@@ -205,6 +207,42 @@ namespace ProyectoIntegrador.Controllers
             MapUsuarioPerfil(vm, objUpdate);
 
             _dbContext.Usuario.Update(objUpdate);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/activar")]
+        public async Task<IActionResult> ActivarAsync(int id)
+        {
+            var obj = _dbContext.Usuario.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == true)
+            {
+                return BadRequest("El registro ya está activo");
+            }
+
+            obj.EstaActivo = true;
+            _dbContext.Usuario.Update(obj);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/inactivar")]
+        public async Task<IActionResult> InactivarAsync(int id)
+        {
+            var obj = _dbContext.Usuario.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == false)
+            {
+                return BadRequest("El registro ya está inactivo");
+            }
+
+            obj.EstaActivo = false;
+            _dbContext.Usuario.Update(obj);
             await _dbContext.SaveChangesAsync();
 
             return NoContent();

@@ -4,14 +4,14 @@ export class Perfil {
     id: number;
     descripcion: string;
     estaActivo: boolean;
-    listaAcceso: PerfilAcceso [];
+    listaDetalle: PerfilAcceso [];
 
     constructor(vm: any) {
         vm = vm || {};
         this.id = vm.id || 0;
         this.descripcion = vm.descripcion || '';
         this.estaActivo = !vm.estaActivo ? true : vm.estaActivo;
-        this.listaAcceso = this.mapAcceso(vm.listaAcceso);
+        this.listaDetalle = this.mapAcceso(vm.listaAcceso);
     }
 
     private mapAcceso(lista: any[]): PerfilAcceso[] {

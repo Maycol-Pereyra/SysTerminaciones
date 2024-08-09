@@ -18,8 +18,7 @@ namespace ProyectoIntegrador.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-        private static readonly object _object = new();
-
+        
         public AlmacenController(
             ApplicationDbContext dbContext,
             IMapper mapper,
@@ -65,6 +64,7 @@ namespace ProyectoIntegrador.Controllers
             if (vm.Id == 0)
             {
                 var objNew = _mapper.Map<Almacen>(vm);
+                objNew.EstaActivo = true;
 
                 _dbContext.Almacen.Add(objNew);
                 await _dbContext.SaveChangesAsync();
@@ -86,6 +86,42 @@ namespace ProyectoIntegrador.Controllers
             _mapper.Map(vm, objUpdate);
 
             _dbContext.Almacen.Update(objUpdate);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/activar")]
+        public async Task<IActionResult> ActivarAsync(int id)
+        {
+            var obj = _dbContext.Almacen.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == true)
+            {
+                return BadRequest("El registro ya está activo");
+            }
+
+            obj.EstaActivo = true;
+            _dbContext.Almacen.Update(obj);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/inactivar")]
+        public async Task<IActionResult> InactivarAsync(int id)
+        {
+            var obj = _dbContext.Almacen.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == false)
+            {
+                return BadRequest("El registro ya está inactivo");
+            }
+
+            obj.EstaActivo = false;
+            _dbContext.Almacen.Update(obj);
             await _dbContext.SaveChangesAsync();
 
             return NoContent();

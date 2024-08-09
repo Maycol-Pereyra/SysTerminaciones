@@ -16,7 +16,7 @@ export class PerfilService extends TableService<PerfilIndex> implements OnDestro
 
   constructor(@Inject(HttpClient)  http) {
     super(http);
-    this.API_URL = `${AppConfig.settings.api}/api/generales/admin/perfil`;
+    this.API_URL = `${AppConfig.settings.api}/api/perfil`;
   }
 
   ngOnDestroy() {

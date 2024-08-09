@@ -9,6 +9,6 @@ namespace ProyectoIntegrador.Api.Models
         public int DireccionId { get; set; }
         public bool EstaActivo { get; set; }
 
-        public virtual Direccion Direccion { get; set; } = new Direccion();
+        public virtual Direccion Direccion { get; set; }
     }
 }

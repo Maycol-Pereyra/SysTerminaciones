@@ -12,11 +12,11 @@
         public DateTime FechaCreacion { get; set; }
         public int EstadoId { get; set; }
 
-        public virtual Cliente Cliente { get; set; } = new();
-        public virtual Direccion Direccion { get; set; } = new();
-        public virtual Empleado EmpleadoAsignado { get; set; } = new();
-        public virtual Vehiculo VehiculoAsignado { get; set; } = new();
-        public virtual Registro Estado { get; set; } = new();
+        public virtual Cliente Cliente { get; set; }
+        public virtual Direccion Direccion { get; set; }
+        public virtual Empleado EmpleadoAsignado { get; set; }
+        public virtual Vehiculo VehiculoAsignado { get; set; }
+        public virtual Registro Estado { get; set; }
         public virtual List<SolicitudTomaMedidaDetalle> ListaDetalle { get; set; } = [];
     }
 }

@@ -11,6 +11,6 @@ namespace ProyectoIntegrador.Api.Models
         public DateTime FechaCreacion { get; set; }
         public bool EstaActivo { get; set; }
 
-        public virtual Provincia Provincia { get; set; } = new Provincia();
+        public virtual Provincia Provincia { get; set; }
     }
 }

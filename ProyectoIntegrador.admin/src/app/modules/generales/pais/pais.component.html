@@ -28,11 +28,23 @@
             <app-sort-icon column="descripcion" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
           </th>
 
+          <th>
+            Estado
+          </th>
+
           <th class="pr-0 text-right" style="min-width: 150px">Acciones</th>
         </thead>
         <tbody>
           <tr *ngFor="let row of service.items$ | async">
             <td>{{ row.descripcion }}</td>
+            <td>
+              <span class="label label-lg label-inline" 
+                [class.label-light-danger]="row.estaActivo === false"
+                [class.label-light-success]="row.estaActivo === true">
+                <ng-container *ngIf="!row.estaActivo">Inactivo</ng-container>
+                <ng-container *ngIf="row.estaActivo">Activo</ng-container>
+              </span>
+            </td>
             <td class="pr-0 text-right">
               <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3" (click)="edit(row.id)">
                 <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true" class="svg-icon svg-icon-md svg-icon-primary">

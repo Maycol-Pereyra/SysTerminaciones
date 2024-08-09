@@ -18,8 +18,7 @@ namespace ProyectoIntegrador.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-        private static readonly object _object = new();
-
+        
         public HerramientaController(
             ApplicationDbContext dbContext,
             IMapper mapper,
@@ -47,7 +46,19 @@ namespace ProyectoIntegrador.Controllers
             var lista = _dbContext.Herramienta
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
-            lista = lista.Where(o => o.EstaActivo);
+            //lista = lista.Where(o => o.EstaActivo);
+            lista = lista.OrderBy(o => o.Id);
+            var pl = await lista.ToPagedList(parameter);
+
+            return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
+        }
+
+        [HttpGet("estado-item-select")]
+        public async Task<ActionResult<List<ItemSelect>>> GetEstadoItemSelect([FromQuery] HerramientaParameters parameter)
+        {
+            var lista = _dbContext.Registro
+                .Where(o => o.TipoRegistroId == 8) //EstadoHerramienta
+                .AsNoTracking();
             lista = lista.OrderBy(o => o.Id);
             var pl = await lista.ToPagedList(parameter);
 
@@ -65,6 +76,7 @@ namespace ProyectoIntegrador.Controllers
             if (vm.Id == 0)
             {
                 var objNew = _mapper.Map<Herramienta>(vm);
+                //objNew.EstaActivo = true; // TODO: asignar el estado correspondiente
 
                 _dbContext.Herramienta.Add(objNew);
                 await _dbContext.SaveChangesAsync();
@@ -112,6 +124,13 @@ namespace ProyectoIntegrador.Controllers
 
         private static IQueryable<Herramienta> Filtrar(IQueryable<Herramienta> lista, HerramientaParameters parameter)
         {
+            if (string.IsNullOrEmpty(parameter.Criterio) == false)
+            {
+                lista = lista.Where(o =>
+                    o.Descripcion.Contains(parameter.Criterio)
+                );
+            }
+
             return lista;
         }
 

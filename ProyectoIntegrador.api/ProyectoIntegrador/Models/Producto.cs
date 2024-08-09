@@ -16,10 +16,10 @@ namespace ProyectoIntegrador.Api.Models
         public DateTime FechaCreacion { get; set; }
         public bool EstaActivo { get; set; }
 
-        public virtual Registro Categoria { get; set; } = new();
-        public virtual TipoProducto TipoProducto { get; set; } = new();
-        public virtual Registro Color { get; set; } = new();
-        public virtual Suplidor Suplidor { get; set; } = new();
+        public virtual Registro Categoria { get; set; }
+        public virtual TipoProducto TipoProducto { get; set; }
+        public virtual Registro Color { get; set; }
+        public virtual Suplidor Suplidor { get; set; }
 
         public virtual List<ProductoUnidad> ListaProductoUnidad { get; set; } = [];
     }

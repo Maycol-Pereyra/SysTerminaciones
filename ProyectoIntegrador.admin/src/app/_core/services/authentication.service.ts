@@ -77,7 +77,6 @@ export class AuthenticationService {
       .pipe(
         map(user => {
           // login successful if there's a jwt token in the response
-          debugger;
           if (user && user.token) {
 
             const x = new User(

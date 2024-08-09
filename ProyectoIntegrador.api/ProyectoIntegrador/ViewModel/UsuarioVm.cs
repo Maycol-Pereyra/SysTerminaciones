@@ -21,6 +21,6 @@
         public string Correo { get; set; } = "";
 
 
-        public virtual List<UsuarioPerfilVm> ListaUsuarioPerfil { get; set; } = new ();
+        public virtual List<UsuarioPerfilVm> ListaUsuarioPerfil { get; set; } = [];
     }
 }

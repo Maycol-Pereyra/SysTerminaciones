@@ -10,8 +10,8 @@
         public int TurnoId { get; set; }
         public bool CuadroCaja { get; set; }
 
-        public virtual Caja Caja { get; set; } = new Caja();
-        public virtual Usuario Usuario { get; set; } = new Usuario();
-        public virtual Registro Registro { get; set; } = new Registro();
+        public virtual Caja Caja { get; set; }
+        public virtual Usuario Usuario { get; set; }
+        public virtual Registro Registro { get; set; }
     }
 }

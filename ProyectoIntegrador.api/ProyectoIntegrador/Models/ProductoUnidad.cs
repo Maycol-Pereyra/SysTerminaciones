@@ -8,6 +8,6 @@
         public decimal PrecioVenta { get; set; }
         public decimal PrecioVentaInstalacion { get; set; }
 
-        public virtual Producto Producto { get; set; } = new();
+        public virtual Producto Producto { get; set; }
     }
 }

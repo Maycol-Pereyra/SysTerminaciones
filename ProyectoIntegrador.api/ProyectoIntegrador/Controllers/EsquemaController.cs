@@ -15,8 +15,7 @@ namespace ProyectoIntegrador.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-        private static readonly object _object = new();
-
+        
         public EsquemaController(
             ApplicationDbContext dbContext,
             IMapper mapper,

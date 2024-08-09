@@ -32,6 +32,11 @@ namespace ProyectoIntegrador.DataModelConfig
                 etb.Property(e => e.EstaActivo)
                     .HasColumnType("bit")
                     .IsRequired();
+
+                etb.HasOne(e => e.Pais)
+                    .WithMany()
+                    .HasForeignKey(e => e.PaisId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             return modelBuilder;

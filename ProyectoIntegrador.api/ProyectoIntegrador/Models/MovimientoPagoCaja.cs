@@ -8,6 +8,6 @@
         public decimal Monto { get; set; }
         public DateTime FechaCreacion { get; set; }
 
-        public virtual Factura Factura { get; set; } = new();
+        public virtual Factura Factura { get; set; }
     }
 }

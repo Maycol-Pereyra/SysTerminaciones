@@ -26,7 +26,7 @@ namespace ProyectoIntegrador.DataModelConfig
                     .IsRequired();
 
                 etb.Property(e => e.Cantidad)
-                    .HasColumnType("int")
+                    .HasColumnType("decimal(18,2)")
                     .IsRequired();
 
                 etb.Property(e => e.FechaModificacion)

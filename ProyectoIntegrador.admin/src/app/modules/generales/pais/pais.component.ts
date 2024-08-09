@@ -16,8 +16,8 @@ import {
   SortState,
   GroupingState
 } from 'src/app/_core/crud-table';
-import { EditPaisModalComponent } from './components/edit-pais-modal/edit-pais-modal.component';
 import { PaisService } from './shared/pais.service';
+import { EditPaisModalComponent } from './components/edit-pais-modal/edit-pais-modal.component';
 
 @Component({
   selector: 'app-pais',
@@ -123,7 +123,7 @@ export class PaisComponent
   // form actions
 
   create() {
-    if (this.accesosService.puedeCrear('generales.pais.crear')) {
+    if (this.accesosService.puedeCrear('generales.provincia.crear')) {
       const modalRef = this.modalService.open(EditPaisModalComponent, { size: 'md', backdrop: 'static' });
       modalRef.result.then(() =>
         this.service.fetch(),
@@ -133,7 +133,7 @@ export class PaisComponent
   }
 
   edit(id: number) {
-    if (this.accesosService.puedeEditar('generales.pais.editar')) {
+    if (this.accesosService.puedeEditar('generales.provincia.editar')) {
       const modalRef = this.modalService.open(EditPaisModalComponent, { size: 'md', backdrop: 'static' });
       modalRef.componentInstance.id = id;
       modalRef.result.then(() =>

@@ -1,0 +1,201 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="vm">
+        <ng-container *ngIf="vm.id">Editar</ng-container>
+        <ng-container *ngIf="!vm.id">Crear</ng-container>
+        Vehiculo
+        <ng-container *ngIf="vm.id">'{{vm.placa}}'</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body" style="min-height: 404px;">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent fixed-top">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="vm">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Marca</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="marca"
+              placeholder="Marca" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('marca')"
+              [class.is-valid]="isControlValid('marca')"
+              formControlName="marca" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'marca')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'marca')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'marca')">Debe tener máximo 50 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Modelo</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="modelo"
+              placeholder="Modelo" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('modelo')"
+              [class.is-valid]="isControlValid('modelo')"
+              formControlName="modelo" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'modelo')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'modelo')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'modelo')">Debe tener máximo 50 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Placa</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="placa"
+              placeholder="Placa" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('placa')"
+              [class.is-valid]="isControlValid('placa')"
+              formControlName="placa" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'placa')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'placa')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'placa')">Debe tener máximo 20 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-label">Año de fabricación</label>
+              <input
+                  type="number"
+                  class="form-control form-control-lg "
+                  placeholder="Año de fabricación"
+                  name="anoFabricacion"
+                  step="1"
+                  (blur)="fixCantidadNullFg(formGroup, 'anoFabricacion'); fixCantidadNumeroEnteroFg(formGroup, 'anoFabricacion')"
+                  [class.is-invalid]="isControlInvalid('anoFabricacion')"
+                  [class.is-valid]="isControlValid('anoFabricacion')"
+                  formControlName="anoFabricacion"
+                />
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'anoFabricacion')">Es requerido</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('min', 'anoFabricacion')">Debe tener mínimo 0</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('max', 'anoFabricacion')">Debe tener máximo 9,999</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-label">Kilometraje</label>
+              <input
+                  type="number"
+                  class="form-control form-control-lg "
+                  placeholder="Kilometraje"
+                  name="kilometraje"
+                  step="0.01"
+                  (blur)="fixCantidadNullFg(formGroup, 'kilometraje'); fixMontoDosDecimalesFg(formGroup, 'kilometraje')"
+                  [class.is-invalid]="isControlInvalid('kilometraje')"
+                  [class.is-valid]="isControlValid('kilometraje')"
+                  formControlName="kilometraje"
+                />
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'kilometraje')">Es requerido</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('min', 'kilometraje')">Debe tener mínimo 0</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('max', 'kilometraje')">Debe tener máximo 99,999,999.99</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-label">Capacidad de carga</label>
+              <input
+                  type="number"
+                  class="form-control form-control-lg "
+                  placeholder="Capacidad de carga"
+                  name="capacidadCarga"
+                  step="0.01" 
+                  [class.is-invalid]="isControlInvalid('capacidadCarga')"
+                  [class.is-valid]="isControlValid('capacidadCarga')"
+                  formControlName="capacidadCarga"
+                />
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'capacidadCarga')">Es requerido</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('min', 'capacidadCarga')">Debe tener mínimo 0</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('max', 'capacidadCarga')">Debe tener máximo 99,999,999.99</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Unidad de la carga</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="unidadCargaId"  
+            formControlName="unidadCargaId"
+            [class.is-invalid]="isControlInvalid('unidadCargaId')">
+            <option [ngValue]="null">Seleccione Uno</option>
+            <ng-container *ngFor="let item of unidades$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'unidadCargaId')">Es requerido</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Color</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="colorId"  
+            formControlName="colorId"
+            [class.is-invalid]="isControlInvalid('colorId')">
+            <option [ngValue]="null">Seleccione Uno</option>
+            <ng-container *ngFor="let item of colores$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'colorId')">Es requerido</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Estado</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="estadoId"  
+            formControlName="estadoId"
+            [class.is-invalid]="isControlInvalid('estadoId')">
+            <option [ngValue]="null">Seleccione Uno</option>
+            <ng-container *ngFor="let item of estados$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'estadoId')">Es requerido</div>
+        </div>
+
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancelar</button>
+    <ng-container *ngIf="vm">
+      <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid">Guardar</button>
+    </ng-container>
+  </div>
+</div>

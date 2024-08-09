@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|solutionrelative:ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\controllers\\registrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\controllers\\registrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\controllers\\vehiculocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\controllers\\vehiculocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
       "RelativeMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|solutionrelative:ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
     },
@@ -37,7 +45,33 @@
               "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql",
               "RelativeToolTip": "ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-08-08T04:37:58.475Z",
+              "WhenOpened": "2024-08-09T05:25:14.117Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RegistroController.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\RegistroController.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\Controllers\\RegistroController.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\RegistroController.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\Controllers\\RegistroController.cs",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAgwDQAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-09T04:54:29.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "VehiculoController.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\VehiculoController.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\Controllers\\VehiculoController.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\VehiculoController.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\Controllers\\VehiculoController.cs",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAowD4AAABwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-09T04:48:12.803Z",
               "EditorCaption": ""
             }
           ]

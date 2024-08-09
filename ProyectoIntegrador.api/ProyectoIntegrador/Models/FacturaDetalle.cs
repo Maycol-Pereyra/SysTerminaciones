@@ -14,6 +14,6 @@
         public decimal Impuesto { get; set; }
         public decimal Descuento { get; set; }
 
-        public virtual Factura Factura { get; set; } = new();
+        public virtual Factura Factura { get; set; }
     }
 }

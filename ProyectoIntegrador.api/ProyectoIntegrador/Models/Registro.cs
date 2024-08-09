@@ -9,6 +9,6 @@
         public DateTime FechaCreacion { get; set; }
         public bool EstaActivo { get; set; }
 
-        public virtual TipoRegistro TipoRegistro { get; set; } = new TipoRegistro();
+        public virtual TipoRegistro TipoRegistro { get; set; }
     }
 }

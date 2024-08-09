@@ -12,8 +12,8 @@
         public DateTime FechaCreacion { get; set; }
         public bool EstaActivo { get; set; }
 
-        public virtual Empleado Empleado { get; set; } = new();
-        public virtual Entidad Entidad { get; set; } = new();
-        public virtual List<UsuarioPerfil> ListaUsuarioPerfil { get; set; } = new();
+        public virtual Empleado Empleado { get; set; }
+        public virtual Entidad Entidad { get; set; }
+        public virtual List<UsuarioPerfil> ListaUsuarioPerfil { get; set; } = [];
     }
 }

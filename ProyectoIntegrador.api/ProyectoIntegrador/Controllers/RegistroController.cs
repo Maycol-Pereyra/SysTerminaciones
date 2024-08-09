@@ -20,7 +20,6 @@ namespace ProyectoIntegrador.Controllers
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly IExistenciaService _existenciaService;
-        private static readonly object _object = new();
 
         public RegistroController(
             ApplicationDbContext dbContext,
@@ -78,6 +77,7 @@ namespace ProyectoIntegrador.Controllers
             {
                 var objNew = _mapper.Map<Registro>(vm);
                 objNew.FechaCreacion = DateTime.Now;
+                objNew.EstaActivo = true;
 
                 _dbContext.Registro.Add(objNew);
                 await _dbContext.SaveChangesAsync();
@@ -101,6 +101,42 @@ namespace ProyectoIntegrador.Controllers
             _mapper.Map(vm, objUpdate);
 
             _dbContext.Registro.Update(objUpdate);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/activar")]
+        public async Task<IActionResult> ActivarAsync(int id)
+        {
+            var obj = _dbContext.Registro.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == true)
+            {
+                return BadRequest("El registro ya está activo");
+            }
+
+            obj.EstaActivo = true;
+            _dbContext.Registro.Update(obj);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/inactivar")]
+        public async Task<IActionResult> InactivarAsync(int id)
+        {
+            var obj = _dbContext.Registro.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == false)
+            {
+                return BadRequest("El registro ya está inactivo");
+            }
+
+            obj.EstaActivo = false;
+            _dbContext.Registro.Update(obj);
             await _dbContext.SaveChangesAsync();
 
             return NoContent();
@@ -136,6 +172,13 @@ namespace ProyectoIntegrador.Controllers
 
         private static IQueryable<Registro> Filtrar(IQueryable<Registro> lista, RegistroParameters parameter)
         {
+            if (string.IsNullOrEmpty(parameter.Criterio) == false)
+            {
+                lista = lista.Where(o =>
+                    o.Descripcion.Contains(parameter.Criterio)
+                );
+            }
+
             if (parameter.TipoRegistroId > 0)
             {
                 lista = lista.Where(o => o.TipoRegistroId == parameter.TipoRegistroId);

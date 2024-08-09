@@ -11,6 +11,6 @@
         public int UsuarioCreacionId { get; set; }
         public DateTime FechaCreacion { get; set; }
 
-        public virtual Usuario Usuario { get; set; } = new Usuario();
+        public virtual Usuario Usuario { get; set; }
     }
 }

@@ -17,9 +17,9 @@ namespace ProyectoIntegrador.Api.Models
         public decimal Descuento { get; set; }
 
 
-        public virtual Compra Compra { get; set; } = new Compra();
-        public virtual Producto Producto { get; set; } = new Producto();
-        public virtual Unidad UnidadProducto { get; set; } = new();
-        public virtual Unidad UnidadMedida { get; set; } = new();
+        public virtual Compra Compra { get; set; }
+        public virtual Producto Producto { get; set; }
+        public virtual Unidad UnidadProducto { get; set; }
+        public virtual Unidad UnidadMedida { get; set; }
     }
 }

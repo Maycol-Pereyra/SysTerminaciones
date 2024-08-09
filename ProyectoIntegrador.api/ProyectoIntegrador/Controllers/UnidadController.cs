@@ -18,8 +18,7 @@ namespace ProyectoIntegrador.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-        private static readonly object _object = new();
-
+        
         public UnidadController(
             ApplicationDbContext dbContext,
             IMapper mapper,
@@ -66,6 +65,8 @@ namespace ProyectoIntegrador.Controllers
             {
                 var objNew = _mapper.Map<Unidad>(vm);
                 objNew.FechaCreacion = DateTime.Now;
+                objNew.FechaModificacion = DateTime.Now;
+                objNew.EstaActivo = true;
 
                 _dbContext.Unidad.Add(objNew);
                 await _dbContext.SaveChangesAsync();
@@ -85,8 +86,45 @@ namespace ProyectoIntegrador.Controllers
             }
 
             _mapper.Map(vm, objUpdate);
+            objUpdate.FechaModificacion = DateTime.Now;
 
             _dbContext.Unidad.Update(objUpdate);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/activar")]
+        public async Task<IActionResult> ActivarAsync(int id)
+        {
+            var obj = _dbContext.Unidad.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == true)
+            {
+                return BadRequest("El registro ya está activo");
+            }
+
+            obj.EstaActivo = true;
+            _dbContext.Unidad.Update(obj);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/inactivar")]
+        public async Task<IActionResult> InactivarAsync(int id)
+        {
+            var obj = _dbContext.Unidad.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == false)
+            {
+                return BadRequest("El registro ya está inactivo");
+            }
+
+            obj.EstaActivo = false;
+            _dbContext.Unidad.Update(obj);
             await _dbContext.SaveChangesAsync();
 
             return NoContent();
@@ -113,6 +151,13 @@ namespace ProyectoIntegrador.Controllers
 
         private static IQueryable<Unidad> Filtrar(IQueryable<Unidad> lista, UnidadParameters parameter)
         {
+            if (string.IsNullOrEmpty(parameter.Criterio) == false)
+            {
+                lista = lista.Where(o =>
+                    o.Descripcion.Contains(parameter.Criterio)
+                );
+            }
+
             return lista;
         }
 

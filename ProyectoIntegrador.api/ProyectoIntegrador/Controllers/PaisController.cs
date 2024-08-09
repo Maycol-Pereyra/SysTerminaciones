@@ -18,8 +18,7 @@ namespace ProyectoIntegrador.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-        private static readonly object _object = new();
-
+        
         public PaisController(
             ApplicationDbContext dbContext,
             IMapper mapper,
@@ -66,6 +65,7 @@ namespace ProyectoIntegrador.Controllers
             {
                 var objNew = _mapper.Map<Pais>(vm);
                 objNew.FechaCreacion = DateTime.Now;
+                objNew.EstaActivo = true;
 
                 _dbContext.Pais.Add(objNew);
                 await _dbContext.SaveChangesAsync();
@@ -92,6 +92,42 @@ namespace ProyectoIntegrador.Controllers
             return NoContent();
         }
 
+        [HttpPost("{id}/activar")]
+        public async Task<IActionResult> ActivarAsync(int id)
+        {
+            var obj = _dbContext.Pais.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == true)
+            {
+                return BadRequest("El registro ya está activo");
+            }
+
+            obj.EstaActivo = true;
+            _dbContext.Pais.Update(obj);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/inactivar")]
+        public async Task<IActionResult> InactivarAsync(int id)
+        {
+            var obj = _dbContext.Pais.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == false)
+            {
+                return BadRequest("El registro ya está inactivo");
+            }
+
+            obj.EstaActivo = false;
+            _dbContext.Pais.Update(obj);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         ///////
 
         private async Task<Resultado> ValidarModelo(PaisVm vm)
@@ -113,6 +149,13 @@ namespace ProyectoIntegrador.Controllers
 
         private static IQueryable<Pais> Filtrar(IQueryable<Pais> lista, PaisParameters parameter)
         {
+            if (string.IsNullOrEmpty(parameter.Criterio) == false)
+            {
+                lista = lista.Where(o =>
+                    o.Descripcion.Contains(parameter.Criterio)
+                );
+            }
+
             return lista;
         }
 

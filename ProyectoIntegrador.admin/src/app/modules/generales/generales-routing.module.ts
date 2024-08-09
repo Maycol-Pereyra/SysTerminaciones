@@ -5,6 +5,13 @@ import { GeneralesComponent } from './generales.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { ConfiguracionGeneralComponent } from './configuracion-general/configuracion-general.component';
+import { CiudadComponent } from './ciudad/ciudad.component';
+import { ProvinciaComponent } from './provincia/provincia.component';
+import { SectorComponent } from './sector/sector.component';
+import { HerramientaComponent } from './herramienta/herramienta.component';
+import { UnidadComponent } from './unidad/unidad.component';
+import { VehiculoComponent } from './vehiculo/vehiculo.component';
+import { ColorComponent } from './color/color.component';
 import { PaisComponent } from './pais/pais.component';
 
 const routes: Routes = [
@@ -41,6 +48,62 @@ const routes: Routes = [
         component: PaisComponent,
         data: {
           acceso: 'generales.pais.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'provincia',
+        component: ProvinciaComponent,
+        data: {
+          acceso: 'generales.provincia.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'ciudad',
+        component: CiudadComponent,
+        data: {
+          acceso: 'generales.ciudad.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'sector',
+        component: SectorComponent,
+        data: {
+          acceso: 'generales.sector.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'herramienta',
+        component: HerramientaComponent,
+        data: {
+          acceso: 'generales.herramienta.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'unidad',
+        component: UnidadComponent,
+        data: {
+          acceso: 'generales.unidad.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'vehiculo',
+        component: VehiculoComponent,
+        data: {
+          acceso: 'generales.vehiculo.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'color',
+        component: ColorComponent,
+        data: {
+          acceso: 'generales.color.acceder'
         },
         canActivate: [AppAuthGuard]
       },

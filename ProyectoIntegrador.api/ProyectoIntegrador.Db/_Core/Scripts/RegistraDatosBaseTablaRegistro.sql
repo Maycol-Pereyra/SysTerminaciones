@@ -58,8 +58,24 @@ USING (VALUES
 	-- Inicio Tabla TipoPrograma
 	(31, 24, 'Registro', GETDATE(), GETDATE(), 1),
 	(32, 24, 'Proceso', GETDATE(), GETDATE(), 1),
-	(33, 24, 'Reporte', GETDATE(), GETDATE(), 1)
+	(33, 24, 'Reporte', GETDATE(), GETDATE(), 1),
 	-- Fin Tabla TipoPrograma
+
+	-- Inicio Tabla EstadoHerramienta
+	(34, 8, 'Disponible', GETDATE(), GETDATE(), 1),
+	(35, 8, 'Asignada', GETDATE(), GETDATE(), 1),
+	(36, 8, 'En Uso', GETDATE(), GETDATE(), 1),
+	(37, 8, 'En Reparación', GETDATE(), GETDATE(), 1),
+	(38, 8, 'Inactivo', GETDATE(), GETDATE(), 1),
+	-- Fin Tabla EstadoHerramienta
+
+	-- Inicio Tabla EstadoVehiculo
+	(39, 25, 'Disponible', GETDATE(), GETDATE(), 1),
+	(40, 25, 'Asignada', GETDATE(), GETDATE(), 1),
+	(41, 25, 'En Ruta', GETDATE(), GETDATE(), 1),
+	(42, 25, 'En Reparación', GETDATE(), GETDATE(), 1),
+	(43, 25, 'Inactivo', GETDATE(), GETDATE(), 1)
+	-- Fin Tabla EstadoVehiculo
 
 ) AS source (Id, TipoRegistroId, Descripcion, FechaModificacion, FechaCreacion, EstaActivo)
 ON target.Id = source.Id

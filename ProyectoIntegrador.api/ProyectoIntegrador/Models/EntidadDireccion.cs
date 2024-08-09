@@ -8,7 +8,7 @@
         public DateTime FechaCreacion { get; set; }
         public bool EstaActivo { get; set; }
 
-        public virtual Entidad Entidad { get; set; } = new();
-        public virtual Direccion Direccion { get; set; } = new();
+        public virtual Entidad Entidad { get; set; }
+        public virtual Direccion Direccion { get; set; }
     }
 }

@@ -6,12 +6,19 @@ import { SelectMultipleComponent } from './select-multiple/select-multiple.compo
 import { SelectMultipleDetalleComponent } from './select-multiple/detalle/select-multiple-detalle.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SelectConBusquedaComponent } from './select-con-busqueda/select-con-busqueda.component';
+import { RegistroComponent } from './registro/registro.component';
+import { EditRegistroModalComponent } from './registro/components/edit-registro-modal/edit-registro-modal.component';
+import { ADVCRUDTableModule } from '../crud-table';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     SelectMultipleComponent,
     SelectMultipleDetalleComponent,
-    SelectConBusquedaComponent
+    SelectConBusquedaComponent,
+
+    RegistroComponent,
+    EditRegistroModalComponent
   ],
   imports: [
     CommonModule,
@@ -19,11 +26,16 @@ import { SelectConBusquedaComponent } from './select-con-busqueda/select-con-bus
     ReactiveFormsModule,
     InlineSVGModule,
     NgSelectModule,
+    ADVCRUDTableModule,
+    NgbModalModule,
   ],
   exports: [
     SelectMultipleComponent,
     SelectMultipleDetalleComponent,
-    SelectConBusquedaComponent
+    SelectConBusquedaComponent,
+
+    RegistroComponent,
+    EditRegistroModalComponent
   ],
 })
 export class ComponentesModule { }

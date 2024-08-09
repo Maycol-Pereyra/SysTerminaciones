@@ -10,7 +10,13 @@ namespace ProyectoIntegrador.Mappers
         public SectorMapper()
         {
             CreateMap<Sector, SectorVm>();
-            CreateMap<Sector, SectorIndex>();
+            CreateMap<Sector, SectorIndex>()
+                .ForMember(
+                    des => des.CiudadDescripcion,
+                    opt => opt.MapFrom(ori => ori.Ciudad != null
+                        ? ori.Ciudad.Descripcion
+                        : "")
+                );
             CreateMap<Sector, ItemSelect>();
             CreateMap<SectorVm, Sector>();
         }

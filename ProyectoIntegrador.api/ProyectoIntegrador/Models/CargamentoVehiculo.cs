@@ -14,9 +14,9 @@ namespace ProyectoIntegrador.Api.Models
         public decimal MedidaAlto { get; set; }
         public int Cantidad { get; set; }
 
-        public virtual Vehiculo Vehiculo { get; set; } = new Vehiculo();
-        public virtual Envio Envio { get; set; } = new Envio();
-        public virtual Producto Producto { get; set; } = new Producto();
-        public virtual Unidad Unidad { get; set; } = new Unidad();
+        public virtual Vehiculo Vehiculo { get; set; }
+        public virtual Envio Envio { get; set; }
+        public virtual Producto Producto { get; set; }
+        public virtual Unidad Unidad { get; set; }
     }
 }

@@ -13,6 +13,6 @@
         public decimal Impuesto { get; set; }
         public decimal Descuento { get; set; }
 
-        public virtual Cotizacion Cotizacion { get; set; } = new();
+        public virtual Cotizacion Cotizacion { get; set; }
     }
 }

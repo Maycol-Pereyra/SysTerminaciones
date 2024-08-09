@@ -147,7 +147,6 @@ export abstract class TableService<Tindex> {
     .pipe(
       catchError(err => {
         this._errorMessage.next(err);
-        console.error('GET ITEM BY IT', id, err);
         return of({ id: undefined });
       }),
       finalize(() => this._isLoading$.next(false))

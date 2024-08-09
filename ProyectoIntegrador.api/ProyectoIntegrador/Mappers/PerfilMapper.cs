@@ -9,13 +9,22 @@ namespace ProyectoIntegrador.Mappers
     {
         public PerfilMapper()
         {
-            CreateMap<Perfil, PerfilVm>();
+            CreateMap<Perfil, PerfilVm>()
+                .ForMember(
+                    des => des.ListaDetalle,
+                    opc => opc.Ignore()
+                );
+
             CreateMap<Perfil, PerfilIndex>();
             CreateMap<Perfil, ItemSelect>();
-            CreateMap<PerfilVm, Perfil>();
+            CreateMap<PerfilVm, Perfil>()
+                .ForMember(
+                    des => des.ListaDetalle,
+                    opc => opc.Ignore()
+                );
 
-            CreateMap<PerfilAcceso, PerfilPermisoVm>();
-            CreateMap<PerfilPermisoVm, PerfilAcceso>();
+            CreateMap<PerfilAcceso, PerfilAccesoVm>();
+            CreateMap<PerfilAccesoVm, PerfilAcceso>();
         }
     }
 }

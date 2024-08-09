@@ -18,7 +18,6 @@ namespace ProyectoIntegrador.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-        private static readonly object _object = new();
 
         public CiudadController(
             ApplicationDbContext dbContext,
@@ -33,6 +32,7 @@ namespace ProyectoIntegrador.Controllers
         public async Task<ActionResult<PagedList<CiudadIndex>>> Get([FromQuery] CiudadParameters parameter)
         {
             var lista = _dbContext.Ciudad
+                .Include(o => o.Provincia)
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
             lista = lista.OrderBy(o => o.Id);
@@ -66,6 +66,7 @@ namespace ProyectoIntegrador.Controllers
             {
                 var objNew = _mapper.Map<Ciudad>(vm);
                 objNew.FechaCreacion = DateTime.Now;
+                objNew.EstaActivo = true;
 
                 _dbContext.Ciudad.Add(objNew);
                 await _dbContext.SaveChangesAsync();
@@ -92,6 +93,42 @@ namespace ProyectoIntegrador.Controllers
             return NoContent();
         }
 
+        [HttpPost("{id}/activar")]
+        public async Task<IActionResult> ActivarAsync(int id)
+        {
+            var obj = _dbContext.Ciudad.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == true)
+            {
+                return BadRequest("El registro ya está activo");
+            }
+
+            obj.EstaActivo = true;
+            _dbContext.Ciudad.Update(obj);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/inactivar")]
+        public async Task<IActionResult> InactivarAsync(int id)
+        {
+            var obj = _dbContext.Ciudad.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == false)
+            {
+                return BadRequest("El registro ya está inactivo");
+            }
+
+            obj.EstaActivo = false;
+            _dbContext.Ciudad.Update(obj);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         ///////
 
         private async Task<Resultado> ValidarModelo(CiudadVm vm)
@@ -113,6 +150,13 @@ namespace ProyectoIntegrador.Controllers
 
         private static IQueryable<Ciudad> Filtrar(IQueryable<Ciudad> lista, CiudadParameters parameter)
         {
+            if (string.IsNullOrEmpty(parameter.Criterio) == false)
+            {
+                lista = lista.Where(o =>
+                    o.Descripcion.Contains(parameter.Criterio)
+                );
+            }
+
             if (parameter.ProvinciaId > 0)
             {
                 lista = lista.Where(o => o.ProvinciaId == parameter.ProvinciaId);

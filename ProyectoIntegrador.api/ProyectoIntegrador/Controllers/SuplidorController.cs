@@ -96,6 +96,7 @@ namespace ProyectoIntegrador.Controllers
             {
                 var objNew = _mapper.Map<Suplidor>(vm);
                 objNew.FechaCreacion = DateTime.Now;
+                objNew.EstaActivo = true;
 
                 MapEntidadDireccion(vm, objNew);
                 MapEntidadDireccion(vm, objNew);
@@ -123,6 +124,42 @@ namespace ProyectoIntegrador.Controllers
             MapEntidadDireccion(vm, objUpdate);
 
             _dbContext.Suplidor.Update(objUpdate);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/activar")]
+        public async Task<IActionResult> ActivarAsync(int id)
+        {
+            var obj = _dbContext.Suplidor.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == true)
+            {
+                return BadRequest("El registro ya está activo");
+            }
+
+            obj.EstaActivo = true;
+            _dbContext.Suplidor.Update(obj);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/inactivar")]
+        public async Task<IActionResult> InactivarAsync(int id)
+        {
+            var obj = _dbContext.Suplidor.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == false)
+            {
+                return BadRequest("El registro ya está inactivo");
+            }
+
+            obj.EstaActivo = false;
+            _dbContext.Suplidor.Update(obj);
             await _dbContext.SaveChangesAsync();
 
             return NoContent();

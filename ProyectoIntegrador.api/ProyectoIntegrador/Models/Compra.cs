@@ -19,9 +19,9 @@
         public bool EstaActivo { get; set; }
 
 
-        public virtual Suplidor Suplidor { get; set; } = new Suplidor();
-        public virtual Registro MedioPago { get; set; } = new();
-        public virtual Registro TipoComprobante { get; set; } = new();
-        public virtual Usuario Usuario { get; set; } = new Usuario();
+        public virtual Suplidor Suplidor { get; set; }
+        public virtual Registro MedioPago { get; set; }
+        public virtual Registro TipoComprobante { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

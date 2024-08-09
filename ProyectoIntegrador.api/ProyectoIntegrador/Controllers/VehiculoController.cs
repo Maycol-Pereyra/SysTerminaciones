@@ -20,7 +20,6 @@ namespace ProyectoIntegrador.Controllers
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly IExistenciaService _existenciaService;
-        private static readonly object _object = new();
 
         public VehiculoController(
             ApplicationDbContext dbContext,
@@ -60,6 +59,19 @@ namespace ProyectoIntegrador.Controllers
             return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
         }
 
+        [HttpGet("estado-item-select")]
+        public async Task<ActionResult<List<ItemSelect>>> GetEstadoItemSelect([FromQuery] VehiculoParameters parameter)
+        {
+            var lista = _dbContext.Registro
+                .Where(o => o.TipoRegistroId == 25) //Estado vehiculo
+                .Where(o => o.EstaActivo)
+                .AsNoTracking();
+            lista = lista.OrderBy(o => o.Id);
+            var pl = await lista.ToPagedList(parameter);
+
+            return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] VehiculoVm vm)
         {
@@ -73,6 +85,7 @@ namespace ProyectoIntegrador.Controllers
                 var objNew = _mapper.Map<Vehiculo>(vm);
                 objNew.FechaCreacion = DateTime.Now;
                 objNew.FechaModificacion = DateTime.Now;
+                objNew.EstaActivo = true;
 
                 _dbContext.Vehiculo.Add(objNew);
                 await _dbContext.SaveChangesAsync();
@@ -97,6 +110,42 @@ namespace ProyectoIntegrador.Controllers
             _mapper.Map(vm, objUpdate);
 
             _dbContext.Vehiculo.Update(objUpdate);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/activar")]
+        public async Task<IActionResult> ActivarAsync(int id)
+        {
+            var obj = _dbContext.Vehiculo.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == true)
+            {
+                return BadRequest("El registro ya está activo");
+            }
+
+            obj.EstaActivo = true;
+            _dbContext.Vehiculo.Update(obj);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/inactivar")]
+        public async Task<IActionResult> InactivarAsync(int id)
+        {
+            var obj = _dbContext.Vehiculo.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == false)
+            {
+                return BadRequest("El registro ya está inactivo");
+            }
+
+            obj.EstaActivo = false;
+            _dbContext.Vehiculo.Update(obj);
             await _dbContext.SaveChangesAsync();
 
             return NoContent();

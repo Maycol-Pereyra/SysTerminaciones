@@ -20,8 +20,7 @@ namespace ProyectoIntegrador.Controllers
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly IExistenciaService _existenciaService;
-        private static readonly object _object = new();
-
+        
         public PerfilController(
             ApplicationDbContext dbContext,
             IMapper mapper,
@@ -58,9 +57,48 @@ namespace ProyectoIntegrador.Controllers
             return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
         }
 
+        [HttpGet("{id}", Name = "GetGeneralesPerfil")]
+        public async Task<ActionResult<PerfilVm>> Get(int id)
+        {
+            if (id <= 0) { return BadRequest("Debe especificar el id."); }
+
+            var obj = await _dbContext.Perfil
+                .Include(o => o.ListaDetalle)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(o => o.Id == id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            var vm = _mapper.Map<PerfilVm>(obj);
+
+            await CargarAcceso(vm);
+
+            obj.ListaDetalle.ForEach(item =>
+            {
+                var acceso = vm.ListaDetalle.FirstOrDefault(o => o.AccesoId == item.AccesoId);
+                if (acceso != null)
+                {
+                    acceso.Seleccionado = true;
+                }
+            });
+
+            return Ok(vm);
+        }
+
+        [HttpGet("nuevo")]
+        public async Task<ActionResult<PerfilVm>> GetNuevo()
+        {
+            var vm = new PerfilVm();
+
+            await CargarAcceso(vm);
+
+            return Ok(vm);
+        }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] PerfilVm vm)
+        public IActionResult Post([FromBody] PerfilVm vm)
         {
             if (!ModelState.IsValid) { return LogModelState(ModelState); }
 
@@ -75,7 +113,7 @@ namespace ProyectoIntegrador.Controllers
                 MapDetalle(vm, objNew);
 
                 _dbContext.Perfil.Add(objNew);
-                await _dbContext.SaveChangesAsync();
+                _dbContext.SaveChanges();
 
                 vm.Id = objNew.Id;
 
@@ -83,9 +121,8 @@ namespace ProyectoIntegrador.Controllers
             }
 
             var objUpdate = _dbContext.Perfil
-                .OrderBy(o => o.Id)
+                .Include(o => o.ListaDetalle)
                 .FirstOrDefault(o => o.Id == vm.Id);
-
             if (objUpdate == null)
             {
                 return NotFound();
@@ -96,6 +133,42 @@ namespace ProyectoIntegrador.Controllers
             MapDetalle(vm, objUpdate);
 
             _dbContext.Perfil.Update(objUpdate);
+            _dbContext.SaveChanges();
+            return NoContent();
+        }
+
+
+        [HttpPost("{id}/activar")]
+        public async Task<IActionResult> ActivarAsync(int id)
+        {
+            var obj = _dbContext.Perfil.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == true)
+            {
+                return BadRequest("El registro ya está activo");
+            }
+
+            obj.EstaActivo = true;
+            _dbContext.Perfil.Update(obj);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/inactivar")]
+        public async Task<IActionResult> InactivarAsync(int id)
+        {
+            var obj = _dbContext.Perfil.FirstOrDefault(o => o.Id == id);
+            if (obj == null) { return NotFound("El registro no existe"); }
+
+            if (obj.EstaActivo == false)
+            {
+                return BadRequest("El registro ya está inactivo");
+            }
+
+            obj.EstaActivo = false;
+            _dbContext.Perfil.Update(obj);
             await _dbContext.SaveChangesAsync();
 
             return NoContent();
@@ -115,30 +188,15 @@ namespace ProyectoIntegrador.Controllers
 
         private static IQueryable<Perfil> Filtrar(IQueryable<Perfil> lista, PerfilParameters parameter)
         {
+            if (string.IsNullOrEmpty(parameter.Criterio) == false)
+            {
+                lista = lista.Where(o =>
+                    o.Descripcion.Contains(parameter.Criterio)
+                );
+            }
+
             return lista;
         }
-
-        [HttpGet("{id}", Name = "GetPerfil")]
-        public async Task<IActionResult> Get(int id)
-        {
-            if (id <= 0)
-            {
-                return BadRequest("Debe especificar el id.");
-            }
-
-            var obj = await _dbContext.Perfil
-                .Include(o => o.ListaDetalle)
-                .FirstOrDefaultAsync(o => o.Id == id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-
-            var vm = _mapper.Map<PerfilVm>(obj);
-
-            return Ok(vm);
-        }
-
         private void MapDetalle(PerfilVm origen, Perfil destino)
         {
             if (destino.ListaDetalle == null)
@@ -178,6 +236,22 @@ namespace ProyectoIntegrador.Controllers
                     destino.ListaDetalle.Add(item);
                 }
             }
+        }
+
+        private async Task CargarAcceso(PerfilVm obj)
+        {
+            obj.ListaDetalle = await _dbContext.Acceso
+                .Select(o => new PerfilAccesoVm
+                {
+                    PerfilId = 0,
+                    AccesoId = o.Id,
+                    Seleccionado = false,
+                    Modulo = o.Modulo,
+                    Opcion = o.Opcion,
+                    Permiso = o.Permiso,
+                    Descripcion = o.Descripcion,
+                })
+                .ToListAsync();
         }
     }
 }

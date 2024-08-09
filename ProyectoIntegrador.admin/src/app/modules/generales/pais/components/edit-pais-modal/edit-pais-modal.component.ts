@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { of, Subscription } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
 import { FormBase } from '../../../../../_core/clase-base/form-base';
 import { AccesosService } from 'src/app/_core/services/acceso.service';
-import { ItemSelect } from 'src/app/_core/item-select/item-select.model';
 import { StringHelper } from 'src/app/_core/helpers/string.helper';
+import { ItemSelectService } from 'src/app/_core/item-select/item-select.service';
 import { Pais } from '../../shared/pais.model';
 import { PaisService } from '../../shared/pais.service';
 
@@ -20,8 +20,6 @@ export class EditPaisModalComponent extends FormBase implements OnInit, OnDestro
   isLoading$;
   vm: Pais;
 
-  public listaSolicitud: ItemSelect[] = [];
-  public listaTipoProducto: ItemSelect[] = [];
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -30,16 +28,15 @@ export class EditPaisModalComponent extends FormBase implements OnInit, OnDestro
     private cd: ChangeDetectorRef,
     private accesosService: AccesosService,
     public modal: NgbActiveModal,
+    private itemSelectService: ItemSelectService
     ) {
     super();
   }
 
-  get f() {
-    return this.formGroup.controls;
-  }
 
   ngOnInit(): void {
     this.isLoading$ = this.service.isLoading$;
+
     this.loadData();
   }
 
@@ -92,14 +89,6 @@ export class EditPaisModalComponent extends FormBase implements OnInit, OnDestro
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sb => sb.unsubscribe());
-  }
-
-  actualizarDescripcion(id: number) {
-    const value = this.listaSolicitud.find(o => o.id === id);
-
-    if (value) {
-      return value.descripcion;
-    }
   }
 
   activar(): void {

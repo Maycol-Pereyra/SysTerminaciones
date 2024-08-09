@@ -10,7 +10,13 @@ namespace ProyectoIntegrador.Mappers
         public CiudadMapper()
         {
             CreateMap<Ciudad, CiudadVm>();
-            CreateMap<Ciudad, CiudadIndex>();
+            CreateMap<Ciudad, CiudadIndex>()
+                .ForMember(
+                    des => des.ProvinciaDescripcion,
+                    opt => opt.MapFrom(ori => ori.Provincia != null
+                        ? ori.Provincia.Descripcion
+                        : "")
+                );
             CreateMap<Ciudad, ItemSelect>();
             CreateMap<CiudadVm, Ciudad>();
         }

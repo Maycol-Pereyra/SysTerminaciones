@@ -113,6 +113,7 @@ namespace ProyectoIntegrador.Controllers
             {
                 var objNew = _mapper.Map<Cotizacion>(vm);
                 objNew.FechaCreacion = DateTime.Now;
+                objNew.EstaActivo = true;
 
                 MapDetalle(vm, objNew);
 

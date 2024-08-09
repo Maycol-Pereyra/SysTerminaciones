@@ -5,6 +5,6 @@
         public int PerfilId { get; set; }
         public string AccesoId { get; set; } = "";
 
-        public virtual Perfil Perfil { get; set; } = new();
+        public virtual Perfil Perfil { get; set; }
     }
 }

@@ -19,8 +19,8 @@
         public DateTime FechaCreacion { get; set; }
         public bool EstaActivo { get; set; }
 
-        public virtual Cliente Cliente { get; set; } = new();
-        public virtual Direccion Direccion { get; set; } = new();
+        public virtual Cliente Cliente { get; set; }
+        public virtual Direccion Direccion { get; set; }
         public virtual List<CotizacionDetalle> ListaDetalle { get; set; } = [];
     }
 }

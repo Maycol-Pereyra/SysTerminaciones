@@ -11,8 +11,8 @@
         public DateTime? FechaEntrega { get; set; }
         public int EstadoId { get; set; }
 
-        public virtual Despacho Despacho { get; set; } = new();
-        public virtual Registro Estado { get; set; } = new();
+        public virtual Despacho Despacho { get; set; }
+        public virtual Registro Estado { get; set; }
         public virtual List<DesgloseCorrederaDetalle> ListaDetalle { get; set; } = [];
     }
 }

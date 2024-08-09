@@ -66,7 +66,7 @@ export class EditPerfilModalComponent extends FormBase implements OnInit, OnDest
         })
       ).subscribe((item: Perfil) => {
         this.vm = item;
-        this.listaAccesoFiltrada = this.vm.listaAcceso;
+        this.listaAccesoFiltrada = this.vm.listaDetalle;
 
         this.loadForm();
       });
@@ -175,7 +175,7 @@ export class EditPerfilModalComponent extends FormBase implements OnInit, OnDest
   private filter(): void {
     const formData = this.formGroup.value;
 
-    this.listaAccesoFiltrada = this.vm.listaAcceso;
+    this.listaAccesoFiltrada = this.vm.listaDetalle;
 
     if (formData.modulo && formData.modulo !== '') {
       this.listaAccesoFiltrada = this.listaAccesoFiltrada

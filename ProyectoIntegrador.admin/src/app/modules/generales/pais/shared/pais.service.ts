@@ -5,8 +5,8 @@ import { AppConfig } from '../../../../_core/services/app-config.service';
 import { Observable } from 'rxjs';
 import { ServiceHelper } from 'src/app/_core/helpers/service.helper';
 import { catchError, map } from 'rxjs/operators';
-import { PaisIndex } from './pais-index.model';
 import { ITableState, TableService } from 'src/app/_core/crud-table';
+import { PaisIndex } from './pais-index.model';
 
 @Injectable({
   providedIn: 'root'

@@ -12,8 +12,8 @@
         public DateTime FechaCreacion { get; set; }
         public bool EstaActivo { get; set; }
 
-        public virtual Entidad Entidad { get; set; } = new();
-        public virtual Registro Posicion { get; set; } = new();
-        public virtual Registro Departamento { get; set; } = new();
+        public virtual Entidad Entidad { get; set; }
+        public virtual Registro Posicion { get; set; }
+        public virtual Registro Departamento { get; set; }
     }
 }

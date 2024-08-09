@@ -11,7 +11,7 @@ USING (VALUES
     (5, 'Color', GETDATE(), 1),
     (6, 'Pais', GETDATE(), 1),
     (7, 'Estado', GETDATE(), 1),
-    (8, 'Herramienta', GETDATE(), 1),
+    (8, 'EstadoHerramienta', GETDATE(), 1),
     (9, 'TipoMovimiento', GETDATE(), 1),
     (10, 'TipoFactura', GETDATE(), 1),
     (11, 'Renglon', GETDATE(), 1),
