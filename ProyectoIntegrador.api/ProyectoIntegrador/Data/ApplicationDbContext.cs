@@ -34,7 +34,6 @@ namespace ProyectoIntegrador.Data
         public DbSet<DesgloseEfectivoAsignadoCaja> DesgloseEfectivoAsignadoCaja { get; set; }
         public DbSet<DespachoDetalle> DespachoDetalle { get; set; }
         public DbSet<Despacho> Despacho { get; set; }
-        public DbSet<Direccion> Direccion { get; set; }
         public DbSet<DistribucionEnvio> DistribucionEnvio { get; set; }
         public DbSet<DistribucionEnvioVehiculo> DistribucionEnvioVehiculo { get; set; }
         public DbSet<Empleado> Empleado { get; set; }
@@ -106,7 +105,6 @@ namespace ProyectoIntegrador.Data
             modelBuilder.ConfigurarDesgloseEfectivoAsignadoCajaModelConfig();
             modelBuilder.ConfigurarDespachoDetalleModelConfig();
             modelBuilder.ConfigurarDespachoModelConfig();
-            modelBuilder.ConfigurarDireccionModelConfig();
             modelBuilder.ConfigurarDistribucionEnvioModelConfig();
             modelBuilder.ConfigurarDistribucionEnvioVehiculoModelConfig();
             modelBuilder.ConfigurarEmpleadoModelConfig();

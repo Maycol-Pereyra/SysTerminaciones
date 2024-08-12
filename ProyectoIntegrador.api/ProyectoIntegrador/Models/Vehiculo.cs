@@ -17,5 +17,7 @@
         public bool EstaActivo { get; set; }
 
         public virtual Registro Color { get; set; }
+        public virtual Registro Estado { get; set; }
+        public virtual Unidad Unidad { get; set; }
     }
 }

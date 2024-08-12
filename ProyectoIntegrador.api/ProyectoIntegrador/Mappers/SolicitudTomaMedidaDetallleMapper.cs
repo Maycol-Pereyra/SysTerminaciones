@@ -40,9 +40,9 @@ namespace ProyectoIntegrador.Mappers
                         : 0)
                 )
                 .ForMember(
-                    des => des.UnidadMedidaId,
+                    des => des.TipoMedidaId,
                     opt => opt.MapFrom(ori => ori.TomaMedida != null
-                        ? ori.TomaMedida.UnidadMedidaId
+                        ? ori.TomaMedida.TipoMedidaId
                         : 0)
                 )
                 .ForMember(

@@ -11,6 +11,22 @@ export const DynamicAsideMenuConfig = {
       translate: 'MENU.DASHBOARD',
       bullet: 'dot',
     },
+    { section: 'Ventas', sectionFeature: 'Ventas' },
+    {
+      title: 'Ventas',
+      root: true,
+      bullet: 'dot',
+      page: '/ventas',
+      icon: 'flaticon2-architecture-and-city',
+      svg: './assets/media/svg/icons/Design/Layers.svg',
+      feature: '',
+      submenu: [
+        {
+          title: 'Cliente',
+          page: '/ventas/cliente',
+        },
+      ]
+    },
     { section: 'Generales', sectionFeature: 'Generales' },
     {
       title: 'Generales',
@@ -21,6 +37,18 @@ export const DynamicAsideMenuConfig = {
       svg: './assets/media/svg/icons/Design/Layers.svg',
       feature: '',
       submenu: [
+        {
+          title: 'Empleado',
+          page: '/generales/empleado',
+        },
+        {
+          title: 'Departamento',
+          page: '/generales/departamento',
+        },
+        {
+          title: 'Posición',
+          page: '/generales/posicion',
+        },
         {
           title: 'Usuario',
           page: '/generales/usuario',

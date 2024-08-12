@@ -8,6 +8,6 @@
         public DateTime FechaCreacion { get; set; }
         public bool EstaActivo { get; set; }
 
-        public virtual Ciudad Ciudad { get; set; } = new();
+        public virtual Ciudad Ciudad { get; set; }
     }
 }

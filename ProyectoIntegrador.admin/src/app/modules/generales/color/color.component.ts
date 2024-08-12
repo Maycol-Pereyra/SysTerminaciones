@@ -22,6 +22,6 @@ export class ColorComponent implements OnInit {
     this.accesoCrearId = 'generales.color.crear';
     this.accesoEditarId = 'generales.color.editar'; 
     this.accesoActivarId = 'generales.color.activar'; 
-    this.accesoInactivarId = 'generales.color.inactivar'; 
+    this.accesoInactivarId = 'generales.color.inactivar';
   }
 }

@@ -8,7 +8,7 @@
         public int Cantidad { get; set; }
         public decimal MedidaAncho { get; set; }
         public decimal MedidaAlto { get; set; }
-        public int UnidadMedidaId { get; set; }
+        public int TipoMedidaId { get; set; }
         public bool EsMedidaAproximada { get; set; }
         public string Nota { get; set; } = "";
     }

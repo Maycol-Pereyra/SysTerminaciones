@@ -186,18 +186,6 @@ export abstract class TableService<Tindex> {
   // UPDATE
   update(item: BaseModel): Observable<any> {
     return this.create(item);
-    // const url = `${this.API_URL}/${item.id}`;
-    // this._isLoading$.next(true);
-    // this._errorMessage.next('');
-    // return this.http.put(url, item)
-    // .pipe(
-    //   catchError(err => {
-    //     this._errorMessage.next(err);
-    //     console.error('UPDATE ITEM', item, err);
-    //     return of(item);
-    //   }),
-    //   finalize(() => this._isLoading$.next(false))
-    // );
   }
 
   // DELETE

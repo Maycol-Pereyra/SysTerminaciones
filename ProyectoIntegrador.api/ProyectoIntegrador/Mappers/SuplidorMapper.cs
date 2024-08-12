@@ -9,6 +9,16 @@ namespace ProyectoIntegrador.Mappers
     {
         public SuplidorMapper()
         {
+            CreateMap<SuplidorVm, EntidadVm>()
+                .ForMember(
+                    des => des.Id,
+                    opt => opt.MapFrom(ori => ori.EntidadId)
+                )
+                .ForMember(
+                    des => des.FechaCreacion,
+                    opt => opt.Ignore()
+                );
+
             CreateMap<Suplidor, SuplidorVm>()
                 .ForMember(
                     des => des.Nombre,

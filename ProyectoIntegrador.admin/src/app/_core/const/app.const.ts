@@ -20,10 +20,10 @@ export class EndPointSelect {
   public static readonly unidad = '/api/unidad/item-select';
   public static readonly estadoVehiculo = '/api/vehiculo/estado-item-select';
   public static readonly color = '/api/registro/item-select';
-  // public static readonly empleado = '/api/empleado/item-select';
-  // public static readonly empleado = '/api/empleado/item-select';
-  // public static readonly empleado = '/api/empleado/item-select';
-  // public static readonly empleado = '/api/empleado/item-select';
+  public static readonly departamento = '/api/registro/item-select';
+  public static readonly posicion = '/api/registro/item-select';
+  public static readonly categoria = '/api/registro/item-select';
+  public static readonly tipoProducto = '/api/tipo-producto/item-select';
   // public static readonly empleado = '/api/empleado/item-select';
   // public static readonly empleado = '/api/empleado/item-select';
 }

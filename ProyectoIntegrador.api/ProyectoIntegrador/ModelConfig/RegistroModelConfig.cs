@@ -26,11 +26,11 @@ namespace ProyectoIntegrador.DataModelConfig
                     .IsRequired();
 
                 etb.Property(e => e.FechaModificacion)
-                    .HasColumnType("datetiem")
+                    .HasColumnType("datetime")
                     .IsRequired();
 
                 etb.Property(e => e.FechaCreacion)
-                    .HasColumnType("datetiem")
+                    .HasColumnType("datetime")
                     .IsRequired();
 
                 etb.Property(e => e.EstaActivo)

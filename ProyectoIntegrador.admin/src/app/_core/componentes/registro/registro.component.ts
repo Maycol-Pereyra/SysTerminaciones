@@ -47,7 +47,6 @@ export class RegistroComponent
   @Input() accesoActivarId: string;
   @Input() accesoInactivarId: string;
 
-  public listaTipoSolicitud: ItemSelect[] = [];
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -61,6 +60,7 @@ export class RegistroComponent
   ngOnInit(): void {
     this.searchForm();
     this.filterForm();
+    this.filter();
     this.service.fetch();
     this.grouping = this.service.grouping;
     this.paginator = this.service.paginator;
@@ -101,6 +101,7 @@ export class RegistroComponent
 
   formaFiltro() {
     const filter = {};
+    filter['tipoRegistroId'] = +this.tipoRegistroId;
 
     return filter;
   }
@@ -132,6 +133,10 @@ export class RegistroComponent
   create() {
     if (this.accesosService.puedeCrear(`${this.accesoCrearId}`)) {
       const modalRef = this.modalService.open(EditRegistroModalComponent, { size: 'md', backdrop: 'static' });
+      modalRef.componentInstance.tipoRegistroId = this.tipoRegistroId;
+      modalRef.componentInstance.titulo = this.titulo;
+      modalRef.componentInstance.accesoActivarId = this.accesoActivarId;
+      modalRef.componentInstance.accesoInactivarId = this.accesoInactivarId;
       modalRef.result.then(() =>
         this.service.fetch(),
         () => { }
@@ -143,6 +148,7 @@ export class RegistroComponent
     if (this.accesosService.puedeEditar(`${this.accesoEditarId}`)) {
       const modalRef = this.modalService.open(EditRegistroModalComponent, { size: 'md', backdrop: 'static' });
       modalRef.componentInstance.id = id;
+      modalRef.componentInstance.tipoRegistroId = this.tipoRegistroId;
       modalRef.componentInstance.titulo = this.titulo;
       modalRef.componentInstance.accesoActivarId = this.accesoActivarId;
       modalRef.componentInstance.accesoInactivarId = this.accesoInactivarId;

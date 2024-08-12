@@ -77,6 +77,7 @@ namespace ProyectoIntegrador.Controllers
             {
                 var objNew = _mapper.Map<Registro>(vm);
                 objNew.FechaCreacion = DateTime.Now;
+                objNew.FechaModificacion = DateTime.Now;
                 objNew.EstaActivo = true;
 
                 _dbContext.Registro.Add(objNew);
@@ -158,6 +159,7 @@ namespace ProyectoIntegrador.Controllers
 
             var obj = await _dbContext.Registro
                 .Where(o => o.TipoRegistroId == vm.TipoRegistroId)
+                .Where(o => o.Id == vm.Id)
                 .Where(o => o.Descripcion == vm.Descripcion)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -187,14 +189,9 @@ namespace ProyectoIntegrador.Controllers
             return lista;
         }
 
-        [HttpGet("{tipoRegistroId}/{id}", Name = "GetRegistro")]
-        public async Task<IActionResult> Get(int tipoRegistroId, int id)
+        [HttpGet("{id}", Name = "GetRegistro")]
+        public async Task<IActionResult> Get(int id)
         {
-            if (tipoRegistroId <= 0)
-            {
-                return BadRequest("Debe especificar el tipo de registro.");
-            }
-
             if (id <= 0)
             {
                 return BadRequest("Debe especificar el id.");

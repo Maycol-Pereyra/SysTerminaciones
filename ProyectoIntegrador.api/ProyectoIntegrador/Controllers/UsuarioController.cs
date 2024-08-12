@@ -83,25 +83,6 @@ namespace ProyectoIntegrador.Controllers
             return Ok(usuario);
         }
 
-        [HttpPost("existencia")]
-        public async Task<ActionResult<List<EntidadVm>>> Get([FromBody] EntidadVm entidad)
-        {
-            if (entidad == null) { return BadRequest("Debe de especificar la entidad a comprobar"); }
-
-            var existe = await _existenciaService.Existe(entidad);
-
-            if (!existe) { return Ok(new List<EntidadVm>()); }
-
-            var entidades = await _existenciaService.ObtenerSimilares(entidad);
-
-            if (entidades.ContieneElementos())
-            {
-                return Ok(entidades);
-            }
-
-            return Ok(new List<EntidadVm>());
-        }
-
         [HttpGet("{id}/acceso")]
         public async Task<IActionResult> GetAcceso(int id)
         {
@@ -172,6 +153,8 @@ namespace ProyectoIntegrador.Controllers
             var resultado = await ValidarModelo(vm);
             if (resultado.EsInvalido) { return BadRequest(resultado.PrimerMensaje); }
 
+            vm.EntidadId = await _existenciaService.RegistraActualizaEntidad(_mapper.Map<EntidadVm>(vm));
+
             if (vm.Id == 0)
             {
                 var objNew = _mapper.Map<Usuario>(vm);
@@ -179,7 +162,13 @@ namespace ProyectoIntegrador.Controllers
                 objNew.FechaModificacion = DateTime.Now;
                 objNew.EstaActivo = true;
 
+                objNew.Entidad = await _dbContext.Entidad
+                    .Where(o => o.Id == objNew.EntidadId)
+                    .FirstOrDefaultAsync() ?? new Entidad();
+
                 MapUsuarioPerfil(vm, objNew);
+                MapEntidadDireccion(vm, objNew);
+                MapEntidadTelefono(vm, objNew);
 
                 _dbContext.Usuario.Add(objNew);
                 await _dbContext.SaveChangesAsync();
@@ -200,11 +189,21 @@ namespace ProyectoIntegrador.Controllers
                 return NotFound();
             }
 
+            objUpdate.Entidad.ListaEntidadDireccion = await _dbContext.EntidadDireccion
+                .Where(o => o.EntidadId == objUpdate.EntidadId)
+                .ToListAsync();
+
+            objUpdate.Entidad.ListaEntidadTelefono = await _dbContext.EntidadTelefono
+                .Where(o => o.EntidadId == objUpdate.EntidadId)
+                .ToListAsync();
 
             _mapper.Map(vm, objUpdate);
+
             objUpdate.FechaModificacion = DateTime.Now;
 
             MapUsuarioPerfil(vm, objUpdate);
+            MapEntidadDireccion(vm, objUpdate);
+            MapEntidadTelefono(vm, objUpdate);
 
             _dbContext.Usuario.Update(objUpdate);
             await _dbContext.SaveChangesAsync();
@@ -264,7 +263,7 @@ namespace ProyectoIntegrador.Controllers
                 return Resultado.Invalido($"Debe de especificar el nombre de usuario");
             }
 
-            if (string.IsNullOrWhiteSpace(vm.Password))
+            if (vm.Id == 0 && string.IsNullOrWhiteSpace(vm.Password))
             {
                 return Resultado.Invalido($"Debe de especificar la contraseña");
             }
@@ -296,6 +295,26 @@ namespace ProyectoIntegrador.Controllers
             }
 
             var vm = _mapper.Map<UsuarioVm>(obj);
+
+            var listaTelefono = await _dbContext.EntidadTelefono
+                .Where(o => o.EntidadId == vm.EntidadId)
+                .AsNoTracking()
+                .ToListAsync();
+
+            if (listaTelefono.ContieneElementos())
+            {
+                vm.ListaEntidadTelefono = _mapper.Map<List<EntidadTelefonoVm>>(listaTelefono);
+            }
+
+            var listaDireccion = await _dbContext.EntidadDireccion
+                .Where(o => o.EntidadId == vm.EntidadId)
+                .AsNoTracking()
+                .ToListAsync();
+
+            if (listaDireccion.ContieneElementos())
+            {
+                vm.ListaEntidadDireccion = _mapper.Map<List<EntidadDireccionVm>>(listaDireccion);
+            }
 
             vm.Password = "";
 
@@ -493,6 +512,96 @@ namespace ProyectoIntegrador.Controllers
             }
 
             return Resultado.Ok();
+        }
+
+        private void MapEntidadDireccion(UsuarioVm origen, Usuario destino)
+        {
+            if (destino.Entidad.ListaEntidadDireccion == null)
+            {
+                destino.Entidad.ListaEntidadDireccion = new List<EntidadDireccion>();
+            }
+
+            int cantidad = destino.Entidad.ListaEntidadDireccion.Count();
+            for (int i = 0; i < cantidad; i++)
+            {
+                var item = destino.Entidad.ListaEntidadDireccion[i];
+
+                var itemVm = origen
+                    .ListaEntidadDireccion?
+                    .Where(o => o.PaisId == item.PaisId)
+                    .Where(o => o.ProvinciaId == item.ProvinciaId)
+                    .Where(o => o.CiudadId == item.CiudadId)
+                    .Where(o => o.SectorId == item.SectorId)
+                    .Where(o => o.Calle == item.Calle)
+                    .Where(o => o.Casa == item.Casa)
+                    .FirstOrDefault();
+
+                if (itemVm == null)
+                {
+                    // ELIMINAR
+                    destino.Entidad.ListaEntidadDireccion.Remove(item);
+                    i--; cantidad--;
+                }
+                else
+                {
+                    // ACTUALIZAR
+                    _mapper.Map(itemVm, item);
+                }
+            }
+
+            // agregar
+            if (origen.ListaEntidadDireccion?.Any() ?? false)
+            {
+                foreach (var itemVm in origen.ListaEntidadDireccion.Where(o => o.EntidadId <= 0))
+                {
+                    var item = _mapper.Map<EntidadDireccion>(itemVm);
+                    item.FechaCreacion = DateTime.Now;
+
+                    destino.Entidad.ListaEntidadDireccion.Add(item);
+                }
+            }
+        }
+
+        private void MapEntidadTelefono(UsuarioVm origen, Usuario destino)
+        {
+            if (destino.Entidad.ListaEntidadTelefono == null)
+            {
+                destino.Entidad.ListaEntidadTelefono = new List<EntidadTelefono>();
+            }
+
+            int cantidad = destino.Entidad.ListaEntidadTelefono.Count();
+            for (int i = 0; i < cantidad; i++)
+            {
+                var item = destino.Entidad.ListaEntidadTelefono[i];
+
+                var itemVm = origen
+                    .ListaEntidadTelefono?
+                    .FirstOrDefault(o => o.Telefono == item.Telefono);
+
+                if (itemVm == null)
+                {
+                    // ELIMINAR
+                    destino.Entidad.ListaEntidadTelefono.Remove(item);
+                    i--; cantidad--;
+                }
+                else
+                {
+                    // ACTUALIZAR
+                    _mapper.Map(itemVm, item);
+                }
+            }
+
+            // agregar
+            if (origen.ListaEntidadTelefono?.Any() ?? false)
+            {
+                foreach (var itemVm in origen.ListaEntidadTelefono.Where(o => o.Id <= 0))
+                {
+                    var item = _mapper.Map<EntidadTelefono>(itemVm);
+                    item.FechaCreacion = DateTime.Now;
+
+                    destino.Entidad.ListaEntidadTelefono.Add(item);
+                }
+            }
         }
     }
 }

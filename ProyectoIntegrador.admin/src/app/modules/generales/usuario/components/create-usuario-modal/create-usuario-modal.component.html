@@ -55,6 +55,91 @@
             <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'apellido')">Debe tener máximo 100 caracteres</div>
           </div>
         </div>
+
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label>Cédula</label>
+            <input
+                type="text"
+                [mask]="maskCedula"
+                class="form-control form-control-lg"
+                autocomplete="off"
+                placeholder="Cédula"
+                name="cedula"
+                [class.is-invalid]="isControlInvalid('cedula')"
+                [class.is-valid]="isControlValid('cedula')"
+                formControlName="cedula"
+            />
+            <div class="text-muted" *ngIf="!isControlTouched('cedula')">Por favor especifique la cédula en formato <b>###-#######-#</b></div> 
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'cedula')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'cedula')">Debe tener el formato ###-#######-#</div>
+          </div>
+
+          <div class="col-lg-4">
+            <label>RNC</label>
+            <input *ngIf="!marcaEsRncCedula"
+              type="text"
+              [mask]="maskRnc"
+              class="form-control form-control-lg"
+              autocomplete="off"
+              placeholder="RNC"
+              name="rnc"
+              [class.is-invalid]="isControlInvalid('rnc')"
+              [class.is-valid]="isControlValid('rnc')"
+              formControlName="rnc"/>
+
+            <input *ngIf="marcaEsRncCedula"
+              type="text"
+              [mask]="maskCedula"
+              class="form-control form-control-lg"
+              autocomplete="off"
+              placeholder="RNC"
+              name="rnc"
+              [class.is-invalid]="isControlInvalid('rnc')"
+              [class.is-valid]="isControlValid('rnc')"
+              formControlName="rnc"/>
+
+            <div class="checkbox-list mt-1">
+              <label class="checkbox checkbox-outline">
+                <input 
+                  type="checkbox"
+                  name="esRncCedula"
+                  formControlName="esRncCedula"/>
+                <span></span>
+                Es RNC tipo cédula
+              </label> 
+            </div>
+
+            <ng-container *ngIf="!marcaEsRncCedula">
+              <div class="text-muted" *ngIf="!isControlTouched('rnc')">Por favor especifique el RNC en formato <b>#-##-#####-#</b></div> 
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'rnc')">Es requerido</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'rnc')">Debe tener el formato #-##-#####-#</div>
+            </ng-container>
+            
+            <ng-container *ngIf="marcaEsRncCedula">
+              <div class="text-muted" *ngIf="!isControlTouched('rnc')">Por favor especifique el RNC en formato <b>###-#######-#</b></div> 
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'rnc')">Es requerido</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'rnc')">Debe tener el formato ###-#######-#</div>
+            </ng-container>
+            
+          </div>
+
+          <div class="col-lg-4">
+            <label>Pasaporte</label>
+            <input
+                type="text"
+                class="form-control form-control-lg"
+                autocomplete="off"
+                placeholder="Pasaporte"
+                name="pasaporte"
+                [class.is-invalid]="isControlInvalid('pasaporte')"
+                [class.is-valid]="isControlValid('pasaporte')"
+                formControlName="pasaporte"/>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'pasaporte')">Es requerido</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'pasaporte')">Debe tener al menos 3 carácteres</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'pasaporte')">Debe tener máximo 30 carácteres</div>
+          </div>
+        </div>
         
 
         <div class="form-group row">

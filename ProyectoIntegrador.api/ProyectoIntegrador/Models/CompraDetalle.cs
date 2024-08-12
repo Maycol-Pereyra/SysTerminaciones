@@ -9,7 +9,7 @@ namespace ProyectoIntegrador.Api.Models
         public int UnidadProductoId { get; set; }
         public decimal MedidaAncho { get; set; }
         public decimal MedidaAlto { get; set; }
-        public int UnidadMedidaId { get; set; }
+        public int TipoMedidaId { get; set; }
         public decimal Cantidad { get; set; }
         public decimal CantidadRecibida { get; set; }
         public decimal PrecioUntario { get; set; }

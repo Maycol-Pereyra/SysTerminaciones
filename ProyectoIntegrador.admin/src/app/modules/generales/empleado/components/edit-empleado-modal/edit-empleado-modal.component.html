@@ -1,0 +1,297 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="vm">
+        <ng-container *ngIf="vm.id">Editar</ng-container>
+        <ng-container *ngIf="!vm.id">Crear</ng-container>
+        Empleado
+        <ng-container *ngIf="vm.id">'{{vm.nombre}}'</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body" style="min-height: 404px;">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent fixed-top">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="vm">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+
+        <div class="form-group row">
+          
+          <div class="col-lg-12">
+            <label class="form-label">Nombre</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="nombre"
+              placeholder="Nombre" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('nombre')"
+              [class.is-valid]="isControlValid('nombre')"
+              formControlName="nombre" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'nombre')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'nombre')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'nombre')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Apellido</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="apellido"
+              placeholder="Apellido" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('apellido')"
+              [class.is-valid]="isControlValid('apellido')"
+              formControlName="apellido" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'apellido')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'apellido')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'apellido')">Debe tener máximo 100 caracteres</div>
+          </div> 
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-4">
+            <label>Cédula</label>
+            <input
+                type="text"
+                [mask]="maskCedula"
+                class="form-control form-control-lg"
+                autocomplete="off"
+                placeholder="Cédula"
+                name="cedula"
+                [class.is-invalid]="isControlInvalid('cedula')"
+                [class.is-valid]="isControlValid('cedula')"
+                formControlName="cedula"
+            />
+            <div class="text-muted" *ngIf="!isControlTouched('cedula')">Por favor especifique la cédula en formato <b>###-#######-#</b></div> 
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'cedula')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'cedula')">Debe tener el formato ###-#######-#</div>
+          </div>
+
+          <div class="col-lg-4">
+            <label>RNC</label>
+            <input *ngIf="!marcaEsRncCedula"
+              type="text"
+              [mask]="maskRnc"
+              class="form-control form-control-lg"
+              autocomplete="off"
+              placeholder="RNC"
+              name="rnc"
+              [class.is-invalid]="isControlInvalid('rnc')"
+              [class.is-valid]="isControlValid('rnc')"
+              formControlName="rnc"/>
+
+            <input *ngIf="marcaEsRncCedula"
+              type="text"
+              [mask]="maskCedula"
+              class="form-control form-control-lg"
+              autocomplete="off"
+              placeholder="RNC"
+              name="rnc"
+              [class.is-invalid]="isControlInvalid('rnc')"
+              [class.is-valid]="isControlValid('rnc')"
+              formControlName="rnc"/>
+
+            <div class="checkbox-list mt-1">
+              <label class="checkbox checkbox-outline">
+                <input 
+                  type="checkbox"
+                  name="esRncCedula"
+                  formControlName="esRncCedula"/>
+                <span></span>
+                Es RNC tipo cédula
+              </label> 
+            </div>
+
+            <ng-container *ngIf="!marcaEsRncCedula">
+              <div class="text-muted" *ngIf="!isControlTouched('rnc')">Por favor especifique el RNC en formato <b>#-##-#####-#</b></div> 
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'rnc')">Es requerido</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'rnc')">Debe tener el formato #-##-#####-#</div>
+            </ng-container>
+            
+            <ng-container *ngIf="marcaEsRncCedula">
+              <div class="text-muted" *ngIf="!isControlTouched('rnc')">Por favor especifique el RNC en formato <b>###-#######-#</b></div> 
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'rnc')">Es requerido</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'rnc')">Debe tener el formato ###-#######-#</div>
+            </ng-container>
+            
+          </div>
+
+          <div class="col-lg-4">
+            <label>Pasaporte</label>
+            <input
+                type="text"
+                class="form-control form-control-lg"
+                autocomplete="off"
+                placeholder="Pasaporte"
+                name="pasaporte"
+                [class.is-invalid]="isControlInvalid('pasaporte')"
+                [class.is-valid]="isControlValid('pasaporte')"
+                formControlName="pasaporte"/>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'pasaporte')">Es requerido</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'pasaporte')">Debe tener al menos 3 carácteres</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'pasaporte')">Debe tener máximo 30 carácteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Correo</label>
+            <input 
+              type="email" 
+              class="form-control form-control-lg " 
+              name="correo"
+              placeholder="Correo" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('correo')"
+              [class.is-valid]="isControlValid('correo')"
+              formControlName="correo" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'correo')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('email', 'correo') || controlHasError('pattern', 'correo')">Debe ser un correo válido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'correo')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+        
+        <app-entidad-direccion
+          [listaDetalle]="vm.listaEntidadDireccion">
+        </app-entidad-direccion>
+
+        <app-entidad-telefono
+          [listaDetalle]="vm.listaEntidadTelefono">
+        </app-entidad-telefono>
+
+        <div class="form-group">
+          <label class="form-label">Departamento</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="departamentoId"  
+            formControlName="departamentoId"
+            [class.is-invalid]="isControlInvalid('departamentoId')">
+            <option [ngValue]="null">Seleccione Uno</option>
+            <ng-container *ngFor="let item of departamentos$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>                
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'departamentoId')">Es requerido</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Posición</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="posicionId"  
+            formControlName="posicionId"
+            [class.is-invalid]="isControlInvalid('posicionId')">
+            <option [ngValue]="null">Seleccione Uno</option>
+            <ng-container *ngFor="let item of posiciones$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>                
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'posicionId')">Es requerido</div>
+        </div>
+
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-label">Sueldo</label>
+              <input
+                  type="number"
+                  class="form-control form-control-lg "
+                  placeholder="Sueldo"
+                  name="sueldo"
+                  step="0.01"
+                  (blur)="fixCantidadNullFg(formGroup, 'sueldo'); fixMontoDosDecimalesFg(formGroup, 'sueldo')"
+                  [class.is-invalid]="isControlInvalid('sueldo')"
+                  [class.is-valid]="isControlValid('sueldo')"
+                  formControlName="sueldo"
+                />
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'sueldo')">Es requerido</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('min', 'sueldo')">Debe tener mínimo 0</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('max', 'sueldo')">Debe tener máximo 99,999,999.99</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <div class="col-lg-6">
+            <label class="form-label">Fecha de ingreso</label>
+            <div class="input-group">
+              <input   
+                type="text" 
+                name="fechaIngreso" 
+                class="form-control" 
+                autocomplete="off"
+                placeholder="dd/mm/yyyy"
+                ngbDatepicker #d="ngbDatepicker"              
+                formControlName="fechaIngreso"/>
+              <div class="input-group-append" (click)="d.toggle()">
+                <span class="input-group-text">
+                  <i class="text-dark-50 flaticon-calendar"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <label class="form-label">Fecha de termino de contrato</label>
+            <div class="input-group">
+              <input   
+                type="text" 
+                name="fechaTerminoContrato" 
+                class="form-control" 
+                autocomplete="off"
+                placeholder="dd/mm/yyyy"
+                ngbDatepicker #d="ngbDatepicker"              
+                formControlName="fechaTerminoContrato"/>
+              <div class="input-group-append" (click)="d.toggle()">
+                <span class="input-group-text">
+                  <i class="text-dark-50 flaticon-calendar"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <ng-container *ngIf="+vm.id > 0">
+          <div class="separator separator-dashed my-8"></div>
+
+          <div *ngIf="vm.estaActivo">
+            <button type="button" class="btn btn-danger btn-elevate" (click)="inactivar()">Inactivar</button>
+            <span class="form-text text-muted">
+              El registro está <b>Activo</b>. Pulse para inactivar. Los registros inactivos no estarán disponibles para ser asignados.
+            </span>
+          </div>
+
+          <div *ngIf="!vm.estaActivo">
+            <button type="button" class="btn btn-primary btn-elevate" (click)="activar()">Activar</button>
+            <span class="form-text text-muted">
+              El registro está <b>Inactivo</b>. Pulse para activar.
+            </span>
+          </div>
+        </ng-container>
+
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancelar</button>
+    
+    <ng-container *ngIf="vm">
+      <button type="submit" class="btn btn-primary btn-elevate" (click)="save()"
+      [disabled]="formGroup.invalid">Guardar</button>
+    </ng-container>
+  </div>
+</div>

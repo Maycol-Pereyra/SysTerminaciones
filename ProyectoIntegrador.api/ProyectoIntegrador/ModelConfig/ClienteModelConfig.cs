@@ -22,11 +22,15 @@ namespace ProyectoIntegrador.DataModelConfig
                     .IsRequired();
 
                 etb.Property(e => e.TiempoCredito)
-                    .HasColumnType("tinyint")
+                    .HasColumnType("int")
                     .IsRequired();
 
                 etb.Property(e => e.LimiteCredito)
                     .HasColumnType("decimal(18, 2)")
+                    .IsRequired();
+
+                etb.Property(e => e.Correo)
+                    .HasColumnType("varchar(100)")
                     .IsRequired();
 
                 etb.Property(e => e.FechaModificacion)

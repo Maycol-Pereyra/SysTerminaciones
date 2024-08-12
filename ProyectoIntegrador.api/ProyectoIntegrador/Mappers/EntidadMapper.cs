@@ -17,52 +17,14 @@ namespace ProyectoIntegrador.Mappers
                 .ForMember(
                     des => des.ListaEntidadTelefono,
                     opt => opt.Ignore()
+                )
+                .ForMember(
+                    des => des.FechaCreacion,
+                    opt => opt.Ignore()
                 );
 
 
-            CreateMap<EntidadDireccion, EntidadDireccionVm>()
-                .ForMember(
-                    des => des.Calle,
-                    opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.Calle
-                        : "")
-                )
-                .ForMember(
-                    des => des.Casa,
-                    opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.Casa
-                        : "")
-                )
-                .ForMember(
-                    des => des.Referencia,
-                    opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.Referencia
-                        : "")
-                )
-                .ForMember(
-                    des => des.PaisId,
-                    opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.PaisId
-                        : 0)
-                )
-                .ForMember(
-                    des => des.ProvinciaId,
-                    opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.ProvinciaId
-                        : 0)
-                )
-                .ForMember(
-                    des => des.CiudadId,
-                    opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.CiudadId
-                        : 0)
-                )
-                .ForMember(
-                    des => des.SectorId,
-                    opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.SectorId
-                        : 0)
-                );
+            CreateMap<EntidadDireccion, EntidadDireccionVm>();
 
             CreateMap<EntidadDireccionVm, EntidadDireccion>();
 

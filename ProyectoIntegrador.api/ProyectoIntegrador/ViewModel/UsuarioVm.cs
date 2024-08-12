@@ -22,5 +22,7 @@
 
 
         public virtual List<UsuarioPerfilVm> ListaUsuarioPerfil { get; set; } = [];
+        public virtual List<EntidadDireccionVm> ListaEntidadDireccion { get; set; } = [];
+        public virtual List<EntidadTelefonoVm> ListaEntidadTelefono { get; set; } = [];
     }
 }

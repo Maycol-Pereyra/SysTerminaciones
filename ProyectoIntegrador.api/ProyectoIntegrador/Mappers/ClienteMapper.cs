@@ -9,6 +9,16 @@ namespace ProyectoIntegrador.Mappers
     {
         public ClienteMapper()
         {
+            CreateMap<ClienteVm, EntidadVm>()
+                .ForMember(
+                    des => des.Id,
+                    opt => opt.MapFrom(ori => ori.EntidadId)
+                )
+                .ForMember(
+                    des => des.FechaCreacion,
+                    opt => opt.Ignore()
+                );
+
             CreateMap<Cliente, ClienteVm>()
                 .ForMember(
                     des => des.Nombre,

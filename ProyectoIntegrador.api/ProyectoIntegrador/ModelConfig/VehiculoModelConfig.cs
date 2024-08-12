@@ -63,12 +63,22 @@ namespace ProyectoIntegrador.DataModelConfig
                     .IsRequired();
 
                 etb.Property(e => e.EstaActivo)
-                    .HasColumnType("int")
+                    .HasColumnType("bit")
                     .IsRequired();
 
                 etb.HasOne(e => e.Color)
                     .WithMany()
                     .HasForeignKey(e => e.ColorId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                etb.HasOne(e => e.Estado)
+                    .WithMany()
+                    .HasForeignKey(e => e.EstadoId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                etb.HasOne(e => e.Unidad)
+                    .WithMany()
+                    .HasForeignKey(e => e.UnidadCargaId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
 

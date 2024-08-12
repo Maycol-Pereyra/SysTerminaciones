@@ -11,14 +11,18 @@ namespace ProyectoIntegrador.DataModelConfig
             {
                 etb.ToTable("EntidadTelefono", "dbo");
 
-                etb.HasKey(e => new { e.EntidadId, e.Telefono});
+                etb.HasKey(e => e.Id);
+
+                etb.Property(e => e.Id)
+                    .HasColumnType("int")
+                    .IsRequired();
 
                 etb.Property(e => e.Descripcion)
                     .HasColumnType("varchar(50)")
                     .IsRequired();
 
                 etb.Property(e => e.Telefono)
-                    .HasColumnType("varchar(10)")
+                    .HasColumnType("varchar(13)")
                     .IsRequired();
 
                 etb.Property(e => e.EntidadId)

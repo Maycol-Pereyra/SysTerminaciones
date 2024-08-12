@@ -13,7 +13,7 @@
         public int EstadoId { get; set; }
 
         public virtual Cliente Cliente { get; set; }
-        public virtual Direccion Direccion { get; set; }
+        public virtual EntidadDireccion Direccion { get; set; }
         public virtual Empleado EmpleadoAsignado { get; set; }
         public virtual Vehiculo VehiculoAsignado { get; set; }
         public virtual Registro Estado { get; set; }

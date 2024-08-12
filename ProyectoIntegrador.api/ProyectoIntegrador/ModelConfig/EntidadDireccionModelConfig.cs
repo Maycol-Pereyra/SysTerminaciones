@@ -11,17 +11,46 @@ namespace ProyectoIntegrador.DataModelConfig
             {
                 etb.ToTable("EntidadDireccion", "dbo");
 
-                etb.HasKey(e => new { e.EntidadId, e.DireccionId});
+                etb.HasKey(e => e.Id);
 
-                etb.Property(e => e.Descripcion)
-                    .HasColumnType("varchar(100)")
+                etb.Property(e => e.Id)
+                    .HasColumnType("int")
                     .IsRequired();
 
                 etb.Property(e => e.EntidadId)
                     .HasColumnType("int")
                     .IsRequired();
 
-                etb.Property(e => e.DireccionId)
+                etb.Property(e => e.Descripcion)
+                    .HasColumnType("varchar(100)")
+                    .IsRequired();
+
+                etb.Property(e => e.Calle)
+                    .HasColumnType("varchar(50)")
+                    .IsRequired();
+
+                etb.Property(e => e.Casa)
+                    .HasColumnType("varchar(50)")
+                    .IsRequired();
+
+
+                etb.Property(e => e.Referencia)
+                    .HasColumnType("varchar(250)")
+                    .IsRequired();
+
+                etb.Property(e => e.PaisId)
+                    .HasColumnType("int")
+                    .IsRequired();
+
+                etb.Property(e => e.ProvinciaId)
+                    .HasColumnType("int")
+                    .IsRequired();
+
+                etb.Property(e => e.CiudadId)
+                    .HasColumnType("int")
+                    .IsRequired();
+
+                etb.Property(e => e.SectorId)
                     .HasColumnType("int")
                     .IsRequired();
 
@@ -33,10 +62,6 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("bit")
                     .IsRequired();
 
-                etb.HasOne(e => e.Direccion)
-                    .WithMany()
-                    .HasForeignKey(e => e.DireccionId)
-                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             return modelBuilder;

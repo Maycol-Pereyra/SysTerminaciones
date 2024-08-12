@@ -33,7 +33,7 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("decimal(18, 2)")
                     .IsRequired();
 
-                etb.Property(e => e.UnidadMedidaId)
+                etb.Property(e => e.TipoMedidaId)
                     .HasColumnType("int")
                     .IsRequired();
 
@@ -76,7 +76,7 @@ namespace ProyectoIntegrador.DataModelConfig
 
                 etb.HasOne(e => e.UnidadMedida)
                     .WithMany()
-                    .HasForeignKey(e => e.UnidadMedidaId)
+                    .HasForeignKey(e => e.TipoMedidaId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
 

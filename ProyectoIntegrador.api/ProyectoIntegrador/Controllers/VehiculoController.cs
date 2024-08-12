@@ -37,6 +37,7 @@ namespace ProyectoIntegrador.Controllers
         {
             var lista = _dbContext.Vehiculo
                 .Include(o => o.Color)
+                .Include(o => o.Estado)
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
             lista = lista.OrderBy(o => o.Id);

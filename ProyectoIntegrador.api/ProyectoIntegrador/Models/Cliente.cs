@@ -4,8 +4,9 @@
     {
         public int Id { get; set; }
         public int EntidadId { get; set; }
-        public byte TiempoCredito { get; set; }
+        public int TiempoCredito { get; set; }
         public decimal LimiteCredito { get; set; }
+        public string Correo { get; set; } = "";
         public DateTime FechaModificacion { get; set; }
         public DateTime FechaCreacion { get; set; }
         public bool EstaActivo { get; set; }

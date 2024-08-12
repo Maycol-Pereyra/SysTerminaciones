@@ -1,0 +1,42 @@
+<div class="mt-10">
+  <div class="row align-items-center">
+    <div class="col-md-8 margin-bottom-10-mobile">          
+      <h3 class="font-size-lg text-dark-75 font-weight-bold mb-10">
+        Teléfono
+      </h3>
+    </div>
+    <div class="col-md-4 text-right margin-bottom-10-mobile">
+      <button type="button" class="btn btn-primary" (click)="create()">Agregar</button>
+    </div>
+  </div>
+  <div class="table-responsive angular-bootstrap-table">
+    <table class="table table-head-custom table-vertical-center overflow-hidden  table-bordered">
+      <thead>
+        <th>Descripción</th>
+        <th>Número telefónico</th>
+        <th class="text-center">Estado</th>
+        <th class="text-right">Acciones</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of listaDetalle">
+          <td>{{ row.descripcion }}</td>
+          <td>{{ row.telefono }}</td>
+          <td class="text-center">
+            <span *ngIf="row.estaActivo" class="label label-lg label-light-success label-inline">Activo</span>
+            <span *ngIf="!row.estaActivo" class="label label-lg label-light-danger label-inline">Inactivo</span>
+          </td>
+          <td class="text-right">            
+            <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3" (click)="edit(row)">
+              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true" class="svg-icon svg-icon-md svg-icon-primary">
+              </span>
+            </a>
+            <a title="Cambiar estado" class="btn btn-icon btn-light btn-sm" (click)="cambiarEstado(row)" [ngClass]="{'btn-hover-success': !row.estaActivo, 'btn-hover-danger': row.estaActivo}">
+              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Clipboard-check.svg'" cacheSVG="true" class="svg-icon svg-icon-md" [ngClass]="{'svg-icon-success': !row.estaActivo, 'svg-icon-danger': row.estaActivo}">
+              </span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

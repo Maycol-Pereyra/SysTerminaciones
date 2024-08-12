@@ -33,7 +33,7 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("decimal(10, 6)")
                     .IsRequired();
 
-                etb.Property(e => e.UnidadMedidaId)
+                etb.Property(e => e.TipoMedidaId)
                     .HasColumnType("int")
                     .IsRequired();
 

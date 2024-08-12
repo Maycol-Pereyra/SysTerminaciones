@@ -1,0 +1,195 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="vm">
+        <ng-container *ngIf="vm.id">Editar</ng-container>
+        <ng-container *ngIf="!vm.id">Crear</ng-container>
+        Producto
+        <ng-container *ngIf="vm.id">'{{vm.descripcion}}'</ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body" style="min-height: 404px;">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent fixed-top">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="vm">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Descripción</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="descripcion"
+              placeholder="Descripción" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('descripcion')"
+              [class.is-valid]="isControlValid('descripcion')"
+              formControlName="descripcion" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'descripcion')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'descripcion')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'descripcion')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Descripción para el cliente</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="descripcionCliente"
+              placeholder="Descripción para el cliente" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('descripcionCliente')"
+              [class.is-valid]="isControlValid('descripcionCliente')"
+              formControlName="descripcionCliente" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'descripcionCliente')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'descripcionCliente')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'descripcionCliente')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tipo de producto</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="tipoProductoId"  
+            formControlName="tipoProductoId"
+            [class.is-invalid]="isControlInvalid('tipoProductoId')">
+            <option [ngValue]="null">Seleccione Uno</option>
+            <ng-container *ngFor="let item of tipoProducto$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'tipoProductoId')">Es requerido</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Categoria</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="categoriaId"  
+            formControlName="categoriaId"
+            [class.is-invalid]="isControlInvalid('categoriaId')">
+            <option [ngValue]="null">Seleccione Uno</option>
+            <ng-container *ngFor="let item of categoria$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'categoriaId')">Es requerido</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Color</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="colorId"  
+            formControlName="colorId"
+            [class.is-invalid]="isControlInvalid('colorId')">
+            <option [ngValue]="null">Seleccione Uno</option>
+            <ng-container *ngFor="let item of color$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'colorId')">Es requerido</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tipo de medida</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="tipoMedidaId"  
+            formControlName="tipoMedidaId"
+            [class.is-invalid]="isControlInvalid('tipoMedidaId')">
+            <option [ngValue]="null">Seleccione Uno</option>
+            <ng-container *ngFor="let item of listaTipoMedida">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'tipoMedidaId')">Es requerido</div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">Medida de ancho</label>
+              <input
+                  type="number"
+                  class="form-control form-control-lg "
+                  placeholder="Medida de ancho"
+                  name="medidaAncho"
+                  step="0.01"
+                  (blur)="fixCantidadNullFg(formGroup, 'medidaAncho'); fixMontoDosDecimalesFg(formGroup, 'medidaAncho')"
+                  [class.is-invalid]="isControlInvalid('medidaAncho')"
+                  [class.is-valid]="isControlValid('medidaAncho')"
+                  formControlName="medidaAncho"
+                />
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'medidaAncho')">Es requerido</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('min', 'medidaAncho')">Debe tener mínimo 0</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('max', 'medidaAncho')">Debe tener máximo 99,999,999.99</div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-label">Medida de alto</label>
+              <input
+                  type="number"
+                  class="form-control form-control-lg "
+                  placeholder="Medida de alto"
+                  name="medidaAlto"
+                  step="0.01"
+                  (blur)="fixCantidadNullFg(formGroup, 'medidaAlto'); fixMontoDosDecimalesFg(formGroup, 'medidaAlto')"
+                  [class.is-invalid]="isControlInvalid('medidaAlto')"
+                  [class.is-valid]="isControlValid('medidaAlto')"
+                  formControlName="medidaAlto"
+                />
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'medidaAlto')">Es requerido</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('min', 'medidaAlto')">Debe tener mínimo 0</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('max', 'medidaAlto')">Debe tener máximo 99,999,999.99</div>
+            </div>
+          </div>
+        </div>
+
+        <ng-container *ngIf="+vm.id > 0">
+          <div class="separator separator-dashed my-8"></div>
+
+          <div *ngIf="vm.estaActivo">
+            <button type="button" class="btn btn-danger btn-elevate" (click)="inactivar()">Inactivar</button>
+            <span class="form-text text-muted">
+              El registro está <b>Activo</b>. Pulse para inactivar. Los registros inactivos no estarán disponibles para ser asignados.
+            </span>
+          </div>
+
+          <div *ngIf="!vm.estaActivo">
+            <button type="button" class="btn btn-primary btn-elevate" (click)="activar()">Activar</button>
+            <span class="form-text text-muted">
+              El registro está <b>Inactivo</b>. Pulse para activar.
+            </span>
+          </div>
+        </ng-container>
+
+      </form>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancelar</button>
+    <ng-container *ngIf="vm">
+      <button type="submit" class="btn btn-primary btn-elevate" (click)="save()" [disabled]="formGroup.invalid">Guardar</button>
+    </ng-container>
+  </div>
+</div>

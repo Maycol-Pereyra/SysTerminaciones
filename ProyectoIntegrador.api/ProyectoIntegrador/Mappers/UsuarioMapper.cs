@@ -9,6 +9,12 @@ namespace ProyectoIntegrador.Mappers
     {
         public UsuarioMapper()
         {
+            CreateMap<UsuarioVm, EntidadVm>()
+                .ForMember(
+                    des => des.Id,
+                    opt => opt.MapFrom(ori => ori.EntidadId)
+                );
+
             CreateMap<Usuario, UsuarioVm>()
                 .ForMember(
                     des => des.Nombre,

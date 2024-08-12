@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbDatepickerModule, NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbDatepickerModule, NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GeneralesRoutingModule } from './generales-routing.module';
 import { GeneralesComponent } from './generales.component';
 import { ADVCRUDTableModule } from 'src/app/_core/crud-table';
@@ -35,6 +35,16 @@ import { EditPaisModalComponent } from './pais/components/edit-pais-modal/edit-p
 import { PaisComponent } from './pais/pais.component';
 import { ComponentesModule } from 'src/app/_core/componentes/componentes.module';
 import { ColorComponent } from './color/color.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { EmpleadoComponent } from './empleado/empleado.component';
+import { EditEmpleadoModalComponent } from './empleado/components/edit-empleado-modal/edit-empleado-modal.component';
+import { DepartamentoComponent } from './departamento/departamento.component';
+import { PosicionComponent } from './posicion/posicion.component';
+import { CustomDateParserFormatter } from 'src/app/_metronic/core';
+import { EntidadDireccionComponent } from './empleado/components/edit-empleado-modal/entidad-direccion/entidad-direccion.component';
+import { EditEntidadDireccionComponent } from './empleado/components/edit-empleado-modal/entidad-direccion/edit/edit-entidad-direccion-modal.component';
+import { EntidadTelefonoComponent } from './empleado/components/edit-empleado-modal/entidad-telefono/entidad-telefono.component';
+import { EditEntidadTelefonoComponent } from './empleado/components/edit-empleado-modal/entidad-telefono/edit/edit-entidad-telefono-modal.component';
 
 
 @NgModule({
@@ -70,7 +80,22 @@ import { ColorComponent } from './color/color.component';
     EditUnidadModalComponent,
 
     VehiculoComponent,
-    EditVehiculoModalComponent
+    EditVehiculoModalComponent,
+
+    ColorComponent,
+    
+    DepartamentoComponent,
+
+    PosicionComponent,
+
+    EmpleadoComponent,
+    EditEmpleadoModalComponent,
+
+    EntidadDireccionComponent,
+    EditEntidadDireccionComponent,
+
+    EntidadTelefonoComponent,
+    EditEntidadTelefonoComponent,
   ],
   imports: [
     CommonModule,
@@ -85,15 +110,25 @@ import { ColorComponent } from './color/color.component';
     NgbModule,
     NgApexchartsModule,
     DxHtmlEditorModule,
-    ComponentesModule
+    ComponentesModule,
+    NgxMaskModule
   ],
   entryComponents: [
     EditUsuarioModalComponent,
     CreateUsuarioModalComponent,
     EditPerfilModalComponent,
     DeletePerfilModalComponent,
-    EditPaisModalComponent,
-    ColorComponent
+    EditPaisModalComponent
+  ],
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
+  ],
+  exports: [
+    EntidadDireccionComponent,
+    EditEntidadDireccionComponent,
+
+    EntidadTelefonoComponent,
+    EditEntidadTelefonoComponent,
   ]
 })
 export class GeneralesModule {}

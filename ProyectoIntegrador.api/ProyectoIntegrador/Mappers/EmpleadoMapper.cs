@@ -9,6 +9,16 @@ namespace ProyectoIntegrador.Mappers
     {
         public EmpleadoMapper()
         {
+            CreateMap<EmpleadoVm, EntidadVm>()
+                .ForMember(
+                    des => des.Id,
+                    opt => opt.MapFrom(ori => ori.EntidadId)
+                )
+                .ForMember(
+                    des => des.FechaCreacion,
+                    opt => opt.Ignore()
+                );
+
             CreateMap<Empleado, EmpleadoVm>()
                 .ForMember(
                     des => des.Nombre,

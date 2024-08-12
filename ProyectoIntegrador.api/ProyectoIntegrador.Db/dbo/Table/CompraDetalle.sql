@@ -4,7 +4,7 @@
 	[UnidadProductoId] INT NOT NULL,
 	[MedidaAncho] DECIMAL(18, 2) NOT NULL,
 	[MedidaAlto] DECIMAL(18, 2) NOT NULL,
-	[UnidadMedidaId] INT NOT NULL,
+	[TipoMedidaId] INT NOT NULL,
 	[Cantidad] DECIMAL(18, 2) NOT NULL,
 	[CantidadRecibida] DECIMAL(18, 2) NOT NULL,
 	[PrecioUntario] DECIMAL(18, 2) NOT NULL,
@@ -13,6 +13,5 @@
 	PRIMARY KEY (CompraId, ProductoId, MedidaAncho, MedidaAlto),
 	FOREIGN KEY (CompraId) REFERENCES Compra(Id),
 	FOREIGN KEY (ProductoId) REFERENCES Producto(Id),
-	FOREIGN KEY (UnidadProductoId) REFERENCES Unidad(Id),
-	FOREIGN KEY (UnidadMedidaId) REFERENCES Unidad(Id)
+	FOREIGN KEY (UnidadProductoId) REFERENCES Unidad(Id)
 )

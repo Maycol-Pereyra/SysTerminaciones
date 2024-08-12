@@ -23,6 +23,12 @@ namespace ProyectoIntegrador.Mappers
                     opt => opt.MapFrom(ori => ori.Color != null
                         ? ori.Color.Descripcion
                         : "")
+                )
+                .ForMember(
+                    des => des.EstadoDescripcion,
+                    opt => opt.MapFrom(ori => ori.Estado != null
+                        ? ori.Estado.Descripcion
+                        : "")
                 );
 
             CreateMap<VehiculoVm, Vehiculo>();

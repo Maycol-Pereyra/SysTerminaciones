@@ -1,5 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { of, Subscription } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { AppConfig } from 'src/app/_core/services/app-config.service';
 import { AccesosService } from 'src/app/_core/services/acceso.service';
 import { EndPointSelect } from 'src/app/_core/const/app.const';
 import { regexCorreo } from 'src/app/_core/const/regexp.const';
+import { maskCedula, maskRnc } from 'src/app/_core/const/formato-mascara';
 
 @Component({
   selector: 'app-edit-usuario-modal',
@@ -26,9 +27,17 @@ export class EditUsuarioModalComponent extends FormBase implements OnInit, OnDes
   vm: Usuario;
   presentaEstado = true;
   empleados$;
+
+  maskRnc = maskRnc;
+  maskCedula = maskCedula;
+  marcaEsRncCedula = false;
   
   private usuarioActualId = null;
   private subscriptions: Subscription[] = [];
+
+  get campoRnc() {
+    return this.formGroup.get('rnc') as FormControl;
+  }
 
   constructor(
     public modal: NgbActiveModal,
@@ -36,7 +45,8 @@ export class EditUsuarioModalComponent extends FormBase implements OnInit, OnDes
     private accesosService: AccesosService,
     private fb: FormBuilder,
     private itemSelectService: ItemSelectService,
-    private authService: AuthenticationService) {
+    private authService: AuthenticationService,
+    private cd: ChangeDetectorRef) {
     super();
   }
 
@@ -86,6 +96,15 @@ export class EditUsuarioModalComponent extends FormBase implements OnInit, OnDes
       estaActivo: [this.vm.estaActivo],
       empleadoId: [this.vm.empleadoId, Validators.compose([Validators.required])],
       login: [this.vm.login, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(100)])],
+      cedula: [this.vm.cedula, Validators.compose([
+        Validators.pattern('[0123456789]{3}[-]{1}[0123456789]{7}[-]{1}[0123456789]{1}')
+      ])],
+      pasaporte: [this.vm.pasaporte, Validators.compose([Validators.minLength(3), Validators.maxLength(30)])],
+      rnc: [this.vm.rnc, Validators.compose([
+        Validators.pattern('[0123456789]{1}[-]{1}[0123456789]{2}[-]{1}[0123456789]{5}[-]{1}[0123456789]{1}')
+      ])],
+      esRncCedula: [this.vm.esRncCedula, Validators.compose([Validators.nullValidator])],
+
     });
 
     this.subscriptions.push(
@@ -95,6 +114,23 @@ export class EditUsuarioModalComponent extends FormBase implements OnInit, OnDes
           this.presentaEstado = +this.usuarioActualId !== + this.vm.id;
         })
     );
+
+    this.marcaEsRncCedula = this.vm.esRncCedula;
+
+    if (this.marcaEsRncCedula) {
+      this.campoRnc.setValidators([
+        Validators.pattern('[0123456789]{3}[-]{1}[0123456789]{7}[-]{1}[0123456789]{1}')
+      ]);
+    } else {
+      this.campoRnc.setValidators([
+        Validators.pattern('[0123456789]{1}[-]{1}[0123456789]{2}[-]{1}[0123456789]{5}[-]{1}[0123456789]{1}')
+      ]);
+    }
+
+    this.formGroup.get('esRncCedula').valueChanges.subscribe(val => {
+      this.marcaEsRncCedula = val === undefined ? false : val;
+      this.actualizaRnc();
+    });
   }
 
   save() {
@@ -159,5 +195,25 @@ export class EditUsuarioModalComponent extends FormBase implements OnInit, OnDes
     this.vm.login = formData.login;
     this.vm.estaActivo = formData.estaActivo;
     this.vm.empleadoId = formData.empleadoId;
+    this.vm.cedula = formData.cedula;
+    this.vm.rnc = formData.rnc;
+    this.vm.pasaporte = formData.pasaporte;
+  }
+
+  private actualizaRnc(actualiza: boolean = true): void {
+    if (this.marcaEsRncCedula) {
+      this.campoRnc.setValidators([
+        Validators.pattern('[0123456789]{3}[-]{1}[0123456789]{7}[-]{1}[0123456789]{1}'),
+      ]);
+    } else {
+      this.campoRnc.setValidators([
+        Validators.pattern('[0123456789]{1}[-]{1}[0123456789]{2}[-]{1}[0123456789]{5}[-]{1}[0123456789]{1}'),
+      ]);
+    }
+
+    if (actualiza) {
+      this.campoRnc.updateValueAndValidity();
+      this.cd.detectChanges();
+    }
   }
 }

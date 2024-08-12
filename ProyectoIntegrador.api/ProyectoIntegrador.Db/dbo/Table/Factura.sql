@@ -21,5 +21,6 @@
 	FOREIGN KEY (ClienteId) REFERENCES Cliente(Id),
 	FOREIGN KEY (MedioPagoId) REFERENCES Registro(Id),
 	FOREIGN KEY (TipoComprobanteId) REFERENCES Registro(Id),
-	FOREIGN KEY (UsuarioCreacionId) REFERENCES Usuario(Id)
+	FOREIGN KEY (UsuarioCreacionId) REFERENCES Usuario(Id),
+	FOREIGN KEY (DireccionId) REFERENCES EntidadDireccion(Id)
 )

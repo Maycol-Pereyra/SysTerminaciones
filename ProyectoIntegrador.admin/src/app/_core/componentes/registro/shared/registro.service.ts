@@ -45,6 +45,10 @@ export class RegistroService extends TableService<RegistroIndex> implements OnDe
   createParams(tableState: ITableState): HttpParams {
     let params = super.createParams(tableState);
 
+    if (tableState.filter.tipoRegistroId) {
+      params = params.set('tipoRegistroId', tableState.filter.tipoRegistroId);
+    }
+
     return params;
   }
 }

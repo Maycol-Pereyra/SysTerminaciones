@@ -79,14 +79,14 @@ export class EditVehiculoModalComponent extends FormBase implements OnInit, OnDe
 
   loadForm() {
     this.formGroup = this.fb.group({
-      marca: [this.vm.estadoId, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      modelo: [this.vm.estadoId, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      anoFabricacion: [this.vm.estadoId, Validators.compose([Validators.required, Validators.min(1), Validators.max(9999)])],
-      placa: [this.vm.estadoId, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
-      colorId: [this.vm.estadoId, Validators.compose([Validators.required])],
-      kilometraje: [this.vm.estadoId, Validators.compose([Validators.required, Validators.min(1), Validators.max(99999999.99)])],
-      capacidadCarga: [this.vm.estadoId, Validators.compose([Validators.required, Validators.min(1), Validators.max(99999999.99)])],
-      unidadCargaId: [this.vm.estadoId, Validators.compose([Validators.required])],
+      marca: [this.vm.marca, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      modelo: [this.vm.modelo, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      anoFabricacion: [this.vm.anoFabricacion, Validators.compose([Validators.required, Validators.min(1), Validators.max(9999)])],
+      placa: [this.vm.placa, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])],
+      colorId: [this.vm.colorId, Validators.compose([Validators.required])],
+      kilometraje: [this.vm.kilometraje, Validators.compose([Validators.required, Validators.min(1), Validators.max(99999999.99)])],
+      capacidadCarga: [this.vm.capacidadCarga, Validators.compose([Validators.required, Validators.min(1), Validators.max(99999999.99)])],
+      unidadCargaId: [this.vm.unidadCargaId, Validators.compose([Validators.required])],
       estadoId: [this.vm.estadoId, Validators.compose([Validators.required])],
     });
   }

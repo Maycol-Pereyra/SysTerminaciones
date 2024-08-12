@@ -15,6 +15,7 @@ export class Usuario {
     public apellido: string;
     public cedula: string;
     public rnc: string;
+    public esRncCedula: boolean;
     public pasaporte: string;
     public correo: string;
 
@@ -34,6 +35,7 @@ export class Usuario {
         this.apellido = vm.apellido || '',
         this.cedula = vm.cedula || '',
         this.rnc = vm.rnc || '',
+        this.esRncCedula = vm.esRncCedula || false,
         this.pasaporte = vm.pasaporte || '',
         this.correo = vm.correo || '',
         this.listaUsuarioPerfil = !vm.listaUsuarioPerfil ? [] : vm.listaUsuarioPerfil

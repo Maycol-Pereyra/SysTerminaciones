@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ProyectoIntegrador.Api.IServices;
+using ProyectoIntegrador.Api.Models;
 using ProyectoIntegrador.Api.ViewModel;
 using ProyectoIntegrador.Data;
 
@@ -22,11 +23,47 @@ namespace ProyectoIntegrador.Api.Services
 
             var existe = await _dbContext.Entidad
                 .AsNoTracking()
-                .Where(o => o.Cedula == entidad.Cedula || o.Rnc == entidad.Rnc || o.Pasaporte == entidad.Pasaporte)
-                .AnyAsync();
+                .Where(o => o.Id == entidad.Id
+                    || (string.IsNullOrWhiteSpace(entidad.Cedula) == false && o.Cedula == entidad.Cedula)
+                    || (string.IsNullOrWhiteSpace(entidad.Rnc) == false && o.Rnc == entidad.Rnc)
+                    || (string.IsNullOrWhiteSpace(entidad.Pasaporte) == false && o.Pasaporte == entidad.Pasaporte))
+                .FirstOrDefaultAsync();
 
-            return existe;
+            if (existe != null)
+            {
+                entidad.Id = existe.Id;
+            }
+
+            return existe != null;
         }
+
+        public async Task<int> RegistraActualizaEntidad(EntidadVm entidad)
+        {
+            if (entidad == null || await Existe(entidad) == false)
+            {
+                var obj = _mapper.Map<Entidad>(entidad);
+
+                obj.EstaActivo = true;
+                obj.FechaCreacion = DateTime.Now;
+
+                _dbContext.Entidad.Add(obj);
+                await _dbContext.SaveChangesAsync();
+
+                return obj.Id;
+            }
+
+            var savedObj = await _dbContext.Entidad
+                .Where(o => o.Id == entidad.Id)
+                .FirstOrDefaultAsync();
+
+            _mapper.Map(entidad, savedObj);
+
+            _dbContext.Entidad.Update(savedObj);
+            await _dbContext.SaveChangesAsync();
+
+            return savedObj.Id;
+        }
+
 
         public async Task<List<EntidadVm>> ObtenerSimilares(EntidadVm entidad)
         {

@@ -13,6 +13,9 @@ import { UnidadComponent } from './unidad/unidad.component';
 import { VehiculoComponent } from './vehiculo/vehiculo.component';
 import { ColorComponent } from './color/color.component';
 import { PaisComponent } from './pais/pais.component';
+import { EmpleadoComponent } from './empleado/empleado.component';
+import { DepartamentoComponent } from './departamento/departamento.component';
+import { PosicionComponent } from './posicion/posicion.component';
 
 const routes: Routes = [
   {
@@ -104,6 +107,30 @@ const routes: Routes = [
         component: ColorComponent,
         data: {
           acceso: 'generales.color.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'empleado',
+        component: EmpleadoComponent,
+        data: {
+          acceso: 'generales.empleado.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'departamento',
+        component: DepartamentoComponent,
+        data: {
+          acceso: 'generales.departamento.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'posicion',
+        component: PosicionComponent,
+        data: {
+          acceso: 'generales.posicion.acceder'
         },
         canActivate: [AppAuthGuard]
       },

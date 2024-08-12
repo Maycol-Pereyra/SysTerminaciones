@@ -115,6 +115,7 @@ export class EditHerramientaModalComponent extends FormBase implements OnInit, O
   private prepareVm() {
     const formData = this.formGroup.value;
     this.vm.descripcion = formData.descripcion;
+    this.vm.estadoId = formData.estadoId;
   }
 
   private getEmty(): Herramienta{

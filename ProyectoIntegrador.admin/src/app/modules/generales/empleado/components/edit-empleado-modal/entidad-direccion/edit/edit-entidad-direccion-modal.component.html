@@ -1,0 +1,166 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="vm">
+        <ng-container *ngIf="nuevo">Crear Relación</ng-container>
+        <ng-container *ngIf="!nuevo">Editar Relación</ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="overlay overlay-block cursor-default modal-body" style="min-height: 404px;">
+    <ng-container *ngIf="vm">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Descripción</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="descripcion"
+              placeholder="Descripción" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('descripcion')"
+              [class.is-valid]="isControlValid('descripcion')"
+              formControlName="descripcion" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'descripcion')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'descripcion')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'descripcion')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">País</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="paisId"  
+            formControlName="paisId"
+            [class.is-invalid]="isControlInvalid('paisId')">
+            <option [ngValue]="null">-</option>
+            <ng-container *ngFor="let item of pais$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>                
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'paisId')">Es requerido</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Provincia</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="provinciaId"  
+            formControlName="provinciaId"
+            [class.is-invalid]="isControlInvalid('provinciaId')">
+            <option [ngValue]="null">-</option>
+            <ng-container *ngFor="let item of provincia$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>                
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'provinciaId')">Es requerido</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ciudad</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="ciudadId"  
+            formControlName="ciudadId"
+            [class.is-invalid]="isControlInvalid('ciudadId')">
+            <option [ngValue]="null">-</option>
+            <ng-container *ngFor="let item of ciudad$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>                
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'ciudadId')">Es requerido</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Sector</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="sectorId"  
+            formControlName="sectorId"
+            [class.is-invalid]="isControlInvalid('sectorId')">
+            <option [ngValue]="null">-</option>
+            <ng-container *ngFor="let item of sector$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>                
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'sectorId')">Es requerido</div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Calle</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="calle"
+              placeholder="Calle" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('calle')"
+              [class.is-valid]="isControlValid('calle')"
+              formControlName="calle" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'calle')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'calle')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'calle')">Debe tener máximo 50 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Casa</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="casa"
+              placeholder="Casa" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('casa')"
+              [class.is-valid]="isControlValid('casa')"
+              formControlName="casa" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'casa')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'casa')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'casa')">Debe tener máximo 50 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Referencia</label>
+            <textarea
+                type=""
+                class="form-control form-control-lg "
+                placeholder="Referencia"
+                name="referencia"
+                rows="3"
+                autocomplete="off"
+                [class.is-invalid]="isControlInvalid('referencia')"
+                [class.is-valid]="isControlValid('referencia')"
+                formControlName="referencia"
+              ></textarea>
+            <div class="invalid-feedback" *ngIf="controlHasError('max', 'referencia')">Debe tener máximo 250</div>
+          </div>
+        </div>
+
+      
+      </form>
+    </ng-container>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancelar</button>
+    <ng-container *ngIf="vm">
+      <button type="submit" class="btn btn-primary btn-elevate" (click)="save()">Guardar</button>
+    </ng-container>
+  </div>
+</div>

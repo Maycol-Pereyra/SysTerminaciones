@@ -1,0 +1,63 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4" id="example-modal-sizes-title-lg">
+      <ng-container *ngIf="vm">
+        <ng-container *ngIf="nuevo">Crear Relación</ng-container>
+        <ng-container *ngIf="!nuevo">Editar Relación</ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="overlay overlay-block cursor-default modal-body" style="min-height: 404px;">
+    <ng-container *ngIf="vm">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label class="form-label">Descripción</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="descripcion"
+              placeholder="Descripción" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('descripcion')"
+              [class.is-valid]="isControlValid('descripcion')"
+              formControlName="descripcion" />
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'descripcion')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'descripcion')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'descripcion')">Debe tener máximo 100 caracteres</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-12">
+            <label>Número telefónico</label>
+            <input
+                type="text"
+                [mask]="maskTelefono"
+                class="form-control form-control-lg"
+                autocomplete="off"
+                placeholder="Teléfono"
+                name="telefono"
+                [class.is-invalid]="isControlInvalid('telefono')"
+                [class.is-valid]="isControlValid('telefono')"
+                formControlName="telefono"
+            />
+            <div class="text-muted" *ngIf="!isControlTouched('telefono')">Por favor especifique el número en formato <b>(###)###-####</b></div> 
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'telefono')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'telefono')">Debe tener el formato (###)###-####</div>
+          </div>
+        </div>
+      
+      </form>
+    </ng-container>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancelar</button>
+    <ng-container *ngIf="vm">
+      <button type="submit" class="btn btn-primary btn-elevate" (click)="save()">Guardar</button>
+    </ng-container>
+  </div>
+</div>

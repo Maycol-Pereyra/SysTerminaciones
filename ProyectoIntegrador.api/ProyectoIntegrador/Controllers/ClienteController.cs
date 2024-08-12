@@ -32,25 +32,6 @@ namespace ProyectoIntegrador.Controllers
             _existenciaService = existenciaService;
         }
 
-        [HttpPost("existencia")]
-        public async Task<ActionResult<List<EntidadVm>>> Get([FromBody] EntidadVm entidad)
-        {
-            if (entidad == null) { return BadRequest("Debe de especificar la entidad a comprobar"); }
-
-            var existe = await _existenciaService.Existe(entidad);
-
-            if (!existe) { return Ok(new List<EntidadVm>()); }
-
-            var entidades = await _existenciaService.ObtenerSimilares(entidad);
-
-            if (entidades.ContieneElementos())
-            {
-                return Ok(entidades);
-            }
-
-            return Ok(new List<EntidadVm>());
-        }
-
         [HttpGet]
         public async Task<ActionResult<PagedList<ClienteIndex>>> Get([FromQuery] ClienteParameters parameter)
         {
@@ -87,19 +68,21 @@ namespace ProyectoIntegrador.Controllers
             var resultado = ValidarModelo(vm);
             if (resultado.EsInvalido) { return BadRequest(resultado.PrimerMensaje); }
 
-            var existe = await _dbContext.Cliente
-                .Where(o => o.Id == vm.Id)
-                .AsNoTracking()
-                .AnyAsync();
+            vm.EntidadId = await _existenciaService.RegistraActualizaEntidad(_mapper.Map<EntidadVm>(vm));
 
-            if (!existe)
+            if (vm.Id == 0)
             {
                 var objNew = _mapper.Map<Cliente>(vm);
                 objNew.FechaCreacion = DateTime.Now;
+                objNew.FechaModificacion = DateTime.Now;
                 objNew.EstaActivo = true;
+
+                objNew.Entidad = await _dbContext.Entidad
+                    .Where(o => o.Id == objNew.EntidadId)
+                    .FirstOrDefaultAsync() ?? new Entidad();
                 
                 MapEntidadDireccion(vm, objNew);
-                MapEntidadDireccion(vm, objNew);
+                MapEntidadTelefono(vm, objNew);
 
                 _dbContext.Cliente.Add(objNew);
                 await _dbContext.SaveChangesAsync();
@@ -118,10 +101,20 @@ namespace ProyectoIntegrador.Controllers
                 return NotFound();
             }
 
+            objUpdate.Entidad.ListaEntidadDireccion = await _dbContext.EntidadDireccion
+                .Where(o => o.EntidadId == objUpdate.EntidadId)
+                .ToListAsync();
+
+            objUpdate.Entidad.ListaEntidadTelefono = await _dbContext.EntidadTelefono
+                .Where(o => o.EntidadId == objUpdate.EntidadId)
+                .ToListAsync();
+
             _mapper.Map(vm, objUpdate);
 
             MapEntidadDireccion(vm, objUpdate);
-            MapEntidadDireccion(vm, objUpdate);
+            MapEntidadTelefono(vm, objUpdate);
+
+            objUpdate.FechaModificacion = DateTime.Now;
 
             _dbContext.Cliente.Update(objUpdate);
             await _dbContext.SaveChangesAsync();
@@ -206,7 +199,7 @@ namespace ProyectoIntegrador.Controllers
             var vm = _mapper.Map<ClienteVm>(obj);
 
             var listaTelefono = await _dbContext.EntidadTelefono
-                .Where(o => o.EntidadId == vm.Id)
+                .Where(o => o.EntidadId == vm.EntidadId)
                 .AsNoTracking()
                 .ToListAsync();
 
@@ -216,8 +209,7 @@ namespace ProyectoIntegrador.Controllers
             }
 
             var listaDireccion = await _dbContext.EntidadDireccion
-                .Include(o => o.Direccion)
-                .Where(o => o.EntidadId == vm.Id)
+                .Where(o => o.EntidadId == vm.EntidadId)
                 .AsNoTracking()
                 .ToListAsync();
 
@@ -243,7 +235,13 @@ namespace ProyectoIntegrador.Controllers
 
                 var itemVm = origen
                     .ListaEntidadDireccion?
-                    .FirstOrDefault(o => o.DireccionId == item.DireccionId);
+                    .Where(o => o.PaisId == item.PaisId)
+                    .Where(o => o.ProvinciaId == item.ProvinciaId)
+                    .Where(o => o.CiudadId == item.CiudadId)
+                    .Where(o => o.SectorId == item.SectorId)
+                    .Where(o => o.Calle == item.Calle)
+                    .Where(o => o.Casa == item.Casa)
+                    .FirstOrDefault();
 
                 if (itemVm == null)
                 {
@@ -261,7 +259,7 @@ namespace ProyectoIntegrador.Controllers
             // agregar
             if (origen.ListaEntidadDireccion?.Any() ?? false)
             {
-                foreach (var itemVm in origen.ListaEntidadDireccion.Where(o => o.DireccionId <= 0))
+                foreach (var itemVm in origen.ListaEntidadDireccion.Where(o => o.EntidadId <= 0))
                 {
                     var item = _mapper.Map<EntidadDireccion>(itemVm);
                     item.FechaCreacion = DateTime.Now;
@@ -303,7 +301,7 @@ namespace ProyectoIntegrador.Controllers
             // agregar
             if (origen.ListaEntidadTelefono?.Any() ?? false)
             {
-                foreach (var itemVm in origen.ListaEntidadTelefono.Where(o => o.Telefono != ""))
+                foreach (var itemVm in origen.ListaEntidadTelefono.Where(o => o.Id <= 0))
                 {
                     var item = _mapper.Map<EntidadTelefono>(itemVm);
                     item.FechaCreacion = DateTime.Now;

@@ -204,6 +204,9 @@ namespace ProyectoIntegrador.Controllers
                 destino.ListaDetalle = new List<PerfilAcceso>();
             }
 
+            origen.ListaDetalle = origen.ListaDetalle.Where(o => o.Seleccionado).ToList()
+                ?? new List<PerfilAccesoVm>();
+
             int cantidad = destino.ListaDetalle.Count();
             for (int i = 0; i < cantidad; i++)
             {
@@ -211,7 +214,9 @@ namespace ProyectoIntegrador.Controllers
 
                 var itemVm = origen
                     .ListaDetalle?
-                    .FirstOrDefault(o => o.AccesoId == item.AccesoId);
+                    .Where(o => o.PerfilId == item.PerfilId)
+                    .Where(o => o.AccesoId == item.AccesoId)
+                    .FirstOrDefault();
 
                 if (itemVm == null)
                 {
@@ -229,10 +234,9 @@ namespace ProyectoIntegrador.Controllers
             // agregar
             if (origen.ListaDetalle?.Any() ?? false)
             {
-                foreach (var itemVm in origen.ListaDetalle.Where(o => string.IsNullOrWhiteSpace(o.AccesoId) == false))
+                foreach (var itemVm in origen.ListaDetalle.Where(o => o.PerfilId <= 0))
                 {
                     var item = _mapper.Map<PerfilAcceso>(itemVm);
-
                     destino.ListaDetalle.Add(item);
                 }
             }

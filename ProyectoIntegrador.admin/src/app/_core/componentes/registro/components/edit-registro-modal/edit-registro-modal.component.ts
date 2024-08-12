@@ -68,7 +68,6 @@ export class EditRegistroModalComponent extends FormBase implements OnInit, OnDe
     this.formGroup = this.fb.group({
       descripcion: [
         this.vm.descripcion, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100)])],
-      tipoRegistroId: [this.tipoRegistroId, Validators.compose([Validators.required])],
     });
   }
 
@@ -136,6 +135,7 @@ export class EditRegistroModalComponent extends FormBase implements OnInit, OnDe
   private prepareVm() {
     const formData = this.formGroup.value;
     this.vm.descripcion = formData.descripcion;
+    this.vm.tipoRegistroId = this.tipoRegistroId;
   }
 
   private getEmty(): Registro{

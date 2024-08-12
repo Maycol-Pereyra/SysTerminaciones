@@ -9,7 +9,7 @@
 	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
 	[EstadoId] INT NOT NULL,
 	FOREIGN KEY (ClienteId) REFERENCES Cliente(Id),
-	FOREIGN KEY (DireccionId) REFERENCES Direccion(Id),
+	FOREIGN KEY (DireccionId) REFERENCES EntidadDireccion(Id),
 	FOREIGN KEY (EmpleadoAsignadoId) REFERENCES Empleado(Id),
 	FOREIGN KEY (VehiculoAsignadoId) REFERENCES Vehiculo(Id),
 	FOREIGN KEY (EstadoId) REFERENCES Registro(Id)

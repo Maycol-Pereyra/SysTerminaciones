@@ -17,5 +17,7 @@
 	[EstaActivo] BIT NOT NULL,
 	FOREIGN KEY (ClienteId) REFERENCES Cliente(Id),
 	FOREIGN KEY (TipoComprobanteId) REFERENCES Registro(Id),
-	FOREIGN KEY (UsuarioCreacionId) REFERENCES Usuario(Id)
+	FOREIGN KEY (UsuarioCreacionId) REFERENCES Usuario(Id),
+	FOREIGN KEY (DireccionId) REFERENCES EntidadDireccion(Id),
+	FOREIGN KEY (SolicitudTomaMedidaId) REFERENCES SolicitudTomaMedida(Id),
 )

@@ -28,7 +28,6 @@ namespace ProyectoIntegrador.Api
             mc.AddProfile(new DesgloseCorrederaMapper());
             mc.AddProfile(new DesgloseEfectivoAsignadoCajaMapper());
             mc.AddProfile(new DespachoMapper());
-            mc.AddProfile(new DireccionMapper());
             mc.AddProfile(new DistribucionEnvioMapper());
             mc.AddProfile(new EmpleadoMapper());
             mc.AddProfile(new EnsambladoMapper());
@@ -49,6 +48,7 @@ namespace ProyectoIntegrador.Api
             mc.AddProfile(new ProductoMapper());
             mc.AddProfile(new ProgramaMapper());
             mc.AddProfile(new ProvinciaMapper());
+            mc.AddProfile(new SectorMapper());
             mc.AddProfile(new SolicitudTomaMedidaMapper());
             mc.AddProfile(new SuplidorMapper());
             mc.AddProfile(new TipoRegistroMapper());
