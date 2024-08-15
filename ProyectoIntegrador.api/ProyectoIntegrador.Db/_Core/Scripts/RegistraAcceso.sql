@@ -89,6 +89,43 @@ USING (VALUES
 , (N'ventas.cliente.activar', N'Ventas', N'Acceso de Cliente', N'Activar', N'')
 , (N'ventas.cliente.inactivar', N'Ventas', N'Acceso de Cliente', N'Inactivar', N'')
 
+, (N'ventas.producto.acceder', N'Ventas', N'Acceso de Producto', N'Acceder', N'')
+, (N'ventas.producto.crear', N'Ventas', N'Acceso de Producto', N'Crear', N'')
+, (N'ventas.producto.editar', N'Ventas', N'Acceso de Producto', N'Editar', N'')
+, (N'ventas.producto.activar', N'Ventas', N'Acceso de Producto', N'Activar', N'')
+, (N'ventas.producto.inactivar', N'Ventas', N'Acceso de Producto', N'Inactivar', N'')
+
+, (N'ventas.categoria.acceder', N'Ventas', N'Acceso de Categoría', N'Acceder', N'')
+, (N'ventas.categoria.crear', N'Ventas', N'Acceso de Categoría', N'Crear', N'')
+, (N'ventas.categoria.editar', N'Ventas', N'Acceso de Categoría', N'Editar', N'')
+, (N'ventas.categoria.activar', N'Ventas', N'Acceso de Categoría', N'Activar', N'')
+, (N'ventas.categoria.inactivar', N'Ventas', N'Acceso de Categoría', N'Inactivar', N'')
+
+, (N'ventas.solicitud-toma-medida.acceder', N'Ventas', N'Acceso de Solicitud de Toma de Medida', N'Acceder', N'')
+, (N'ventas.solicitud-toma-medida.crear', N'Ventas', N'Acceso de Solicitud de Toma de Medida', N'Crear', N'')
+, (N'ventas.solicitud-toma-medida.editar', N'Ventas', N'Acceso de Solicitud de Toma de Medida', N'Editar', N'')
+, (N'ventas.solicitud-toma-medida.activar', N'Ventas', N'Acceso de Solicitud de Toma de Medida', N'Activar', N'')
+, (N'ventas.solicitud-toma-medida.inactivar', N'Ventas', N'Acceso de Solicitud de Toma de Medida', N'Inactivar', N'')
+
+, (N'ventas.cotizacion.acceder', N'Ventas', N'Acceso de Cotización', N'Acceder', N'')
+, (N'ventas.cotizacion.crear', N'Ventas', N'Acceso de Cotización', N'Crear', N'')
+, (N'ventas.cotizacion.editar', N'Ventas', N'Acceso de Cotización', N'Editar', N'')
+, (N'ventas.cotizacion.activar', N'Ventas', N'Acceso de Cotización', N'Activar', N'')
+, (N'ventas.cotizacion.inactivar', N'Ventas', N'Acceso de Cotización', N'Inactivar', N'')
+, (N'ventas.solicitud-toma-medida.ver-info', N'Ventas', N'Acceso de Cotización', N'Ver Información', N'')
+, (N'ventas.solicitud-toma-medida.tomar-medida', N'Ventas', N'Acceso de Cotización', N'Tomar Medidas', N'')
+
+, (N'ventas.factura.acceder', N'Ventas', N'Acceso de Factura', N'Acceder', N'')
+, (N'ventas.factura.crear', N'Ventas', N'Acceso de Factura', N'Crear', N'')
+, (N'ventas.factura.editar', N'Ventas', N'Acceso de Factura', N'Editar', N'')
+, (N'ventas.factura.activar', N'Ventas', N'Acceso de Factura', N'Activar', N'')
+, (N'ventas.factura.inactivar', N'Ventas', N'Acceso de Factura', N'Inactivar', N'')
+
+, (N'compras.suplidor.acceder', N'Compras', N'Acceso de Suplidor', N'Acceder', N'')
+, (N'compras.suplidor.crear', N'Compras', N'Acceso de Suplidor', N'Crear', N'')
+, (N'compras.suplidor.editar', N'Compras', N'Acceso de Suplidor', N'Editar', N'')
+, (N'compras.suplidor.activar', N'Compras', N'Acceso de Suplidor', N'Activar', N'')
+, (N'compras.suplidor.inactivar', N'Compras', N'Acceso de Suplidor', N'Inactivar', N'')
 
 ) 
 AS source (Id,Modulo,Opcion,Permiso,Descripcion)

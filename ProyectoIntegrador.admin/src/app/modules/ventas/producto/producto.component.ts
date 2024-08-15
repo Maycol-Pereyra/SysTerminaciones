@@ -40,7 +40,6 @@ export class ProductoComponent
   filterGroup: FormGroup;
   searchGroup: FormGroup;
 
-  public listaTipoSolicitud: ItemSelect[] = [];
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -124,7 +123,7 @@ export class ProductoComponent
 
   create() {
     if (this.accesosService.puedeCrear('ventas.producto.crear')) {
-      const modalRef = this.modalService.open(EditProductoModalComponent, { size: 'lg', backdrop: 'static' });
+      const modalRef = this.modalService.open(EditProductoModalComponent, { size: 'xl', backdrop: 'static' });
       modalRef.result.then(() =>
         this.service.fetch(),
         () => { }
@@ -134,7 +133,7 @@ export class ProductoComponent
 
   edit(id: number) {
     if (this.accesosService.puedeEditar('ventas.producto.editar')) {
-      const modalRef = this.modalService.open(EditProductoModalComponent, { size: 'lg', backdrop: 'static' });
+      const modalRef = this.modalService.open(EditProductoModalComponent, { size: 'xl', backdrop: 'static' });
       modalRef.componentInstance.id = id;
       modalRef.result.then(() =>
         this.service.fetch(),

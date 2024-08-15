@@ -71,6 +71,7 @@ export class AuthenticationService {
   }
 
   login(login: string, password: string) {
+    debugger;
     const url = `${this.urlBase}/authenticate`;
     this.isLoadingSubject.next(true);
     return this.http.post<User>(url, { login, password })

@@ -21,9 +21,13 @@
         public string Casa { get; set; } = "";
         public string Referencia { get; set; } = "";
         public int PaisId { get; set; }
+        public string PaisDescripcion { get; set; } = "";
         public int ProvinciaId { get; set; }
+        public string ProvinciaDescripcion { get; set; } = "";
         public int CiudadId { get; set; }
+        public string CiudadDescripcion { get; set; } = "";
         public int SectorId { get; set; }
+        public string SectorDescripcion { get; set; } = "";
 
         public virtual List<SolicitudTomaMedidaDetalleVm> ListaDetalle { get; set; } = [];
     }

@@ -105,10 +105,6 @@ namespace ProyectoIntegrador.Controllers
             var resultado = ValidarModelo(vm);
             if (resultado.EsInvalido) { return BadRequest(resultado.PrimerMensaje); }
 
-            var direccionVm = _mapper.Map<DireccionVm>(vm);
-
-            vm.DireccionId = await _direccionService.ObtenerDireccionId(direccionVm);
-
             if (vm.Id == 0)
             {
                 var objNew = _mapper.Map<Cotizacion>(vm);
@@ -168,35 +164,10 @@ namespace ProyectoIntegrador.Controllers
 
             if (vm.LlevaEnvio || vm.LlevaInstalacion)
             {
-                if (vm.PaisId == 0)
+                if (vm.DireccionId == 0)
                 {
-                    return Resultado.Invalido($"Debe de especificar el país");
-                }
-
-                if (vm.ProvinciaId == 0)
-                {
-                    return Resultado.Invalido($"Debe de especificar la provincia");
-                }
-
-                if (vm.CiudadId == 0)
-                {
-                    return Resultado.Invalido($"Debe de especificar la ciudad");
-                }
-
-                if (vm.SectorId == 0)
-                {
-                    return Resultado.Invalido($"Debe de especificar el sector");
-                }
-
-                if (string.IsNullOrWhiteSpace(vm.Calle))
-                {
-                    return Resultado.Invalido($"Debe de especificar la calle");
-                }
-
-                if (string.IsNullOrWhiteSpace(vm.Casa))
-                {
-                    return Resultado.Invalido($"Debe de especificar la casa");
-                }
+                    return Resultado.Invalido($"Debe de especificar la dirección");
+                }       
             }
 
             return Resultado.Ok();

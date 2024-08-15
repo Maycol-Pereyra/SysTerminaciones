@@ -48,11 +48,13 @@ namespace ProyectoIntegrador.Controllers
                 .Include(o => o.EmpleadoAsignado)
                 .Include(o => o.VehiculoAsignado)
                 .Include(o => o.Estado)
-                .Include(o => o.ListaDetalle)
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
             lista = lista.OrderBy(o => o.Id);
             var pl = await lista.ToPagedList(parameter);
+
+            await ComplementarDatosEmpleado(pl.Items);
+            await ComplementarDatosCliente(pl.Items);
 
             return Ok(pl.GetCopy(_mapper.Map<List<SolicitudTomaMedidaIndex>>(pl.Items)));
         }
@@ -83,18 +85,16 @@ namespace ProyectoIntegrador.Controllers
             var resultado = ValidarModelo(vm);
             if (resultado.EsInvalido) { return BadRequest(resultado.PrimerMensaje); }
 
-            var direccionVm = _mapper.Map<DireccionVm>(vm);
-
-            vm.DireccionId = await _direccionService.ObtenerDireccionId(direccionVm);
-
-            await RegistraTomaMedida(vm);
-
             if (vm.Id == 0)
             {
                 var objNew = _mapper.Map<SolicitudTomaMedida>(vm);
                 objNew.FechaCreacion = DateTime.Now;
-
-                MapDetalle(vm, objNew);
+                objNew.EstadoId = await _dbContext.Registro
+                    .Where(o => o.TipoRegistroId == 26)
+                    .Where(o => o.Descripcion == "Pendiente Tomar Medidas")
+                    .AsNoTracking()
+                    .Select(o => o.Id)
+                    .FirstOrDefaultAsync();
 
                 _dbContext.SolicitudTomaMedida.Add(objNew);
                 await _dbContext.SaveChangesAsync();
@@ -105,12 +105,6 @@ namespace ProyectoIntegrador.Controllers
             }
 
             var objUpdate = _dbContext.SolicitudTomaMedida
-                .Include(o => o.Cliente)
-                .Include(o => o.Direccion)
-                .Include(o => o.EmpleadoAsignado)
-                .Include(o => o.VehiculoAsignado)
-                .Include(o => o.Estado)
-                .Include(o => o.ListaDetalle)
                 .OrderBy(o => o.Id)
                 .FirstOrDefault(o => o.Id == vm.Id);
 
@@ -119,9 +113,37 @@ namespace ProyectoIntegrador.Controllers
                 return NotFound();
             }
 
-            MapDetalle(vm, objUpdate);
+            _mapper.Map(vm, objUpdate);
+
+            _dbContext.SolicitudTomaMedida.Update(objUpdate);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("tomar-medida")]
+        public async Task<IActionResult> TomarMedidaAsync([FromBody] SolicitudTomaMedidaVm vm)
+        {
+            if (!ModelState.IsValid) { return LogModelState(ModelState); }
+
+            //TODO: validar el formato de las medidas
+            //var resultado = ValidarModelo(vm);
+            //if (resultado.EsInvalido) { return BadRequest(resultado.PrimerMensaje); }
+
+            await RegistraTomaMedida(vm);
+
+            var objUpdate = _dbContext.SolicitudTomaMedida
+                .OrderBy(o => o.Id)
+                .FirstOrDefault(o => o.Id == vm.Id);
+
+            if (objUpdate == null)
+            {
+                return NotFound();
+            }
 
             _mapper.Map(vm, objUpdate);
+
+            objUpdate.FechaTomaMedida = DateTime.Now;
 
             _dbContext.SolicitudTomaMedida.Update(objUpdate);
             await _dbContext.SaveChangesAsync();
@@ -138,34 +160,14 @@ namespace ProyectoIntegrador.Controllers
                 return Resultado.Invalido($"Debe especificar el cliente");
             }
 
-            if (vm.PaisId == 0)
+            if (vm.DireccionId == 0)
             {
-                return Resultado.Invalido($"Debe de especificar el país");
+                return Resultado.Invalido($"Debe especificar la dirección");
             }
 
-            if (vm.ProvinciaId == 0)
+            if (vm.FechaCompromisoTomaMedida != null && vm.FechaCompromisoTomaMedida < DateTime.Now)
             {
-                return Resultado.Invalido($"Debe de especificar la provincia");
-            }
-
-            if (vm.CiudadId == 0)
-            {
-                return Resultado.Invalido($"Debe de especificar la ciudad");
-            }
-
-            if (vm.SectorId == 0)
-            {
-                return Resultado.Invalido($"Debe de especificar el sector");
-            }
-
-            if (string.IsNullOrWhiteSpace(vm.Calle))
-            {
-                return Resultado.Invalido($"Debe de especificar la calle");
-            }
-
-            if (string.IsNullOrWhiteSpace(vm.Casa))
-            {
-                return Resultado.Invalido($"Debe de especificar la casa");
+                return Resultado.Invalido($"La fecha de compromiso no puede ser menor a la fecha actual");
             }
 
             return Resultado.Ok();
@@ -197,16 +199,88 @@ namespace ProyectoIntegrador.Controllers
                 return NotFound();
             }
 
+            obj.Cliente.Entidad = await _dbContext.Entidad
+                .Where(o => o.Id == obj.Cliente.EntidadId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync() ?? new();
+
+            obj.EmpleadoAsignado.Entidad = await _dbContext.Entidad
+                .Where(o => o.Id == obj.EmpleadoAsignado.EntidadId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync() ?? new();
+
             var vm = _mapper.Map<SolicitudTomaMedidaVm>(obj);
 
+            var direccion = await _dbContext.EntidadDireccion
+                .Include(o => o.Pais)
+                .Include(o => o.Provincia)
+                .Include(o => o.Ciudad)
+                .Include(o => o.Sector)
+                .Where(o => o.Id == vm.DireccionId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
+            if (direccion != null)
+            {
+                vm.PaisDescripcion = direccion.Pais.Descripcion;
+                vm.ProvinciaDescripcion = direccion.Provincia.Descripcion;
+                vm.CiudadDescripcion = direccion.Ciudad.Descripcion;
+                vm.SectorDescripcion = direccion.Sector.Descripcion;
+            }
+
             return Ok(vm);
+        }
+
+        private async Task ComplementarDatosEmpleado(List<SolicitudTomaMedida> lista)
+        {
+            if (lista.SinElementos())
+            {
+                return;
+            }
+
+            var listaEntidadId = lista.Select(o => o.EmpleadoAsignado.EntidadId).ToList();
+
+            var entidades = await _dbContext.Entidad
+                .Where(o => listaEntidadId.Contains(o.Id))
+                .AsNoTracking()
+                .ToListAsync();
+
+            foreach (var item in lista)
+            {
+                item.EmpleadoAsignado.Entidad = entidades.Where(o => o.Id == item.EmpleadoAsignado.EntidadId).FirstOrDefault() ?? new();
+            }
+        }
+
+        private async Task ComplementarDatosCliente(List<SolicitudTomaMedida> lista)
+        {
+            if (lista.SinElementos())
+            {
+                return;
+            }
+
+            var listaEntidadId = lista.Select(o => o.Cliente.EntidadId).ToList();
+
+            var entidades = await _dbContext.Entidad
+                .Where(o => listaEntidadId.Contains(o.Id))
+                .AsNoTracking()
+                .ToListAsync();
+
+            foreach (var item in lista)
+            {
+                item.Cliente.Entidad = entidades.Where(o => o.Id == item.Cliente.EntidadId).FirstOrDefault() ?? new();
+            }
         }
 
         private async Task RegistraTomaMedida(SolicitudTomaMedidaVm vm)
         {
             var listaVm = _mapper.Map<List<TomaMedidaVm>>(vm.ListaDetalle);
 
-            await _registraTomaMedidaService.Registra(listaVm);
+            var listaId = await _registraTomaMedidaService.Registra(listaVm);
+
+            for (var i = 0; i < vm.ListaDetalle.Count; i++)
+            {
+                vm.ListaDetalle[i].TomaMedidaId = listaId[i];
+            }
         }
 
         private void MapDetalle(SolicitudTomaMedidaVm origen, SolicitudTomaMedida destino)

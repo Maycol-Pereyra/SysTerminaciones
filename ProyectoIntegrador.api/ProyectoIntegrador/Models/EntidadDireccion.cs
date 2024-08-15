@@ -16,5 +16,9 @@
         public bool EstaActivo { get; set; }
 
         public virtual Entidad Entidad { get; set; }
+        public virtual Pais Pais { get; set; }
+        public virtual Provincia Provincia { get; set; }
+        public virtual Ciudad Ciudad { get; set; }
+        public virtual Sector Sector { get; set; }
     }
 }

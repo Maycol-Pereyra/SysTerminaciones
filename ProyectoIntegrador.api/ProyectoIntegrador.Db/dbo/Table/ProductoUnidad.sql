@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[ProductUnidad] (
+﻿CREATE TABLE [dbo].[ProductoUnidad] (
 	[ProductoId] INT NOT NULL,
 	[UnidadId] INT NOT NULL,
 	[PrecioCompra] DECIMAL(18, 2) NOT NULL,

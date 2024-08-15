@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { LayoutService, LayoutInitService } from '../../_metronic/core';
 import KTLayoutContent from '../../../assets/js/layout/base/content';
-import { FeatureFlagService } from 'src/app/_core/services/feature-flag.service';
 import { AuthenticationService } from 'src/app/_core/services/authentication.service';
 
 @Component({
@@ -49,11 +48,9 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   constructor(
     private initService: LayoutInitService,
     private layout: LayoutService,
-    private featureFlagService: FeatureFlagService,
     private authenticationService: AuthenticationService
   ) {
     this.initService.init();
-    this.featureFlagService.getFeatureFlag().subscribe();
   }
 
   ngOnInit(): void {

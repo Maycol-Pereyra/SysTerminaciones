@@ -125,45 +125,60 @@
 
         <div class="form-group row">
           <div class="col-lg-6">
-            <div class="form-group">
-              <label class="form-label">Medida de ancho</label>
-              <input
-                  type="number"
-                  class="form-control form-control-lg "
-                  placeholder="Medida de ancho"
-                  name="medidaAncho"
-                  step="0.01"
-                  (blur)="fixCantidadNullFg(formGroup, 'medidaAncho'); fixMontoDosDecimalesFg(formGroup, 'medidaAncho')"
-                  [class.is-invalid]="isControlInvalid('medidaAncho')"
-                  [class.is-valid]="isControlValid('medidaAncho')"
-                  formControlName="medidaAncho"
-                />
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'medidaAncho')">Es requerido</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('min', 'medidaAncho')">Debe tener mínimo 0</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('max', 'medidaAncho')">Debe tener máximo 99,999,999.99</div>
-            </div>
+            <label class="form-label">Medida de ancho</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="medidaAncho"
+              placeholder="Medida de ancho" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('medidaAncho')"
+              [class.is-valid]="isControlValid('medidaAncho')"
+              formControlName="medidaAncho" />
+            <div class="text-muted">Por favor especifique en formato <b>### / ##</b></div> 
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'medidaAncho')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'medidaAncho')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'medidaAncho')">Debe tener máximo 50 caracteres</div>
           </div>
 
           <div class="col-lg-6">
-            <div class="form-group">
-              <label class="form-label">Medida de alto</label>
-              <input
-                  type="number"
-                  class="form-control form-control-lg "
-                  placeholder="Medida de alto"
-                  name="medidaAlto"
-                  step="0.01"
-                  (blur)="fixCantidadNullFg(formGroup, 'medidaAlto'); fixMontoDosDecimalesFg(formGroup, 'medidaAlto')"
-                  [class.is-invalid]="isControlInvalid('medidaAlto')"
-                  [class.is-valid]="isControlValid('medidaAlto')"
-                  formControlName="medidaAlto"
-                />
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'medidaAlto')">Es requerido</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('min', 'medidaAlto')">Debe tener mínimo 0</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('max', 'medidaAlto')">Debe tener máximo 99,999,999.99</div>
-            </div>
+            <label class="form-label">Medida de alto</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg " 
+              name="medidaAlto"
+              placeholder="Medida de alto" 
+              autocomplete="off" 
+              [class.is-invalid]="isControlInvalid('medidaAlto')"
+              [class.is-valid]="isControlValid('medidaAlto')"
+              formControlName="medidaAlto" />
+            <div class="text-muted">Por favor especifique en formato <b>### / ##</b></div> 
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'medidaAlto')">Es requerido</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'medidaAlto')">Debe tener al menos 1 caracter</div>
+            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'medidaAlto')">Debe tener máximo 50 caracteres</div>
           </div>
         </div>
+
+        <div class="form-group">
+          <label class="form-label">Suplidor</label>
+          <select 
+            class="form-control selectpicker"
+            data-size="7"
+            data-live-search="true"
+            name="suplidorId"  
+            formControlName="suplidorId"
+            [class.is-invalid]="isControlInvalid('suplidorId')">
+            <option [ngValue]="null">Seleccione Uno</option>
+            <ng-container *ngFor="let item of suplidor$ | async">
+              <option [value]="item.id">{{item.descripcion}}</option>
+            </ng-container>
+          </select>
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'suplidorId')">Es requerido</div>
+        </div>
+
+        <app-producto-unidad
+          [listaDetalle]="vm.listaProductoUnidad">
+        </app-producto-unidad>
 
         <ng-container *ngIf="+vm.id > 0">
           <div class="separator separator-dashed my-8"></div>

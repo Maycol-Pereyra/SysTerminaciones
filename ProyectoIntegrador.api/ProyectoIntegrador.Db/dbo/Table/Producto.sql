@@ -8,7 +8,7 @@
     [ColorId] INT NULL,
     [MedidaAncho] DECIMAL (10, 6) NOT NULL,
     [MedidaAlto] DECIMAL (10, 6) NOT NULL,
-    [TipoMedidaId] INT NOT NULL,
+    [TipoMedidaId] INT NOT NULL DEFAULT 1,
     [FechaModificacion] DATETIME NOT NULL DEFAULT GETDATE(),
     [FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
     [EstaActivo] BIT NOT NULL,

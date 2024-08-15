@@ -50,6 +50,7 @@ namespace ProyectoIntegrador.Api
             mc.AddProfile(new ProvinciaMapper());
             mc.AddProfile(new SectorMapper());
             mc.AddProfile(new SolicitudTomaMedidaMapper());
+            mc.AddProfile(new SolicitudTomaMedidaDetalleMapper());
             mc.AddProfile(new SuplidorMapper());
             mc.AddProfile(new TipoRegistroMapper());
             mc.AddProfile(new TipoProductoMapper());

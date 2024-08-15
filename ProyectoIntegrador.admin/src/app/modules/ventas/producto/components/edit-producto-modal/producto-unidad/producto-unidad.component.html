@@ -1,0 +1,37 @@
+<div class="mt-10">
+  <div class="row align-items-center">
+    <div class="col-md-8 margin-bottom-10-mobile">          
+      <h3 class="font-size-lg text-dark-75 font-weight-bold mb-10">
+        Unidades a las que aplica el producto
+      </h3>
+    </div>
+    <div class="col-md-4 text-right margin-bottom-10-mobile">
+      <button type="button" class="btn btn-primary" (click)="create()">Agregar</button>
+    </div>
+  </div>
+  <div class="table-responsive angular-bootstrap-table">
+    <table class="table table-head-custom table-vertical-center overflow-hidden  table-bordered">
+      <thead>
+        <th>Descripción</th>
+        <th class="text-right">Precio de compra</th>
+        <th class="text-right">Precio de venta</th>
+        <th class="text-right">Precio de venta + instalación</th>
+        <th class="text-right">Acciones</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of listaDetalle">
+          <td>{{ row.unidadDescripcion }}</td>
+          <td class="text-right">{{ row.precioCompra }}</td>
+          <td class="text-right">{{ row.precioVenta }}</td>
+          <td class="text-right">{{ row.precioVentaInstalacion }}</td>
+          <td class="text-right">            
+            <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3" (click)="edit(row)">
+              <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true" class="svg-icon svg-icon-md svg-icon-primary">
+              </span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

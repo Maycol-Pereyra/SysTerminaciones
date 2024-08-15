@@ -62,6 +62,26 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("bit")
                     .IsRequired();
 
+                etb.HasOne(e => e.Pais)
+                    .WithMany()
+                    .HasForeignKey(e => e.PaisId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                etb.HasOne(e => e.Provincia)
+                    .WithMany()
+                    .HasForeignKey(e => e.ProvinciaId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                etb.HasOne(e => e.Ciudad)
+                    .WithMany()
+                    .HasForeignKey(e => e.CiudadId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                etb.HasOne(e => e.Sector)
+                    .WithMany()
+                    .HasForeignKey(e => e.SectorId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
             });
 
             return modelBuilder;

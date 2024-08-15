@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DynamicAsideMenuConfig } from '../../configs/dynamic-aside-menu.config';
-import { FeatureFlagService } from '../../../_core/services/feature-flag.service';
 
 const emptyMenuConfig = {
   items: []
@@ -15,7 +14,7 @@ export class DynamicAsideMenuService {
 
   private menuConfigSubject = new BehaviorSubject<any>(emptyMenuConfig);
 
-  constructor(public featureFlagService: FeatureFlagService) {
+  constructor() {
     this.menuConfig$ = this.menuConfigSubject.asObservable();
     this.loadMenu();
   }

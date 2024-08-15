@@ -30,6 +30,6 @@ export class Producto {
         this.tipoMedidaId = vm.tipoMedidaId || null;
         this.estaActivo = vm.estaActivo || false;
 
-        this.listaProductoUnidad = !vm.listaProductoUnidad ? null : vm.listaProductoUnidad;
+        this.listaProductoUnidad = !vm.listaProductoUnidad ? [] : vm.listaProductoUnidad;
     }
 }

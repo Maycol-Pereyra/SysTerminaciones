@@ -19,9 +19,11 @@ namespace ProyectoIntegrador.Services
             _mapper = mapper;
         }
 
-        public async Task Registra(List<TomaMedidaVm> listaVm)
+        public async Task<List<int>> Registra(List<TomaMedidaVm> listaVm)
         {
-            if (listaVm.SinElementos()) { return; }
+            if (listaVm.SinElementos()) { return new(); }
+
+            var listaId = new List<int>();
 
             var lista = _mapper.Map<List<TomaMedida>>(listaVm);
 
@@ -35,15 +37,19 @@ namespace ProyectoIntegrador.Services
                     if (objUpdate != null)
                     {
                         _dbContext.TomaMedida.Update(objUpdate);
+                        await _dbContext.SaveChangesAsync();
                     }
                 }
                 else
                 {
                     _dbContext.TomaMedida.Add(item);
+                    await _dbContext.SaveChangesAsync();
                 }
+
+                listaId.Add(item.Id);
             }
 
-            await _dbContext.SaveChangesAsync();
+            return listaId;
         }
     }
 }

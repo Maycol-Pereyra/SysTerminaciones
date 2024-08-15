@@ -92,7 +92,7 @@ export class EditProductoModalComponent extends FormBase implements OnInit, OnDe
       suplidorId: [this.vm.suplidorId, Validators.compose([Validators.required])],
       tipoProductoId: [this.vm.tipoProductoId, Validators.compose([Validators.required])],
       colorId: [this.vm.colorId, Validators.compose([Validators.required])],
-      tipoMedidaId: [this.vm.tipoMedidaId, Validators.compose([Validators.required])],
+      tipoMedidaId: [this.vm.tipoMedidaId, Validators.compose([Validators.nullValidator])],
       medidaAncho: [this.vm.medidaAncho, Validators.compose([Validators.minLength(1), Validators.maxLength(50)])],
       medidaAlto: [this.vm.medidaAlto, Validators.compose([Validators.minLength(1), Validators.maxLength(50)])],
     });

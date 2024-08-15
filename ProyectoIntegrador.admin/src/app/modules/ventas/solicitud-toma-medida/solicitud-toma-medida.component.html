@@ -1,0 +1,108 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Solicitud de toma de medidas</h3>
+    </div>
+    <div class="card-toolbar">
+      <button type="button" class="btn btn-primary" (click)="create()">Nuevo</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <div class="form form-label-right">
+      <div class="form-group row">
+        <div class="col-lg-4" [formGroup]="searchGroup">
+          <label class="form-label">Búsqueda General</label>
+          <input type="text" class="form-control" name="searchText" placeholder="Búsqueda" value=""
+            formControlName="searchTerm" />
+        </div>
+    </div>
+    <!-- end: Filtration form -->
+
+    <!-- begin:Table -->
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table table-head-custom table-vertical-center overflow-hidden">
+        <thead>
+          <th>
+            Cliente
+            <app-sort-icon column="cliente" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th>
+            Dirección
+            <app-sort-icon column="direccion" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th>
+            Usuario asignado
+            <app-sort-icon column="usuarioAsignado" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th>
+            Vehículo asignado
+            <app-sort-icon column="vehiculoAsignado" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th>
+            Estado
+          </th>
+
+          <th class="pr-0 text-right" style="min-width: 150px">Acciones</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of service.items$ | async">
+            <td>{{ row.clienteNombre }}</td>
+            <td>{{ row.direccionDescripcion }}</td>
+            <td>{{ row.empleadoAsignadoNombre }}</td>
+            <td>{{ row.vehiculoAsignadoDescripcion }}</td>
+            <td>
+              <span *ngIf="row.estadoDescripcion === 'Pendiente Tomar Medidas'" class="label label-lg label-light-info label-inline">{{ row.estadoDescripcion }}</span>
+              <span *ngIf="row.estadoDescripcion === 'En Proceso'" class="label label-lg label-primary label-inline">{{ row.estadoDescripcion }}</span>
+              <span *ngIf="row.estadoDescripcion === 'Concluido'" class="label label-lg label-light-success label-inline">{{ row.estadoDescripcion }}</span>
+            </td>
+            <td class="mr-0 pr-0 text-right text-nowrap">
+              <div class="row justify-content-end mr-2">
+
+              <div ngbDropdown container="body" display="dynamic">                
+                <button class="btn btn-icon btn-light btn-hover-default btn-sm mx-1" ngbDropdownToggle>
+                  <span title="Opciones" [inlineSVG]="'./assets/media/svg/icons/Code/Settings4.svg'" cacheSVG="true" class="svg-icon svg-icon-md svg-icon-primary">
+                  </span>
+                </button>
+                <div ngbDropdownMenu>
+
+                  <button ngbDropdownItem (click)="info(row.id)">
+                    <span title="Ver información" [inlineSVG]="'./assets/media/svg/icons/General/Visible.svg'" cacheSVG="true"
+                      class="svg-icon svg-icon-md svg-icon-primary mr-2">
+                    </span>
+                    Ver información
+                  </button>
+
+                  <button ngbDropdownItem (click)="tomarMedidas(row.id)">
+                    <span title="Tomar medidas" [inlineSVG]="'./assets/media/svg/icons/Communication/clipboard-list.svg'" cacheSVG="true" aria-labelledby="Tomar medidas"
+                      class="svg-icon svg-icon-md svg-icon-primary mr-2" alt='' role='image'>
+                    </span>
+                    Tomar medidas
+                  </button>
+
+                  <button ngbDropdownItem (click)="edit(row.id)">
+                    <span title="Editar" [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true" aria-labelledby="Editar"
+                      class="svg-icon svg-icon-md svg-icon-primary mr-2" alt='' role='image'>
+                    </span>
+                    Editar la solicitud
+                  </button>
+
+                </div>
+              </div>
+
+              </div>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- end: Table -->
+    <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="paginator" [isLoading]="isLoading" (paginate)="paginate($event)">
+    </app-paginator>
+  </div>
+</div>

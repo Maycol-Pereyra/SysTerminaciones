@@ -9,5 +9,6 @@
         public decimal PrecioVentaInstalacion { get; set; }
 
         public virtual Producto Producto { get; set; }
+        public virtual Unidad Unidad { get; set; }
     }
 }

@@ -21,11 +21,6 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("int")
                     .IsRequired();
 
-                etb.HasOne(e => e.SolicitudTomaMedida)
-                    .WithMany()
-                    .HasForeignKey(e => e.SolicitudTomaMedidaId)
-                    .OnDelete(DeleteBehavior.Restrict);
-
                 etb.HasOne(e => e.TomaMedida)
                     .WithMany()
                     .HasForeignKey(e => e.TomaMedidaId)

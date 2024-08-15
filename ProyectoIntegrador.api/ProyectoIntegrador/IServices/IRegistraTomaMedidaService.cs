@@ -4,6 +4,6 @@ namespace ProyectoIntegrador.IServices
 {
     public interface IRegistraTomaMedidaService
     {
-        Task Registra(List<TomaMedidaVm> listaDetalle);
+        Task<List<int>> Registra(List<TomaMedidaVm> listaDetalle);
     }
 }

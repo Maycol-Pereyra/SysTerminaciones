@@ -11,6 +11,22 @@ export const DynamicAsideMenuConfig = {
       translate: 'MENU.DASHBOARD',
       bullet: 'dot',
     },
+    { section: 'Compras', sectionFeature: 'Compras' },
+    {
+      title: 'Compras',
+      root: true,
+      bullet: 'dot',
+      page: '/compras',
+      icon: 'flaticon2-architecture-and-city',
+      svg: './assets/media/svg/icons/Design/Layers.svg',
+      feature: '',
+      submenu: [
+        {
+          title: 'Suplidor',
+          page: '/compras/suplidor',
+        },
+      ]
+    },
     { section: 'Ventas', sectionFeature: 'Ventas' },
     {
       title: 'Ventas',
@@ -24,6 +40,26 @@ export const DynamicAsideMenuConfig = {
         {
           title: 'Cliente',
           page: '/ventas/cliente',
+        },
+        {
+          title: 'Producto',
+          page: '/ventas/producto',
+        },
+        {
+          title: 'Categoria',
+          page: '/ventas/categoria',
+        },
+        {
+          title: 'Solicitud toma medida',
+          page: '/ventas/solicitud-toma-medida',
+        },
+        {
+          title: 'Cotización',
+          page: '/ventas/cotizacion',
+        },
+        {
+          title: 'Factura',
+          page: '/ventas/factura',
         },
       ]
     },

@@ -33,9 +33,9 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("decimal(18, 2)")
                     .IsRequired();
 
-                etb.HasOne(e => e.Producto)
+                etb.HasOne(e => e.Unidad)
                     .WithMany()
-                    .HasForeignKey(e => e.ProductoId)
+                    .HasForeignKey(e => e.UnidadId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
 

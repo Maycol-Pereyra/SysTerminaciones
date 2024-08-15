@@ -69,7 +69,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   submit() {
     this.hasError = false;
-
     const loginSubscr = this.authenticationService
       .login(this.f.login.value, this.f.password.value)
       .pipe(first())

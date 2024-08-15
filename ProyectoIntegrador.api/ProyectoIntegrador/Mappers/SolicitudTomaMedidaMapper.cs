@@ -53,28 +53,28 @@ namespace ProyectoIntegrador.Mappers
                         : "")
                 )
                 .ForMember(
-                    des => des.PaisId,
+                    des => des.PaisDescripcion,
                     opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.PaisId
-                        : 0)
+                        ? ori.Direccion.Descripcion
+                        : "")
                 )
                 .ForMember(
-                    des => des.ProvinciaId,
+                    des => des.ProvinciaDescripcion,
                     opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.ProvinciaId
-                        : 0)
+                        ? ori.Direccion.Descripcion
+                        : "")
                 )
                 .ForMember(
-                    des => des.CiudadId,
+                    des => des.CiudadDescripcion,
                     opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.CiudadId
-                        : 0)
+                        ? ori.Direccion.Descripcion
+                        : "")
                 )
                 .ForMember(
-                    des => des.SectorId,
+                    des => des.SectorDescripcion,
                     opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.SectorId
-                        : 0)
+                        ? ori.Direccion.Descripcion
+                        : "")
                 );
 
 
@@ -115,7 +115,7 @@ namespace ProyectoIntegrador.Mappers
                 .ForMember(
                     des => des.DireccionDescripcion,
                     opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? $"{ori.Direccion.Calle}, {ori.Direccion.Casa}"
+                        ? $"{ori.Direccion.Descripcion} | {ori.Direccion.Calle} | {ori.Direccion.Casa}"
                         : "")
                 );
 

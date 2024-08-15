@@ -8,7 +8,6 @@ import { NgbTimeStringAdapter } from '../../../../../_metronic/core/utils/time-s
 import { ConfiguracionGeneral } from '../../shared/configuracion-general.model';
 import { ConfiguracionGeneralService } from '../../shared/configuracion-general.service';
 import { regexCorreo } from 'src/app/_core/const/regexp.const';
-import { FeatureFlagService } from 'src/app/_core/services/feature-flag.service';
 import { ItemSelect } from 'src/app/_core/item-select/item-select.model';
 
 @Component({
@@ -35,8 +34,7 @@ export class EditConfiguracionGeneralModalComponent extends FormBase implements 
     private service: ConfiguracionGeneralService,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
-    public modal: NgbActiveModal,
-    public featureFlagService: FeatureFlagService,
+    public modal: NgbActiveModal
   ) {
     super();
   }

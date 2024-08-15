@@ -15,13 +15,36 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { EditClienteModalComponent } from './cliente/components/edit-cliente-modal/edit-cliente-modal.component';
 import { GeneralesModule } from '../generales/generales.module';
 import { VentasComponent } from './ventas.component';
+import { ProductoComponent } from './producto/producto.component';
+import { EditProductoModalComponent } from './producto/components/edit-producto-modal/edit-producto-modal.component';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { EditProductoUnidadComponent } from './producto/components/edit-producto-modal/producto-unidad/edit/edit-producto-unidad-modal.component';
+import { ProductoUnidadComponent } from './producto/components/edit-producto-modal/producto-unidad/producto-unidad.component';
+import { SolicitudTomaMedidaComponent } from './solicitud-toma-medida/solicitud-toma-medida.component';
+import { EditSolicitudTomaMedidaModalComponent } from './solicitud-toma-medida/components/edit-solicitud-toma-medida-modal/edit-solicitud-toma-medida-modal.component';
+import { InfoSolicitudTomaMedidaModalComponent } from './solicitud-toma-medida/components/info-solicitud-toma-medida-modal/info-solicitud-toma-medida-modal.component';
+import { TomaMedidaSolicitudTomaMedidaModalComponent } from './solicitud-toma-medida/components/toma-medida-solicitud-toma-medida-modal/toma-medida-solicitud-toma-medida-modal.component';
 
 
 @NgModule({
   declarations: [
   VentasComponent,
+
+  CategoriaComponent,
+
   ClienteComponent,
-  EditClienteModalComponent
+  EditClienteModalComponent,
+
+  ProductoComponent,
+  EditProductoModalComponent,
+
+  ProductoUnidadComponent,
+  EditProductoUnidadComponent,
+
+  SolicitudTomaMedidaComponent,
+  EditSolicitudTomaMedidaModalComponent,
+  InfoSolicitudTomaMedidaModalComponent,
+  TomaMedidaSolicitudTomaMedidaModalComponent
   ],
   imports: [
     CommonModule,

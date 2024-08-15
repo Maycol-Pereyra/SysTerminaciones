@@ -74,6 +74,7 @@ namespace ProyectoIntegrador.Controllers
             {
                 var objNew = _mapper.Map<Suplidor>(vm);
                 objNew.FechaCreacion = DateTime.Now;
+                objNew.FechaModificacion = DateTime.Now;
                 objNew.EstaActivo = true;
 
                 objNew.Entidad = await _dbContext.Entidad
@@ -112,6 +113,8 @@ namespace ProyectoIntegrador.Controllers
 
             MapEntidadDireccion(vm, objUpdate);
             MapEntidadTelefono(vm, objUpdate);
+
+            objUpdate.FechaModificacion = DateTime.Now;
 
             _dbContext.Suplidor.Update(objUpdate);
             await _dbContext.SaveChangesAsync();

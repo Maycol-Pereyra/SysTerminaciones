@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { VentasComponent } from './ventas.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { AppAuthGuard } from 'src/app/_core/guards/app-auth.guard';
+import { ProductoComponent } from './producto/producto.component';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { SolicitudTomaMedidaComponent } from './solicitud-toma-medida/solicitud-toma-medida.component';
 
 const routes: Routes = [
   {
@@ -14,6 +17,30 @@ const routes: Routes = [
         component: ClienteComponent,
         data: {
           acceso: 'ventas.cliente.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'producto',
+        component: ProductoComponent,
+        data: {
+          acceso: 'ventas.producto.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'categoria',
+        component: CategoriaComponent,
+        data: {
+          acceso: 'ventas.categoria.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'solicitud-toma-medida',
+        component: SolicitudTomaMedidaComponent,
+        data: {
+          acceso: 'ventas.solicitud-toma-medida.acceder'
         },
         canActivate: [AppAuthGuard]
       },

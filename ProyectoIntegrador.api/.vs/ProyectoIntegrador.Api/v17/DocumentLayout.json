@@ -3,40 +3,44 @@
   "WorkspaceRootPath": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\services\\existenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\services\\existenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\controllers\\solicitudtomamedidacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\controllers\\solicitudtomamedidacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\services\\registratomamedidaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\services\\registratomamedidaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\controllers\\empleadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\controllers\\empleadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\modelconfig\\solicitudtomamedidadetallemodelconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\modelconfig\\solicitudtomamedidadetallemodelconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\mappers\\entidadmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\mappers\\entidadmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\serviceextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\serviceextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\mappers\\solicitudtomamedidadetalllemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\mappers\\solicitudtomamedidadetalllemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\controllers\\suplidorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\controllers\\suplidorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|solutionrelative:ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\modelconfig\\clientemodelconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\modelconfig\\clientemodelconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\mappers\\solicitudtomamedidamapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\mappers\\solicitudtomamedidamapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
       "RelativeMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|solutionrelative:ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\controllers\\facturacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\controllers\\facturacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\mappers\\entidadmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\mappers\\entidadmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
@@ -45,6 +49,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame",
       "RelativeMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|solutionrelative:ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
+      "RelativeMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|solutionrelative:ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,126 +62,139 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 9,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ExistenciaService.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Services\\ExistenciaService.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Services\\ExistenciaService.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Services\\ExistenciaService.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Services\\ExistenciaService.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAwwBwAAABOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-12T02:47:45.491Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UsuarioController.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\UsuarioController.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Controllers\\UsuarioController.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\UsuarioController.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Controllers\\UsuarioController.cs",
-              "ViewState": "AQIAABEBAAAAAAAAAAAuwDwBAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-12T02:36:19.981Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EntidadMapper.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\EntidadMapper.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Mappers\\EntidadMapper.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\EntidadMapper.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Mappers\\EntidadMapper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-12T02:29:43.367Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EmpleadoController.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\EmpleadoController.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Controllers\\EmpleadoController.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\EmpleadoController.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Controllers\\EmpleadoController.cs",
-              "ViewState": "AQIAAEEAAAAAAAAAAAAIwEoAAAA3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-12T02:09:49.708Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ClienteController.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\ClienteController.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Controllers\\ClienteController.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\ClienteController.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Controllers\\ClienteController.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAAiwEYAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-12T01:26:06.978Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Cliente.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Models\\Cliente.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Models\\Cliente.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Models\\Cliente.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Models\\Cliente.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-12T01:56:40.497Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "ClienteModelConfig.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\ModelConfig\\ClienteModelConfig.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\ModelConfig\\ClienteModelConfig.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\ModelConfig\\ClienteModelConfig.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\ModelConfig\\ClienteModelConfig.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAAACcAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-12T01:56:03.141Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SuplidorController.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\SuplidorController.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Controllers\\SuplidorController.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\SuplidorController.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Controllers\\SuplidorController.cs",
-              "ViewState": "AQIAACUAAAAAAAAAAAAewEgAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-12T01:27:22.529Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
               "Title": "RegistraAcceso.sql ",
               "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql",
               "RelativeDocumentMoniker": "ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql",
               "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql",
               "RelativeToolTip": "ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraAcceso.sql",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-08-12T01:17:14.63Z",
+              "WhenOpened": "2024-08-13T02:28:29.079Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RegistraTomaMedidaService.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Services\\RegistraTomaMedidaService.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\Services\\RegistraTomaMedidaService.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Services\\RegistraTomaMedidaService.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\Services\\RegistraTomaMedidaService.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAcwBcAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-15T04:50:26.621Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ServiceExtension.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\ServiceExtension.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\ServiceExtension.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\ServiceExtension.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\ServiceExtension.cs",
+              "ViewState": "AQIAACUAAAAAAAAAAAAgwDQAAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-15T04:47:29.353Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SolicitudTomaMedidaDetallleMapper.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaDetallleMapper.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaDetallleMapper.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaDetallleMapper.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaDetallleMapper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-15T04:46:56.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SolicitudTomaMedidaMapper.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaMapper.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaMapper.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaMapper.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaMapper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-14T01:44:57.134Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SolicitudTomaMedidaDetalleModelConfig.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\ModelConfig\\SolicitudTomaMedidaDetalleModelConfig.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\ModelConfig\\SolicitudTomaMedidaDetalleModelConfig.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\ModelConfig\\SolicitudTomaMedidaDetalleModelConfig.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\ModelConfig\\SolicitudTomaMedidaDetalleModelConfig.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T22:42:11.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RegistraDatosBaseTablaRegistro.sql ",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql",
+              "RelativeDocumentMoniker": "ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql",
+              "RelativeToolTip": "ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-08-13T06:06:42.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FacturaController.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\FacturaController.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\Controllers\\FacturaController.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\FacturaController.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\Controllers\\FacturaController.cs",
+              "ViewState": "AQIAAIIAAAAAAAAAAAAqwJQAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T06:00:42.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SolicitudTomaMedidaController.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\SolicitudTomaMedidaController.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\Controllers\\SolicitudTomaMedidaController.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\SolicitudTomaMedidaController.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\Controllers\\SolicitudTomaMedidaController.cs",
+              "ViewState": "AQIAAIMAAAAAAAAAAAAmwJYAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T05:54:31.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EntidadMapper.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\EntidadMapper.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\Mappers\\EntidadMapper.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\EntidadMapper.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\Mappers\\EntidadMapper.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAYwCUAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T05:48:26.635Z",
               "EditorCaption": ""
             }
           ]

@@ -1,0 +1,84 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h3 class="card-span font-weight-bolder text-dark mb-0">
+      Solicitud de toma de medida
+    </h3>
+    
+    <span class="badge modal-title h4 ml-2"
+      [ngClass]="{
+        'bg-light-info text-info': vm.estadoDescripcion === 'Pendiente Tomar Medidas',
+        'bg-light-primary text-primary': vm.estadoDescripcion === 'En Proceso',
+        'bg-light-success text-success': vm.estadoDescripcion === 'Concluido'}">
+        <span>{{ vm.estadoDescripcion }}</span>
+    </span>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body" style="min-height: 404px;">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent fixed-top">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="vm">
+      <ng-container>
+        <h5>{{ vm.clienteNombre }}</h5>
+        <span class="form-text text-muted mb-5">Nombre del cliente</span>
+      </ng-container>
+
+      <div class="separator separator-dashed my-8"></div>
+
+      <h3 class="font-size-lg text-dark-75 font-weight-bold mb-10">
+        Datos de Asignación
+      </h3>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'Empleado', valor: vm.empleadoAsignadoNombre }"></ng-container>
+        </div>
+        
+        <div class="col-sm-6">
+          <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'Vehículo', valor: vm.vehiculoAsignadoDescripcion }"></ng-container>
+        </div>
+      </div>
+
+
+      <div class="separator separator-dashed my-8"></div>
+
+      <h3 class="font-size-lg text-dark-75 font-weight-bold mb-10">
+        Dirección
+      </h3>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'País', valor: vm.paisDescripcion }"></ng-container>
+          <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'Provincia', valor: vm.provinciaDescripcion }"></ng-container>
+          <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'Ciudad', valor: vm.ciudadDescripcion }"></ng-container>
+          <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'Sector', valor: vm.sectorDescripcion }"></ng-container>
+        </div>
+        
+        <div class="col-sm-6">
+          <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'Calle', valor: vm.calle }"></ng-container>
+          <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'Casa', valor: vm.casa }"></ng-container>          
+          <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'referencia', valor: vm.referencia }"></ng-container>          
+        </div>
+      </div>
+      
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancelar</button>
+  </div>
+</div>
+
+<ng-template
+  #detalle
+  let-titulo="titulo"
+  let-valor="valor">
+  <div class="row align-items-center mb-1">
+    <div class="font-weight-bold col-xl-3 text-nowrap" style="min-width: 150px;">{{titulo}}</div>
+    <div class="col">
+      <label *ngIf="!valor" class="adv-input-data text-muted">{{ 'Sin asignar' }}</label>
+      <label *ngIf="valor" class="adv-input-data">{{ valor }}</label>
+    </div>
+  </div>
+</ng-template>

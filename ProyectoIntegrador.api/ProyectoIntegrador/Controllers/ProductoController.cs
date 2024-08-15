@@ -86,6 +86,7 @@ namespace ProyectoIntegrador.Controllers
             {
                 var objNew = _mapper.Map<Producto>(vm);
                 objNew.FechaCreacion = DateTime.Now;
+                objNew.FechaModificacion = DateTime.Now;
                 objNew.EstaActivo = true;
 
                 MapProductoUnidad(vm, objNew);
@@ -115,6 +116,8 @@ namespace ProyectoIntegrador.Controllers
             MapProductoUnidad(vm, objUpdate);
 
             _mapper.Map(vm, objUpdate);
+
+            objUpdate.FechaModificacion = DateTime.Now;
 
             _dbContext.Producto.Update(objUpdate);
             await _dbContext.SaveChangesAsync();
@@ -182,7 +185,11 @@ namespace ProyectoIntegrador.Controllers
                 return Resultado.Invalido($"Debe de especificar el tipo de producto");
             }
 
-            var obj = await _dbContext.Producto.AsNoTracking().FirstOrDefaultAsync(o => o.Descripcion == vm.Descripcion);
+            var obj = await _dbContext.Producto
+                .Where(o => o.Id != vm.Id)
+                .Where(o => o.Descripcion == vm.Descripcion)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
 
             if (obj != null)
             {
@@ -217,12 +224,17 @@ namespace ProyectoIntegrador.Controllers
                 .Include(o => o.TipoProducto)
                 .Include(o => o.Color)
                 .Include(o => o.Suplidor)
-                .Include(o => o.ListaProductoUnidad)
                 .FirstOrDefaultAsync(o => o.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
+
+            obj.ListaProductoUnidad = await _dbContext.ProductoUnidad
+                .Include(o => o.Unidad)
+                .Where(o => o.ProductoId == obj.Id)
+                .AsNoTracking()
+                .ToListAsync();
 
             var vm = _mapper.Map<ProductoVm>(obj);
 
@@ -261,7 +273,7 @@ namespace ProyectoIntegrador.Controllers
             // agregar
             if (origen.ListaProductoUnidad?.Any() ?? false)
             {
-                foreach (var itemVm in origen.ListaProductoUnidad.Where(o => o.UnidadId <= 0))
+                foreach (var itemVm in origen.ListaProductoUnidad.Where(o => o.ProductoId <= 0))
                 {
                     var item = _mapper.Map<ProductoUnidad>(itemVm);
 
