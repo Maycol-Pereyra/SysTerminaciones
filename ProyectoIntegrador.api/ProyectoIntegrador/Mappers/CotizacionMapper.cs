@@ -35,6 +35,30 @@ namespace ProyectoIntegrador.Mappers
                         : "")
                 )
                 .ForMember(
+                    des => des.PaisDescripcion,
+                    opt => opt.MapFrom(ori => ori.Direccion != null
+                        ? ori.Direccion.Descripcion
+                        : "")
+                )
+                .ForMember(
+                    des => des.ProvinciaDescripcion,
+                    opt => opt.MapFrom(ori => ori.Direccion != null
+                        ? ori.Direccion.Descripcion
+                        : "")
+                )
+                .ForMember(
+                    des => des.CiudadDescripcion,
+                    opt => opt.MapFrom(ori => ori.Direccion != null
+                        ? ori.Direccion.Descripcion
+                        : "")
+                )
+                .ForMember(
+                    des => des.SectorDescripcion,
+                    opt => opt.MapFrom(ori => ori.Direccion != null
+                        ? ori.Direccion.Descripcion
+                        : "")
+                )
+                .ForMember(
                     des => des.PaisId,
                     opt => opt.MapFrom(ori => ori.Direccion != null
                         ? ori.Direccion.PaisId
@@ -57,6 +81,18 @@ namespace ProyectoIntegrador.Mappers
                     opt => opt.MapFrom(ori => ori.Direccion != null
                         ? ori.Direccion.SectorId
                         : 0)
+                )
+                .ForMember(
+                    des => des.EstadoDescripcion,
+                    opt => opt.MapFrom(ori => ori.Estado != null
+                        ? ori.Estado.Descripcion
+                        : "")
+                )
+                .ForMember(
+                    des => des.UsuarioCreacionNombre,
+                    opt => opt.MapFrom(ori => ori.UsuarioCreacion != null
+                        ? $"{ori.UsuarioCreacion.Entidad.Nombre} {ori.UsuarioCreacion.Entidad.Apellido}"
+                        : "")
                 );
 
             CreateMap<Cotizacion, CotizacionIndex>()
@@ -64,6 +100,12 @@ namespace ProyectoIntegrador.Mappers
                     des => des.ClienteNombre,
                     opt => opt.MapFrom(ori => ori.Cliente != null
                         ? $"{ori.Cliente.Entidad.Nombre} {ori.Cliente.Entidad.Apellido}"
+                        : "")
+                )
+                .ForMember(
+                    des => des.EstadoDescripcion,
+                    opt => opt.MapFrom(ori => ori.Estado != null
+                        ? ori.Estado.Descripcion
                         : "")
                 );
 

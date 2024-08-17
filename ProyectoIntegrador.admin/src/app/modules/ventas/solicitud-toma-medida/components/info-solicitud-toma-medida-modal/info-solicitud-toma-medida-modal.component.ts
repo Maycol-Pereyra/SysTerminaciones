@@ -6,6 +6,10 @@ import { FormBase } from '../../../../../_core/clase-base/form-base';
 import { ItemSelect } from 'src/app/_core/item-select/item-select.model';
 import { SolicitudTomaMedida } from '../../shared/solicitud-toma-medida.model';
 import { SolicitudTomaMedidaService } from '../../shared/solicitud-toma-medida.service';
+import { NumeroMixto } from 'src/app/_core/models/numero-mixto.model';
+import { ItemSelectService } from 'src/app/_core/item-select/item-select.service';
+import { EndPointSelect } from 'src/app/_core/const/app.const';
+import { AppConfig } from 'src/app/_core/services/app-config.service';
 
 @Component({
   selector: 'app-info-solicitud-toma-medida-modal',
@@ -16,13 +20,15 @@ export class InfoSolicitudTomaMedidaModalComponent extends FormBase implements O
 
   isLoading$;
   vm: SolicitudTomaMedida;
+  producto$;
 
-  public listaTipoMedida: ItemSelect[] = [];
+  public listaProducto: ItemSelect[] = [];
   private subscriptions: Subscription[] = [];
 
   constructor(
     private service: SolicitudTomaMedidaService,
-    public modal: NgbActiveModal
+    public modal: NgbActiveModal,
+    private itemSelectService: ItemSelectService
     ) {
     super();
   }
@@ -33,6 +39,9 @@ export class InfoSolicitudTomaMedidaModalComponent extends FormBase implements O
 
   ngOnInit(): void {
     this.isLoading$ = this.service.isLoading$;
+
+    this.producto$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.producto}`);
+    this.producto$.subscribe(data => this.listaProducto = data as ItemSelect[]);
 
     this.loadData();
   }
@@ -53,6 +62,18 @@ export class InfoSolicitudTomaMedidaModalComponent extends FormBase implements O
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sb => sb.unsubscribe());
+  }
+
+  public getProductoDescripcion(row: any): string {
+    const elemento = this.listaProducto.find(o => +o.id === +row.productoId)
+
+    return !elemento ? '' : elemento.descripcion;
+  }
+
+  public getNumeroMixto(medida: number): string {
+    const medidaString = new NumeroMixto(medida);
+
+    return medidaString.numeroString;
   }
 
   private getEmty(): SolicitudTomaMedida{

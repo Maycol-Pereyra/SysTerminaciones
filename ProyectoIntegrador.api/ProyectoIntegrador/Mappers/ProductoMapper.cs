@@ -23,11 +23,37 @@ namespace ProyectoIntegrador.Mappers
                         ? $"{ori.TipoProducto.Descripcion}"
                         : "")
                 );
-            CreateMap<Producto, ItemSelect>();
+            CreateMap<Producto, ItemSelect>()
+                .ForMember(
+                    des => des.Descripcion,
+                    opt => opt.MapFrom(ori => $"{ori.Descripcion} | {ori.Color.Descripcion}")
+                )
+                .ForMember(
+                    des => des.Objeto,
+                    opt => opt.MapFrom(ori => ori)
+                );
+
+
             CreateMap<ProductoVm, Producto>()
                 .ForMember(
                     des => des.ListaProductoUnidad,
                     opt => opt.Ignore()
+                );
+
+            CreateMap<ProductoUnidad, ItemSelect>()
+                .ForMember(
+                    des => des.Id,
+                    opt => opt.MapFrom(ori => ori.UnidadId)
+                )
+                .ForMember(
+                    des => des.Descripcion,
+                    opt => opt.MapFrom(ori => ori.Unidad != null
+                        ? $"{ori.Unidad.Descripcion}"
+                        : "")
+                )
+                .ForMember(
+                    des => des.Objeto,
+                    opt => opt.MapFrom(ori => ori)
                 );
 
             CreateMap<ProductoUnidad, ProductoUnidadVm>()

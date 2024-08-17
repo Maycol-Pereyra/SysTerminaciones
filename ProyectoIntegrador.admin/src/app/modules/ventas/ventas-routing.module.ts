@@ -6,6 +6,7 @@ import { AppAuthGuard } from 'src/app/_core/guards/app-auth.guard';
 import { ProductoComponent } from './producto/producto.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { SolicitudTomaMedidaComponent } from './solicitud-toma-medida/solicitud-toma-medida.component';
+import { CotizacionComponent } from './cotizacion/cotizacion.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,14 @@ const routes: Routes = [
         component: SolicitudTomaMedidaComponent,
         data: {
           acceso: 'ventas.solicitud-toma-medida.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'cotizacion',
+        component: CotizacionComponent,
+        data: {
+          acceso: 'ventas.cotizacion.acceder'
         },
         canActivate: [AppAuthGuard]
       },

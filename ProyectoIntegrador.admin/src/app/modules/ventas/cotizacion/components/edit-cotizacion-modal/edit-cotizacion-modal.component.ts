@@ -1,0 +1,429 @@
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject, of, Subscription } from 'rxjs';
+import { catchError, first } from 'rxjs/operators';
+import { FormBase } from '../../../../../_core/clase-base/form-base';
+import { AccesosService } from 'src/app/_core/services/acceso.service';
+import { ItemSelect } from 'src/app/_core/item-select/item-select.model';
+import { Cotizacion } from '../../shared/cotizacion.model';
+import { CotizacionService } from '../../shared/cotizacion.service';
+import { ItemSelectService } from 'src/app/_core/item-select/item-select.service';
+import { AppConfig } from 'src/app/_core/services/app-config.service';
+import { EndPointSelect } from 'src/app/_core/const/app.const';
+import { ItemSelectFilter } from 'src/app/_core/item-select/item-select-filter';
+import { NumeroMixto } from 'src/app/_core/models/numero-mixto.model';
+import { CotizacionDetalle } from '../../shared/cotizacion-detalle.model';
+
+@Component({
+  selector: 'app-edit-cotizacion-modal',
+  templateUrl: './edit-cotizacion-modal.component.html',
+})
+export class EditCotizacionModalComponent extends FormBase implements OnInit, OnDestroy {
+  @Input() id: number;
+
+  public detalleGroup: FormGroup;
+  
+  isLoading$;
+  vm: Cotizacion;
+  esParaEditar = false;
+  index: number;
+
+  cliente$;
+  producto$;
+  estado$;
+  unidad$  = new BehaviorSubject<ItemSelect[]>([]);
+  direccion$ = new BehaviorSubject<ItemSelect[]>([]);
+  telefono$ = new BehaviorSubject<ItemSelect[]>([]);
+
+  public listaProducto: ItemSelect[] = [];
+  public listaUnidad: ItemSelect[] = [];
+  public listaEstado: ItemSelect[] = [];
+  public listaDetalle: CotizacionDetalle[] = [];
+  private subscriptions: Subscription[] = [];
+
+  constructor(
+    private service: CotizacionService,
+    private fb: FormBuilder,
+    private cd: ChangeDetectorRef,
+    private accesosService: AccesosService,
+    public modal: NgbActiveModal,
+    private itemSelectService: ItemSelectService
+    ) {
+    super();
+  }
+
+  get f() {
+    return this.formGroup.controls;
+  }
+
+  get productoSeleccionado() {
+    const productoId = this.detalleGroup.value.productoId;
+
+    const elemento = this.listaProducto.find(o => +o.id === +productoId)
+
+    return !elemento ? null : elemento;
+  }
+
+  get tipoProductoSeleccionado() {
+    return !this.productoSeleccionado ? null : this.productoSeleccionado.objeto.tipoProducto;
+  }
+
+  get productoDescripcion() {
+    const productoId = this.detalleGroup.value.productoId;
+
+    const elemento = this.listaProducto.find(o => +o.id === +productoId)
+
+    return !elemento ? '' : elemento.descripcion;
+  }
+
+  get unidadDescripcion() {
+    const unidadId = this.detalleGroup.value.unidadId;
+
+    const elemento = this.listaUnidad.find(o => +o.id === +unidadId)
+
+    return !elemento ? '' : elemento.descripcion;
+  }
+
+  ngOnInit(): void {
+    this.isLoading$ = this.service.isLoading$;
+
+    this.cliente$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.cliente}`);
+
+    this.producto$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.producto}`);
+    this.producto$.subscribe(data => this.listaProducto = data as ItemSelect[])
+
+    const filtroEstado = ItemSelectService.defaultFilter();
+    filtroEstado.filter.push({ criterio: 'tipoRegistroId', valor: '26'});
+    this.estado$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.estadoSolicitudTomaMedida}`, filtroEstado);
+    this.estado$.subscribe(data => this.listaEstado = data as ItemSelect[]);
+
+    this.loadData();
+  }
+
+  loadData() {
+    if (!this.id || this.id === 0) {
+      this.vm = this.getEmty();
+      this.loadForm();
+    } else {
+      const sb = this.service.getItemById(this.id)
+      .pipe(
+        first(),
+        catchError((errorMessage) => {
+          this.modal.dismiss(errorMessage);
+          return of(this.getEmty());
+        })
+      ).subscribe(item => {
+        this.vm = item as Cotizacion;
+        this.loadForm();
+      });
+      this.subscriptions.push(sb);
+    }
+  }
+
+  loadForm() {
+    this.formGroup = this.fb.group({
+      clienteId: [this.vm.clienteId, Validators.compose([Validators.required])],
+      telefonoId: [this.vm.telefonoId, Validators.compose([Validators.required])],
+      direccionId: [this.vm.direccionId, Validators.compose([Validators.nullValidator])],
+      nota: [this.vm.nota, Validators.compose([Validators.nullValidator, Validators.minLength(0), Validators.maxLength(250)])],
+    });
+
+    this.detalleGroup = this.fb.group({
+      productoId: [null, Validators.compose([Validators.required])],
+      unidadProductoId: [null, Validators.compose([Validators.required])],
+      medidaAncho: ['', Validators.compose([Validators.nullValidator])],
+      medidaAlto: ['', Validators.compose([Validators.nullValidator])],
+      cantidad: [1, Validators.compose([Validators.required, Validators.min(1), Validators.max(99999999)])],
+      esMedidaAproximada: [false, Validators.compose([Validators.nullValidator])]
+    });
+
+    for (const item of this.vm.listaDetalle) {
+      const producto = this.listaProducto.find(o => +o.id === +item.productoId)
+      const productoDescripcion = !producto ? '' : producto.descripcion;
+
+      const unidad = this.listaUnidad.find(o => +o.id === +item.unidadProductoId)
+      const unidadDescripcion = !unidad ? '' : unidad.descripcion;
+
+      const medidaAnchoMixto = new NumeroMixto(item.medidaAncho);
+      const medidaAltoMixto = new NumeroMixto(item.medidaAlto);
+
+      this.listaDetalle.push(new CotizacionDetalle({
+        cotizacionId: item.cotizacionId,
+        productoId: item.productoId,
+        productoDescripcion: productoDescripcion,
+        unidadProductoId: item.unidadProductoId,
+        unidadProductoDescripcion: unidadDescripcion,
+        medidaAncho: item.medidaAncho,
+        medidaAnchoString: medidaAnchoMixto.numeroString,
+        medidaAlto: item.medidaAlto,
+        medidaAltoString: medidaAltoMixto.numeroString,
+        tipoMedidaId: item.tipoMedidaId,
+        cantidad: item.cantidad,
+        precioUnitario: item.precioUnitario,
+        impuesto: item.impuesto,
+        descuento: item.descuento
+      }));
+    }
+
+    this.formGroup.get('clienteId').valueChanges.subscribe(val => {
+      this.cambioCliente(val);
+      this.cd.detectChanges();
+    });
+
+    this.subscriptions.push(
+      this.detalleGroup.controls.productoId.valueChanges.subscribe(val => {
+        this.cambioProducto(val);
+        this.cd.detectChanges();
+      })
+    );
+  }
+
+  save(esSaveDefinitivo: boolean = false) {
+    this.prepareVm(esSaveDefinitivo);
+    this.edit();
+  }
+
+  edit() {
+    const sbUpdate = this.service.update(this.vm)
+    .subscribe((res: any) => {
+      if (res && res.id) {
+        this.mensajeOk('El registro fue realizado correctamente.');
+        this.modal.close();
+      } else {
+        this.mensajeValidacion(res.msg);
+      }
+    });
+    this.subscriptions.push(sbUpdate);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sb => sb.unsubscribe());
+  }
+
+  public esInvalido(controlName: string): boolean {
+    const control = this.detalleGroup.controls[controlName];
+    return control.invalid && (control.dirty || control.touched);
+  }
+
+  public tieneError(validation: string, controlName: string) {
+    const control = this.detalleGroup.controls[controlName];
+    return control.hasError(validation) && (control.dirty || control.touched);
+  }
+
+  editar(): void {
+    const elemento = this.listaDetalle[this.index];
+    
+    const formData = this.detalleGroup.value;
+
+    elemento.productoId = formData.productoId;
+    elemento.medidaAnchoString = formData.medidaAncho;
+    elemento.medidaAltoString = formData.medidaAlto;
+    elemento.cantidad = formData.cantidad;
+
+    this.esParaEditar = false;
+
+    this.limpiarCampos();
+
+    this.cd.detectChanges();
+  }
+
+  public agregar(): void {
+    if (!this.validar()) { return; }
+    debugger;
+
+    const formData = this.detalleGroup.value;
+    const productoId = formData.productoId;
+    const medidaAncho = formData.medidaAncho;
+    const medidaAlto = formData.medidaAlto;
+    const cantidad = formData.cantidad;
+
+    const elemento = this.listaDetalle.find(o =>
+      +o.productoId === +productoId &&
+      o.medidaAncho === medidaAncho &&
+      o.medidaAlto === medidaAlto
+    );
+
+    if (!elemento) {
+      const nuevoElemento = new CotizacionDetalle({
+        productoId,
+        medidaAnchoString: medidaAncho,
+        medidaAltoString: medidaAlto,
+        cantidad,
+        productoDescripcion: this.productoDescripcion,
+        unidadDescripcion: this.unidadDescripcion
+      });
+
+      this.listaDetalle.push(nuevoElemento);
+
+      this.limpiarCampos();
+
+      this.cd.detectChanges();
+
+      return;
+    }
+
+    elemento.cantidad += cantidad;
+    
+    this.limpiarCampos();
+    
+    this.cd.detectChanges();
+  }
+
+  public getProductoDescripcion(row: any): string {
+    const elemento = this.listaProducto.find(o => +o.id === +row.productoId)
+
+    return !elemento ? '' : elemento.descripcion;
+  }
+
+  public getUnidadDescripcion(row: any): string {
+    const elemento = this.listaUnidad.find(o => +o.id === +row.unidadId)
+
+    return !elemento ? '' : elemento.descripcion;
+  }
+
+  public getNumeroMixto(medida: number): string {
+    const medidaString = new NumeroMixto(medida);
+
+    return medidaString.numeroString;
+  }
+
+  private limpiarCampos(): void {
+    this.detalleGroup.controls.medidaAncho.setValue('');
+    this.detalleGroup.controls.medidaAlto.setValue('');
+    this.detalleGroup.controls.cantidad.setValue(1);
+  }
+
+  private validar(): boolean {
+    const formData = this.detalleGroup.value;
+    const productoId = formData.productoId;
+    const medidaAncho = formData.medidaAncho;
+    const medidaAlto = formData.medidaAlto;
+    const cantidad = formData.cantidad;
+
+    if (+productoId === 0) {
+      this.mensajeValidacion('Debe especificar el producto');
+      return false;
+    }
+
+    if (!!this.tipoProductoSeleccionado && this.tipoProductoSeleccionado.usaMedidasFactura) {
+      if (medidaAncho === '') {
+        this.mensajeValidacion('Debe especificar la medida de ancho');
+        return false;
+      }
+  
+      if (medidaAlto === '') {
+        this.mensajeValidacion('Debe especificar le medida de alto');
+        return false;
+      }
+    }
+
+    if (+cantidad === 0) {
+      this.mensajeValidacion('Debe especificar la cantidad');
+      return false;
+    }
+
+    return true;
+  }
+
+  private prepareVm(esSaveDefinitivo: boolean) {
+    const formData = this.formGroup.value;
+    this.vm.clienteId = formData.clienteId;
+    this.vm.telefonoId = formData.telefonoId;
+    this.vm.direccionId = formData.direccionId;
+    this.vm.nota = formData.nota;
+
+    if (this.listaDetalle.length <= 0) {
+      this.mensajeValidacion('Debe de insertar al menos una medida');
+      return;
+    }
+    
+    const estadoId = esSaveDefinitivo
+      ? this.listaEstado.find(o => o.descripcion === 'Entregada al Cliente').id
+      : this.listaEstado.find(o => o.descripcion === 'En Proceso').id;
+
+    this.vm.estadoId = +estadoId;
+
+    for (const item of this.listaDetalle) {
+      const medidaAnchoMixto = new NumeroMixto(item.medidaAnchoString);
+      const medidaAltoMixto = new NumeroMixto(item.medidaAltoString);
+
+      const elemento = new CotizacionDetalle({
+        cotizacionId: item.cotizacionId,
+        productoId: item.productoId,
+        productoDescripcion: item.productoDescripcion,
+        unidadProductoId: item.unidadProductoId,
+        unidadProductoDescripcion: item.unidadProductoDescripcion,
+        medidaAncho: item.medidaAncho,
+        medidaAnchoString: medidaAnchoMixto.numeroString,
+        medidaAlto: item.medidaAlto,
+        medidaAltoString: medidaAltoMixto.numeroString,
+        tipoMedidaId: item.tipoMedidaId,
+        cantidad: item.cantidad,
+        precioUnitario: item.precioUnitario,
+        impuesto: item.impuesto,
+        descuento: item.descuento
+      });
+
+      this.vm.listaDetalle.push(elemento);
+    }
+  }
+
+  private getEmty(): Cotizacion{
+    return new Cotizacion(null);
+  }
+
+  private cambioCliente(val: any) {
+    const filter = ItemSelectService.defaultFilter();
+    filter.filter.push({ criterio: 'clienteId', valor: `${val}` } as ItemSelectFilter);
+
+    const direccionId = this.formGroup.get('direccionId');
+    direccionId.setValue(null);
+
+    this.direccion$.next([]);
+
+    const sb = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.direccion}`, filter)
+      .subscribe(data => {
+        this.direccion$.next(data);
+      });
+    this.subscriptions.push(sb);
+
+    const telefonoId = this.formGroup.get('telefonoId');
+    telefonoId.setValue(null);
+
+    this.telefono$.next([]);
+
+    const sb2 = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.telefono}`, filter)
+      .subscribe(data => {
+        this.telefono$.next(data);
+      });
+    this.subscriptions.push(sb2);
+  }
+
+  private cambioProducto(val: any): void {
+    const filter = ItemSelectService.defaultFilter();
+    filter.filter.push({ criterio: 'productoId', valor: `${val}` } as ItemSelectFilter);
+
+    const unidadProductoId = this.detalleGroup.get('unidadProductoId');
+    unidadProductoId.setValue(null);
+
+    this.unidad$.next([]);
+
+    const sb = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.unidadProducto}`, filter)
+      .subscribe(data => {
+        this.unidad$.next(data);
+        this.listaUnidad = data;
+      });
+    this.subscriptions.push(sb);
+
+
+    const medidaAncho = this.detalleGroup.get('medidaAncho');
+    medidaAncho.setValidators([Validators.required]);
+    medidaAncho.updateValueAndValidity();
+
+    const medidaAlto = this.detalleGroup.get('medidaAlto');
+    medidaAlto.setValidators([Validators.required]);
+    medidaAlto.updateValueAndValidity();
+  }
+
+}

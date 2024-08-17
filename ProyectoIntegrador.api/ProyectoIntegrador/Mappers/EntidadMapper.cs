@@ -28,7 +28,7 @@ namespace ProyectoIntegrador.Mappers
             CreateMap<EntidadDireccion, ItemSelect>()
                 .ForMember(
                     des => des.Descripcion,
-                    opt => opt.MapFrom(ori => $"{ori.Descripcion} | {ori.Calle} | {ori.Casa}")
+                    opt => opt.MapFrom(ori => $"{ori.Descripcion} | {ori.Sector.Descripcion} | {ori.Calle} | {ori.Casa}")
                 );
             CreateMap<EntidadDireccion, EntidadDireccionVm>();
 
@@ -39,6 +39,12 @@ namespace ProyectoIntegrador.Mappers
                     des => des.Descripcion,
                     opt => opt.MapFrom(ori => ori.Telefono)
                 );
+            CreateMap<EntidadTelefono, ItemSelect>()
+                .ForMember(
+                    des => des.Descripcion,
+                    opt => opt.MapFrom(ori => ori.Telefono)
+                );
+
             CreateMap<EntidadTelefono, EntidadTelefonoVm>();
             CreateMap<EntidadTelefonoVm, EntidadTelefono>();
         }

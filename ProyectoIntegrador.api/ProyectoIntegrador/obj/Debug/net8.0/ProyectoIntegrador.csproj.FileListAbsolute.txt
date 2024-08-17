@@ -524,7 +524,6 @@ C:\_Proyectos\SysTerminaciones\ProyectoIntegrador.api\ProyectoIntegrador\bin\Deb
 C:\_Proyectos\SysTerminaciones\ProyectoIntegrador.api\ProyectoIntegrador\bin\Debug\net8.0\System.Runtime.Caching.dll
 C:\_Proyectos\SysTerminaciones\ProyectoIntegrador.api\ProyectoIntegrador\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 C:\_Proyectos\SysTerminaciones\ProyectoIntegrador.api\ProyectoIntegrador\bin\Debug\net8.0\System.Security.Permissions.dll
-C:\_Proyectos\SysTerminaciones\ProyectoIntegrador.api\ProyectoIntegrador\bin\Debug\net8.0\System.Text.Json.dll
 C:\_Proyectos\SysTerminaciones\ProyectoIntegrador.api\ProyectoIntegrador\bin\Debug\net8.0\System.Windows.Extensions.dll
 C:\_Proyectos\SysTerminaciones\ProyectoIntegrador.api\ProyectoIntegrador\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
 C:\_Proyectos\SysTerminaciones\ProyectoIntegrador.api\ProyectoIntegrador\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll

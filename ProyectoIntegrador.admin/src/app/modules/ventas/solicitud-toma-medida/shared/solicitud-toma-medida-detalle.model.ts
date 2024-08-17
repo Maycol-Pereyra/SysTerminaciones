@@ -3,7 +3,8 @@ export class SolicitudTomaMedidaDetalle {
     public tomaMedidaId: number; 
     public productoId: number;
     public productoDescripcion: string;
-    public unidadProductoId: number; 
+    public unidadProductoId: number;
+    public unidadProductoDescripcion: string;
     public cantidad: number; 
     public medidaAncho: number; 
     public medidaAnchoString: string; 
@@ -20,6 +21,7 @@ export class SolicitudTomaMedidaDetalle {
         this.productoId = vm.productoId || 0;
         this.productoDescripcion = vm.productoDescripcion || '';
         this.unidadProductoId = vm.unidadProductoId || 0;
+        this.unidadProductoDescripcion = vm.unidadProductoDescripcion || '';
         this.cantidad = vm.cantidad || 0;
         this.medidaAncho = vm.medidaAncho || 0;
         this.medidaAnchoString = vm.medidaAnchoString || '';

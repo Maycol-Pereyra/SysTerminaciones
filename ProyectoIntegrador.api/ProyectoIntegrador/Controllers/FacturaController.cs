@@ -64,10 +64,12 @@ namespace ProyectoIntegrador.Controllers
                 return BadRequest("La cotización especificada no existe");
             }
 
-            if (cotizacion.EstaActivo == false)
-            {
-                return BadRequest("La cotización especificada no está en un estado válido para crear una factura");
-            }
+            //TODO: controlar esto
+
+            //if (cotizacion.EstaActivo == false)
+            //{
+            //    return BadRequest("La cotización especificada no está en un estado válido para crear una factura");
+            //}
 
             var cotizacionVm = _mapper.Map<SolicitudTomaMedidaVm>(cotizacion);
 

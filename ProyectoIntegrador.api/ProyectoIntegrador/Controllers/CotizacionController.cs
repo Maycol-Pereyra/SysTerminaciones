@@ -38,12 +38,13 @@ namespace ProyectoIntegrador.Controllers
         {
             var lista = _dbContext.Cotizacion
                 .Include(o => o.Cliente)
-                .Include(o => o.Direccion)
-                .Include(o => o.ListaDetalle)
+                .Include(o => o.Estado)
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
             lista = lista.OrderBy(o => o.Id);
             var pl = await lista.ToPagedList(parameter);
+            
+            await ComplementarDatosCliente(pl.Items);
 
             return Ok(pl.GetCopy(_mapper.Map<List<CotizacionIndex>>(pl.Items)));
         }
@@ -53,13 +54,14 @@ namespace ProyectoIntegrador.Controllers
         {
             var lista = _dbContext.Cotizacion
                 .Include(o => o.Cliente)
-                .Include(o => o.Direccion)
-                .Include(o => o.ListaDetalle)
+                .Include(o => o.Estado)
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
-            lista = lista.Where(o => o.EstaActivo);
+            //lista = lista.Where(o => o.EstaActivo); TODO: solo filtrar por aquellos en un estado pertienente
             lista = lista.OrderBy(o => o.Id);
             var pl = await lista.ToPagedList(parameter);
+
+            await ComplementarDatosCliente(pl.Items);
 
             return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
         }
@@ -109,7 +111,13 @@ namespace ProyectoIntegrador.Controllers
             {
                 var objNew = _mapper.Map<Cotizacion>(vm);
                 objNew.FechaCreacion = DateTime.Now;
-                objNew.EstaActivo = true;
+                
+                objNew.EstadoId = await _dbContext.Registro
+                    .Where(o => o.TipoRegistroId == 27)
+                    .Where(o => o.Descripcion == "En Proceso")
+                    .AsNoTracking()
+                    .Select(o => o.Id)
+                    .FirstOrDefaultAsync();
 
                 MapDetalle(vm, objNew);
 
@@ -199,6 +207,26 @@ namespace ProyectoIntegrador.Controllers
             var vm = _mapper.Map<CotizacionVm>(obj);
 
             return Ok(vm);
+        }
+
+        private async Task ComplementarDatosCliente(List<Cotizacion> lista)
+        {
+            if (lista.SinElementos())
+            {
+                return;
+            }
+
+            var listaEntidadId = lista.Select(o => o.Cliente.EntidadId).ToList();
+
+            var entidades = await _dbContext.Entidad
+                .Where(o => listaEntidadId.Contains(o.Id))
+                .AsNoTracking()
+                .ToListAsync();
+
+            foreach (var item in lista)
+            {
+                item.Cliente.Entidad = entidades.Where(o => o.Id == item.Cliente.EntidadId).FirstOrDefault() ?? new();
+            }
         }
 
         private void MapDetalle(CotizacionVm origen, Cotizacion destino)

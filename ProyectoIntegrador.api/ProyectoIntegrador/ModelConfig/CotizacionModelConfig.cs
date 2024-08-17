@@ -73,8 +73,8 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("datetime")
                     .IsRequired();
 
-                etb.Property(e => e.EstaActivo)
-                    .HasColumnType("bit")
+                etb.Property(e => e.EstadoId)
+                    .HasColumnType("int")
                     .IsRequired();
 
                 etb.HasOne(e => e.Cliente)
@@ -85,6 +85,16 @@ namespace ProyectoIntegrador.DataModelConfig
                 etb.HasOne(e => e.Direccion)
                     .WithMany()
                     .HasForeignKey(e => e.DireccionId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                etb.HasOne(e => e.Estado)
+                    .WithMany()
+                    .HasForeignKey(e => e.EstadoId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                etb.HasOne(e => e.UsuarioCreacion)
+                    .WithMany()
+                    .HasForeignKey(e => e.UsuarioCreacionId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 etb.HasMany(e => e.ListaDetalle)

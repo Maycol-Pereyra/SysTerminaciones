@@ -57,7 +57,7 @@
             <td>{{ row.vehiculoAsignadoDescripcion }}</td>
             <td>
               <span *ngIf="row.estadoDescripcion === 'Pendiente Tomar Medidas'" class="label label-lg label-light-info label-inline">{{ row.estadoDescripcion }}</span>
-              <span *ngIf="row.estadoDescripcion === 'En Proceso'" class="label label-lg label-primary label-inline">{{ row.estadoDescripcion }}</span>
+              <span *ngIf="row.estadoDescripcion === 'En Proceso'" class="label label-lg label-light-primary label-inline">{{ row.estadoDescripcion }}</span>
               <span *ngIf="row.estadoDescripcion === 'Concluido'" class="label label-lg label-light-success label-inline">{{ row.estadoDescripcion }}</span>
             </td>
             <td class="mr-0 pr-0 text-right text-nowrap">
@@ -77,8 +77,8 @@
                     Ver información
                   </button>
 
-                  <button ngbDropdownItem (click)="tomarMedidas(row.id)">
-                    <span title="Tomar medidas" [inlineSVG]="'./assets/media/svg/icons/Communication/clipboard-list.svg'" cacheSVG="true" aria-labelledby="Tomar medidas"
+                  <button ngbDropdownItem (click)="tomarMedidas(row)">
+                    <span title="Tomar medidas" [inlineSVG]="'./assets/media/svg/icons/Communication/Clipboard-list.svg'" cacheSVG="true" aria-labelledby="Tomar medidas"
                       class="svg-icon svg-icon-md svg-icon-primary mr-2" alt='' role='image'>
                     </span>
                     Tomar medidas

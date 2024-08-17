@@ -2,14 +2,13 @@ import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { FormBase } from 'src/app/_core/clase-base/form-base';
 import { EntidadDireccion } from '../../../../shared/entidad-direccion.model';
-import { ItemSelect } from 'src/app/_core/item-select/item-select.model';
 import { ItemSelectService } from 'src/app/_core/item-select/item-select.service';
 import { AppConfig } from 'src/app/_core/services/app-config.service';
 import { EndPointSelect } from 'src/app/_core/const/app.const';
 import { StringHelper } from 'src/app/_core/helpers/string.helper';
+import { ItemSelectFilter } from 'src/app/_core/item-select/item-select-filter';
 
 @Component({
   selector: 'app-edit-entidad-direccion-modal',
@@ -71,6 +70,27 @@ export class EditEntidadDireccionComponent extends FormBase implements OnInit, O
       ciudadId: [this.vm.ciudadId, Validators.compose([Validators.required])],
       sectorId: [this.vm.sectorId, Validators.compose([Validators.required])],
     });
+
+    this.subscriptions.push(
+      this.formGroup.controls.paisId.valueChanges.subscribe(val => {
+        this.cambioPais(val);
+        this.cdr.detectChanges();
+      })
+    );
+
+    this.subscriptions.push(
+      this.formGroup.controls.provinciaId.valueChanges.subscribe(val => {
+        this.cambioProvincia(val);
+        this.cdr.detectChanges();
+      })
+    );
+
+    this.subscriptions.push(
+      this.formGroup.controls.ciudadId.valueChanges.subscribe(val => {
+        this.cambioCiudad(val);
+        this.cdr.detectChanges();
+      })
+    );
   }
 
   save() {
@@ -138,14 +158,46 @@ export class EditEntidadDireccionComponent extends FormBase implements OnInit, O
 
     this.modal.close(this.vm);
   }
+  
+  private cambioPais(val: any): void {
+    const filter = ItemSelectService.defaultFilter();
+    filter.filter.push({ criterio: 'paisId', valor: `${val}` } as ItemSelectFilter);
 
+    const provinciaId = this.formGroup.get('provinciaId');
+    provinciaId.setValue(null);
 
+    this.provincia$.next([]);
 
-  private n(value: number): number {
-    if (!value || value === undefined || value === null) {
-      return 0;
-    }
+    const sb = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.provincia}`, filter)
+      .subscribe(data => this.provincia$.next(data));
+    this.subscriptions.push(sb);
+  }
 
-    return +value;
+  private cambioProvincia(val: any): void {
+    const filter = ItemSelectService.defaultFilter();
+    filter.filter.push({ criterio: 'provinciaId', valor: `${val}` } as ItemSelectFilter);
+
+    const ciudadId = this.formGroup.get('ciudadId');
+    ciudadId.setValue(null);
+
+    this.ciudad$.next([]);
+
+    const sb = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.ciudad}`, filter)
+      .subscribe(data => this.ciudad$.next(data));
+    this.subscriptions.push(sb);
+  }
+
+  private cambioCiudad(val: any): void {
+    const filter = ItemSelectService.defaultFilter();
+    filter.filter.push({ criterio: 'ciudadId', valor: `${val}` } as ItemSelectFilter);
+
+    const sectorId = this.formGroup.get('sectorId');
+    sectorId.setValue(null);
+
+    this.sector$.next([]);
+
+    const sb = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.sector}`, filter)
+      .subscribe(data => this.sector$.next(data));
+    this.subscriptions.push(sb);
   }
 }

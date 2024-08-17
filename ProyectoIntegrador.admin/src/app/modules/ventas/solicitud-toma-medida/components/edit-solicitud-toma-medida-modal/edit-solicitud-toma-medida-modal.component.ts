@@ -108,43 +108,6 @@ export class EditSolicitudTomaMedidaModalComponent extends FormBase implements O
     this.subscriptions.push(sbUpdate);
   }
 
-  activar(): void {
-    if (this.accesosService.puedeActivar('ventas.producto.activar')) {
-
-      this.confirmacion(`¿Está seguro de activar el producto?`, 'Confirmación', () => {
-        const sb = this.service.activar(this.vm.id)
-        .subscribe((res: any) => {
-          if (res && res.id) {
-            this.mensajeOk(`Se ha activado el producto`);
-            this.modal.close();
-          } else {
-            this.mensajeValidacion(res.msg);
-          }
-        });
-        this.subscriptions.push(sb);
-      });
-    }
-  }
-
-  inactivar(): void {
-    if (this.accesosService.puedeInactivar('ventas.producto.inactivar')) {
-
-      this.confirmacion(`¿Está seguro de inactivar el producto?`, 'Confirmación', () => {
-        const sb = this.service
-          .inactivar(this.vm.id)
-          .subscribe((res: any) => {
-            if (res && res.id) {
-              this.mensajeOk(`Se ha inactivado el producto`);
-              this.modal.close();
-            } else {
-              this.mensajeValidacion(res.msg);
-            }
-          });
-        this.subscriptions.push(sb);
-      });
-    }
-  }
-
   ngOnDestroy(): void {
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }

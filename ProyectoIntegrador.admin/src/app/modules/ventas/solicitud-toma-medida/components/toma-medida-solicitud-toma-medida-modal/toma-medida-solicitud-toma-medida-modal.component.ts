@@ -13,8 +13,9 @@ import { AppConfig } from 'src/app/_core/services/app-config.service';
 import { EndPointSelect } from 'src/app/_core/const/app.const';
 import { ItemSelectState } from 'src/app/_core/item-select/item-select-state';
 import { SolicitudTomaMedidaDetalle } from '../../shared/solicitud-toma-medida-detalle.model';
-import { NumeroMixto } from 'src/app/_core/models/numero-mixto.model';
 import { JsonHelper } from 'src/app/_core/helpers/json.helper';
+import { NumeroMixto } from 'src/app/_core/models/numero-mixto.model';
+import { ItemSelectFilter } from 'src/app/_core/item-select/item-select-filter';
 
 @Component({
   selector: 'app-toma-medida-solicitud-toma-medida-modal',
@@ -32,11 +33,13 @@ export class TomaMedidaSolicitudTomaMedidaModalComponent extends FormBase implem
   categoria$;
   producto$;
   estado$;
+  unidad$;
 
   filtro: ItemSelectState
 
   public listaDetalle: SolicitudTomaMedidaDetalle[] = [];
   public listaProductos: ItemSelect[] = [];
+  public listaUnidad: ItemSelect[] = [];
   public listaEstado: ItemSelect[] = [];
   private subscriptions: Subscription[] = [];
 
@@ -59,6 +62,14 @@ export class TomaMedidaSolicitudTomaMedidaModalComponent extends FormBase implem
     const productoId = this.formGroup.value.productoId;
 
     const elemento = this.listaProductos.find(o => +o.id === +productoId)
+
+    return !elemento ? '' : elemento.descripcion;
+  }
+
+  get unidadDescripcion() {
+    const unidadId = this.formGroup.value.unidadId;
+
+    const elemento = this.listaUnidad.find(o => +o.id === +unidadId)
 
     return !elemento ? '' : elemento.descripcion;
   }
@@ -97,6 +108,7 @@ export class TomaMedidaSolicitudTomaMedidaModalComponent extends FormBase implem
   loadForm() {
     this.formGroup = this.fb.group({
       productoId: [null, Validators.compose([Validators.required])],
+      unidadProductoId: [null, Validators.compose([Validators.required])],
       medidaAncho: ['', Validators.compose([Validators.nullValidator])],
       medidaAlto: ['', Validators.compose([Validators.nullValidator])],
       esMedidaAproximada: [false, Validators.compose([Validators.nullValidator])],
@@ -104,20 +116,40 @@ export class TomaMedidaSolicitudTomaMedidaModalComponent extends FormBase implem
       nota: ['', Validators.compose([Validators.nullValidator, Validators.minLength(1), Validators.maxLength(250)])],
     });
 
-    this.listaDetalle = JsonHelper.nuevoObjetoJson(this.vm.listaDetalle);
+    for (const item of this.vm.listaDetalle) {
+      const producto = this.listaProductos.find(o => +o.id === +item.productoId)
+      const productoDescripcion = !producto ? '' : producto.descripcion;
 
-    // this.filterGroup = this.fb.group({
-    //   searchText: [this.filtro.searchText],
-    //   categoriaId: [this.filtro.categoriaId],
-    // });
+      const unidad = this.listaUnidad.find(o => +o.id === +item.unidadProductoId)
+      const unidadDescripcion = !unidad ? '' : unidad.descripcion;
 
-    // const searchEvent = this.filterGroup.controls.searchTerm.valueChanges
-    //   .pipe(
-    //     debounceTime(150),
-    //     distinctUntilChanged()
-    //   )
-    //   .subscribe((val) => this.search(val));
-    // this.subscriptions.push(searchEvent);
+      const medidaAnchoMixto = new NumeroMixto(item.medidaAncho);
+      const medidaAltoMixto = new NumeroMixto(item.medidaAlto);
+
+      this.listaDetalle.push(new SolicitudTomaMedidaDetalle({
+        solicitudTomaMedidaId: item.solicitudTomaMedidaId,
+        tomaMedidaId: item.tomaMedidaId,
+        productoId: item.productoId,
+        productoDescripcion: productoDescripcion,
+        unidadProductoId: item.unidadProductoId,
+        unidadProductoDescripcion: unidadDescripcion,
+        cantidad: item.cantidad,
+        medidaAncho: item.medidaAncho,
+        medidaAnchoString: medidaAnchoMixto.numeroString,
+        medidaAlto: item.medidaAlto,
+        medidaAltoString: medidaAltoMixto.numeroString,
+        tipoMedidaId: item.tipoMedidaId,
+        esMedidaAproximada: item.esMedidaAproximada,
+        nota: item.nota,
+      }));
+    }
+
+    this.subscriptions.push(
+      this.formGroup.controls.productoId.valueChanges.subscribe(val => {
+        this.cambioProducto(val);
+        this.cd.detectChanges();
+      })
+    );
   }
 
   save(esSaveDefinitivo: boolean = false) {
@@ -144,14 +176,13 @@ export class TomaMedidaSolicitudTomaMedidaModalComponent extends FormBase implem
         cantidad: item.cantidad,
         nota: item.nota,
         productoDescripcion: this.productoDescripcion,
-        unidadProductoId: 1, // TODO: fijo hasta desarrollar el tema
+        unidadProductoId: item.unidadProductoId,
+        unidadProductoDescripcion: this.unidadDescripcion,
         tipoMedidaId: 1 // TODO: fijo hasta desarrollar el tema
       });
 
       this.vm.listaDetalle.push(elemento);
     }
-
-    this.service.tomarMedida(this.vm);
 
     const mensaje = esSaveDefinitivo 
       ? 'Los cambios fueron registrados'
@@ -189,6 +220,7 @@ export class TomaMedidaSolicitudTomaMedidaModalComponent extends FormBase implem
     this.esParaEditar = true;
 
     this.formGroup.controls.productoId.setValue(row.productoId);
+    this.formGroup.controls.unidadProductoId.setValue(row.unidadProductoId);
     this.formGroup.controls.medidaAncho.setValue(row.medidaAnchoString);
     this.formGroup.controls.medidaAlto.setValue(row.medidaAltoString);
     this.formGroup.controls.esMedidaAproximada.setValue(row.esMedidaAproximada);
@@ -230,7 +262,8 @@ export class TomaMedidaSolicitudTomaMedidaModalComponent extends FormBase implem
         esMedidaAproximada,
         cantidad,
         nota,
-        productoDescripcion: this.productoDescripcion
+        productoDescripcion: this.productoDescripcion,
+        unidadDescripcion: this.unidadDescripcion
       });
 
       this.listaDetalle.push(nuevoElemento);
@@ -247,6 +280,23 @@ export class TomaMedidaSolicitudTomaMedidaModalComponent extends FormBase implem
     this.limpiarCampos();
     
     this.cd.detectChanges();
+  }
+
+  private cambioProducto(val: any): void {
+    const filter = ItemSelectService.defaultFilter();
+    filter.filter.push({ criterio: 'productoId', valor: `${val}` } as ItemSelectFilter);
+
+    const unidadProductoId = this.filterGroup.get('unidadProductoId');
+    unidadProductoId.setValue(null);
+
+    this.unidad$.next([]);
+
+    const sb = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.unidadProducto}`, filter)
+      .subscribe(data => {
+        this.unidad$.next(data);
+        this.listaUnidad = data;
+      });
+    this.subscriptions.push(sb);
   }
 
   private limpiarCampos(): void {

@@ -64,7 +64,7 @@
         </div>
 
         <div class="form-group row">
-          <div class="col-md-3">
+          <div class="col-md-6">
             <label class="form-label">Producto</label>
             <select 
               class="form-control selectpicker"
@@ -81,7 +81,26 @@
             <div class="invalid-feedback" *ngIf="controlHasError('required', 'productoId')">Es requerido</div>
           </div>
 
-          <div class="col-lg-3">
+          <div class="col-md-6">
+            <label class="form-label">Unidad</label>
+            <select 
+              class="form-control selectpicker"
+              data-size="7"
+              data-live-search="true"
+              name="unidadProductoId"
+              formControlName="unidadProductoId"
+              [class.is-invalid]="isControlInvalid('unidadProductoId')">
+              <option [ngValue]="null">Seleccione Uno</option>
+              <ng-container *ngFor="let item of unidad$ | async">
+                <option [value]="item.id">{{item.descripcion}}</option>
+              </ng-container>
+            </select>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'unidadProductoId')">Es requerido</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-4">
             <label class="form-label">Medida de ancho</label>
             <input 
               type="text" 
@@ -95,7 +114,7 @@
             <div class="invalid-feedback" *ngIf="controlHasError('required', 'medidaAncho')">Es requerido</div>
           </div>
 
-          <div class="col-lg-3">
+          <div class="col-lg-4">
             <label class="form-label">Medida de alto</label>
             <input 
               type="text" 
@@ -109,7 +128,7 @@
             <div class="invalid-feedback" *ngIf="controlHasError('required', 'medidaAlto')">Es requerido</div>
           </div>
 
-          <div class="col-lg-3">
+          <div class="col-lg-4">
             <label class="form-label">Cantidad</label>
             <input
                 type="number"
@@ -207,7 +226,7 @@
     </ng-container>
 
     <ng-container *ngIf="vm">
-      <button type="button" class="btn btn-light-success btn-elevate" (click)="save(true)">Completar</button>
+      <button type="button" class="btn btn-success btn-elevate" (click)="save(true)">Completar</button>
     </ng-container>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="card card-custom gutter-b">
   <div class="card-header">
     <div class="card-title">
-      <h3 class="card-label">Ciudad</h3>
+      <h3 class="card-label">Sector</h3>
     </div>
     <div class="card-toolbar">
       <button type="button" class="btn btn-primary" (click)="create()">Nuevo</button>
@@ -29,8 +29,8 @@
           </th>
 
           <th>
-            Provincia
-            <app-sort-icon column="provincia" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+            Ciudad
+            <app-sort-icon column="ciudad" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
           </th>
 
           <th>
@@ -42,7 +42,7 @@
         <tbody>
           <tr *ngFor="let row of service.items$ | async">
             <td>{{ row.descripcion }}</td>
-            <td>{{ row.provinciaDescripcion }}</td>
+            <td>{{ row.ciudadDescripcion }}</td>
             <td>
               <span class="label label-lg label-inline" 
                 [class.label-light-danger]="row.estaActivo === false"

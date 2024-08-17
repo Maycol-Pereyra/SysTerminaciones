@@ -15,12 +15,15 @@
         public bool LlevaInstalacion { get; set; }
         public int UsuarioCreacionId { get; set; }
         public int? DireccionId { get; set; }
+        public int TelefonoId { get; set; }
         public int? SolicitudTomaMedidaId { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public bool EstaActivo { get; set; }
+        public int EstadoId { get; set; }
 
         public virtual Cliente Cliente { get; set; }
+        public virtual Usuario UsuarioCreacion { get; set; }
         public virtual EntidadDireccion Direccion { get; set; }
+        public virtual Registro Estado { get; set; }
         public virtual List<CotizacionDetalle> ListaDetalle { get; set; } = [];
     }
 }

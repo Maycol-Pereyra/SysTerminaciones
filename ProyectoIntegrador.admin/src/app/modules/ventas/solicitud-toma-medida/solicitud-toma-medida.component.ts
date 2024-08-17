@@ -19,6 +19,7 @@ import { EditSolicitudTomaMedidaModalComponent as EditSolicitudTomaMedidaModalCo
 import { SolicitudTomaMedidaService } from './shared/solicitud-toma-medida.service';
 import { InfoSolicitudTomaMedidaModalComponent } from './components/info-solicitud-toma-medida-modal/info-solicitud-toma-medida-modal.component';
 import { TomaMedidaSolicitudTomaMedidaModalComponent } from './components/toma-medida-solicitud-toma-medida-modal/toma-medida-solicitud-toma-medida-modal.component';
+import { Mensajes } from 'src/app/_core/helpers/mensaje.helper';
 
 @Component({
   selector: 'app-solicitud-toma-medida',
@@ -143,10 +144,11 @@ export class SolicitudTomaMedidaComponent
     }
   }
 
-  tomarMedidas(id: number) {
+  tomarMedidas(row: any) {
     if (this.accesosService.puede('ventas.solicitud-toma-medida.tomar-medida','Usted no tiene acceso a hacer la toma de medidas')) {
+      if (this.validarTomaMedida(row) === false) { return; }
       const modalRef = this.modalService.open(TomaMedidaSolicitudTomaMedidaModalComponent, { size: 'xl', backdrop: 'static' });
-      modalRef.componentInstance.id = id;
+      modalRef.componentInstance.id = row.id;
       modalRef.result.then(
         () => { },
         () => { }
@@ -154,14 +156,43 @@ export class SolicitudTomaMedidaComponent
     }
   }
 
-  edit(id: number) {
+  edit(row: any) {
     if (this.accesosService.puedeEditar('ventas.solicitud-toma-medida.editar')) {
+      if (this.validarEditar(row) === false) { return; }
       const modalRef = this.modalService.open(EditSolicitudTomaMedidaModalComponent, { size: 'xl', backdrop: 'static' });
-      modalRef.componentInstance.id = id;
+      modalRef.componentInstance.id = row.id;
       modalRef.result.then(() =>
         this.service.fetch(),
         () => { }
       );
     }
+  }
+
+  private validarEditar(row: any): boolean {
+    if (row.estadoDescripcion !== 'Pendiente Tomar Medidas') {
+      Mensajes.mensajeValidacion('La solicitud no se encuentra en un estado disponible para tomar la medida');
+      return false;
+    }
+
+    return true;
+  }
+
+  private validarTomaMedida(row: any): boolean {
+    if (!row.empleadoAsignadoId || row.empleadoAsignadoId === 0) {
+      Mensajes.mensajeValidacion('La solicitud no tiene un empleado asignado');
+      return false;
+    }
+
+    if (!row.vehiculoAsignadoId || row.vehiculoAsignadoId === 0) {
+      Mensajes.mensajeValidacion('La solicitud no tiene un vehiculo asignado');
+      return false;
+    }
+
+    if (row.estadoDescripcion === 'Concluido') {
+      Mensajes.mensajeValidacion('La solicitud no se encuentra en un estado disponible para tomar la medida');
+      return false;
+    }
+    //TODO: validar que el usuario asignado sea el mismo que esta loggeado
+    return true;
   }
 }

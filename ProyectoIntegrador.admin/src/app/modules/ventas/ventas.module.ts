@@ -24,6 +24,9 @@ import { SolicitudTomaMedidaComponent } from './solicitud-toma-medida/solicitud-
 import { EditSolicitudTomaMedidaModalComponent } from './solicitud-toma-medida/components/edit-solicitud-toma-medida-modal/edit-solicitud-toma-medida-modal.component';
 import { InfoSolicitudTomaMedidaModalComponent } from './solicitud-toma-medida/components/info-solicitud-toma-medida-modal/info-solicitud-toma-medida-modal.component';
 import { TomaMedidaSolicitudTomaMedidaModalComponent } from './solicitud-toma-medida/components/toma-medida-solicitud-toma-medida-modal/toma-medida-solicitud-toma-medida-modal.component';
+import { InfoCotizacionModalComponent } from './cotizacion/components/info-cotizacion-modal/info-cotizacion-modal.component';
+import { CotizacionComponent } from './cotizacion/cotizacion.component';
+import { EditCotizacionModalComponent } from './cotizacion/components/edit-cotizacion-modal/edit-cotizacion-modal.component';
 
 
 @NgModule({
@@ -44,7 +47,11 @@ import { TomaMedidaSolicitudTomaMedidaModalComponent } from './solicitud-toma-me
   SolicitudTomaMedidaComponent,
   EditSolicitudTomaMedidaModalComponent,
   InfoSolicitudTomaMedidaModalComponent,
-  TomaMedidaSolicitudTomaMedidaModalComponent
+  TomaMedidaSolicitudTomaMedidaModalComponent,
+
+  CotizacionComponent,
+  InfoCotizacionModalComponent,
+  EditCotizacionModalComponent
   ],
   imports: [
     CommonModule,

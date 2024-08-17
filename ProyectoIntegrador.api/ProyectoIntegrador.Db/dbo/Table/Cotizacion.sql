@@ -12,12 +12,15 @@
 	[LlevaInstalacion] BIT NOT NULL,
 	[UsuarioCreacionId] INT NOT NULL,
 	[DireccionId] INT NULL,
+	[TelefonoId] INT NOT NULL,
 	[SolicitudTomaMedidaId] INT NULL,
 	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
-	[EstaActivo] BIT NOT NULL,
+	[EstadoId] INT NOT NULL,
 	FOREIGN KEY (ClienteId) REFERENCES Cliente(Id),
 	FOREIGN KEY (TipoComprobanteId) REFERENCES Registro(Id),
 	FOREIGN KEY (UsuarioCreacionId) REFERENCES Usuario(Id),
 	FOREIGN KEY (DireccionId) REFERENCES EntidadDireccion(Id),
 	FOREIGN KEY (SolicitudTomaMedidaId) REFERENCES SolicitudTomaMedida(Id),
+	FOREIGN KEY (EstadoId) REFERENCES Registro(Id),
+	FOREIGN KEY (TelefonoId) REFERENCES EntidadTelefono(Id)
 )

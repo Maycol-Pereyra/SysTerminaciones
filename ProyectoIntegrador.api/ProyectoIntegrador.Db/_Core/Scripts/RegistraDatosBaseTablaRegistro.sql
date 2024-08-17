@@ -74,8 +74,37 @@ USING (VALUES
 	(40, 25, 'Asignada', GETDATE(), GETDATE(), 1),
 	(41, 25, 'En Ruta', GETDATE(), GETDATE(), 1),
 	(42, 25, 'En Reparación', GETDATE(), GETDATE(), 1),
-	(43, 25, 'Inactivo', GETDATE(), GETDATE(), 1)
+	(43, 25, 'Inactivo', GETDATE(), GETDATE(), 1),
 	-- Fin Tabla EstadoVehiculo
+
+	-- Inicio Tabla EstadoCotizacion
+	(44, 27, 'En Proceso', GETDATE(), GETDATE(), 1),
+	(45, 27, 'Entregada al Cliente', GETDATE(), GETDATE(), 1),
+	(46, 27, 'Rechazada por Cliente', GETDATE(), GETDATE(), 1),
+	(47, 27, 'Cancelada por Cliente', GETDATE(), GETDATE(), 1),
+	(48, 27, 'Aceptada', GETDATE(), GETDATE(), 1),
+	(49, 27, 'Inactiva', GETDATE(), GETDATE(), 1),
+	-- Fin Tabla EstadoCotizacion
+
+	-- Inicio Tabla EstadoFactura
+	(50, 28, 'En Proceso', GETDATE(), GETDATE(), 1),
+	(51, 28, 'Devuelta por Cliente', GETDATE(), GETDATE(), 1),
+	(52, 28, 'Facturada', GETDATE(), GETDATE(), 1),
+	(53, 28, 'Inactiva', GETDATE(), GETDATE(), 1),
+	-- Fin Tabla EstadoFactura
+
+	-- Inicio Tabla Turno
+	(54, 13, 'Matutino', GETDATE(), GETDATE(), 1),
+	(55, 13, 'Vespertino', GETDATE(), GETDATE(), 1),
+	(56, 13, 'Nocturno', GETDATE(), GETDATE(), 1),
+	-- Fin Tabla Turno
+
+	-- Inicio Tabla EstadoProduccion
+	(57, 7, 'En Proceso', GETDATE(), GETDATE(), 1),
+	(58, 7, 'Devuelta por Cliente', GETDATE(), GETDATE(), 1),
+	(59, 7, 'Facturada', GETDATE(), GETDATE(), 1),
+	(60, 7, 'Inactiva', GETDATE(), GETDATE(), 1)
+	-- Fin Tabla EstadoProduccion
 
 ) AS source (Id, TipoRegistroId, Descripcion, FechaModificacion, FechaCreacion, EstaActivo)
 ON target.Id = source.Id

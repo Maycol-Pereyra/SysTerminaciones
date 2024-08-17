@@ -10,7 +10,7 @@ USING (VALUES
     (4, 'Modulo', GETDATE(), 1),
     (5, 'Color', GETDATE(), 1),
     (6, 'Pais', GETDATE(), 1),
-    (7, 'Estado', GETDATE(), 1),
+    (7, 'EstadoProduccion', GETDATE(), 1),
     (8, 'EstadoHerramienta', GETDATE(), 1),
     (9, 'TipoMovimiento', GETDATE(), 1),
     (10, 'TipoFactura', GETDATE(), 1),
@@ -29,7 +29,9 @@ USING (VALUES
     (23, 'Perfil', GETDATE(), 1),
     (24, 'TipoPrograma', GETDATE(), 1),
     (25, 'EstadoVehiculo', GETDATE(), 1),
-    (26, 'EstadoSolicitudTomaMedida', GETDATE(), 1)
+    (26, 'EstadoSolicitudTomaMedida', GETDATE(), 1),
+    (27, 'EstadoCotizacion', GETDATE(), 1),
+    (28, 'EstadoFactura', GETDATE(), 1)
 
 ) AS source (Id, Descripcion, FechaCreacion, EstaActivo)
 ON target.Id = source.Id

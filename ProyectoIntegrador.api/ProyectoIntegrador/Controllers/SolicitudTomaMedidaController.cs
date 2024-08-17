@@ -133,6 +133,7 @@ namespace ProyectoIntegrador.Controllers
             await RegistraTomaMedida(vm);
 
             var objUpdate = _dbContext.SolicitudTomaMedida
+                .Include(o => o.ListaDetalle)
                 .OrderBy(o => o.Id)
                 .FirstOrDefault(o => o.Id == vm.Id);
 
@@ -142,6 +143,8 @@ namespace ProyectoIntegrador.Controllers
             }
 
             _mapper.Map(vm, objUpdate);
+
+            MapDetalle(vm, objUpdate);
 
             objUpdate.FechaTomaMedida = DateTime.Now;
 
@@ -192,7 +195,6 @@ namespace ProyectoIntegrador.Controllers
                 .Include(o => o.EmpleadoAsignado)
                 .Include(o => o.VehiculoAsignado)
                 .Include(o => o.Estado)
-                .Include(o => o.ListaDetalle)
                 .FirstOrDefaultAsync(o => o.Id == id);
             if (obj == null)
             {
@@ -208,6 +210,12 @@ namespace ProyectoIntegrador.Controllers
                 .Where(o => o.Id == obj.EmpleadoAsignado.EntidadId)
                 .AsNoTracking()
                 .FirstOrDefaultAsync() ?? new();
+
+            obj.ListaDetalle = await _dbContext.SolicitudTomaMedidaDetalle
+                .Include(o => o.TomaMedida)
+                .Where(o => o.SolicitudTomaMedidaId == obj.Id)
+                .AsNoTracking()
+                .ToListAsync();
 
             var vm = _mapper.Map<SolicitudTomaMedidaVm>(obj);
 

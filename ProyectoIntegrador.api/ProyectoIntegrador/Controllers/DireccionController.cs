@@ -31,6 +31,7 @@ namespace ProyectoIntegrador.Controllers
         public async Task<ActionResult<List<ItemSelect>>> GetItemSelect([FromQuery] DireccionParameters parameter)
         {
             var lista = _dbContext.EntidadDireccion
+                .Include(o => o.Sector)
                 .AsNoTracking();
             lista = await Filtrar(lista, parameter);
             lista = lista.Where(o => o.EstaActivo);

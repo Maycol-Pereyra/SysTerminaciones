@@ -60,15 +60,24 @@ namespace ProyectoIntegrador.Controllers
         public async Task<ActionResult<List<ItemSelect>>> GetItemSelect([FromQuery] ProductoParameters parameter)
         {
             var lista = _dbContext.Producto
-                .Include(o => o.Categoria)
                 .Include(o => o.TipoProducto)
                 .Include(o => o.Color)
-                .Include(o => o.Suplidor)
-                .Include(o => o.ListaProductoUnidad)
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
             lista = lista.Where(o => o.EstaActivo);
             lista = lista.OrderBy(o => o.Id);
+            var pl = await lista.ToPagedList(parameter);
+
+            return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
+        }
+
+        [HttpGet("unidad-item-select")]
+        public async Task<ActionResult<List<ItemSelect>>> GetUnidadItemSelect([FromQuery] ProductoParameters parameter)
+        {
+            var lista = _dbContext.ProductoUnidad
+                .Include(o => o.Unidad)
+                .AsNoTracking();
+            lista = Filtrar(lista, parameter);
             var pl = await lista.ToPagedList(parameter);
 
             return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
@@ -206,6 +215,16 @@ namespace ProyectoIntegrador.Controllers
                 lista = lista.Where(o =>
                     o.Descripcion.Contains(parameter.Criterio)
                 );
+            }
+
+            return lista;
+        }
+
+        private static IQueryable<ProductoUnidad> Filtrar(IQueryable<ProductoUnidad> lista, ProductoParameters parameter)
+        {
+            if (parameter.ProductoId > 0)
+            {
+                lista = lista.Where(o => o.ProductoId == parameter.ProductoId);
             }
 
             return lista;

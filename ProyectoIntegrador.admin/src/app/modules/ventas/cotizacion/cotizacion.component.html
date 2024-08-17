@@ -1,0 +1,82 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Cotización</h3>
+    </div>
+    <div class="card-toolbar">
+      <button type="button" class="btn btn-primary" (click)="create()">Nuevo</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <div class="form form-label-right">
+      <div class="form-group row">
+        <div class="col-lg-4" [formGroup]="searchGroup">
+          <label class="form-label">Búsqueda General</label>
+          <input type="text" class="form-control" name="searchText" placeholder="Búsqueda" value=""
+            formControlName="searchTerm" />
+        </div>
+    </div>
+    <!-- end: Filtration form -->
+
+    <!-- begin:Table -->
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table table-head-custom table-vertical-center overflow-hidden">
+        <thead>
+          <th>
+            Cotización
+            <app-sort-icon column="fechaCreacion" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+          
+          <th>
+            Cliente
+            <app-sort-icon column="cliente" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th>
+            Monto
+            <app-sort-icon column="monto" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </th>
+
+          <th>
+            Estado
+          </th>
+
+          <th class="pr-0 text-right" style="min-width: 150px">Acciones</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of service.items$ | async">
+            <td>
+              <div class="font-weight-bolder text-primary mb-0">
+                {{ row.numeroCotizacion }} 
+              </div>
+              <small class="text-muted">{{ row.fechaCreacion | date: 'dd/MM/yyyy hh:mm:ss a' }}</small>
+            </td>
+            <td>{{ row.clienteNombre }}</td>
+            <td>{{ row.monto }}</td>
+            <td>
+              <span *ngIf="row.estadoDescripcion === 'En Proceso'" class="label label-lg label-light-info label-inline">{{ row.estadoDescripcion }}</span>
+              <span *ngIf="row.estadoDescripcion === 'Entregada al Cliente'" class="label label-lg label-light-success label-inline">{{ row.estadoDescripcion }}</span>
+              <span *ngIf="row.estadoDescripcion === 'Rechazada por Cliente'" class="label label-lg label-danger label-inline">{{ row.estadoDescripcion }}</span>
+              <span *ngIf="row.estadoDescripcion === 'Cancelada por Cliente'" class="label label-lg label-light-danger label-inline">{{ row.estadoDescripcion }}</span>
+              <span *ngIf="row.estadoDescripcion === 'Aceptada'" class="label label-lg label-success label-inline">{{ row.estadoDescripcion }}</span>
+              <span *ngIf="row.estadoDescripcion === 'Inactiva'" class="label label-lg label-light-warning label-inline">{{ row.estadoDescripcion }}</span>
+            </td>
+            <td class="pr-0 text-right">              
+              <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mr-3" (click)="edit(row)">
+                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true" class="svg-icon svg-icon-md svg-icon-primary"></span>
+              </a>
+
+              <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mr-3" (click)="info(row)">
+                <span [inlineSVG]="'./assets/media/svg/icons/General/Visible.svg'" cacheSVG="true" class="svg-icon svg-icon-md svg-icon-primary"></span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- end: Table -->
+    <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="paginator" [isLoading]="isLoading" (paginate)="paginate($event)">
+    </app-paginator>
+  </div>
+</div>
