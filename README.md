@@ -1,2 +1,2 @@
 # SysTerminaciones
-Prototipo de sistema de fabrica de puertas y ventanas
+Sistema de fabrica de puertas y ventanas
