@@ -21,6 +21,7 @@
         public int EstadoId { get; set; }
 
         public virtual Cliente Cliente { get; set; }
+        public virtual EntidadTelefono Telefono { get; set; }
         public virtual Usuario UsuarioCreacion { get; set; }
         public virtual EntidadDireccion Direccion { get; set; }
         public virtual Registro Estado { get; set; }

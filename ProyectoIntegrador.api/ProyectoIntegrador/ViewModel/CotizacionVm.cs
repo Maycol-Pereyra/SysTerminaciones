@@ -18,8 +18,9 @@
         public string UsuarioCreacionNombre { get; set; } = "";
         public int? DireccionId { get; set; }
         public int TelefonoId { get; set; }
+        public string TelefonoDescripcion { get; set; } = "";
         public int? SolicitudTomaMedidaId { get; set; }
-        public DateTime FechaCreacion { get; set; }
+        public DateTime? FechaCreacion { get; set; }
         public int EstadoId { get; set; }
         public string EstadoDescripcion { get; set; } = "";
 

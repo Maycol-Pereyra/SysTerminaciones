@@ -14,6 +14,7 @@ import { EndPointSelect } from 'src/app/_core/const/app.const';
 import { ItemSelectFilter } from 'src/app/_core/item-select/item-select-filter';
 import { NumeroMixto } from 'src/app/_core/models/numero-mixto.model';
 import { CotizacionDetalle } from '../../shared/cotizacion-detalle.model';
+import { NumeroMixtoHelper } from 'src/app/_core/helpers/numero-misxto-helper';
 
 @Component({
   selector: 'app-edit-cotizacion-modal',
@@ -57,6 +58,14 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
     return this.formGroup.controls;
   }
 
+  get unidadSeleccionada() {
+    const unidadId = this.detalleGroup.value.unidadProductoId;
+
+    const elemento = this.listaUnidad.find(o => +o.id === +unidadId)
+
+    return !elemento ? null : elemento;
+  }
+
   get productoSeleccionado() {
     const productoId = this.detalleGroup.value.productoId;
 
@@ -78,7 +87,7 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
   }
 
   get unidadDescripcion() {
-    const unidadId = this.detalleGroup.value.unidadId;
+    const unidadId = this.detalleGroup.value.unidadProductoId;
 
     const elemento = this.listaUnidad.find(o => +o.id === +unidadId)
 
@@ -94,7 +103,7 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
     this.producto$.subscribe(data => this.listaProducto = data as ItemSelect[])
 
     const filtroEstado = ItemSelectService.defaultFilter();
-    filtroEstado.filter.push({ criterio: 'tipoRegistroId', valor: '26'});
+    filtroEstado.filter.push({ criterio: 'tipoRegistroId', valor: '27'});
     this.estado$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.estadoSolicitudTomaMedida}`, filtroEstado);
     this.estado$.subscribe(data => this.listaEstado = data as ItemSelect[]);
 
@@ -127,6 +136,8 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
       telefonoId: [this.vm.telefonoId, Validators.compose([Validators.required])],
       direccionId: [this.vm.direccionId, Validators.compose([Validators.nullValidator])],
       nota: [this.vm.nota, Validators.compose([Validators.nullValidator, Validators.minLength(0), Validators.maxLength(250)])],
+      llevaEnvio: [this.vm.llevaEnvio, Validators.compose([Validators.nullValidator])],
+      llevaInstalacion: [this.vm.llevaInstalacion, Validators.compose([Validators.nullValidator])],
     });
 
     this.detalleGroup = this.fb.group({
@@ -179,9 +190,16 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
     );
   }
 
-  save(esSaveDefinitivo: boolean = false) {
-    this.prepareVm(esSaveDefinitivo);
+  save() {
+    this.prepareVm(false);
     this.edit();
+  }
+
+  saveDefinitivo() {
+    this.confirmacion('¿Está seguro de completar la cotización, una vez completada no se va a poder editar?', 'Confirmación', () => {
+      this.prepareVm(true);
+      this.edit();
+    });
   }
 
   edit() {
@@ -228,16 +246,34 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
     this.cd.detectChanges();
   }
 
+  public getPrecioTotal(): number {
+    if (!this.listaDetalle || this.listaDetalle.length === 0) {
+      return 0;
+    }
+
+    let total = 0;
+
+    for (const item of this.listaDetalle) {
+      total += item.precioUnitario;
+    }
+
+    return total;
+  }
+
   public agregar(): void {
     if (!this.validar()) { return; }
-    debugger;
-
-    const formData = this.detalleGroup.value;
-    const productoId = formData.productoId;
-    const medidaAncho = formData.medidaAncho;
-    const medidaAlto = formData.medidaAlto;
-    const cantidad = formData.cantidad;
-
+    const formData = this.formGroup.value;
+    const llevaInstalacion = formData.llevaInstalacion;
+    
+    const detalleData = this.detalleGroup.value;
+    const productoId = detalleData.productoId;
+    const unidadProductoId = detalleData.unidadProductoId;
+    const medidaAncho = detalleData.medidaAncho;
+    const medidaAlto = detalleData.medidaAlto;
+    const cantidad = detalleData.cantidad;
+    const medidaAnchoMixto = new NumeroMixto(medidaAncho);
+    const medidaAltoMixto = new NumeroMixto(medidaAlto);
+    
     const elemento = this.listaDetalle.find(o =>
       +o.productoId === +productoId &&
       o.medidaAncho === medidaAncho &&
@@ -245,13 +281,29 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
     );
 
     if (!elemento) {
+      const precioUnitario = llevaInstalacion
+        ? this.unidadSeleccionada.objeto.precioVentaInstalacion
+        : this.unidadSeleccionada.objeto.precioVenta; 
+
+      const precio = NumeroMixtoHelper.obtenerPrecioProducto(
+        this.tipoProductoSeleccionado.id,
+        medidaAncho,
+        medidaAlto,
+        cantidad,
+        precioUnitario 
+      );
+
       const nuevoElemento = new CotizacionDetalle({
         productoId,
         medidaAnchoString: medidaAncho,
         medidaAltoString: medidaAlto,
+        medidaAncho: medidaAnchoMixto.numeroDecimal,
+        medidaAlto: medidaAltoMixto.numeroDecimal,
         cantidad,
         productoDescripcion: this.productoDescripcion,
-        unidadDescripcion: this.unidadDescripcion
+        unidadProductoId: unidadProductoId,
+        unidadProductoDescripcion: this.unidadDescripcion,
+        precioUnitario: precio
       });
 
       this.listaDetalle.push(nuevoElemento);
@@ -277,7 +329,7 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
   }
 
   public getUnidadDescripcion(row: any): string {
-    const elemento = this.listaUnidad.find(o => +o.id === +row.unidadId)
+    const elemento = this.listaUnidad.find(o => +o.id === +row.unidadProductoId)
 
     return !elemento ? '' : elemento.descripcion;
   }
@@ -332,6 +384,9 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
     this.vm.telefonoId = formData.telefonoId;
     this.vm.direccionId = formData.direccionId;
     this.vm.nota = formData.nota;
+    this.vm.llevaEnvio = formData.llevaEnvio;
+    this.vm.llevaInstalacion = formData.llevaInstalacion;
+    this.vm.monto = this.getPrecioTotal();
 
     if (this.listaDetalle.length <= 0) {
       this.mensajeValidacion('Debe de insertar al menos una medida');
@@ -403,6 +458,7 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
   private cambioProducto(val: any): void {
     const filter = ItemSelectService.defaultFilter();
     filter.filter.push({ criterio: 'productoId', valor: `${val}` } as ItemSelectFilter);
+    filter.filter.push({ criterio: 'cargarSoloUnidadVenta', valor: `${true}` } as ItemSelectFilter);
 
     const unidadProductoId = this.detalleGroup.get('unidadProductoId');
     unidadProductoId.setValue(null);

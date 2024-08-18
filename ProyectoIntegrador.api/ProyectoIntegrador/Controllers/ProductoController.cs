@@ -227,6 +227,15 @@ namespace ProyectoIntegrador.Controllers
                 lista = lista.Where(o => o.ProductoId == parameter.ProductoId);
             }
 
+            if (parameter.CargarSoloUnidadVenta)
+            {
+                lista = lista.Where(o => o.PrecioVenta > 0);
+            }
+            if (parameter.CargarSoloUnidadCompra)
+            {
+                lista = lista.Where(o => o.PrecioCompra > 0);
+            }
+
             return lista;
         }
 

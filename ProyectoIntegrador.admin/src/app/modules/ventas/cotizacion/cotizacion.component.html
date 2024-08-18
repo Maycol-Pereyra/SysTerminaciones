@@ -34,12 +34,12 @@
           </th>
 
           <th>
-            Monto
-            <app-sort-icon column="monto" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+            Estado
           </th>
 
-          <th>
-            Estado
+          <th class="text-right">
+            Monto
+            <app-sort-icon column="monto" [activeColumn]="sorting.column" [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
           </th>
 
           <th class="pr-0 text-right" style="min-width: 150px">Acciones</th>
@@ -53,7 +53,6 @@
               <small class="text-muted">{{ row.fechaCreacion | date: 'dd/MM/yyyy hh:mm:ss a' }}</small>
             </td>
             <td>{{ row.clienteNombre }}</td>
-            <td>{{ row.monto }}</td>
             <td>
               <span *ngIf="row.estadoDescripcion === 'En Proceso'" class="label label-lg label-light-info label-inline">{{ row.estadoDescripcion }}</span>
               <span *ngIf="row.estadoDescripcion === 'Entregada al Cliente'" class="label label-lg label-light-success label-inline">{{ row.estadoDescripcion }}</span>
@@ -62,6 +61,7 @@
               <span *ngIf="row.estadoDescripcion === 'Aceptada'" class="label label-lg label-success label-inline">{{ row.estadoDescripcion }}</span>
               <span *ngIf="row.estadoDescripcion === 'Inactiva'" class="label label-lg label-light-warning label-inline">{{ row.estadoDescripcion }}</span>
             </td>
+            <td class="text-right"><strong>${{ row.monto | number: '1.2-2' }}</strong></td>
             <td class="pr-0 text-right">              
               <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mr-3" (click)="edit(row)">
                 <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true" class="svg-icon svg-icon-md svg-icon-primary"></span>

@@ -18,55 +18,59 @@
     <ng-container *ngIf="vm">
       <form action="#" class="form form-label-right" [formGroup]="formGroup">
 
-        <div class="form-group">
-          <label class="form-label">Cliente</label>
-          <select 
-            class="form-control selectpicker"
-            data-size="7"
-            data-live-search="true"
-            name="clienteId"  
-            formControlName="clienteId"
-            [class.is-invalid]="isControlInvalid('clienteId')">
-            <option [ngValue]="null">Seleccione Uno</option>
-            <ng-container *ngFor="let item of cliente$ | async">
-              <option [value]="item.id">{{item.descripcion}}</option>
-            </ng-container>
-          </select>
-          <div class="invalid-feedback" *ngIf="controlHasError('required', 'clienteId')">Es requerido</div>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <label class="form-label">Cliente</label>
+            <select 
+              class="form-control selectpicker"
+              data-size="7"
+              data-live-search="true"
+              name="clienteId"  
+              formControlName="clienteId"
+              [class.is-invalid]="isControlInvalid('clienteId')">
+              <option [ngValue]="null">Seleccione Uno</option>
+              <ng-container *ngFor="let item of cliente$ | async">
+                <option [value]="item.id">{{item.descripcion}}</option>
+              </ng-container>
+            </select>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'clienteId')">Es requerido</div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Teléfono</label>
-          <select 
-            class="form-control selectpicker"
-            data-size="7"
-            data-live-search="true"
-            name="telefonoId"  
-            formControlName="telefonoId"
-            [class.is-invalid]="isControlInvalid('telefonoId')">
-            <option [ngValue]="null">Seleccione Uno</option>
-            <ng-container *ngFor="let item of telefono$ | async">
-              <option [value]="item.id">{{item.descripcion}}</option>
-            </ng-container>
-          </select>
-          <div class="invalid-feedback" *ngIf="controlHasError('required', 'telefonoId')">Es requerido</div>
-        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label class="form-label">Teléfono</label>
+            <select 
+              class="form-control selectpicker"
+              data-size="7"
+              data-live-search="true"
+              name="telefonoId"  
+              formControlName="telefonoId"
+              [class.is-invalid]="isControlInvalid('telefonoId')">
+              <option [ngValue]="null">Seleccione Uno</option>
+              <ng-container *ngFor="let item of telefono$ | async">
+                <option [value]="item.id">{{item.descripcion}}</option>
+              </ng-container>
+            </select>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'telefonoId')">Es requerido</div>
+          </div>
 
-        <div class="form-group">
-          <label class="form-label">Dirección</label>
-          <select 
-            class="form-control selectpicker"
-            data-size="7"
-            data-live-search="true"
-            name="direccionId"  
-            formControlName="direccionId"
-            [class.is-invalid]="isControlInvalid('direccionId')">
-            <option [ngValue]="null">Seleccione Uno</option>
-            <ng-container *ngFor="let item of direccion$ | async">
-              <option [value]="item.id">{{item.descripcion}}</option>
-            </ng-container>
-          </select>
-          <div class="invalid-feedback" *ngIf="controlHasError('required', 'direccionId')">Es requerido</div>
+          <div class="col-md-6">
+            <label class="form-label">Dirección</label>
+            <select 
+              class="form-control selectpicker"
+              data-size="7"
+              data-live-search="true"
+              name="direccionId"  
+              formControlName="direccionId"
+              [class.is-invalid]="isControlInvalid('direccionId')">
+              <option [ngValue]="null">Seleccione Uno</option>
+              <ng-container *ngFor="let item of direccion$ | async">
+                <option [value]="item.id">{{item.descripcion}}</option>
+              </ng-container>
+            </select>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'direccionId')">Es requerido</div>
+          </div>
         </div>
 
         <div class="form-group row">
@@ -87,6 +91,20 @@
           </div>
         </div>
 
+        <div class="checkbox-inline mt-3 mb-5">
+          <label class="checkbox">
+            <input type="checkbox" formControlName="llevaEnvio"/>
+            <span></span>Lleva envío
+          </label>
+        </div>
+
+        <div class="checkbox-inline mt-3 mb-5">
+          <label class="checkbox">
+            <input type="checkbox" formControlName="llevaInstalacion" [disabled]="listaDetalle.length > 0"/>
+            <span></span>Lleva instalación
+          </label>
+        </div>
+
         <div class="separator separator-dashed my-8"></div>
       </form>
 
@@ -94,11 +112,11 @@
 
         <div class="row justify-content-end">
           <div class="col-sm-3" *ngIf="!esParaEditar">
-            <button style="float: right;" type="button" class="btn btn-primary mb-5" (click)="agregar()"><i class="fa fa-plus"></i>Agregar</button>
+            <button style="float: right;" type="submit" class="btn btn-primary mb-5" (click)="agregar()"><i class="fa fa-plus"></i>Agregar</button>
           </div>
 
           <div class="col-sm-3" *ngIf="esParaEditar">
-            <button style="float: right;" type="button" class="btn btn-primary mb-5" (click)="editar()"><i class="fa fa-sync"></i>Actualizar</button>
+            <button style="float: right;" type="submit" class="btn btn-primary mb-5" (click)="editar()"><i class="fa fa-sync"></i>Actualizar</button>
           </div>
         </div>
 
@@ -145,7 +163,7 @@
                 placeholder="Cantidad"
                 name="cantidad"
                 step="0.01"
-                (blur)="fixCantidadNullFg(formGroup, 'cantidad'); fixMontoDosDecimalesFg(formGroup, 'cantidad')"
+                (blur)="fixCantidadNullFg(detalleGroup, 'cantidad'); fixMontoDosDecimalesFg(detalleGroup, 'cantidad')"
                 [class.is-invalid]="esInvalido('cantidad')"
                 formControlName="cantidad"
               />
@@ -163,10 +181,8 @@
               class="form-control form-control-lg " 
               name="medidaAncho"
               placeholder="Medida de ancho" 
-              autocomplete="off" 
-              [class.is-invalid]="esInvalido('medidaAncho')"
+              autocomplete="off"
               formControlName="medidaAncho" />
-            <div class="invalid-feedback" *ngIf="tieneError('required', 'medidaAncho')">Es requerido</div>
           </div>
 
           <div class="col-lg-6" *ngIf="tipoProductoSeleccionado && tipoProductoSeleccionado.usaMedidasFactura">
@@ -176,10 +192,8 @@
               class="form-control form-control-lg " 
               name="medidaAlto"
               placeholder="Medida de alto" 
-              autocomplete="off" 
-              [class.is-invalid]="esInvalido('medidaAlto')"
+              autocomplete="off"
               formControlName="medidaAlto" />
-            <div class="invalid-feedback" *ngIf="tieneError('required', 'medidaAlto')">Es requerido</div>
           </div>
         </div>
 
@@ -202,17 +216,19 @@
   
             <th class="text-right">Cantidad</th>
 
+            <th class="text-right">Precio</th>
+
           </thead>
           <tbody>
             <tr *ngFor="let row of listaDetalle">
 
-              <td>{{ getProductoDescripcion(row) }}</td>
+              <td>{{ row.productoDescripcion }}</td>
 
-              <td>{{ getProductoDescripcion(row) }}</td>
+              <td>{{ row.unidadProductoDescripcion }}</td>
 
               <td>
                 <ng-container *ngIf="row.medidaAncho || row.medidaAlto">
-                  {{ getNumeroMixto(row.medidaAncho) + ' x ' + getNumeroMixto(row.medidaAlto) }}
+                  {{ getNumeroMixto(row.medidaAnchoString) + ' x ' + getNumeroMixto(row.medidaAltoString) }}
                 </ng-container>
 
                 <ng-container *ngIf="!row.medidaAncho && !row.medidaAlto">
@@ -221,7 +237,35 @@
               </td>
               
               <td class="text-right">{{ row.cantidad }}</td>
+
+              <td class="text-right">${{ row.precioUnitario | number: '1.2-2' }}</td>
             </tr>
+
+            <ng-container *ngIf="listaDetalle && listaDetalle.length > 0">
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">ITBIS:</td>
+                <td class="text-right">${{ vm.impuesto | number: '1.2-2' }}</td>
+              </tr>
+  
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">Descuento:</td>
+                <td class="text-right">${{ vm.descuento | number: '1.2-2' }}</td>
+              </tr>
+  
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">Monto total:</td>
+                <td class="text-right">${{ getPrecioTotal() | number: '1.2-2' }}</td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>
@@ -235,7 +279,7 @@
     </ng-container>
 
     <ng-container *ngIf="vm">
-      <button type="button" class="btn btn-success btn-elevate" (click)="save(true)" [disabled]="formGroup.invalid">Completar</button>
+      <button type="button" class="btn btn-success btn-elevate" (click)="saveDefinitivo()" [disabled]="formGroup.invalid">Completar</button>
     </ng-container>
   </div>
 </div>

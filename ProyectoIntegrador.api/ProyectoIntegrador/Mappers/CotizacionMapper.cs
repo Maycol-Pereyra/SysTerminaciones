@@ -11,6 +11,12 @@ namespace ProyectoIntegrador.Mappers
         {
             CreateMap<Cotizacion, CotizacionVm>()
                 .ForMember(
+                    des => des.TelefonoDescripcion,
+                    opt => opt.MapFrom(ori => ori.Telefono != null
+                        ? ori.Telefono.Telefono
+                        : "")
+                )
+                .ForMember(
                     des => des.ClienteNombre,
                     opt => opt.MapFrom(ori => ori.Cliente != null
                         ? $"{ori.Cliente.Entidad.Nombre} {ori.Cliente.Entidad.Apellido}"
@@ -37,25 +43,25 @@ namespace ProyectoIntegrador.Mappers
                 .ForMember(
                     des => des.PaisDescripcion,
                     opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.Descripcion
+                        ? ori.Direccion.Pais.Descripcion
                         : "")
                 )
                 .ForMember(
                     des => des.ProvinciaDescripcion,
                     opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.Descripcion
+                        ? ori.Direccion.Provincia.Descripcion
                         : "")
                 )
                 .ForMember(
                     des => des.CiudadDescripcion,
                     opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.Descripcion
+                        ? ori.Direccion.Ciudad.Descripcion
                         : "")
                 )
                 .ForMember(
                     des => des.SectorDescripcion,
                     opt => opt.MapFrom(ori => ori.Direccion != null
-                        ? ori.Direccion.Descripcion
+                        ? ori.Direccion.Sector.Descripcion
                         : "")
                 )
                 .ForMember(
@@ -123,7 +129,19 @@ namespace ProyectoIntegrador.Mappers
 
             CreateMap<CotizacionVm, DireccionVm>();
 
-            CreateMap<CotizacionDetalle, CotizacionDetalleVm>();
+            CreateMap<CotizacionDetalle, CotizacionDetalleVm>()
+                .ForMember(
+                    des => des.ProductoDescripcion,
+                    opt => opt.MapFrom(ori => ori.Producto != null
+                    ? ori.Producto.Descripcion
+                    : "")
+                )
+                .ForMember(
+                    des => des.UnidadProductoDescripcion,
+                    opt => opt.MapFrom(ori => ori.UnidadProducto != null
+                    ? ori.UnidadProducto.Descripcion
+                    : "")
+                );
             CreateMap<CotizacionDetalleVm, CotizacionDetalle>();
             
             

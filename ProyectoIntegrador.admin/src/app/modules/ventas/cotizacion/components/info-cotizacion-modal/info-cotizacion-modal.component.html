@@ -4,7 +4,7 @@
       Cotización
     </h3>
 
-    <span class="badge modal-title h4 ml-2"
+    <span class="badge modal-title h4 ml-2" *ngIf="vm"
       [ngClass]="{
         'bg-light-info text-info': vm.estadoDescripcion === 'En Proceso',
         'bg-light-success text-success': vm.estadoDescripcion === 'Entregada al Cliente',
@@ -24,21 +24,28 @@
 
     <ng-container *ngIf="vm">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <ng-container>
             <h5>{{ vm.clienteNombre }}</h5>
             <span class="form-text text-muted mb-5">Nombre del cliente</span>
           </ng-container>    
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
+          <ng-container>
+            <h5>{{ vm.telefonoDescripcion }}</h5>
+            <span class="form-text text-muted mb-5">Teléfono del cliente</span>
+          </ng-container>    
+        </div>
+
+        <div class="col-md-3">
           <ng-container>
             <h5>{{ vm.usuarioCreacionNombre }}</h5>
             <span class="form-text text-muted mb-5">Usuario de creación</span>
           </ng-container>    
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <ng-container>
             <h5>{{ vm.fechaCreacion | date: 'dd/MM/yyyy hh:mm:ss a' }}</h5>
             <span class="form-text text-muted mb-5">Fecha de creación</span>
@@ -89,15 +96,15 @@
   
             <th class="text-right">Cantidad</th>
             
-            <th>Es medida aproximada</th>
+            <th class="text-right">Precio</th>
 
           </thead>
           <tbody>
             <tr *ngFor="let row of vm.listaDetalle">
 
-              <td>{{ getProductoDescripcion(row) }}</td>
+              <td>{{ row.productoDescripcion }}</td>
 
-              <td>{{ getProductoDescripcion(row) }}</td>
+              <td>{{ row.unidadProductoDescripcion }}</td>
 
               <td>
                 <ng-container *ngIf="row.medidaAncho || row.medidaAlto">
@@ -110,13 +117,35 @@
               </td>
               
               <td class="text-right">{{ row.cantidad }}</td>
-              <td class="selection-cell">
-                <label class="checkbox checkbox-single">
-                  <input type="checkbox" [checked]="row.esMedidaAproximada" [disabled]="true"/>
-                  <span></span>
-                </label>
-              </td>
+              
+              <td class="text-right">${{ row.precioUnitario | number: '1.2-2' }} </td>
             </tr>
+
+            <ng-container *ngIf="vm.listaDetalle && vm.listaDetalle.length > 0">
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">ITBIS:</td>
+                <td class="text-right">${{ vm.impuesto| number: '1.2-2' }}</td>
+              </tr>
+  
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">Descuento:</td>
+                <td class="text-right">${{ vm.descuento | number: '1.2-2' }}</td>
+              </tr>
+  
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">Monto total:</td>
+                <td class="text-right">${{ vm.monto| number: '1.2-2' }}</td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>

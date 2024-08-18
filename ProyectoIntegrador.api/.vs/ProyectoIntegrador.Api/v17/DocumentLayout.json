@@ -3,28 +3,32 @@
   "WorkspaceRootPath": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\mappers\\productomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\mappers\\productomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\mappers\\cotizacionmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\mappers\\cotizacionmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\controllers\\cotizacioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\controllers\\cotizacioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\viewmodel\\cotizaciondetallevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\viewmodel\\cotizaciondetallevm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\viewmodel\\cotizacionvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\viewmodel\\cotizacionvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\controllers\\productocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraTipoProducto.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|solutionrelative:ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraTipoProducto.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\mappers\\productomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\mappers\\productomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\mappers\\solicitudtomamedidamapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\mappers\\solicitudtomamedidamapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\controllers\\cotizacioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\controllers\\cotizacioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
@@ -35,16 +39,8 @@
       "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\viewmodel\\cotizacionindex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\models\\cotizacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\models\\cotizacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|c:\\_proyectos\\systerminaciones\\proyectointegrador.api\\proyectointegrador\\controllers\\solicitudtomamedidacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A5C0C286-80FA-4952-8C51-0ADF6FDFF5B7}|ProyectoIntegrador\\ProyectoIntegrador.csproj|solutionrelative:proyectointegrador\\controllers\\solicitudtomamedidacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
-      "RelativeMoniker": "D:0:0:{788501C2-0B65-463B-8C5A-3687680376FC}|ProyectoIntegrador.Db\\ProyectoIntegrador.Db.sqlproj|solutionrelative:ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,59 +58,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProductoMapper.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\ProductoMapper.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Mappers\\ProductoMapper.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\ProductoMapper.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Mappers\\ProductoMapper.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAAnwCkAAAAeAAAA",
+              "DocumentIndex": 2,
+              "Title": "CotizacionDetalleVm.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\ViewModel\\CotizacionDetalleVm.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\ViewModel\\CotizacionDetalleVm.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\ViewModel\\CotizacionDetalleVm.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\ViewModel\\CotizacionDetalleVm.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-16T19:16:26.933Z",
+              "WhenOpened": "2024-08-18T04:07:31.554Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CotizacionMapper.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\CotizacionMapper.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\Mappers\\CotizacionMapper.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\CotizacionMapper.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\Mappers\\CotizacionMapper.cs",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAYwD8AAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T03:58:32.169Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ProductoController.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\ProductoController.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Controllers\\ProductoController.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\ProductoController.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Controllers\\ProductoController.cs",
-              "ViewState": "AQIAAFUAAAAAAAAAAAAkwFkAAABBAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-16T18:58:52.987Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SolicitudTomaMedidaMapper.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaMapper.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaMapper.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaMapper.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaMapper.cs",
-              "ViewState": "AQIAADoAAAAAAAAAAAAgwE0AAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-16T18:36:52.25Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "CotizacionVm.cs",
               "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\ViewModel\\CotizacionVm.cs",
               "RelativeDocumentMoniker": "ProyectoIntegrador\\ViewModel\\CotizacionVm.cs",
               "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\ViewModel\\CotizacionVm.cs",
               "RelativeToolTip": "ProyectoIntegrador\\ViewModel\\CotizacionVm.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAAowCUAAAAgAAAA",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAAwCcAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-16T16:12:47.469Z",
+              "WhenOpened": "2024-08-18T03:53:13.722Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "CotizacionIndex.cs",
               "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\ViewModel\\CotizacionIndex.cs",
               "RelativeDocumentMoniker": "ProyectoIntegrador\\ViewModel\\CotizacionIndex.cs",
@@ -122,26 +105,12 @@
               "RelativeToolTip": "ProyectoIntegrador\\ViewModel\\CotizacionIndex.cs",
               "ViewState": "AQIAAAQAAAAAAAAAAAA1wAcAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-16T16:44:14.984Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-16T16:44:14.984Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CotizacionMapper.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\CotizacionMapper.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Mappers\\CotizacionMapper.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\CotizacionMapper.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Mappers\\CotizacionMapper.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAAgwH0AAAA4AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-16T15:36:50.777Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "RegistraDatosBaseTablaRegistro.sql ",
+              "DocumentIndex": 7,
+              "Title": "RegistraDatosBaseTablaRegistro.sql",
               "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql",
               "RelativeDocumentMoniker": "ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql",
               "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraDatosBaseTablaRegistro.sql",
@@ -152,15 +121,51 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Cotizacion.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Models\\Cotizacion.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Models\\Cotizacion.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Models\\Cotizacion.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Models\\Cotizacion.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAXAAAA",
+              "DocumentIndex": 1,
+              "Title": "CotizacionController.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\CotizacionController.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\Controllers\\CotizacionController.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\CotizacionController.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\Controllers\\CotizacionController.cs",
+              "ViewState": "AQIAAMMAAAAAAAAAAAAowNMAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-16T15:31:47.115Z",
+              "WhenOpened": "2024-08-16T15:14:40.228Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SolicitudTomaMedidaMapper.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaMapper.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaMapper.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaMapper.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\Mappers\\SolicitudTomaMedidaMapper.cs",
+              "ViewState": "AQIAADoAAAAAAAAAAAAgwE0AAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T18:36:52.25Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProductoMapper.cs",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\ProductoMapper.cs",
+              "RelativeDocumentMoniker": "ProyectoIntegrador\\Mappers\\ProductoMapper.cs",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Mappers\\ProductoMapper.cs",
+              "RelativeToolTip": "ProyectoIntegrador\\Mappers\\ProductoMapper.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAnwCkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T19:16:26.933Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RegistraTipoProducto.sql",
+              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraTipoProducto.sql",
+              "RelativeDocumentMoniker": "ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraTipoProducto.sql",
+              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraTipoProducto.sql",
+              "RelativeToolTip": "ProyectoIntegrador.Db\\_Core\\Scripts\\RegistraTipoProducto.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-08-18T01:31:43.47Z",
               "EditorCaption": ""
             },
             {
@@ -173,21 +178,7 @@
               "RelativeToolTip": "ProyectoIntegrador\\Controllers\\SolicitudTomaMedidaController.cs",
               "ViewState": "AQIAAEgAAAAAAAAAAAAlwFsAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-16T15:18:51.396Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CotizacionController.cs",
-              "DocumentMoniker": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\CotizacionController.cs",
-              "RelativeDocumentMoniker": "ProyectoIntegrador\\Controllers\\CotizacionController.cs",
-              "ToolTip": "C:\\_Proyectos\\SysTerminaciones\\ProyectoIntegrador.api\\ProyectoIntegrador\\Controllers\\CotizacionController.cs",
-              "RelativeToolTip": "ProyectoIntegrador\\Controllers\\CotizacionController.cs",
-              "ViewState": "AQIAAGUAAAAAAAAAAAAIwGYAAABEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-16T15:14:40.228Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-16T15:18:51.396Z"
             }
           ]
         }

@@ -4,7 +4,9 @@
     {
         public int CotizacionId { get; set; }
         public int ProductoId { get; set; }
+        public string ProductoDescripcion { get; set; } = "";
         public int UnidadProductoId { get; set; }
+        public string UnidadProductoDescripcion { get; set; } = "";
         public decimal MedidaAncho { get; set; }
         public decimal MedidaAlto { get; set; }
         public int TipoMedidaId { get; set; }

@@ -124,7 +124,7 @@ export class CotizacionComponent
 
   create() {
     if (this.accesosService.puedeCrear('ventas.cotizacion.crear')) {
-      const modalRef = this.modalService.open(EditCotizacionModalComponent, { size: 'lg', backdrop: 'static' });
+      const modalRef = this.modalService.open(EditCotizacionModalComponent, { size: 'xl', backdrop: 'static' });
       modalRef.result.then(() =>
         this.service.fetch(),
         () => { }
@@ -132,10 +132,10 @@ export class CotizacionComponent
     }
   }
 
-  info(id: number) {
+  info(row: any) {
     if (this.accesosService.puedeEditar('ventas.cotizacion.ver-info')) {
       const modalRef = this.modalService.open(InfoCotizacionModalComponent, { size: 'xl', backdrop: 'static' });
-      modalRef.componentInstance.id = id;
+      modalRef.componentInstance.id = row.id;
       modalRef.result.then(
         () => { },
         () => { }
@@ -157,7 +157,7 @@ export class CotizacionComponent
 
   private validarEditar(row: any): boolean {
     if (row.estadoDescripcion !== 'En Proceso') {
-      Mensajes.mensajeValidacion('La solicitud no se encuentra en un estado disponible para tomar la medida');
+      Mensajes.mensajeValidacion('La cotización no se encuentra en un estado disponible para editar');
       return false;
     }
 

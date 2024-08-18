@@ -14,5 +14,7 @@
         public decimal Descuento { get; set; }
 
         public virtual Cotizacion Cotizacion { get; set; }
+        public virtual Producto Producto { get; set; }
+        public virtual Unidad UnidadProducto { get; set; }
     }
 }

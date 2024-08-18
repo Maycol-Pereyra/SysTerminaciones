@@ -38,7 +38,7 @@ namespace ProyectoIntegrador.DataModelConfig
                     .IsRequired();
 
                 etb.Property(e => e.Cantidad)
-                    .HasColumnType("int")
+                    .HasColumnType("decimal(18, 2)")
                     .IsRequired();
 
                 etb.Property(e => e.PrecioUnitario)
@@ -52,6 +52,16 @@ namespace ProyectoIntegrador.DataModelConfig
                 etb.Property(e => e.Descuento)
                     .HasColumnType("decimal(18, 2)")
                     .IsRequired();
+
+                etb.HasOne(e => e.UnidadProducto)
+                    .WithMany()
+                    .HasForeignKey(e => e.UnidadProductoId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                etb.HasOne(e => e.Producto)
+                    .WithMany()
+                    .HasForeignKey(e => e.ProductoId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             return modelBuilder;

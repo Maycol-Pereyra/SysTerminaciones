@@ -104,17 +104,19 @@ USING (VALUES
 , (N'ventas.solicitud-toma-medida.acceder', N'Ventas', N'Acceso de Solicitud de Toma de Medida', N'Acceder', N'')
 , (N'ventas.solicitud-toma-medida.crear', N'Ventas', N'Acceso de Solicitud de Toma de Medida', N'Crear', N'')
 , (N'ventas.solicitud-toma-medida.editar', N'Ventas', N'Acceso de Solicitud de Toma de Medida', N'Editar', N'')
-, (N'ventas.solicitud-toma-medida.ver-info', N'Ventas', N'Acceso de Cotización', N'Ver Información', N'')
-, (N'ventas.solicitud-toma-medida.tomar-medida', N'Ventas', N'Acceso de Cotización', N'Tomar Medidas', N'')
+, (N'ventas.solicitud-toma-medida.ver-info', N'Ventas', N'Acceso de Solicitud de Toma de Medida', N'Ver Información', N'')
+, (N'ventas.solicitud-toma-medida.tomar-medida', N'Ventas', N'Acceso de Solicitud de Toma de Medida', N'Tomar Medidas', N'')
 
 , (N'ventas.cotizacion.acceder', N'Ventas', N'Acceso de Cotización', N'Acceder', N'')
 , (N'ventas.cotizacion.crear', N'Ventas', N'Acceso de Cotización', N'Crear', N'')
 , (N'ventas.cotizacion.editar', N'Ventas', N'Acceso de Cotización', N'Editar', N'')
+, (N'ventas.cotizacion.ver-info', N'Ventas', N'Acceso de Cotización', N'Ver Información', N'')
 
 , (N'ventas.factura.acceder', N'Ventas', N'Acceso de Factura', N'Acceder', N'')
 , (N'ventas.factura.crear', N'Ventas', N'Acceso de Factura', N'Crear', N'')
 , (N'ventas.factura.editar', N'Ventas', N'Acceso de Factura', N'Editar', N'')
 , (N'ventas.factura.facturar', N'Ventas', N'Acceso de Factura', N'Facturar', N'')
+, (N'ventas.factura.ver-info', N'Ventas', N'Acceso de Factura', N'Ver Información', N'')
 
 , (N'compras.suplidor.acceder', N'Compras', N'Acceso de Suplidor', N'Acceder', N'')
 , (N'compras.suplidor.crear', N'Compras', N'Acceso de Suplidor', N'Crear', N'')

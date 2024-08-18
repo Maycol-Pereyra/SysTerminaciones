@@ -110,6 +110,8 @@ namespace ProyectoIntegrador.Controllers
             if (vm.Id == 0)
             {
                 var objNew = _mapper.Map<Cotizacion>(vm);
+                objNew.UsuarioCreacionId = GetUsuarioId();
+                objNew.TipoComprobanteId = 1; //TODO: asi hasta desarrollar el tema
                 objNew.FechaCreacion = DateTime.Now;
                 
                 objNew.EstadoId = await _dbContext.Registro
@@ -195,14 +197,41 @@ namespace ProyectoIntegrador.Controllers
             }
 
             var obj = await _dbContext.Cotizacion
-                .Include(o => o.Cliente)
-                .Include(o => o.Direccion)
-                .Include(o => o.ListaDetalle)
+                .Include(o => o.Estado)
+                .Include(o => o.Telefono)
                 .FirstOrDefaultAsync(o => o.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
+
+            obj.Direccion = await _dbContext.EntidadDireccion
+                .Include(o => o.Pais)
+                .Include(o => o.Provincia)
+                .Include(o => o.Ciudad)
+                .Include(o => o.Sector)
+                .Where(o => o.Id == obj.DireccionId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync() ?? new();
+
+            obj.Cliente = await _dbContext.Cliente
+                .Include(o => o.Entidad)
+                .Where(o => o.Id == obj.ClienteId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync() ?? new();
+
+            obj.UsuarioCreacion = await _dbContext.Usuario
+                .Include(o => o.Entidad)
+                .Where(o => o.Id == obj.UsuarioCreacionId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync() ?? new();
+
+            obj.ListaDetalle = await _dbContext.CotizacionDetalle
+                .Include(o => o.Producto)
+                .Include(o => o.UnidadProducto)
+                .Where(o => o.CotizacionId == obj.Id)
+                .AsNoTracking()
+                .ToListAsync();
 
             var vm = _mapper.Map<CotizacionVm>(obj);
 
@@ -265,7 +294,7 @@ namespace ProyectoIntegrador.Controllers
             // agregar
             if (origen.ListaDetalle?.Any() ?? false)
             {
-                foreach (var itemVm in origen.ListaDetalle.Where(o => o.ProductoId <= 0))
+                foreach (var itemVm in origen.ListaDetalle.Where(o => o.CotizacionId <= 0))
                 {
                     var item = _mapper.Map<CotizacionDetalle>(itemVm);
 

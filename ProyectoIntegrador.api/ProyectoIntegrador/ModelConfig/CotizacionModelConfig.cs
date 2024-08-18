@@ -82,6 +82,11 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasForeignKey(e => e.ClienteId)
                     .OnDelete(DeleteBehavior.Restrict);
 
+                etb.HasOne(e => e.Telefono)
+                    .WithMany()
+                    .HasForeignKey(e => e.TelefonoId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
                 etb.HasOne(e => e.Direccion)
                     .WithMany()
                     .HasForeignKey(e => e.DireccionId)

@@ -78,7 +78,7 @@ export class EditProductoUnidadComponent extends FormBase implements OnInit, OnD
       unidadId: [this.vm.unidadId, Validators.compose([Validators.required])],
       precioCompra: [this.vm.precioCompra, Validators.compose([Validators.min(0), Validators.max(99999999.99)])],
       precioVenta: [this.vm.precioVenta, Validators.compose([Validators.min(0), Validators.max(99999999.99)])],
-      precioVentaInstalacion: [this.vm.precioVentaInstalacion, Validators.compose([Validators.min(1), Validators.max(99999999.99)])],
+      precioVentaInstalacion: [this.vm.precioVentaInstalacion, Validators.compose([Validators.min(0), Validators.max(99999999.99)])],
     });
   }
 
