@@ -27,7 +27,8 @@ import { TomaMedidaSolicitudTomaMedidaModalComponent } from './solicitud-toma-me
 import { InfoCotizacionModalComponent } from './cotizacion/components/info-cotizacion-modal/info-cotizacion-modal.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
 import { EditCotizacionModalComponent } from './cotizacion/components/edit-cotizacion-modal/edit-cotizacion-modal.component';
-
+import { EditProductoDetalleProduccionComponent } from './producto/components/edit-producto-modal/producto-detalle-produccion/edit/edit-producto-detalle-produccion-modal.component';
+import { ProductoDetalleProduccionComponent } from './producto/components/edit-producto-modal/producto-detalle-produccion/producto-detalle-produccion.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,10 @@ import { EditCotizacionModalComponent } from './cotizacion/components/edit-cotiz
 
   CotizacionComponent,
   InfoCotizacionModalComponent,
-  EditCotizacionModalComponent
+  EditCotizacionModalComponent,
+
+  ProductoDetalleProduccionComponent,
+  EditProductoDetalleProduccionComponent
   ],
   imports: [
     CommonModule,

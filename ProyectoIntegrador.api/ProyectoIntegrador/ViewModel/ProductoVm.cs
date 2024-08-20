@@ -1,4 +1,6 @@
-﻿namespace ProyectoIntegrador.Api.ViewModel
+﻿using ProyectoIntegrador.ViewModel;
+
+namespace ProyectoIntegrador.Api.ViewModel
 {
     public class ProductoVm
     {
@@ -16,5 +18,6 @@
         public bool EstaActivo { get; set; }
 
         public List<ProductoUnidadVm> ListaProductoUnidad { get; set; } = [];
+        public List<ProductoDetalleProduccionVm> ListaProductoDetalleProduccion { get; set; } = [];
     }
 }

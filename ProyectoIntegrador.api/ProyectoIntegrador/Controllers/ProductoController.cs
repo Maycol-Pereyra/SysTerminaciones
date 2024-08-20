@@ -11,6 +11,7 @@ using ProyectoIntegrador.Api.RequestParameters;
 using ProyectoIntegrador.Api.ViewModel;
 using ProyectoIntegrador.Data;
 using ProyectoIntegrador.IServices;
+using ProyectoIntegrador.Models;
 
 namespace ProyectoIntegrador.Controllers
 {
@@ -99,6 +100,7 @@ namespace ProyectoIntegrador.Controllers
                 objNew.EstaActivo = true;
 
                 MapProductoUnidad(vm, objNew);
+                MapProductoDetalleProduccion(vm, objNew);
 
                 _dbContext.Producto.Add(objNew);
                 await _dbContext.SaveChangesAsync();
@@ -123,6 +125,7 @@ namespace ProyectoIntegrador.Controllers
             }
 
             MapProductoUnidad(vm, objUpdate);
+            MapProductoDetalleProduccion(vm, objUpdate);
 
             _mapper.Map(vm, objUpdate);
 
@@ -210,6 +213,16 @@ namespace ProyectoIntegrador.Controllers
 
         private static IQueryable<Producto> Filtrar(IQueryable<Producto> lista, ProductoParameters parameter)
         {
+            if (parameter.ProductoId > 0)
+            {
+                lista = lista.Where(o => o.Id == parameter.ProductoId);
+            }
+
+            if (parameter.ProductoExcluirId > 0)
+            {
+                lista = lista.Where(o => o.Id != parameter.ProductoExcluirId);
+            }
+
             if (string.IsNullOrEmpty(parameter.Criterio) == false)
             {
                 lista = lista.Where(o =>
@@ -264,6 +277,13 @@ namespace ProyectoIntegrador.Controllers
                 .AsNoTracking()
                 .ToListAsync();
 
+            obj.ListaProductoDetalleProduccion = await _dbContext.ProductoDetalleProduccion
+                .Include(o => o.ProductoProduccion)
+                .Include(o => o.UnidadProduccion)
+                .Where(o => o.ProductoId == obj.Id)
+                .AsNoTracking()
+                .ToListAsync();
+
             var vm = _mapper.Map<ProductoVm>(obj);
 
             return Ok(vm);
@@ -306,6 +326,47 @@ namespace ProyectoIntegrador.Controllers
                     var item = _mapper.Map<ProductoUnidad>(itemVm);
 
                     destino.ListaProductoUnidad.Add(item);
+                }
+            }
+        }
+
+        private void MapProductoDetalleProduccion(ProductoVm origen, Producto destino)
+        {
+            if (destino.ListaProductoDetalleProduccion == null)
+            {
+                destino.ListaProductoDetalleProduccion = new List<ProductoDetalleProduccion>();
+            }
+
+            int cantidad = destino.ListaProductoDetalleProduccion.Count();
+            for (int i = 0; i < cantidad; i++)
+            {
+                var item = destino.ListaProductoDetalleProduccion[i];
+
+                var itemVm = origen
+                    .ListaProductoDetalleProduccion?
+                    .FirstOrDefault(o => o.ProductoProduccionId == item.ProductoProduccionId);
+
+                if (itemVm == null)
+                {
+                    // ELIMINAR
+                    destino.ListaProductoDetalleProduccion.Remove(item);
+                    i--; cantidad--;
+                }
+                else
+                {
+                    // ACTUALIZAR
+                    _mapper.Map(itemVm, item);
+                }
+            }
+
+            // agregar
+            if (origen.ListaProductoDetalleProduccion?.Any() ?? false)
+            {
+                foreach (var itemVm in origen.ListaProductoDetalleProduccion.Where(o => o.ProductoId <= 0))
+                {
+                    var item = _mapper.Map<ProductoDetalleProduccion>(itemVm);
+
+                    destino.ListaProductoDetalleProduccion.Add(item);
                 }
             }
         }

@@ -1,3 +1,4 @@
+import { ProductoDetalleProduccion } from "./producto-detalle-produccion.model";
 import { ProductoUnidad } from "./producto-unidad.model";
 
 export class Producto {
@@ -9,11 +10,14 @@ export class Producto {
     public tipoProductoId: number;
     public colorId: number | null;
     public medidaAncho: number;
+    public medidaAnchoString: string;
     public medidaAlto: number;
+    public medidaAltoString: string;
     public tipoMedidaId: number;
     public estaActivo: boolean;
 
     public listaProductoUnidad: ProductoUnidad[];
+    public listaProductoDetalleProduccion: ProductoDetalleProduccion[];
 
 
     constructor(vm: any) {
@@ -26,10 +30,13 @@ export class Producto {
         this.tipoProductoId = vm.tipoProductoId || null;
         this.colorId = vm.colorId || null;
         this.medidaAncho = vm.medidaAncho || 0;
+        this.medidaAnchoString = vm.medidaAnchoString || '';
         this.medidaAlto = vm.medidaAlto || 0;
+        this.medidaAltoString = vm.medidaAltoString || '';
         this.tipoMedidaId = vm.tipoMedidaId || null;
         this.estaActivo = vm.estaActivo || false;
 
         this.listaProductoUnidad = !vm.listaProductoUnidad ? [] : vm.listaProductoUnidad;
+        this.listaProductoDetalleProduccion = !vm.listaProductoDetalleProduccion ? [] : vm.listaProductoDetalleProduccion;
     }
 }

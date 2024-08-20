@@ -15,5 +15,7 @@
         public decimal Descuento { get; set; }
 
         public virtual Factura Factura { get; set; }
+        public virtual Producto Producto { get; set; }
+        public virtual Unidad UnidadProducto { get; set; }
     }
 }

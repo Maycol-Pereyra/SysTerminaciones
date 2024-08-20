@@ -13,6 +13,7 @@
         public bool LlevaInstalacion { get; set; }
         public int UsuarioCreacionId { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public bool EstaActivo { get; set; }
+        public int EstadoId { get; set; }
+        public string EstadoDescripcion { get; set; } = "";
     }
 }

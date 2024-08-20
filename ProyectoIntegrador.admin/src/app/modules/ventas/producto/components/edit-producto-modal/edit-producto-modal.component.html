@@ -135,10 +135,7 @@
               [class.is-invalid]="isControlInvalid('medidaAncho')"
               [class.is-valid]="isControlValid('medidaAncho')"
               formControlName="medidaAncho" />
-            <div class="text-muted">Por favor especifique en formato <b>### / ##</b></div> 
-            <div class="invalid-feedback" *ngIf="controlHasError('required', 'medidaAncho')">Es requerido</div>
-            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'medidaAncho')">Debe tener al menos 1 caracter</div>
-            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'medidaAncho')">Debe tener máximo 50 caracteres</div>
+            <div class="text-muted">Especifique en formato <b># ##/##</b></div> 
           </div>
 
           <div class="col-lg-6">
@@ -152,10 +149,7 @@
               [class.is-invalid]="isControlInvalid('medidaAlto')"
               [class.is-valid]="isControlValid('medidaAlto')"
               formControlName="medidaAlto" />
-            <div class="text-muted">Por favor especifique en formato <b>### / ##</b></div> 
-            <div class="invalid-feedback" *ngIf="controlHasError('required', 'medidaAlto')">Es requerido</div>
-            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'medidaAlto')">Debe tener al menos 1 caracter</div>
-            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'medidaAlto')">Debe tener máximo 50 caracteres</div>
+            <div class="text-muted">Especifique en formato <b># ##/##</b></div> 
           </div>
         </div>
 
@@ -180,6 +174,14 @@
           [listaDetalle]="vm.listaProductoUnidad">
         </app-producto-unidad>
 
+        <div class="separator separator-dashed my-8"></div>
+           
+        <app-producto-detalle-produccion
+          [listaDetalle]="vm.listaProductoDetalleProduccion"
+          [productoId]="vm.id">
+        </app-producto-detalle-produccion>
+
+        
         <ng-container *ngIf="+vm.id > 0">
           <div class="separator separator-dashed my-8"></div>
 

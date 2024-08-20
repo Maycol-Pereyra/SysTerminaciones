@@ -62,6 +62,7 @@ namespace ProyectoIntegrador.Data
         public DbSet<PerfilAcceso> PerfilAcceso { get; set; }
         public DbSet<Acceso> Acceso { get; set; }
         public DbSet<Producto> Producto { get; set; }
+        public DbSet<ProductoDetalleProduccion> ProductoDetalleProduccion { get; set; }
         public DbSet<ProductoUnidad> ProductoUnidad { get; set; }
         public DbSet<Programa> Programa { get; set; }
         public DbSet<Provincia> Provincia { get; set; }
@@ -133,6 +134,7 @@ namespace ProyectoIntegrador.Data
             modelBuilder.ConfigurarPerfilPermisoModelConfig();
             modelBuilder.ConfigurarPermisoModelConfig();
             modelBuilder.ConfigurarProductoModelConfig();
+            modelBuilder.ConfigurarProductoDetalleProduccionModelConfig();
             modelBuilder.ConfigurarProductoUnidadModelConfig();
             modelBuilder.ConfigurarProgramaModelConfig();
             modelBuilder.ConfigurarProvinciaModelConfig();

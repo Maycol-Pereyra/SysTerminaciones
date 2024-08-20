@@ -13,6 +13,7 @@ import { ItemSelectService } from 'src/app/_core/item-select/item-select.service
 import { AppConfig } from 'src/app/_core/services/app-config.service';
 import { EndPointSelect } from 'src/app/_core/const/app.const';
 import { TipoMedidaEnum } from '../../shared/tipo-medida.enum';
+import { NumeroMixto } from 'src/app/_core/models/numero-mixto.model';
 
 @Component({
   selector: 'app-edit-producto-modal',
@@ -93,8 +94,8 @@ export class EditProductoModalComponent extends FormBase implements OnInit, OnDe
       tipoProductoId: [this.vm.tipoProductoId, Validators.compose([Validators.required])],
       colorId: [this.vm.colorId, Validators.compose([Validators.required])],
       tipoMedidaId: [this.vm.tipoMedidaId, Validators.compose([Validators.nullValidator])],
-      medidaAncho: [this.vm.medidaAncho, Validators.compose([Validators.minLength(1), Validators.maxLength(50)])],
-      medidaAlto: [this.vm.medidaAlto, Validators.compose([Validators.minLength(1), Validators.maxLength(50)])],
+      medidaAncho: [this.vm.medidaAncho, Validators.compose([Validators.nullValidator])],
+      medidaAlto: [this.vm.medidaAlto, Validators.compose([Validators.nullValidator])],
     });
   }
 
@@ -168,8 +169,14 @@ export class EditProductoModalComponent extends FormBase implements OnInit, OnDe
     this.vm.tipoProductoId = formData.tipoProductoId; 
     this.vm.colorId = formData.colorId; 
     this.vm.tipoMedidaId = formData.tipoMedidaId; 
-    this.vm.medidaAncho = formData.medidaAncho; 
-    this.vm.medidaAlto = formData.medidaAlto; 
+    this.vm.medidaAnchoString = formData.medidaAncho; 
+    this.vm.medidaAltoString = formData.medidaAlto;
+    
+    const medidaAnchoMixto = new NumeroMixto(formData.medidaAncho);
+    const medidaAltoMixto = new NumeroMixto(formData.medidaAlto);
+
+    this.vm.medidaAncho = medidaAnchoMixto.numeroDecimal; 
+    this.vm.medidaAlto = medidaAltoMixto.numeroDecimal;
   }
 
   private getEmty(): Producto{

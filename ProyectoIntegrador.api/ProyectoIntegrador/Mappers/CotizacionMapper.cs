@@ -2,6 +2,7 @@
 using ProyectoIntegrador.Api._Core.Entidades;
 using ProyectoIntegrador.Api.Models;
 using ProyectoIntegrador.Api.ViewModel;
+using ProyectoIntegrador.ViewModel;
 
 namespace ProyectoIntegrador.Mappers
 {
@@ -147,6 +148,8 @@ namespace ProyectoIntegrador.Mappers
             
             CreateMap<CotizacionVm, FacturaVm>();
             CreateMap<CotizacionDetalleVm, FacturaDetalleVm>();
+
+            CreateMap<CotizacionDetalleVm, VerificacionExistenciaDto>();
         }
     }
 }

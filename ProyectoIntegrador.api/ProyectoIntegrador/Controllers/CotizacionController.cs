@@ -11,6 +11,7 @@ using ProyectoIntegrador.Api.ViewModel;
 using ProyectoIntegrador.Data;
 using ProyectoIntegrador.Helpers;
 using ProyectoIntegrador.IServices;
+using ProyectoIntegrador.ViewModel;
 
 namespace ProyectoIntegrador.Controllers
 {
@@ -97,6 +98,45 @@ namespace ProyectoIntegrador.Controllers
             var cotizacionVm = _mapper.Map<CotizacionVm>(solicitudTomaMedidaVm);
 
             return Ok(cotizacionVm);
+        }
+
+        [HttpPost("obtener-productos-faltantes")]
+        public async Task<ActionResult<List<string>>> GetProductosFaltantes([FromBody] CotizacionVm vm)
+        {
+            var listaVerificar = new List<VerificacionExistenciaDto>();
+
+            var listaProductoId = vm.ListaDetalle.Select(o => o.ProductoId).ToList();
+
+            foreach (var item in vm.ListaDetalle)
+            {
+                var producto = await _dbContext.Producto
+                    .Include(o => o.TipoProducto)
+                    .Where(o => o.Id == item.ProductoId)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync() ?? new();
+
+                if (producto.TipoProducto.UsaMedidasProducto)
+                {
+                    
+                }
+                else
+                {
+                    var obj = _mapper.Map<VerificacionExistenciaDto>(item);
+                    obj.TipoProductoId = producto.TipoProductoId;
+
+                    listaVerificar.Add(obj);
+                }
+
+            }
+
+
+
+            var lista = await _dbContext.ProductoDetalleProduccion
+                .Where(o => listaProductoId.Contains(o.ProductoId))
+                .AsNoTracking()
+                .ToListAsync();
+
+            return new List<string>(); //TODO: completar este este endpoint cuando pueda
         }
 
         [HttpPost]

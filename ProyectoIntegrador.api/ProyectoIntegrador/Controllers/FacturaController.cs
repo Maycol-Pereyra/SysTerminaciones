@@ -11,6 +11,7 @@ using ProyectoIntegrador.Api.ViewModel;
 using ProyectoIntegrador.Data;
 using ProyectoIntegrador.Helpers;
 using ProyectoIntegrador.IServices;
+using ProyectoIntegrador.ViewModel;
 
 namespace ProyectoIntegrador.Controllers
 {
@@ -38,50 +39,76 @@ namespace ProyectoIntegrador.Controllers
         {
             var lista = _dbContext.Factura
                 .Include(o => o.Cliente)
-                .Include(o => o.Direccion)
-                .Include(o => o.ListaDetalle)
+                .Include(o => o.Estado)
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
             lista = lista.OrderBy(o => o.Id);
             var pl = await lista.ToPagedList(parameter);
+            
+            await ComplementarDatosCliente(pl.Items);
 
             return Ok(pl.GetCopy(_mapper.Map<List<FacturaIndex>>(pl.Items)));
         }
 
-        [HttpGet("nueva-por-cotizacion/{cotizacionId}")]
-        public async Task<ActionResult<FacturaVm>> GetNuevaPorSolicitudTomaMedida(int cotizacionId)
+        [HttpGet("item-select")]
+        public async Task<ActionResult<List<ItemSelect>>> GetItemSelect([FromQuery] FacturaParameters parameter)
         {
-            var cotizacion = await _dbContext.Cotizacion
+            var lista = _dbContext.Factura
                 .Include(o => o.Cliente)
-                .Include(o => o.Direccion)
-                .Include(o => o.ListaDetalle)
-                .Where(o => o.Id == cotizacionId)
-                .AsNoTracking()
-                .FirstOrDefaultAsync();
+                .Include(o => o.Estado)
+                .AsNoTracking();
+            lista = Filtrar(lista, parameter);
+            //lista = lista.Where(o => o.EstaActivo); TODO: solo filtrar por aquellos en un estado pertienente
+            lista = lista.OrderBy(o => o.Id);
+            var pl = await lista.ToPagedList(parameter);
 
-            if (cotizacion == null)
+            await ComplementarDatosCliente(pl.Items);
+
+            return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
+        }
+
+        [HttpPost("obtener-productos-faltantes")]
+        public async Task<ActionResult<List<string>>> GetProductosFaltantes([FromBody] FacturaVm vm)
+        {
+            var listaVerificar = new List<VerificacionExistenciaDto>();
+
+            var listaProductoId = vm.ListaDetalle.Select(o => o.ProductoId).ToList();
+
+            foreach (var item in vm.ListaDetalle)
             {
-                return BadRequest("La cotización especificada no existe");
+                var producto = await _dbContext.Producto
+                    .Include(o => o.TipoProducto)
+                    .Where(o => o.Id == item.ProductoId)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync() ?? new();
+
+                if (producto.TipoProducto.UsaMedidasProducto)
+                {
+                    
+                }
+                else
+                {
+                    var obj = _mapper.Map<VerificacionExistenciaDto>(item);
+                    obj.TipoProductoId = producto.TipoProductoId;
+
+                    listaVerificar.Add(obj);
+                }
+
             }
 
-            //TODO: controlar esto
 
-            //if (cotizacion.EstaActivo == false)
-            //{
-            //    return BadRequest("La cotización especificada no está en un estado válido para crear una factura");
-            //}
 
-            var cotizacionVm = _mapper.Map<SolicitudTomaMedidaVm>(cotizacion);
+            var lista = await _dbContext.ProductoDetalleProduccion
+                .Where(o => listaProductoId.Contains(o.ProductoId))
+                .AsNoTracking()
+                .ToListAsync();
 
-            var facturaVm = _mapper.Map<FacturaVm>(cotizacionVm);
-
-            return Ok(facturaVm);
+            return new List<string>(); //TODO: completar este este endpoint cuando pueda
         }
 
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] FacturaVm vm)
         {
-            //TODO: Manejar el registro de factura en un stored procedure
             if (!ModelState.IsValid) { return LogModelState(ModelState); }
 
             var resultado = ValidarModelo(vm);
@@ -90,7 +117,16 @@ namespace ProyectoIntegrador.Controllers
             if (vm.Id == 0)
             {
                 var objNew = _mapper.Map<Factura>(vm);
+                objNew.UsuarioCreacionId = GetUsuarioId();
+                objNew.TipoComprobanteId = 1; //TODO: asi hasta desarrollar el tema
                 objNew.FechaCreacion = DateTime.Now;
+                
+                objNew.EstadoId = await _dbContext.Registro
+                    .Where(o => o.TipoRegistroId == 27)
+                    .Where(o => o.Descripcion == "En Proceso")
+                    .AsNoTracking()
+                    .Select(o => o.Id)
+                    .FirstOrDefaultAsync();
 
                 MapDetalle(vm, objNew);
 
@@ -148,7 +184,7 @@ namespace ProyectoIntegrador.Controllers
                 if (vm.DireccionId == 0)
                 {
                     return Resultado.Invalido($"Debe de especificar la dirección");
-                }
+                }       
             }
 
             return Resultado.Ok();
@@ -168,18 +204,65 @@ namespace ProyectoIntegrador.Controllers
             }
 
             var obj = await _dbContext.Factura
-                .Include(o => o.Cliente)
-                .Include(o => o.Direccion)
-                .Include(o => o.ListaDetalle)
+                .Include(o => o.Estado)
+                .Include(o => o.Telefono)
                 .FirstOrDefaultAsync(o => o.Id == id);
             if (obj == null)
             {
                 return NotFound();
             }
 
+            obj.Direccion = await _dbContext.EntidadDireccion
+                .Include(o => o.Pais)
+                .Include(o => o.Provincia)
+                .Include(o => o.Ciudad)
+                .Include(o => o.Sector)
+                .Where(o => o.Id == obj.DireccionId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync() ?? new();
+
+            obj.Cliente = await _dbContext.Cliente
+                .Include(o => o.Entidad)
+                .Where(o => o.Id == obj.ClienteId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync() ?? new();
+
+            obj.UsuarioCreacion = await _dbContext.Usuario
+                .Include(o => o.Entidad)
+                .Where(o => o.Id == obj.UsuarioCreacionId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync() ?? new();
+
+            obj.ListaDetalle = await _dbContext.FacturaDetalle
+                .Include(o => o.Producto)
+                .Include(o => o.UnidadProducto)
+                .Where(o => o.FacturaId == obj.Id)
+                .AsNoTracking()
+                .ToListAsync();
+
             var vm = _mapper.Map<FacturaVm>(obj);
 
             return Ok(vm);
+        }
+
+        private async Task ComplementarDatosCliente(List<Factura> lista)
+        {
+            if (lista.SinElementos())
+            {
+                return;
+            }
+
+            var listaEntidadId = lista.Select(o => o.Cliente.EntidadId).ToList();
+
+            var entidades = await _dbContext.Entidad
+                .Where(o => listaEntidadId.Contains(o.Id))
+                .AsNoTracking()
+                .ToListAsync();
+
+            foreach (var item in lista)
+            {
+                item.Cliente.Entidad = entidades.Where(o => o.Id == item.Cliente.EntidadId).FirstOrDefault() ?? new();
+            }
         }
 
         private void MapDetalle(FacturaVm origen, Factura destino)
@@ -218,7 +301,7 @@ namespace ProyectoIntegrador.Controllers
             // agregar
             if (origen.ListaDetalle?.Any() ?? false)
             {
-                foreach (var itemVm in origen.ListaDetalle.Where(o => o.ProductoId <= 0))
+                foreach (var itemVm in origen.ListaDetalle.Where(o => o.FacturaId <= 0))
                 {
                     var item = _mapper.Map<FacturaDetalle>(itemVm);
 

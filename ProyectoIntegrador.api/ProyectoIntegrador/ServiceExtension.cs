@@ -67,6 +67,7 @@ namespace ProyectoIntegrador.Api
             services.AddScoped<IExistenciaService, ExistenciaService>();
             services.AddScoped<IDireccionService, DireccionService>();
             services.AddScoped<IRegistraTomaMedidaService, RegistraTomaMedidaService>();
+            services.AddScoped<IInventarioService, InventarioService>();
             return services;
         }
 

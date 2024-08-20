@@ -1,4 +1,6 @@
 ﻿
+using ProyectoIntegrador.Models;
+
 namespace ProyectoIntegrador.Api.Models
 {
     public class Producto
@@ -22,5 +24,6 @@ namespace ProyectoIntegrador.Api.Models
         public virtual Suplidor Suplidor { get; set; }
 
         public virtual List<ProductoUnidad> ListaProductoUnidad { get; set; } = [];
+        public virtual List<ProductoDetalleProduccion> ListaProductoDetalleProduccion { get; set; } = [];
     }
 }

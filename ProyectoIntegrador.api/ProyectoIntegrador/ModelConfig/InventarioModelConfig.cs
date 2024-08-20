@@ -29,6 +29,14 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("int")
                     .IsRequired();
 
+                etb.Property(e => e.MedidaAncho)
+                    .HasColumnType("decimal(10, 6)")
+                    .IsRequired();
+
+                etb.Property(e => e.MedidaAlto)
+                    .HasColumnType("decimal(10, 6)")
+                    .IsRequired();
+
                 etb.Property(e => e.EstadoId)
                     .HasColumnType("int")
                     .IsRequired();

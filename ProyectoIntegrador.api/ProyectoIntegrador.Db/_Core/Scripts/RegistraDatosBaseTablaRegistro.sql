@@ -55,11 +55,11 @@ USING (VALUES
 	(30, 26, 'Concluido', GETDATE(), GETDATE(), 1),
 	-- Fin Tabla EstadoSolicitudTomaMedida
 
-	-- Inicio Tabla TipoPrograma
-	(31, 24, 'Registro', GETDATE(), GETDATE(), 1),
-	(32, 24, 'Proceso', GETDATE(), GETDATE(), 1),
-	(33, 24, 'Reporte', GETDATE(), GETDATE(), 1),
-	-- Fin Tabla TipoPrograma
+	-- Inicio Tabla EstadoInventario
+	(31, 22, 'Disponible', GETDATE(), GETDATE(), 1),
+	(32, 22, 'Reservado', GETDATE(), GETDATE(), 1),
+	(33, 22, 'No Disponible', GETDATE(), GETDATE(), 1),
+	-- Fin Tabla EstadoInventario
 
 	-- Inicio Tabla EstadoHerramienta
 	(34, 8, 'Disponible', GETDATE(), GETDATE(), 1),

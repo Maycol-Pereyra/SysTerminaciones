@@ -2,6 +2,8 @@
 using ProyectoIntegrador.Api._Core.Entidades;
 using ProyectoIntegrador.Api.Models;
 using ProyectoIntegrador.Api.ViewModel;
+using ProyectoIntegrador.Models;
+using ProyectoIntegrador.ViewModel;
 
 namespace ProyectoIntegrador.Mappers
 {
@@ -38,6 +40,10 @@ namespace ProyectoIntegrador.Mappers
                 .ForMember(
                     des => des.ListaProductoUnidad,
                     opt => opt.Ignore()
+                )
+                .ForMember(
+                    des => des.ListaProductoDetalleProduccion,
+                    opt => opt.Ignore()
                 );
 
             CreateMap<ProductoUnidad, ItemSelect>()
@@ -64,6 +70,22 @@ namespace ProyectoIntegrador.Mappers
                         :"")
                 );
             CreateMap<ProductoUnidadVm, ProductoUnidad>();
+
+
+            CreateMap<ProductoDetalleProduccion, ProductoDetalleProduccionVm>()
+                .ForMember(
+                    des => des.ProductoProduccionDescripcion,
+                    opt => opt.MapFrom(ori => ori.ProductoProduccion != null
+                        ? $"{ori.ProductoProduccion.Descripcion}"
+                        : "")
+                )
+                .ForMember(
+                    des => des.UnidadProduccionDescripcion,
+                    opt => opt.MapFrom(ori => ori.UnidadProduccion != null
+                        ? $"{ori.UnidadProduccion.Descripcion}"
+                        : "")
+                );
+            CreateMap<ProductoDetalleProduccionVm, ProductoDetalleProduccion>();
         }
     }
 }

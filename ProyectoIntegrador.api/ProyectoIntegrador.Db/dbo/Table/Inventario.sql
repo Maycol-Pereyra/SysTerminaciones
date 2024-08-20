@@ -3,6 +3,8 @@
 	[AlmacenId] INT NOT NULL,
 	[ProductoId] INT NOT NULL,
 	[UnidadId] INT NOT NULL,
+	[MedidaAncho] DECIMAL(10, 6) NOT NULL DEFAULT 0,
+	[MedidaAlto] DECIMAL(10, 6) NOT NULL DEFAULT 0,
 	[EstadoId] INT NOT NULL,
 	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
 	[FechaModificacion] DATETIME NOT NULL DEFAULT GETDATE(),

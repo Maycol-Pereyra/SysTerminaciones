@@ -21,7 +21,7 @@
             name="unidadId"
             formControlName="unidadId"
             [class.is-invalid]="isControlInvalid('unidadId')">
-            <option [ngValue]="null">-</option>
+            <option [ngValue]="null">Seleccione uno</option>
             <ng-container *ngFor="let item of unidad$ | async">
               <option [value]="item.id">{{item.descripcion}}</option>
             </ng-container>

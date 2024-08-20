@@ -8,8 +8,33 @@ namespace ProyectoIntegrador.Mappers
     {
         public FacturaMapper()
         {
-            CreateMap<Factura, FacturaIndex>();
+            CreateMap<Factura, FacturaIndex>()
+                .ForMember(
+                    des => des.ClienteNombre,
+                    opt => opt.MapFrom(ori => ori.Cliente != null
+                        ? $"{ori.Cliente.Entidad.Nombre} {ori.Cliente.Entidad.Apellido}"
+                        : "")
+                )
+                .ForMember(
+                    des => des.EstadoDescripcion,
+                    opt => opt.MapFrom(ori => ori.Estado != null
+                        ? ori.Estado.Descripcion
+                        : "")
+                );
+
             CreateMap<Factura, FacturaVm>()
+                .ForMember(
+                    des => des.TelefonoDescripcion,
+                    opt => opt.MapFrom(ori => ori.Telefono != null
+                        ? ori.Telefono.Telefono
+                        : "")
+                )
+                .ForMember(
+                    des => des.ClienteNombre,
+                    opt => opt.MapFrom(ori => ori.Cliente != null
+                        ? $"{ori.Cliente.Entidad.Nombre} {ori.Cliente.Entidad.Apellido}"
+                        : "")
+                )
                 .ForMember(
                     des => des.Calle,
                     opt => opt.MapFrom(ori => ori.Direccion != null
@@ -26,6 +51,30 @@ namespace ProyectoIntegrador.Mappers
                     des => des.Referencia,
                     opt => opt.MapFrom(ori => ori.Direccion != null
                         ? ori.Direccion.Referencia
+                        : "")
+                )
+                .ForMember(
+                    des => des.PaisDescripcion,
+                    opt => opt.MapFrom(ori => ori.Direccion != null
+                        ? ori.Direccion.Pais.Descripcion
+                        : "")
+                )
+                .ForMember(
+                    des => des.ProvinciaDescripcion,
+                    opt => opt.MapFrom(ori => ori.Direccion != null
+                        ? ori.Direccion.Provincia.Descripcion
+                        : "")
+                )
+                .ForMember(
+                    des => des.CiudadDescripcion,
+                    opt => opt.MapFrom(ori => ori.Direccion != null
+                        ? ori.Direccion.Ciudad.Descripcion
+                        : "")
+                )
+                .ForMember(
+                    des => des.SectorDescripcion,
+                    opt => opt.MapFrom(ori => ori.Direccion != null
+                        ? ori.Direccion.Sector.Descripcion
                         : "")
                 )
                 .ForMember(
@@ -51,6 +100,18 @@ namespace ProyectoIntegrador.Mappers
                     opt => opt.MapFrom(ori => ori.Direccion != null
                         ? ori.Direccion.SectorId
                         : 0)
+                )
+                .ForMember(
+                    des => des.EstadoDescripcion,
+                    opt => opt.MapFrom(ori => ori.Estado != null
+                        ? ori.Estado.Descripcion
+                        : "")
+                )
+                .ForMember(
+                    des => des.UsuarioCreacionNombre,
+                    opt => opt.MapFrom(ori => ori.UsuarioCreacion != null
+                        ? $"{ori.UsuarioCreacion.Entidad.Nombre} {ori.UsuarioCreacion.Entidad.Apellido}"
+                        : "")
                 );
 
             CreateMap<FacturaVm, Factura>()
@@ -59,7 +120,19 @@ namespace ProyectoIntegrador.Mappers
                     opt => opt.Ignore()
                 );
 
-            CreateMap<FacturaDetalle, FacturaDetalleVm>();
+            CreateMap<FacturaDetalle, FacturaDetalleVm>()
+                .ForMember(
+                    des => des.ProductoDescripcion,
+                    opt => opt.MapFrom(ori => ori.Producto != null
+                    ? ori.Producto.Descripcion
+                    : "")
+                )
+                .ForMember(
+                    des => des.UnidadProductoDescripcion,
+                    opt => opt.MapFrom(ori => ori.UnidadProducto != null
+                    ? ori.UnidadProducto.Descripcion
+                    : "")
+                );
             CreateMap<FacturaDetalleVm, FacturaDetalle>();
         }
     }

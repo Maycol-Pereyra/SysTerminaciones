@@ -85,6 +85,11 @@ namespace ProyectoIntegrador.DataModelConfig
                     .WithOne(x => x.Producto)
                     .HasForeignKey(x => x.ProductoId)
                     .OnDelete(DeleteBehavior.Cascade);
+
+                etb.HasMany(e => e.ListaProductoDetalleProduccion)
+                    .WithOne(x => x.Producto)
+                    .HasForeignKey(x => x.ProductoId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             return modelBuilder;
