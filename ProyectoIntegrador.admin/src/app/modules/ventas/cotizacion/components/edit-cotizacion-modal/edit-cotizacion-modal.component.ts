@@ -299,6 +299,7 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
         medidaAltoString: medidaAlto,
         medidaAncho: medidaAnchoMixto.numeroDecimal,
         medidaAlto: medidaAltoMixto.numeroDecimal,
+        tipoMedidaId: 1,
         cantidad,
         productoDescripcion: this.productoDescripcion,
         unidadProductoId: unidadProductoId,
@@ -358,13 +359,13 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
       return false;
     }
 
-    if (!!this.tipoProductoSeleccionado && this.tipoProductoSeleccionado.usaMedidasFactura) {
-      if (medidaAncho === '') {
+    if (!!this.tipoProductoSeleccionado && (this.tipoProductoSeleccionado.usaMedidaAncho || this.tipoProductoSeleccionado.usaMedidaAlto)) {
+      if (this.tipoProductoSeleccionado.usaMedidaAncho && medidaAncho === '') {
         this.mensajeValidacion('Debe especificar la medida de ancho');
         return false;
       }
   
-      if (medidaAlto === '') {
+      if (this.tipoProductoSeleccionado.usaMedidaAlto && medidaAlto === '') {
         this.mensajeValidacion('Debe especificar le medida de alto');
         return false;
       }

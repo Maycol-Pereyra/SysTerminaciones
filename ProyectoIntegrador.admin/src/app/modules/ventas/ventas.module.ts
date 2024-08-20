@@ -29,6 +29,13 @@ import { CotizacionComponent } from './cotizacion/cotizacion.component';
 import { EditCotizacionModalComponent } from './cotizacion/components/edit-cotizacion-modal/edit-cotizacion-modal.component';
 import { EditProductoDetalleProduccionComponent } from './producto/components/edit-producto-modal/producto-detalle-produccion/edit/edit-producto-detalle-produccion-modal.component';
 import { ProductoDetalleProduccionComponent } from './producto/components/edit-producto-modal/producto-detalle-produccion/producto-detalle-produccion.component';
+import { EditFacturaModalComponent } from './factura/components/edit-factura-modal/edit-factura-modal.component';
+import { InfoFacturaModalComponent } from './factura/components/info-factura-modal/info-factura-modal.component';
+import { FacturaComponent } from './factura/factura.component';
+import { EditCajaModalComponent } from './caja/components/edit-caja-modal/edit-caja-modal.component';
+import { CajaComponent } from './caja/caja.component';
+import { AbrirCajaModalComponent } from './caja/components/abrir-caja-modal/abrir-caja-modal.component';
+import { CerrarCajaModalComponent } from './caja/components/cerrar-caja-modal/cerrar-caja-modal.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +62,16 @@ import { ProductoDetalleProduccionComponent } from './producto/components/edit-p
   EditCotizacionModalComponent,
 
   ProductoDetalleProduccionComponent,
-  EditProductoDetalleProduccionComponent
+  EditProductoDetalleProduccionComponent,
+
+  FacturaComponent,
+  EditFacturaModalComponent,
+  InfoFacturaModalComponent,
+  
+  CajaComponent,
+  EditCajaModalComponent,
+  AbrirCajaModalComponent,
+  CerrarCajaModalComponent
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,7 @@
         <ng-container *ngIf="vm.id">Editar</ng-container>
         <ng-container *ngIf="!vm.id">Crear</ng-container>
         Cotización
+        <ng-container *ngIf="vm.id">'<span class="font-weight-bolder text-primary mb-0">{{vm.numeroCotizacion}}</span>'</ng-container>
       </ng-container>
     </div>
   </div>
@@ -173,8 +174,8 @@
           </div>
         </div>
 
-        <div class="form-group row" *ngIf="tipoProductoSeleccionado && tipoProductoSeleccionado.usaMedidasFactura">
-          <div class="col-lg-6">
+        <div class="form-group row" *ngIf="tipoProductoSeleccionado && (tipoProductoSeleccionado.usaMedidaAncho || tipoProductoSeleccionado.usaMedidaAlto)">
+          <div class="col-lg-6" *ngIf="tipoProductoSeleccionado.usaMedidaAncho">
             <label class="form-label">Medida de ancho</label>
             <input 
               type="text" 
@@ -185,7 +186,7 @@
               formControlName="medidaAncho" />
           </div>
 
-          <div class="col-lg-6" *ngIf="tipoProductoSeleccionado && tipoProductoSeleccionado.usaMedidasFactura">
+          <div class="col-lg-6" *ngIf="tipoProductoSeleccionado.usaMedidaAlto">
             <label class="form-label">Medida de alto</label>
             <input 
               type="text" 

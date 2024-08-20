@@ -82,7 +82,7 @@ namespace ProyectoIntegrador.Controllers
                     .AsNoTracking()
                     .FirstOrDefaultAsync() ?? new();
 
-                if (producto.TipoProducto.UsaMedidasProducto)
+                if (producto.TipoProducto.UsaMedidaAncho)
                 {
                     
                 }

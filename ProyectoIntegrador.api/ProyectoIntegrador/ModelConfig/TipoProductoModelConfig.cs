@@ -21,11 +21,19 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("varchar(50)")
                     .IsRequired();
 
-                etb.Property(e => e.UsaMedidasProducto)
+                etb.Property(e => e.UsaMedidaAncho)
                     .HasColumnType("bit")
                     .IsRequired();
 
-                etb.Property(e => e.UsaMedidasFactura)
+                etb.Property(e => e.UsaMedidaAlto)
+                    .HasColumnType("bit")
+                    .IsRequired();
+
+                etb.Property(e => e.UsaDescuento)
+                    .HasColumnType("bit")
+                    .IsRequired();
+
+                etb.Property(e => e.UsaDivision)
                     .HasColumnType("bit")
                     .IsRequired();
 

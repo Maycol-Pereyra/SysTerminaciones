@@ -118,6 +118,14 @@ USING (VALUES
 , (N'ventas.factura.facturar', N'Ventas', N'Acceso de Factura', N'Facturar', N'')
 , (N'ventas.factura.ver-info', N'Ventas', N'Acceso de Factura', N'Ver Información', N'')
 
+, (N'ventas.caja.acceder', N'Ventas', N'Acceso de Caja', N'Acceder', N'')
+, (N'ventas.caja.crear', N'Ventas', N'Acceso de Caja', N'Crear', N'')
+, (N'ventas.caja.editar', N'Ventas', N'Acceso de Caja', N'Editar', N'')
+, (N'ventas.caja.activar', N'Ventas', N'Acceso de Caja', N'Activar', N'')
+, (N'ventas.caja.inactivar', N'Ventas', N'Acceso de Caja', N'Inactivar', N'')
+, (N'ventas.caja.abrir', N'Ventas', N'Acceso de Caja', N'Abrir', N'')
+, (N'ventas.caja.cerrar', N'Ventas', N'Acceso de Caja', N'Cerrar', N'')
+
 , (N'compras.suplidor.acceder', N'Compras', N'Acceso de Suplidor', N'Acceder', N'')
 , (N'compras.suplidor.crear', N'Compras', N'Acceso de Suplidor', N'Crear', N'')
 , (N'compras.suplidor.editar', N'Compras', N'Acceso de Suplidor', N'Editar', N'')

@@ -57,7 +57,7 @@ namespace ProyectoIntegrador.Controllers
             return Ok(pl.GetCopy(_mapper.Map<List<ItemSelect>>(pl.Items)));
         }
 
-        [HttpGet("{id}", Name = "GetGeneralesPerfil")]
+        [HttpGet("{id}", Name = "GetPerfil")]
         public async Task<ActionResult<PerfilVm>> Get(int id)
         {
             if (id <= 0) { return BadRequest("Debe especificar el id."); }

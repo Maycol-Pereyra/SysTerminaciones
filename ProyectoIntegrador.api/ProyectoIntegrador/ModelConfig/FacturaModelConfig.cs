@@ -17,10 +17,6 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("int")
                     .IsRequired();
 
-                etb.Property(e => e.TipoFacturaId)
-                    .HasColumnType("int")
-                    .IsRequired();
-
                 etb.Property(e => e.ClienteId)
                     .HasColumnType("int")
                     .IsRequired();

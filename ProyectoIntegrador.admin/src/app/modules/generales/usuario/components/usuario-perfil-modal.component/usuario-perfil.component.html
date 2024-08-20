@@ -1,0 +1,38 @@
+<ng-container>
+  <div class="mt-10">
+    <div class="row align-items-center">
+      <div class="col-md-8 margin-bottom-10-mobile">          
+        <h3 class="font-size-lg text-dark-75 font-weight-bold mb-10">
+          Lista de Perfiles
+        </h3>
+      </div>
+    </div>
+  
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+      <div class="table-responsive angular-bootstrap-table ">
+        <table class="table table-head-custom table-vertical-center overflow-hidden table-bordered">
+          <thead>
+            <th class="selection-cell">
+              <label class="checkbox checkbox-single">
+                <input type="checkbox" (click)="cambioSeleccionTodos()" [checked]="seleccionTodos"/>
+                <span></span>
+              </label>
+            </th>
+            <th>Perfil</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of listaAccesoFiltrada">
+              <td class="selection-cell">
+                <label class="checkbox checkbox-single">
+                  <input type="checkbox" (click)="row.seleccionado = !row.seleccionado; cambio()" [checked]="row.seleccionado"/>
+                  <span></span>
+                </label>
+              </td>
+              <td>{{ row.perfilDescripcion }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-container>

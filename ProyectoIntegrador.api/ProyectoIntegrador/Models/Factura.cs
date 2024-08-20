@@ -3,7 +3,6 @@
     public class Factura
     {
         public int Id { get; set; }
-        public int TipoFacturaId { get; set; }
         public int ClienteId { get; set; }
         public string NumeroFactura { get; set; } = "";
         public int MedioPagoId { get; set; }

@@ -123,7 +123,7 @@ export class PaisComponent
   // form actions
 
   create() {
-    if (this.accesosService.puedeCrear('generales.provincia.crear')) {
+    if (this.accesosService.puedeCrear('generales.pais.crear')) {
       const modalRef = this.modalService.open(EditPaisModalComponent, { size: 'md', backdrop: 'static' });
       modalRef.result.then(() =>
         this.service.fetch(),
@@ -133,7 +133,7 @@ export class PaisComponent
   }
 
   edit(id: number) {
-    if (this.accesosService.puedeEditar('generales.provincia.editar')) {
+    if (this.accesosService.puedeEditar('generales.pais.editar')) {
       const modalRef = this.modalService.open(EditPaisModalComponent, { size: 'md', backdrop: 'static' });
       modalRef.componentInstance.id = id;
       modalRef.result.then(() =>

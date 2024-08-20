@@ -92,24 +92,20 @@ namespace ProyectoIntegrador.Controllers
             }
 
             //TODO; quitar de comentario
-            //var perfiles = await _dbContext.UsuarioPerfil
-            //    .Where(o => o.UsuarioId == id)
-            //    .Select(o => o.PerfilId)
-            //    .ToListAsync();
+            var perfiles = await _dbContext.UsuarioPerfil
+                .Where(o => o.UsuarioId == id)
+                .Select(o => o.PerfilId)
+                .ToListAsync();
 
-            //if (perfiles.SinElementos())
-            //{
-            //    return NotFound();
-            //}
+            if (perfiles.SinElementos())
+            {
+                return NotFound();
+            }
 
-            //var lista = await _dbContext.PerfilAcceso
-            //    .Where(o => perfiles.Contains(o.PerfilId))
-            //    .Select(o => o.AccesoId)
-            //    .Distinct()
-            //    .ToListAsync() ?? new List<string>();
-
-            var lista = await _dbContext.Acceso
-                .Select(o => o.Id)
+            var lista = await _dbContext.PerfilAcceso
+                .Where(o => perfiles.Contains(o.PerfilId))
+                .Select(o => o.AccesoId)
+                .Distinct()
                 .ToListAsync() ?? new List<string>();
 
             return Ok(lista);
@@ -316,6 +312,17 @@ namespace ProyectoIntegrador.Controllers
                 vm.ListaEntidadDireccion = _mapper.Map<List<EntidadDireccionVm>>(listaDireccion);
             }
 
+            await CargarPerfil(vm);
+
+            obj.ListaUsuarioPerfil.ForEach(item =>
+            {
+                var acceso = vm.ListaUsuarioPerfil.FirstOrDefault(o => o.PerfilId == item.PerfilId);
+                if (acceso != null)
+                {
+                    acceso.Seleccionado = true;
+                }
+            });
+
             vm.Password = "";
 
             return Ok(vm);
@@ -330,6 +337,9 @@ namespace ProyectoIntegrador.Controllers
                 destino.ListaUsuarioPerfil = new List<UsuarioPerfil>();
             }
 
+            origen.ListaUsuarioPerfil = origen.ListaUsuarioPerfil.Where(o => o.Seleccionado).ToList()
+                ?? new List<UsuarioPerfilVm>();
+
             int cantidad = destino.ListaUsuarioPerfil.Count();
             for (int i = 0; i < cantidad; i++)
             {
@@ -337,7 +347,9 @@ namespace ProyectoIntegrador.Controllers
 
                 var itemVm = origen
                     .ListaUsuarioPerfil?
-                    .FirstOrDefault(o => o.PerfilId == item.PerfilId);
+                    .Where(o => o.UsuarioId == item.UsuarioId)
+                    .Where(o => o.PerfilId == item.PerfilId)
+                    .FirstOrDefault();
 
                 if (itemVm == null)
                 {
@@ -355,11 +367,9 @@ namespace ProyectoIntegrador.Controllers
             // agregar
             if (origen.ListaUsuarioPerfil?.Any() ?? false)
             {
-                foreach (var itemVm in origen.ListaUsuarioPerfil.Where(o => o.PerfilId <= 0))
+                foreach (var itemVm in origen.ListaUsuarioPerfil.Where(o => o.UsuarioId <= 0))
                 {
                     var item = _mapper.Map<UsuarioPerfil>(itemVm);
-                    item.FechaCreacion = DateTime.Now;
-
                     destino.ListaUsuarioPerfil.Add(item);
                 }
             }
@@ -602,6 +612,20 @@ namespace ProyectoIntegrador.Controllers
                     destino.Entidad.ListaEntidadTelefono.Add(item);
                 }
             }
+        }
+
+        private async Task CargarPerfil(UsuarioVm obj)
+        {
+            obj.ListaUsuarioPerfil = await _dbContext.Perfil
+                .AsNoTracking()
+                .Select(o => new UsuarioPerfilVm
+                {
+                    UsuarioId = 0,
+                    PerfilId = o.Id,
+                    Seleccionado = false,
+                    PerfilDescripcion = o.Descripcion,
+                })
+                .ToListAsync();
         }
     }
 }

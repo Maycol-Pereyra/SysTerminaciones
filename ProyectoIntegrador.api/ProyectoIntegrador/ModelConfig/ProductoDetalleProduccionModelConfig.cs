@@ -29,6 +29,14 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("decimal(18, 2)")
                     .IsRequired();
 
+                etb.Property(e => e.Descuento)
+                    .HasColumnType("decimal(10, 6)")
+                    .IsRequired();
+
+                etb.Property(e => e.Division)
+                    .HasColumnType("int")
+                    .IsRequired();
+
                 etb.HasOne(e => e.ProductoProduccion)
                     .WithMany()
                     .HasForeignKey(e => e.ProductoProduccionId)

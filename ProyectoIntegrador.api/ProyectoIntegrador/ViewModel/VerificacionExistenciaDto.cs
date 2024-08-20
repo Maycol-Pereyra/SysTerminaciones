@@ -1,4 +1,6 @@
-﻿namespace ProyectoIntegrador.ViewModel
+﻿using ProyectoIntegrador.Api.ViewModel;
+
+namespace ProyectoIntegrador.ViewModel
 {
     public class VerificacionExistenciaDto
     {
@@ -9,5 +11,9 @@
         public decimal Cantidad { get; set; }
         public decimal MedidaAncho { get; set; }
         public decimal MedidaAlto { get; set; }
+        public decimal Descuento { get; set; }
+        public int Division { get; set; }
+
+        public TipoProductoVm TipoProducto { get; set; }
     }
 }

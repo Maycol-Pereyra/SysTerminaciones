@@ -94,9 +94,9 @@ USING (VALUES
 	-- Fin Tabla EstadoFactura
 
 	-- Inicio Tabla Turno
-	(54, 13, 'Matutino', GETDATE(), GETDATE(), 1),
-	(55, 13, 'Vespertino', GETDATE(), GETDATE(), 1),
-	(56, 13, 'Nocturno', GETDATE(), GETDATE(), 1),
+	(54, 15, 'Matutino', GETDATE(), GETDATE(), 1),
+	(55, 15, 'Vespertino', GETDATE(), GETDATE(), 1),
+	(56, 15, 'Nocturno', GETDATE(), GETDATE(), 1),
 	-- Fin Tabla Turno
 
 	-- Inicio Tabla EstadoProduccion

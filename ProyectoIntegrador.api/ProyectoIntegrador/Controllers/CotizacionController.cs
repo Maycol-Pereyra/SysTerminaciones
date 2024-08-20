@@ -22,16 +22,19 @@ namespace ProyectoIntegrador.Controllers
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly IDireccionService _direccionService;
+        private readonly IInventarioService _inventarioService;
 
         public CotizacionController(
             ApplicationDbContext dbContext,
             IMapper mapper,
             IDireccionService direccionService,
+            IInventarioService inventarioService,
             ILogger<CotizacionController> logger) : base(logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _direccionService = direccionService;
+            _inventarioService = inventarioService;
         }
 
         [HttpGet]
@@ -111,32 +114,51 @@ namespace ProyectoIntegrador.Controllers
             {
                 var producto = await _dbContext.Producto
                     .Include(o => o.TipoProducto)
+                    .Include(o => o.ListaProductoDetalleProduccion)
                     .Where(o => o.Id == item.ProductoId)
                     .AsNoTracking()
                     .FirstOrDefaultAsync() ?? new();
 
-                if (producto.TipoProducto.UsaMedidasProducto)
+                if (producto.ListaProductoDetalleProduccion.ContieneElementos())
                 {
-                    
+                    foreach (var objeto in producto.ListaProductoDetalleProduccion)
+                    {
+                        var productoConTipo = await _dbContext.Producto
+                            .Include(o => o.TipoProducto)
+                            .Where(o => o.Id == objeto.ProductoProduccionId)
+                            .AsNoTracking()
+                            .FirstOrDefaultAsync();
+
+                        var obj = new VerificacionExistenciaDto
+                        {
+                            ProductoId = objeto.ProductoProduccionId,
+                            ProductoDescripcion = productoConTipo?.Descripcion ?? "",
+                            TipoProductoId = productoConTipo?.TipoProductoId ?? 0,
+                            UnidadId = objeto.UnidadProduccionId,
+                            Cantidad = objeto.Cantidad,
+                            MedidaAncho = item.MedidaAncho,
+                            MedidaAlto = item.MedidaAlto,
+                            Descuento = objeto.Descuento,
+                            Division = objeto.Division,
+                            TipoProducto = _mapper.Map<TipoProductoVm>(productoConTipo?.TipoProducto ?? new()),
+                        };
+
+                        listaVerificar.Add(obj);
+                    }
                 }
                 else
                 {
                     var obj = _mapper.Map<VerificacionExistenciaDto>(item);
                     obj.TipoProductoId = producto.TipoProductoId;
+                    obj.TipoProducto = _mapper.Map<TipoProductoVm>(producto.TipoProducto);
 
                     listaVerificar.Add(obj);
                 }
-
             }
 
+            var lista = await _inventarioService.ObtenerProductosFaltantes(listaVerificar);
 
-
-            var lista = await _dbContext.ProductoDetalleProduccion
-                .Where(o => listaProductoId.Contains(o.ProductoId))
-                .AsNoTracking()
-                .ToListAsync();
-
-            return new List<string>(); //TODO: completar este este endpoint cuando pueda
+            return lista; //TODO: completar este este endpoint cuando pueda
         }
 
         [HttpPost]

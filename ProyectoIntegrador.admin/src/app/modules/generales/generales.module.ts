@@ -45,6 +45,7 @@ import { EntidadDireccionComponent } from './empleado/components/edit-empleado-m
 import { EditEntidadDireccionComponent } from './empleado/components/edit-empleado-modal/entidad-direccion/edit/edit-entidad-direccion-modal.component';
 import { EntidadTelefonoComponent } from './empleado/components/edit-empleado-modal/entidad-telefono/entidad-telefono.component';
 import { EditEntidadTelefonoComponent } from './empleado/components/edit-empleado-modal/entidad-telefono/edit/edit-entidad-telefono-modal.component';
+import { EditPerfilComponent } from './usuario/components/usuario-perfil-modal.component/usuario-perfil.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { EditEntidadTelefonoComponent } from './empleado/components/edit-emplead
     UsuarioComponent,
     EditUsuarioModalComponent,
     CreateUsuarioModalComponent,
+    EditPerfilComponent,
 
     PerfilComponent,
     EditPerfilModalComponent,

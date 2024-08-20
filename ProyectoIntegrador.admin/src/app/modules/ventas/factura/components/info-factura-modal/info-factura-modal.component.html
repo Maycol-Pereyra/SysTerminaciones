@@ -1,0 +1,169 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h3 class="card-span font-weight-bolder text-dark mb-0">
+      Factura
+    </h3>
+
+    <span class="badge modal-title h4 ml-2" *ngIf="vm"
+      [ngClass]="{
+        'bg-light-info text-info': vm.estadoDescripcion === 'En Proceso',
+        'bg-light-danger text-danger': vm.estadoDescripcion === 'Devuelta por Cliente',
+        'bg-success text-light-success': vm.estadoDescripcion === 'Facturada',
+        'bg-light-warning text-warning': vm.estadoDescripcion === 'Inactiva'}">
+        <span>{{ vm.estadoDescripcion }}</span>
+    </span>
+  </div>
+  <div class="overlay overlay-block cursor-default modal-body" style="min-height: 404px;">
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="overlay-layer bg-transparent fixed-top">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="vm">
+      <div class="row">
+        <div class="col-md-3">
+          <ng-container>
+            <h5>{{ vm.clienteNombre }}</h5>
+            <span class="form-text text-muted mb-5">Nombre del cliente</span>
+          </ng-container>    
+        </div>
+
+        <div class="col-md-3">
+          <ng-container>
+            <h5>{{ vm.telefonoDescripcion }}</h5>
+            <span class="form-text text-muted mb-5">Teléfono del cliente</span>
+          </ng-container>    
+        </div>
+
+        <div class="col-md-3">
+          <ng-container>
+            <h5>{{ vm.usuarioCreacionNombre }}</h5>
+            <span class="form-text text-muted mb-5">Usuario de creación</span>
+          </ng-container>    
+        </div>
+
+        <div class="col-md-3">
+          <ng-container>
+            <h5>{{ vm.fechaCreacion | date: 'dd/MM/yyyy hh:mm:ss a' }}</h5>
+            <span class="form-text text-muted mb-5">Fecha de creación</span>
+          </ng-container>    
+        </div>
+
+      </div>
+
+      <ng-container *ngIf="vm.direccionId && vm.direccionId > 0">
+        <div class="separator separator-dashed my-8"></div>
+  
+        <h3 class="font-size-lg text-dark-75 font-weight-bold mb-10">
+          Dirección
+        </h3>
+  
+        <div class="row">
+          <div class="col-sm-6">
+            <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'País', valor: vm.paisDescripcion }"></ng-container>
+            <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'Provincia', valor: vm.provinciaDescripcion }"></ng-container>
+            <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'Ciudad', valor: vm.ciudadDescripcion }"></ng-container>
+            <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'Sector', valor: vm.sectorDescripcion }"></ng-container>
+          </div>
+          
+          <div class="col-sm-6">
+            <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'Calle', valor: vm.calle }"></ng-container>
+            <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'Casa', valor: vm.casa }"></ng-container>          
+            <ng-container [ngTemplateOutlet]="detalle" [ngTemplateOutletContext]="{titulo: 'referencia', valor: vm.referencia }"></ng-container>          
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="separator separator-dashed my-8"></div>
+
+      <div class="table-responsive angular-bootstrap-table">
+        <table class="table table-head-custom table-vertical-center overflow-hidden">
+          <thead>
+            <th>
+              Producto
+            </th>
+
+            <th>
+              Unidad
+            </th>
+  
+            <th>
+              Medida
+            </th>
+  
+            <th class="text-right">Cantidad</th>
+            
+            <th class="text-right">Precio</th>
+
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of vm.listaDetalle">
+
+              <td>{{ row.productoDescripcion }}</td>
+
+              <td>{{ row.unidadProductoDescripcion }}</td>
+
+              <td>
+                <ng-container *ngIf="row.medidaAncho || row.medidaAlto">
+                  {{ getNumeroMixto(row.medidaAncho) + ' x ' + getNumeroMixto(row.medidaAlto) }}
+                </ng-container>
+
+                <ng-container *ngIf="!row.medidaAncho && !row.medidaAlto">
+                  <div class="text-muted">No aplica</div>
+                </ng-container>
+              </td>
+              
+              <td class="text-right">{{ row.cantidad }}</td>
+              
+              <td class="text-right">${{ row.precioUnitario | number: '1.2-2' }} </td>
+            </tr>
+
+            <ng-container *ngIf="vm.listaDetalle && vm.listaDetalle.length > 0">
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">ITBIS:</td>
+                <td class="text-right">${{ vm.impuesto| number: '1.2-2' }}</td>
+              </tr>
+  
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">Descuento:</td>
+                <td class="text-right">${{ vm.descuento | number: '1.2-2' }}</td>
+              </tr>
+  
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">Monto total:</td>
+                <td class="text-right">${{ vm.monto| number: '1.2-2' }}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Cancelar</button>
+  </div>
+</div>
+
+<ng-template
+  #detalle
+  let-titulo="titulo"
+  let-valor="valor">
+  <div class="row align-items-center mb-1">
+    <div class="font-weight-bold col-xl-3 text-nowrap" style="min-width: 150px;">{{titulo}}</div>
+    <div class="col">
+      <label *ngIf="!valor" class="adv-input-data text-muted">{{ 'Sin especificar' }}</label>
+      <label *ngIf="valor" class="adv-input-data">{{ valor }}</label>
+    </div>
+  </div>
+</ng-template>

@@ -22,14 +22,9 @@ export class AppAuthGuard implements CanActivate {
         if (currentUser) {
 
             if (route.data && route.data.acceso && this._accesosService.lista) {
-                // console.log('Investigando acceso: ', state.url);
                 const resul = this._accesosService.hasClaim(route.data.acceso);
                 if (resul === false) {
-                    // console.log('No tiene acceso: ', state.url);
-                    // Mensajes.mensajeValidacion('No tienes acceso a esta opción');
                     Mensajes.toastWarning('No tienes acceso a esta opción');
-                    // this._toast.onWarning('No tienes acceso a esta opción', 'Permiso');
-                    // this.router.navigate(['/sin-acceso']);
                     return false;
                 }
             }

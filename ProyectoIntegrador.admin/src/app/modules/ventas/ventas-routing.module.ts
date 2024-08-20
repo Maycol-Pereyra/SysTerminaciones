@@ -7,6 +7,8 @@ import { ProductoComponent } from './producto/producto.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { SolicitudTomaMedidaComponent } from './solicitud-toma-medida/solicitud-toma-medida.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
+import { FacturaComponent } from './factura/factura.component';
+import { CajaComponent } from './caja/caja.component';
 
 const routes: Routes = [
   {
@@ -50,6 +52,22 @@ const routes: Routes = [
         component: CotizacionComponent,
         data: {
           acceso: 'ventas.cotizacion.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'factura',
+        component: FacturaComponent,
+        data: {
+          acceso: 'ventas.factura.acceder'
+        },
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'caja',
+        component: CajaComponent,
+        data: {
+          acceso: 'ventas.caja.acceder'
         },
         canActivate: [AppAuthGuard]
       },

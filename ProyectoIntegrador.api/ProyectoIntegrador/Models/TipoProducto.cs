@@ -4,8 +4,10 @@
     {
         public int Id { get; set; }
         public string Descripcion { get; set; } = "";
-        public bool UsaMedidasProducto { get; set; }
-        public bool UsaMedidasFactura { get; set; }
+        public bool UsaMedidaAncho { get; set; }
+        public bool UsaMedidaAlto { get; set; }
+        public bool UsaDescuento { get; set; }
+        public bool UsaDivision { get; set; }
         public bool UsaInstalacion { get; set; }
         public decimal DescuentoCabezal { get; set; }
         public decimal DescuentoVidrioAncho { get; set; }

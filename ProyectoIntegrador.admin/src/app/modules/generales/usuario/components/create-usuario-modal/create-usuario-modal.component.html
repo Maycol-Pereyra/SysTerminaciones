@@ -178,6 +178,11 @@
           <div class="invalid-feedback" *ngIf="controlHasError('required', 'empleadoId')">Es requerido</div>
         </div>          
 
+        <div class="separator separator-dashed my-8"></div>
+
+        <app-usuario-perfil
+          [listaDetalle]="vm.listaUsuarioPerfil">
+        </app-usuario-perfil>
 
         <div class="separator separator-dashed my-8"></div>
 
@@ -238,6 +243,7 @@
             <div class="invalid-feedback" *ngIf="controlHasError('passwordSonIguales', 'confirmacionPassword')">La nueva contraseña y la confirmación deben ser iguales</div>
           </div>
         </div>
+
       </form>
     </ng-container>
   </div>

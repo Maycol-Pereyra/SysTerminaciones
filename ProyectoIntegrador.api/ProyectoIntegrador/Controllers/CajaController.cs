@@ -141,18 +141,15 @@ namespace ProyectoIntegrador.Controllers
                 return BadRequest("Debe especificar el turno.");
             }
 
-            var caja = await _dbContext.Caja
-                .Where(o => o.Id == vm.CajaId)
+            var apertura = await _dbContext.AperturaCaja
+                .Where(o => o.CajaId == vm.CajaId)
+                .Where(o => o.FechaCierre == null)
                 .FirstOrDefaultAsync();
 
-            if ((caja?.EstaActivo ?? false) == false)
+            if (apertura != null)
             {
-                return BadRequest("La caja especificada no está disponible.");
+                return BadRequest("La caja ya está abierta.");
             }
-
-            caja.EstaActivo = false;
-
-            _dbContext.Caja.Update(caja);
 
             vm.UsuarioId = GetUsuarioId();
             vm.FechaCierre = null;
@@ -209,10 +206,8 @@ namespace ProyectoIntegrador.Controllers
 
             if (apertura.CuadroCaja == false)
             {
-                return BadRequest("Debe de hacer el cuadre del día antes de poder cerrar la caja.");
+                return BadRequest("Debe de hacer el cuadre de la caja antes de poder cerrarla.");
             }
-
-            caja.EstaActivo = true;
 
             _dbContext.Caja.Update(caja);
 

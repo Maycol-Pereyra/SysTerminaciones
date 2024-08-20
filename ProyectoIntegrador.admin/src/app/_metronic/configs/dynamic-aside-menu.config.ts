@@ -61,6 +61,10 @@ export const DynamicAsideMenuConfig = {
           title: 'Factura',
           page: '/ventas/factura',
         },
+        {
+          title: 'Caja',
+          page: '/ventas/caja',
+        },
       ]
     },
     { section: 'Generales', sectionFeature: 'Generales' },

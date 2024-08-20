@@ -55,7 +55,7 @@ namespace ProyectoIntegrador.Services
                 var usaMedidasProducto = await _dbContext.TipoProducto
                     .Where(o => o.Id == item.TipoProductoId)
                     .AsNoTracking()
-                    .Select(o => o.UsaMedidasProducto)
+                    .Select(o => o.UsaMedidaAncho)
                     .FirstOrDefaultAsync();
                 
                 var listaInventarioProducto = inventario

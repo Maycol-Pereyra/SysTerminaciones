@@ -8,5 +8,7 @@
         public int UnidadProduccionId { get; set; }
         public string UnidadProduccionDescripcion { get; set; } = "";
         public int Cantidad { get; set; }
+        public decimal Descuento { get; set; }
+        public int Division { get; set; }
     }
 }

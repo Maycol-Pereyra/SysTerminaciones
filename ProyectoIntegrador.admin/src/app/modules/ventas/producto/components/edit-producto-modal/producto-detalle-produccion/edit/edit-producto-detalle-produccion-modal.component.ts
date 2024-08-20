@@ -20,6 +20,8 @@ export class EditProductoDetalleProduccionComponent extends FormBase implements 
   @Input() productoId: number;
   @Input() vm: ProductoDetalleProduccion;
 
+  public tipoProductoSeleccionado: any;
+
   get f() {
     return this.formGroup.controls;
   }
@@ -80,6 +82,8 @@ export class EditProductoDetalleProduccionComponent extends FormBase implements 
       productoProduccionId: [this.vm.productoProduccionId, Validators.compose([Validators.required])],
       unidadProduccionId: [this.vm.unidadProduccionId, Validators.compose([Validators.required])],
       cantidad: [this.vm.cantidad, Validators.compose([Validators.min(1), Validators.max(99999999.99)])],
+      descuento: [this.vm.descuento, Validators.compose([Validators.min(0), Validators.max(99999999.99)])],
+      division: [this.vm.division, Validators.compose([Validators.min(0), Validators.max(10)])],
     });
 
     this.subscriptions.push(
@@ -106,6 +110,8 @@ export class EditProductoDetalleProduccionComponent extends FormBase implements 
     this.vm.unidadProduccionId = formData.unidadProduccionId;
     this.vm.unidadProduccionDescripcion = this.unidadProduccionDescripcion;
     this.vm.cantidad = formData.cantidad;
+    this.vm.descuento = formData.descuento;
+    this.vm.division = formData.division;
 
     this.modal.close(this.vm);
   }
@@ -125,5 +131,8 @@ export class EditProductoDetalleProduccionComponent extends FormBase implements 
         this.listaUnidadProduccion = data;
       });
     this.subscriptions.push(sb);
+
+    const producto = this.listaProductoProduccion.find(o => +o.id === +val)
+    this.tipoProductoSeleccionado = !producto ? null : producto.objeto.tipoProducto
   }
 }

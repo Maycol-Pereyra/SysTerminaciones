@@ -3,7 +3,6 @@
     public class FacturaVm
     {
         public int Id { get; set; }
-        public int TipoFacturaId { get; set; }
         public int ClienteId { get; set; }
         public string ClienteNombre { get; set; } = "";
         public string NumeroFactura { get; set; } = "";
