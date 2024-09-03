@@ -2,10 +2,10 @@
 
 :on error exit
 
+:r Scripts\RegistraTipoDefecto.sql
 :r Scripts\RegistraTipoRegistro.sql
 :r Scripts\RegistraTipoProducto.sql
-:r Scripts\RegistraDatosBaseTablaRegistro.sql
-:r Scripts\RegistraPrograma.sql
+:r Scripts\RegistraDefecto.sql
 :r Scripts\RegistraAcceso.sql
 :r Scripts\CreaPrimerUsuario.sql
 

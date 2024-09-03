@@ -25,10 +25,6 @@ namespace ProyectoIntegrador.DataModelConfig
                     .HasColumnType("varchar(100)")
                     .IsRequired();
 
-                etb.Property(e => e.FechaModificacion)
-                    .HasColumnType("datetime")
-                    .IsRequired();
-
                 etb.Property(e => e.FechaCreacion)
                     .HasColumnType("datetime")
                     .IsRequired();

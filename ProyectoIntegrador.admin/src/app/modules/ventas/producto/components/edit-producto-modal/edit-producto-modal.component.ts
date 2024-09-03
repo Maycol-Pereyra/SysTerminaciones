@@ -58,7 +58,7 @@ export class EditProductoModalComponent extends FormBase implements OnInit, OnDe
     this.categoria$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.categoria}`, filtroCategoria);
 
     const filtroColor = ItemSelectService.defaultFilter();
-    filtroColor.filter.push({ criterio: 'tipoRegistroId', valor: '5'});
+    filtroColor.filter.push({ criterio: 'tipoRegistroId', valor: '4'});
     this.color$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.color}`, filtroColor);
 
     this.llenarListaTipoMedida();

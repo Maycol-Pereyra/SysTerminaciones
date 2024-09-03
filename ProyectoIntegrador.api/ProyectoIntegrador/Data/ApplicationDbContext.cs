@@ -29,6 +29,7 @@ namespace ProyectoIntegrador.Data
         public DbSet<Cotizacion> Cotizacion { get; set; }
         public DbSet<CuadreCaja> CuadreCaja { get; set; }
         public DbSet<CuentaContable> CuentaContable { get; set; }
+        public DbSet<Defecto> Defecto { get; set; }
         public DbSet<DesgloseCorrederaDetalle> DesgloseCorrederaDetalle { get; set; }
         public DbSet<DesgloseCorredera> DesgloseCorredera { get; set; }
         public DbSet<DesgloseEfectivoAsignadoCaja> DesgloseEfectivoAsignadoCaja { get; set; }
@@ -73,6 +74,7 @@ namespace ProyectoIntegrador.Data
         public DbSet<SolicitudTomaMedida> SolicitudTomaMedida { get; set; }
         public DbSet<SolicitudTomaMedidaDetalle> SolicitudTomaMedidaDetalle { get; set; }
         public DbSet<Suplidor> Suplidor { get; set; }
+        public DbSet<TipoDefecto> TipoDefecto { get; set; }
         public DbSet<TipoProducto> TipoProducto { get; set; }
         public DbSet<TipoRegistro> TipoRegistro { get; set; }
         public DbSet<TomaMedida> TomaMedida { get; set; }
@@ -101,6 +103,7 @@ namespace ProyectoIntegrador.Data
             modelBuilder.ConfigurarCotizacionDetalleModelConfig();
             modelBuilder.ConfigurarCotizacionModelConfig();
             modelBuilder.ConfigurarCuadreCajaModelConfig();
+            modelBuilder.ConfigurarDefectoModelConfig();
             modelBuilder.ConfigurarDesgloseCorrederaDetalleModelConfig();
             modelBuilder.ConfigurarDesgloseCorrederaModelConfig();
             modelBuilder.ConfigurarDesgloseEfectivoAsignadoCajaModelConfig();
@@ -145,6 +148,7 @@ namespace ProyectoIntegrador.Data
             modelBuilder.ConfigurarSolicitudTomaMedidaModelConfig();
             modelBuilder.ConfigurarSolicitudTomaMedidaDetalleModelConfig();
             modelBuilder.ConfigurarSuplidorModelConfig();
+            modelBuilder.ConfigurarTipoDefectoModelConfig();
             modelBuilder.ConfigurarTipoProductoModelConfig();
             modelBuilder.ConfigurarTipoRegistroModelConfig();
             modelBuilder.ConfigurarTomaMedidaModelConfig();

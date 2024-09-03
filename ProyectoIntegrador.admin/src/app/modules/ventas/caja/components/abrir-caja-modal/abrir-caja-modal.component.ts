@@ -44,7 +44,7 @@ export class AbrirCajaModalComponent extends FormBase implements OnInit, OnDestr
     this.caja$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.caja}`);
 
     const filtroTurno = ItemSelectService.defaultFilter();
-    filtroTurno.filter.push({ criterio: 'tipoRegistroId', valor: '13'});
+    filtroTurno.filter.push({ criterio: 'tipoDefectoId', valor: '7'});
     this.turno$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.turno}`, filtroTurno);
 
     this.loadForm();

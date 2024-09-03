@@ -77,7 +77,6 @@ namespace ProyectoIntegrador.Controllers
             {
                 var objNew = _mapper.Map<Registro>(vm);
                 objNew.FechaCreacion = DateTime.Now;
-                objNew.FechaModificacion = DateTime.Now;
                 objNew.EstaActivo = true;
 
                 _dbContext.Registro.Add(objNew);
@@ -96,8 +95,6 @@ namespace ProyectoIntegrador.Controllers
             {
                 return NotFound();
             }
-
-            objUpdate.FechaModificacion = DateTime.Now;
 
             _mapper.Map(vm, objUpdate);
 

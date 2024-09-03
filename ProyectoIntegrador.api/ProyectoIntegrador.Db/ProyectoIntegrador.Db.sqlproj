@@ -139,11 +139,12 @@
     <Build Include="dbo\Table\Concepto.sql" />
     <Build Include="dbo\Table\CuentaContable.sql" />
     <Build Include="dbo\Table\ClasificacionContable.sql" />
-    <None Include="_Core\Scripts\RegistraDatosBaseTablaRegistro.sql" />
+    <None Include="_Core\Scripts\RegistraDefecto.sql" />
     <None Include="_Core\Scripts\CreaPrimerUsuario.sql" />
-    <Build Include="dbo\View\Esquema.sql" />
-    <None Include="_Core\Scripts\RegistraPrograma.sql" />
     <Build Include="dbo\Table\ProductoDetalleProduccion.sql" />
+    <Build Include="dbo\Table\TipoDefecto.sql" />
+    <Build Include="dbo\Table\Defecto.sql" />
+    <None Include="_Core\Scripts\RegistraTipoDefecto.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="_Core\Scripts\RegistraTipoProducto.sql" />

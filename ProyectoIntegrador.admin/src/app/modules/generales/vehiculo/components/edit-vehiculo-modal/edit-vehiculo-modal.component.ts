@@ -51,7 +51,7 @@ export class EditVehiculoModalComponent extends FormBase implements OnInit, OnDe
     this.estados$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.estadoVehiculo}`);
     this.unidades$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.unidad}`);
     const filtroUsuarioCore = ItemSelectService.defaultFilter();
-    filtroUsuarioCore.filter.push({ criterio: 'tipoRegistroId', valor: '5'});
+    filtroUsuarioCore.filter.push({ criterio: 'tipoRegistroId', valor: '4'});
     this.colores$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.color}`, filtroUsuarioCore);
 
     this.loadData();

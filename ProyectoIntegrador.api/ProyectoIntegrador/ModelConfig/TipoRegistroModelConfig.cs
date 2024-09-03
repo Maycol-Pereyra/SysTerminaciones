@@ -20,15 +20,6 @@ namespace ProyectoIntegrador.DataModelConfig
                 etb.Property(e => e.Descripcion)
                     .HasColumnType("varchar(100)")
                     .IsRequired();
-
-
-                etb.Property(e => e.FechaCreacion)
-                    .HasColumnType("datetime")
-                    .IsRequired();
-
-                etb.Property(e => e.EstaActivo)
-                    .HasColumnType("bit")
-                    .IsRequired();
             });
 
             return modelBuilder;

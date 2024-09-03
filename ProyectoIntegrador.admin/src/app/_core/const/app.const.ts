@@ -27,8 +27,8 @@ export class EndPointSelect {
   public static readonly direccion = '/api/direccion/item-select';
   public static readonly telefono = '/api/telefono/item-select';
   public static readonly producto = '/api/producto/item-select';
-  public static readonly estadoSolicitudTomaMedida = '/api/registro/item-select';
+  public static readonly estadoSolicitudTomaMedida = '/api/defecto/item-select';
   public static readonly unidadProducto = '/api/producto/unidad-item-select';
   public static readonly caja = '/api/caja/item-select';
-  public static readonly turno = '/api/registro/item-select';
+  public static readonly turno = '/api/defecto/item-select';
 }

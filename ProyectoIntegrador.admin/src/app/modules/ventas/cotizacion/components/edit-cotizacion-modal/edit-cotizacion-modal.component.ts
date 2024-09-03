@@ -103,7 +103,7 @@ export class EditCotizacionModalComponent extends FormBase implements OnInit, On
     this.producto$.subscribe(data => this.listaProducto = data as ItemSelect[])
 
     const filtroEstado = ItemSelectService.defaultFilter();
-    filtroEstado.filter.push({ criterio: 'tipoRegistroId', valor: '27'});
+    filtroEstado.filter.push({ criterio: 'tipoDefectoId', valor: '17'});
     this.estado$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.estadoSolicitudTomaMedida}`, filtroEstado);
     this.estado$.subscribe(data => this.listaEstado = data as ItemSelect[]);
 
