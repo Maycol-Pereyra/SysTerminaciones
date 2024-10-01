@@ -8,5 +8,5 @@
 	[EstadoId] INT NOT NULL,
 	[EstaActivo] BIT NOT NULL,
 	FOREIGN KEY (DespachoId) REFERENCES Despacho(Id),
-	FOREIGN KEY (EstadoId) REFERENCES Registro(Id)
+	FOREIGN KEY (EstadoId) REFERENCES Defecto(Id)
 )

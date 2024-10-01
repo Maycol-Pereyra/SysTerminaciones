@@ -12,7 +12,7 @@
         public int EstadoId { get; set; }
 
         public virtual Despacho Despacho { get; set; }
-        public virtual Registro Estado { get; set; }
+        public virtual Defecto Estado { get; set; }
         public virtual List<DesgloseCorrederaDetalle> ListaDetalle { get; set; } = [];
     }
 }

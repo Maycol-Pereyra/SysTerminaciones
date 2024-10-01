@@ -16,5 +16,5 @@
     [EstaActivo] BIT NOT NULL,
     FOREIGN KEY (ColorId) REFERENCES Registro(Id),
     FOREIGN KEY (UnidadCargaId) REFERENCES Unidad(Id),
-    FOREIGN KEY (EstadoId) REFERENCES Registro(Id)
+    FOREIGN KEY (EstadoId) REFERENCES Defecto(Id)
 )

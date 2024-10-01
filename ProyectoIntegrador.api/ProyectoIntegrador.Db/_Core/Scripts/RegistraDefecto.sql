@@ -1,7 +1,5 @@
 PRINT'EJECUTANDO RegistraDefecto'
 
-SET IDENTITY_INSERT Defecto ON
-
 MERGE INTO Defecto AS target
 USING (VALUES 
 	-- Inicio Tabla Turno
@@ -81,8 +79,19 @@ USING (VALUES
 	(47, 1, 'En Proceso'),
 	(48, 1, 'Devuelta por Cliente'),
 	(49, 1, 'Facturada'),
-	(50, 1, 'Inactiva')
+	(50, 1, 'Inactiva'),
 	-- Fin Tabla EstadoProduccion
+
+	-- Inicio Tabla TipoProduccionFabricacion
+	(51, 20, 'Fabricación'),
+	(52, 20, 'Instalación'),
+	-- Fin Tabla TipoProduccionFabricacion
+
+	-- Inicio Tabla TipoMedida
+	(53, 21, 'Pulgadas'),
+	(54, 21, 'Centímetros'),
+	(53, 21, 'Piés')
+	-- Fin Tabla TipoMedida
 
 ) AS source (Id, TipoDefectoId, Descripcion)
 ON target.Id = source.Id
@@ -93,7 +102,5 @@ WHEN MATCHED THEN
 WHEN NOT MATCHED THEN
     INSERT (Id, TipoDefectoId, Descripcion)
     VALUES (source.Id, source.TipoDefectoId, source.Descripcion);
-	
-SET IDENTITY_INSERT Defecto OFF
 
 PRINT'RegistraDefecto EJECUTADO CON ÉXITO'

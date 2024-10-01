@@ -6,6 +6,6 @@
         public string Descripcion { get; set; } = "";
         public int EstadoId { get; set; }
 
-        public virtual Registro Estado { get; set; }
+        public virtual Defecto Estado { get; set; }
     }
 }

@@ -10,7 +10,13 @@ namespace ProyectoIntegrador.Mappers
         public HerramientaMapper()
         {
             CreateMap<Herramienta, HerramientaVm>();
-            CreateMap<Herramienta, HerramientaIndex>();
+            CreateMap<Herramienta, HerramientaIndex>()
+                .ForMember(
+                    des => des.EstadoDescripcion,
+                    opt => opt.MapFrom(ori => ori.Estado != null
+                        ? ori.Estado.Descripcion
+                        : "")
+                );
             CreateMap<Herramienta, ItemSelect>();
             CreateMap<HerramientaVm, Herramienta>();
         }

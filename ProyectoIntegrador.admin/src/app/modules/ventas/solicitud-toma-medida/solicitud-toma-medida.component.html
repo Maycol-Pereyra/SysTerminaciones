@@ -53,8 +53,22 @@
           <tr *ngFor="let row of service.items$ | async">
             <td>{{ row.clienteNombre }}</td>
             <td>{{ row.direccionDescripcion }}</td>
-            <td>{{ row.empleadoAsignadoNombre }}</td>
-            <td>{{ row.vehiculoAsignadoDescripcion }}</td>
+            <td>
+              <div *ngIf="row.empleadoAsignadoNombre">
+                {{row.empleadoAsignadoNombre}}
+              </div>
+              <div class="text-muted" *ngIf="!row.empleadoAsignadoNombre">
+                Sin asignar
+              </div>
+            </td>
+            <td>
+              <div *ngIf="row.vehiculoAsignadoDescripcion">
+                {{row.vehiculoAsignadoDescripcion}}
+              </div>
+              <div class="text-muted" *ngIf="!row.vehiculoAsignadoDescripcion">
+                Sin asignar
+              </div>
+            </td>
             <td>
               <span *ngIf="row.estadoDescripcion === 'Pendiente Tomar Medidas'" class="label label-lg label-light-info label-inline">{{ row.estadoDescripcion }}</span>
               <span *ngIf="row.estadoDescripcion === 'En Proceso'" class="label label-lg label-light-primary label-inline">{{ row.estadoDescripcion }}</span>
@@ -84,7 +98,7 @@
                     Tomar medidas
                   </button>
 
-                  <button ngbDropdownItem (click)="edit(row.id)">
+                  <button ngbDropdownItem (click)="edit(row)">
                     <span title="Editar" [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true" aria-labelledby="Editar"
                       class="svg-icon svg-icon-md svg-icon-primary mr-2" alt='' role='image'>
                     </span>

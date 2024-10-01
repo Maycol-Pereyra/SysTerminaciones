@@ -12,6 +12,18 @@
     <ng-container *ngIf="vm">
       <form action="#" class="form form-label-right" [formGroup]="formGroup">
 
+        <div class="form-group">
+          <div><label>Tipo</label></div>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">  
+            <label class="btn btn-outline-primary" [class.active]="+f.tipoId.value === 1">
+              <input type="radio" name="tipoId" id="option1" autocomplete="off" formControlName="tipoId" value="1"> Producción
+            </label>
+            <label class="btn btn-outline-primary" [class.active]="+f.tipoId.value === 2">
+              <input type="radio" name="tipoId" id="option2" autocomplete="off" formControlName="tipoId" value="2"> Fabricación
+            </label>              
+          </div>
+        </div>
+
         <div class="form-group row">
           <div class="col-lg-12">
             <label class="form-label">Producto</label>

@@ -25,6 +25,7 @@ namespace ProyectoIntegrador.Api
             mc.AddProfile(new CotizacionMapper());
             mc.AddProfile(new CuentaContableMapper());
             mc.AddProfile(new CuadreCajaMapper());
+            mc.AddProfile(new DefectoMapper());
             mc.AddProfile(new DesgloseCorrederaMapper());
             mc.AddProfile(new DesgloseEfectivoAsignadoCajaMapper());
             mc.AddProfile(new DespachoMapper());

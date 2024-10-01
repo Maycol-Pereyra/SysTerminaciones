@@ -31,4 +31,5 @@ export class EndPointSelect {
   public static readonly unidadProducto = '/api/producto/unidad-item-select';
   public static readonly caja = '/api/caja/item-select';
   public static readonly turno = '/api/defecto/item-select';
+  public static readonly tipoProduccionFabricacion = '/api/defecto/item-select';
 }

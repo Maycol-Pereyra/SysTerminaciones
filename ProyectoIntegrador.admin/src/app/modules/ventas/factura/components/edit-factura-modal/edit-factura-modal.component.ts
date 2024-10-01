@@ -387,6 +387,8 @@ export class EditFacturaModalComponent extends FormBase implements OnInit, OnDes
     this.vm.clienteId = formData.clienteId;
     this.vm.telefonoId = formData.telefonoId;
     this.vm.direccionId = formData.direccionId;
+    this.vm.tipoComprobanteId = 1; //TODO: fijo por el momento
+    this.vm.medioPagoId = 4; //TODO: fijo por el momento
     this.vm.nota = formData.nota;
     this.vm.llevaEnvio = formData.llevaEnvio;
     this.vm.llevaInstalacion = formData.llevaInstalacion;

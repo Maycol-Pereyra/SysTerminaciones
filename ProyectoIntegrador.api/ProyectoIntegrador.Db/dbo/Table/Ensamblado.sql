@@ -8,6 +8,6 @@
 	[EstadoId] INT NOT NULL,
 	FOREIGN KEY (DespachoId) REFERENCES Despacho(Id),
 	FOREIGN KEY (DesgloseCorrederaId) REFERENCES DesgloseCorredera(Id),
-	FOREIGN KEY (EstadoId) REFERENCES Registro(Id),
+	FOREIGN KEY (EstadoId) REFERENCES Defecto(Id),
 )
 

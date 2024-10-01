@@ -12,5 +12,5 @@
 	FOREIGN KEY (EnvioId) REFERENCES Envio(Id),
 	FOREIGN KEY (ProductoId) REFERENCES Producto(Id),
 	FOREIGN KEY (UnidadId) REFERENCES Unidad(Id),
-	FOREIGN KEY (EstadoId) REFERENCES Registro(Id)
+	FOREIGN KEY (EstadoId) REFERENCES Defecto(Id)
 )

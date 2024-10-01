@@ -20,7 +20,7 @@ export class JwtInterceptor implements HttpInterceptor {
             request = request.clone({
                 setHeaders: {
                     Authorization: `Bearer ${currentUser.token}`,
-                    'x-client-name': 'advansys-gestion-credito-admin',
+                    'x-client-name': 'sys-terminaciones-admin',
                     'x-client-version': `${environment.appVersion}`,
                     'x-client-device': `${this.detectBrowserName()}`,
                     'x-client-os-version': `${this.detectBrowserVersion()}`
@@ -29,7 +29,7 @@ export class JwtInterceptor implements HttpInterceptor {
         } else {
             request = request.clone({
               setHeaders: {
-                'x-client-name': 'advansys-gestion-credito-admin',
+                'x-client-name': 'sys-terminaciones-admin',
                 'x-client-version': `${environment.appVersion}`,
                 'x-client-device': `${this.detectBrowserName()}`,
                 'x-client-os-version': `${this.detectBrowserVersion()}`

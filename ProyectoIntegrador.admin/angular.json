@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "advansys-gestion-credito-admin",
+            "outputPath": "sys-terminaciones",
             "showCircularDependencies": false,
             "allowedCommonJsDependencies": [
               "object-path",

@@ -46,10 +46,21 @@ export class EditProductoDetalleProduccionComponent extends FormBase implements 
       : unidadProduccion.descripcion;
   }
 
+  get tipoDescripcion() {
+    const tipoId = this.formGroup.value.tipoId; 
+    
+    const tipo = this.listaTipo.find(o => +o.id === +tipoId)
+
+    return !tipo
+      ? ''
+      : tipo.descripcion;
+  }
+
   productoProduccion$;
   unidadProduccion$ = new BehaviorSubject<ItemSelect[]>([]);
 
   private listaProductoProduccion: ItemSelect[] = []
+  public listaTipo: ItemSelect[] = []
   private listaUnidadProduccion: ItemSelect[] = []
   private subscriptions: Subscription[] = [];
 
@@ -70,6 +81,11 @@ export class EditProductoDetalleProduccionComponent extends FormBase implements 
     this.productoProduccion$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.producto}`, filtroProducto);
     this.productoProduccion$.subscribe(data => this.listaProductoProduccion = data as ItemSelect[]);
 
+    const filtroTipo = ItemSelectService.defaultFilter();
+    filtroTipo.filter.push({ criterio: 'defectoId', valor: `${20}`});
+
+    this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.producto}`, filtroTipo)
+      .subscribe(data => this.listaTipo = data as ItemSelect[]);
     this.loadForm();
   }
 
@@ -79,6 +95,7 @@ export class EditProductoDetalleProduccionComponent extends FormBase implements 
 
   loadForm() {
     this.formGroup = this.fb.group({
+      tipoId: [this.vm.tipoId, Validators.compose([Validators.required])],
       productoProduccionId: [this.vm.productoProduccionId, Validators.compose([Validators.required])],
       unidadProduccionId: [this.vm.unidadProduccionId, Validators.compose([Validators.required])],
       cantidad: [this.vm.cantidad, Validators.compose([Validators.min(1), Validators.max(99999999.99)])],
@@ -105,6 +122,8 @@ export class EditProductoDetalleProduccionComponent extends FormBase implements 
 
     //
 
+    this.vm.tipoId = formData.tipoId;
+    this.vm.tipoDescripcion = this.tipoDescripcion;
     this.vm.productoProduccionId = formData.productoProduccionId;
     this.vm.productoProduccionDescripcion = this.productoProduccionDescripcion;
     this.vm.unidadProduccionId = formData.unidadProduccionId;

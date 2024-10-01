@@ -12,5 +12,5 @@
 	FOREIGN KEY (DireccionId) REFERENCES EntidadDireccion(Id),
 	FOREIGN KEY (EmpleadoAsignadoId) REFERENCES Empleado(Id),
 	FOREIGN KEY (VehiculoAsignadoId) REFERENCES Vehiculo(Id),
-	FOREIGN KEY (EstadoId) REFERENCES Registro(Id)
+	FOREIGN KEY (EstadoId) REFERENCES Defecto(Id)
 )

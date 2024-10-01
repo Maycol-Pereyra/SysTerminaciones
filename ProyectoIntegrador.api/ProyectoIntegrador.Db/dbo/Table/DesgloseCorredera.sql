@@ -7,5 +7,6 @@
 	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
 	[FechaEntrega] DATETIME NULL,
 	[EstadoId] INT NOT NULL,
-	FOREIGN KEY (DespachoId) REFERENCES Despacho(Id)
+	FOREIGN KEY (DespachoId) REFERENCES Despacho(Id),
+	FOREIGN KEY (EstadoId) REFERENCES Defecto(Id)
 )

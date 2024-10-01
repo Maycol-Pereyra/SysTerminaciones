@@ -10,5 +10,7 @@
         public int Cantidad { get; set; }
         public decimal Descuento { get; set; }
         public int Division { get; set; }
+        public int TipoId { get; set; }
+        public string TipoDescripcion { get; set; } = "";
     }
 }

@@ -98,6 +98,11 @@ namespace ProyectoIntegrador.Controllers
                 lista = lista.Where(o => o.EntidadId == parameter.EntidadId);
             }
 
+            if (parameter.Id > 0)
+            {
+                lista = lista.Where(o => o.Id == parameter.Id);
+            }
+
             return lista;
         }
 

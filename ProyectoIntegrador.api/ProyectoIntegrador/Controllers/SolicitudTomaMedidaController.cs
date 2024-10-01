@@ -89,8 +89,8 @@ namespace ProyectoIntegrador.Controllers
             {
                 var objNew = _mapper.Map<SolicitudTomaMedida>(vm);
                 objNew.FechaCreacion = DateTime.Now;
-                objNew.EstadoId = await _dbContext.Registro
-                    .Where(o => o.TipoRegistroId == 26)
+                objNew.EstadoId = await _dbContext.Defecto
+                    .Where(o => o.TipoDefectoId == 17)
                     .Where(o => o.Descripcion == "Pendiente Tomar Medidas")
                     .AsNoTracking()
                     .Select(o => o.Id)
@@ -246,14 +246,16 @@ namespace ProyectoIntegrador.Controllers
                 return;
             }
 
-            var listaEntidadId = lista.Select(o => o.EmpleadoAsignado.EntidadId).ToList();
+            var listaEntidadId = lista
+                .Where(o => o.EmpleadoAsignado != null)
+                .Select(o => o.EmpleadoAsignado.EntidadId).ToList();
 
             var entidades = await _dbContext.Entidad
                 .Where(o => listaEntidadId.Contains(o.Id))
                 .AsNoTracking()
                 .ToListAsync();
 
-            foreach (var item in lista)
+            foreach (var item in lista.Where(o => o.EmpleadoAsignado != null))
             {
                 item.EmpleadoAsignado.Entidad = entidades.Where(o => o.Id == item.EmpleadoAsignado.EntidadId).FirstOrDefault() ?? new();
             }
@@ -266,14 +268,16 @@ namespace ProyectoIntegrador.Controllers
                 return;
             }
 
-            var listaEntidadId = lista.Select(o => o.Cliente.EntidadId).ToList();
+            var listaEntidadId = lista
+                .Where(o => o.Cliente != null)
+                .Select(o => o.Cliente.EntidadId).ToList();
 
             var entidades = await _dbContext.Entidad
                 .Where(o => listaEntidadId.Contains(o.Id))
                 .AsNoTracking()
                 .ToListAsync();
 
-            foreach (var item in lista)
+            foreach (var item in lista.Where(o => o.Cliente != null))
             {
                 item.Cliente.Entidad = entidades.Where(o => o.Id == item.Cliente.EntidadId).FirstOrDefault() ?? new();
             }

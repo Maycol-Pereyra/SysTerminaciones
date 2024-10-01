@@ -22,7 +22,9 @@ USING (VALUES
     (16, 'EstadoVehiculo'),
     (17, 'EstadoSolicitudTomaMedida'),
     (18, 'EstadoCotizacion'),
-    (19, 'EstadoFactura')
+    (19, 'EstadoFactura'),
+    (20, 'TipoProduccionFabricacion'),
+    (21, 'TipoMedida')
 
 ) AS source (Id, Descripcion)
 ON target.Id = source.Id
@@ -30,7 +32,7 @@ WHEN MATCHED THEN
     UPDATE SET 
         target.Descripcion = source.Descripcion
 WHEN NOT MATCHED THEN
-    INSERT (Id, Descripcion, FechaCreacion, EstaActivo)
+    INSERT (Id, Descripcion)
     VALUES (source.Id, source.Descripcion);
 
 SET NOCOUNT OFF

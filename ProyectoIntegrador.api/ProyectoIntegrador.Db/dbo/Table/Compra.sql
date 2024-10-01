@@ -15,7 +15,7 @@
 	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
 	[EstaActivo] BIT NOT NULL,
 	FOREIGN KEY (SuplidorId) REFERENCES Suplidor(Id),
-	FOREIGN KEY (MedioPagoId) REFERENCES Registro(Id),
-	FOREIGN KEY (TipoComprobanteId) REFERENCES Registro(Id),
+	FOREIGN KEY (MedioPagoId) REFERENCES Defecto(Id),
+	FOREIGN KEY (TipoComprobanteId) REFERENCES Defecto(Id),
 	FOREIGN KEY (UsuarioCreacionId) REFERENCES Usuario(Id)
 )

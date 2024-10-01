@@ -7,5 +7,5 @@
 	[FechaInstalacion] DATETIME NULL,
 	[EstadoId] INT NOT NULL,
 	FOREIGN KEY (FacturaId) REFERENCES Factura(Id),
-	FOREIGN KEY (EstadoId) REFERENCES Registro(Id)
+	FOREIGN KEY (EstadoId) REFERENCES Defecto(Id)
 )

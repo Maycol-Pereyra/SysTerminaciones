@@ -11,7 +11,7 @@ import { UsuarioService } from '../../shared/usuario.service';
 import { ConfirmacionPasswordValidator } from './confirmacion-password.validator';
 import { EndPointSelect } from 'src/app/_core/const/app.const';
 import { finalize, first } from 'rxjs/operators';
-import { regexCorreo } from 'src/app/_core/const/regexp.const';
+import { regexCorreo } from 'src/app/_core/const/regex.const';
 import { maskRnc, maskCedula } from 'src/app/_core/const/formato-mascara';
 
 @Component({

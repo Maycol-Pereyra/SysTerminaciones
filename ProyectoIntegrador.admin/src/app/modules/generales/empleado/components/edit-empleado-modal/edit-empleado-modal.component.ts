@@ -11,7 +11,7 @@ import { ItemSelectService } from 'src/app/_core/item-select/item-select.service
 import { AppConfig } from 'src/app/_core/services/app-config.service';
 import { AccesosService } from 'src/app/_core/services/acceso.service';
 import { EndPointSelect } from 'src/app/_core/const/app.const';
-import { regexCorreo } from 'src/app/_core/const/regexp.const';
+import { regexCorreo } from 'src/app/_core/const/regex.const';
 import { maskCedula, maskRnc } from 'src/app/_core/const/formato-mascara';
 
 @Component({

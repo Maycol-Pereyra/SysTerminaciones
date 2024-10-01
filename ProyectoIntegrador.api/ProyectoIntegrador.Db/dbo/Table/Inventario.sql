@@ -11,5 +11,5 @@
 	FOREIGN KEY (ProductoId) REFERENCES Producto(Id),
 	FOREIGN KEY (AlmacenId) REFERENCES Almacen(Id),
 	FOREIGN KEY (UnidadId) REFERENCES Unidad(Id),
-	FOREIGN KEY (EstadoId) REFERENCES Registro(Id)
+	FOREIGN KEY (EstadoId) REFERENCES Defecto(Id)
 )

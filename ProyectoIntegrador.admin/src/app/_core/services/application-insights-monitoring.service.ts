@@ -100,12 +100,12 @@ export class ApplicationInsightsMonitoringService {
         if (item) {
           item.properties = item.properties || {};
           // item.properties.ApplicationPlatform = 'WEB';
-          // item.properties.ApplicationName = AppConfig.settings.appInsightsRoleName || 'advansys-gestion-credito-admin';
+          // item.properties.ApplicationName = AppConfig.settings.appInsightsRoleName || 'sys-terminaciones-admin';
         }
 
         if (envelope !== undefined && envelope.tags) {
-          envelope.tags['ai.cloud.role'] = AppConfig.settings.appInsightsRoleName || 'advansys-gestion-credito-admin';
-          envelope.tags['ai.cloud.roleInstance'] = AppConfig.settings.appInsightsRoleInstance || 'advansys-gestion-credito-admin-01';
+          envelope.tags['ai.cloud.role'] = AppConfig.settings.appInsightsRoleName || 'sys-terminaciones-admin';
+          envelope.tags['ai.cloud.roleInstance'] = AppConfig.settings.appInsightsRoleInstance || 'sys-terminaciones-admin-01';
         }
       }
     );

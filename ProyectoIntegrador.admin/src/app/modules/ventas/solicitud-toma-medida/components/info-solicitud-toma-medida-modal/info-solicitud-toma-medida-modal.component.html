@@ -63,46 +63,48 @@
         </div>
       </div>
 
-      <div class="separator separator-dashed my-8"></div>
-
-      <div class="table-responsive angular-bootstrap-table">
-        <table class="table table-head-custom table-vertical-center overflow-hidden">
-          <thead>
-            <th>
-              Descripción
-            </th>
-  
-            <th>
-              Medida
-            </th>
-  
-            <th class="text-right">Cantidad</th>
-            
-            <th>Es medida aproximada</th>
-            
-            <th>Nota</th>
-
-          </thead>
-          <tbody>
-            <tr *ngFor="let row of vm.listaDetalle">
-
-              <td>{{ getProductoDescripcion(row) }}</td>
-
-              <td>{{ getNumeroMixto(row.medidaAncho) + ' x ' + getNumeroMixto(row.medidaAlto) }}</td>
+      <ng-container *ngIf="vm.listaDetalle && vm.listaDetalle.length > 0">
+        <div class="separator separator-dashed my-8"></div>
+        
+        <div class="table-responsive angular-bootstrap-table">
+          <table class="table table-head-custom table-vertical-center overflow-hidden">
+            <thead>
+              <th>
+                Descripción
+              </th>
+    
+              <th>
+                Medida
+              </th>
+    
+              <th class="text-right">Cantidad</th>
               
-              <td class="text-right">{{ row.cantidad }}</td>
-              <td class="selection-cell">
-                <label class="checkbox checkbox-single">
-                  <input type="checkbox" [checked]="row.esMedidaAproximada" [disabled]="true"/>
-                  <span></span>
-                </label>
-              </td>
-
-              <td><p>{{ row.nota }}</p></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+              <th>Es medida aproximada</th>
+              
+              <th>Nota</th>
+  
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of vm.listaDetalle">
+  
+                <td>{{ getProductoDescripcion(row) }}</td>
+  
+                <td>{{ getNumeroMixto(row.medidaAncho) + ' x ' + getNumeroMixto(row.medidaAlto) }}</td>
+                
+                <td class="text-right">{{ row.cantidad }}</td>
+                <td class="selection-cell">
+                  <label class="checkbox checkbox-single">
+                    <input type="checkbox" [checked]="row.esMedidaAproximada" [disabled]="true"/>
+                    <span></span>
+                  </label>
+                </td>
+  
+                <td><p>{{ row.nota }}</p></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-container>
       
     </ng-container>
   </div>

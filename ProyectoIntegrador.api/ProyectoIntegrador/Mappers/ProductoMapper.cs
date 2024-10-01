@@ -84,6 +84,12 @@ namespace ProyectoIntegrador.Mappers
                     opt => opt.MapFrom(ori => ori.UnidadProduccion != null
                         ? $"{ori.UnidadProduccion.Descripcion}"
                         : "")
+                )
+                .ForMember(
+                    des => des.TipoDescripcion,
+                    opt => opt.MapFrom(ori => ori.Tipo != null
+                        ? $"{ori.Tipo.Descripcion}"
+                        : "")
                 );
             CreateMap<ProductoDetalleProduccionVm, ProductoDetalleProduccion>();
         }

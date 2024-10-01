@@ -111,7 +111,6 @@
     <Build Include="dbo\Table\Despacho.sql" />
     <Build Include="dbo\Table\Ensamblado.sql" />
     <Build Include="dbo\Table\PerfilAcceso.sql" />
-    <Build Include="dbo\Table\Programa.sql" />
     <Build Include="dbo\Table\UsuarioPerfil.sql" />
     <Build Include="dbo\Table\Compra.sql" />
     <Build Include="dbo\Table\CompraDetalle.sql" />

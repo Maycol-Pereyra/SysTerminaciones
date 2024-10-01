@@ -5,6 +5,6 @@
 	[FechaFinal] DATETIME NOT NULL,
 	[UsuarioCreacion] INT NOT NULL,
 	[EstaActivo] BIT NOT NULL,
-	FOREIGN KEY (TipoNomina) REFERENCES Registro(Id),
+	FOREIGN KEY (TipoNomina) REFERENCES Defecto(Id),
 	FOREIGN KEY (UsuarioCreacion) REFERENCES Usuario(Id)
 )

@@ -7,7 +7,7 @@ import { FormBase } from '../../../../../_core/clase-base/form-base';
 import { NgbTimeStringAdapter } from '../../../../../_metronic/core/utils/time-string-adapter';
 import { ConfiguracionGeneral } from '../../shared/configuracion-general.model';
 import { ConfiguracionGeneralService } from '../../shared/configuracion-general.service';
-import { regexCorreo } from 'src/app/_core/const/regexp.const';
+import { regexCorreo } from 'src/app/_core/const/regex.const';
 import { ItemSelect } from 'src/app/_core/item-select/item-select.model';
 
 @Component({

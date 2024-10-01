@@ -16,7 +16,7 @@
         public virtual EntidadDireccion Direccion { get; set; }
         public virtual Empleado EmpleadoAsignado { get; set; }
         public virtual Vehiculo VehiculoAsignado { get; set; }
-        public virtual Registro Estado { get; set; }
+        public virtual Defecto Estado { get; set; }
         public virtual List<SolicitudTomaMedidaDetalle> ListaDetalle { get; set; } = [];
     }
 }

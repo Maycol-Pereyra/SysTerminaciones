@@ -17,7 +17,7 @@ export class ColorComponent implements OnInit {
 
   // angular lifecircle hooks
   ngOnInit(): void {
-    this.tipoRegistroId = 5;
+    this.tipoRegistroId = 4;
     this.titulo = 'Color';
     this.accesoCrearId = 'generales.color.crear';
     this.accesoEditarId = 'generales.color.editar'; 

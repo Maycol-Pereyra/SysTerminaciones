@@ -18,10 +18,10 @@
 	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
 	[EstadoId] INT NOT NULL,
 	FOREIGN KEY (ClienteId) REFERENCES Cliente(Id),
-	FOREIGN KEY (MedioPagoId) REFERENCES Registro(Id),
-	FOREIGN KEY (TipoComprobanteId) REFERENCES Registro(Id),
+	FOREIGN KEY (MedioPagoId) REFERENCES Defecto(Id),
+	FOREIGN KEY (TipoComprobanteId) REFERENCES Defecto(Id),
 	FOREIGN KEY (UsuarioCreacionId) REFERENCES Usuario(Id),
 	FOREIGN KEY (DireccionId) REFERENCES EntidadDireccion(Id),
 	FOREIGN KEY (TelefonoId) REFERENCES EntidadTelefono(Id),
-	FOREIGN KEY (EstadoId) REFERENCES Registro(Id)
+	FOREIGN KEY (EstadoId) REFERENCES Defecto(Id)
 )

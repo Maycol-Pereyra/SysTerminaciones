@@ -5,5 +5,5 @@
 	[FechaDistribucion] DATETIME NULL,
 	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
 	[EstaActivo] BIT NOT NULL,
-	foreign key (EstadoId) REFERENCES Registro(Id)
+	FOREIGN KEY (EstadoId) REFERENCES Defecto(Id)
 )

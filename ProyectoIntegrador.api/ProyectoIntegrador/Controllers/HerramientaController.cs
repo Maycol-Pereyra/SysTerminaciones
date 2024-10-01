@@ -32,6 +32,7 @@ namespace ProyectoIntegrador.Controllers
         public async Task<ActionResult<PagedList<HerramientaIndex>>> Get([FromQuery] HerramientaParameters parameter)
         {
             var lista = _dbContext.Herramienta
+                .Include(o => o.Estado)
                 .AsNoTracking();
             lista = Filtrar(lista, parameter);
             lista = lista.OrderBy(o => o.Id);
@@ -56,8 +57,8 @@ namespace ProyectoIntegrador.Controllers
         [HttpGet("estado-item-select")]
         public async Task<ActionResult<List<ItemSelect>>> GetEstadoItemSelect([FromQuery] HerramientaParameters parameter)
         {
-            var lista = _dbContext.Registro
-                .Where(o => o.TipoRegistroId == 8) //EstadoHerramienta
+            var lista = _dbContext.Defecto
+                .Where(o => o.TipoDefectoId == 2) //EstadoHerramienta
                 .AsNoTracking();
             lista = lista.OrderBy(o => o.Id);
             var pl = await lista.ToPagedList(parameter);

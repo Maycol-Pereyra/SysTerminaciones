@@ -9,7 +9,7 @@
 	[UsuarioCreacionId] INT NOT NULL,
 	[FechaCreacion] DATETIME NOT NULL DEFAULT GETDATE(),
 	FOREIGN KEY (ProductoId) REFERENCES Producto(Id),
-	FOREIGN KEY (TipoMovimientoId) REFERENCES Registro(Id),
+	FOREIGN KEY (TipoMovimientoId) REFERENCES Defecto(Id),
 	FOREIGN KEY (UsuarioCreacionId) REFERENCES Usuario(Id),
 	FOREIGN KEY (AlmacenOrigenId) REFERENCES Almacen(Id),
 	FOREIGN KEY (AlmacenDestinoId) REFERENCES Almacen(Id)

@@ -134,7 +134,7 @@ export class SolicitudTomaMedidaComponent
   }
 
   info(id: number) {
-    if (this.accesosService.puedeEditar('ventas.solicitud-toma-medida.ver-info')) {
+    if (this.accesosService.puede('ventas.solicitud-toma-medida.ver-info', 'Usted no tiene acceso a editar esta solicitud')) {
       const modalRef = this.modalService.open(InfoSolicitudTomaMedidaModalComponent, { size: 'xl', backdrop: 'static' });
       modalRef.componentInstance.id = id;
       modalRef.result.then(
@@ -170,7 +170,7 @@ export class SolicitudTomaMedidaComponent
 
   private validarEditar(row: any): boolean {
     if (row.estadoDescripcion !== 'Pendiente Tomar Medidas') {
-      Mensajes.mensajeValidacion('La solicitud no se encuentra en un estado disponible para tomar la medida');
+      Mensajes.mensajeValidacion('La solicitud no se encuentra en un estado disponible para editar');
       return false;
     }
 

@@ -20,8 +20,8 @@
 
 
         public virtual Suplidor Suplidor { get; set; }
-        public virtual Registro MedioPago { get; set; }
-        public virtual Registro TipoComprobante { get; set; }
+        public virtual Defecto MedioPago { get; set; }
+        public virtual Defecto TipoComprobante { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

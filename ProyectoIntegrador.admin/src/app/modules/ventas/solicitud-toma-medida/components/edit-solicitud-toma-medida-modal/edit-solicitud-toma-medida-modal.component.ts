@@ -88,6 +88,14 @@ export class EditSolicitudTomaMedidaModalComponent extends FormBase implements O
       this.cambioCliente(val);
       this.cd.detectChanges();
     });
+
+    if (+this.vm.clienteId > 0) {
+      const direccionFilter = ItemSelectService.defaultFilter();
+      direccionFilter.filter.push({ criterio: 'clienteId', valor: `${this.vm.clienteId}` } as ItemSelectFilter);
+  
+      this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.direccion}`, direccionFilter)
+        .subscribe(data => this.direccion$.next(data));
+    }
   }
 
   save() {
@@ -116,7 +124,9 @@ export class EditSolicitudTomaMedidaModalComponent extends FormBase implements O
     const formData = this.formGroup.value;
     this.vm.clienteId = formData.clienteId;
     this.vm.direccionId = formData.direccionId;
-    this.vm.fechaCompromisoTomaMedida = formData.fechaCompromisoTomaMedida;
+    this.vm.fechaCompromisoTomaMedida = !formData.fechaCompromisoTomaMedida 
+      ? null
+      : new Date(formData.fechaCompromisoTomaMedida.year, +formData.fechaCompromisoTomaMedida.month - 1, formData.fechaCompromisoTomaMedida.day);
     this.vm.empleadoAsignadoId = formData.empleadoAsignadoId;
     this.vm.vehiculoAsignadoId = formData.vehiculoAsignadoId;
   }

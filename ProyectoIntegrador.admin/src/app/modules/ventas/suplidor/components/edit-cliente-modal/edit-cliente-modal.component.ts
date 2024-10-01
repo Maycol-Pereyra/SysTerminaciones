@@ -6,7 +6,7 @@ import { catchError, first } from 'rxjs/operators';
 import { AuthenticationService } from '../../../../../_core/services/authentication.service';
 import { FormBase } from 'src/app/_core/clase-base/form-base';
 import { AccesosService } from 'src/app/_core/services/acceso.service';
-import { regexCorreo } from 'src/app/_core/const/regexp.const';
+import { regexCorreo } from 'src/app/_core/const/regex.const';
 import { maskCedula, maskRnc } from 'src/app/_core/const/formato-mascara';
 import { Cliente } from '../../shared/cliente.model';
 import { ClienteService } from '../../shared/cliente.service';

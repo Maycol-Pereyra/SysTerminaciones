@@ -24,7 +24,7 @@
         public virtual EntidadTelefono Telefono { get; set; }
         public virtual Usuario UsuarioCreacion { get; set; }
         public virtual EntidadDireccion Direccion { get; set; }
-        public virtual Registro Estado { get; set; }
+        public virtual Defecto Estado { get; set; }
         public virtual List<CotizacionDetalle> ListaDetalle { get; set; } = [];
     }
 }

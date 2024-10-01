@@ -14,6 +14,9 @@ import { AppConfig } from 'src/app/_core/services/app-config.service';
 import { EndPointSelect } from 'src/app/_core/const/app.const';
 import { TipoMedidaEnum } from '../../shared/tipo-medida.enum';
 import { NumeroMixto } from 'src/app/_core/models/numero-mixto.model';
+import { TipoProducto } from '../../shared/tipo-producto.model';
+import { NumberHelper } from 'src/app/_core/helpers/number.helper';
+import { regexNumeroMixtoFraccion } from 'src/app/_core/const/regex.const';
 
 @Component({
   selector: 'app-edit-producto-modal',
@@ -26,9 +29,9 @@ export class EditProductoModalComponent extends FormBase implements OnInit, OnDe
   vm: Producto;
   categoria$;
   suplidor$;
-  tipoProducto$;
   color$;
 
+  public listaTipoProducto: ItemSelect[] = [];
   public listaTipoMedida: ItemSelect[] = [];
   private subscriptions: Subscription[] = [];
 
@@ -47,11 +50,20 @@ export class EditProductoModalComponent extends FormBase implements OnInit, OnDe
     return this.formGroup.controls;
   }
 
+  get tipoProductoSeleccionado(): TipoProducto {
+    const tipoProductoId = this.formGroup.value.tipoProductoId;
+
+    const elemento = this.listaTipoProducto.find(o => +o.id === +tipoProductoId);
+
+    return !elemento ? null : elemento.objeto as TipoProducto;
+  }
+
   ngOnInit(): void {
     this.isLoading$ = this.service.isLoading$;
 
     this.suplidor$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.suplidor}`);    
-    this.tipoProducto$ = this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.tipoProducto}`);
+    this.itemSelectService.get(`${AppConfig.settings.api}${EndPointSelect.tipoProducto}`)
+      .subscribe(data => this.listaTipoProducto = data as ItemSelect[]);
 
     const filtroCategoria = ItemSelectService.defaultFilter();
     filtroCategoria.filter.push({ criterio: 'tipoRegistroId', valor: '1'});
@@ -94,8 +106,8 @@ export class EditProductoModalComponent extends FormBase implements OnInit, OnDe
       tipoProductoId: [this.vm.tipoProductoId, Validators.compose([Validators.required])],
       colorId: [this.vm.colorId, Validators.compose([Validators.required])],
       tipoMedidaId: [this.vm.tipoMedidaId, Validators.compose([Validators.nullValidator])],
-      medidaAncho: [this.vm.medidaAncho, Validators.compose([Validators.nullValidator])],
-      medidaAlto: [this.vm.medidaAlto, Validators.compose([Validators.nullValidator])],
+      medidaAncho: [this.vm.medidaAncho, Validators.compose([Validators.nullValidator, Validators.pattern(regexNumeroMixtoFraccion),])],
+      medidaAlto: [this.vm.medidaAlto, Validators.compose([Validators.nullValidator, Validators.pattern(regexNumeroMixtoFraccion),])],
     });
   }
 
@@ -194,11 +206,18 @@ export class EditProductoModalComponent extends FormBase implements OnInit, OnDe
       return false;
     }
 
+    const objSinPrecio = this.vm.listaProductoUnidad.find(o => NumberHelper.obtenerValorNumerico(o.precioVenta) === 0);
+
+    if (objSinPrecio) {
+      this.mensajeValidacion(`Debe especificar el precio de venta para la unidad: ${objSinPrecio.unidadDescripcion}`);
+      return false;
+    }
+
     return true;
   }
 
   llenarListaTipoMedida(): void {
     this.listaTipoMedida.push(new ItemSelect({ id: +TipoMedidaEnum.Pulgada, descripcion: 'Pulgadas' }));
-    this.listaTipoMedida.push(new ItemSelect({ id: +TipoMedidaEnum.centimetro, descripcion: 'Centimetros' }));
+    this.listaTipoMedida.push(new ItemSelect({ id: +TipoMedidaEnum.centimetro, descripcion: 'Centímetros' }));
   }
 }

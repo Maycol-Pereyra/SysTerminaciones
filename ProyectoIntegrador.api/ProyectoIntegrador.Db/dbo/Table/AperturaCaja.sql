@@ -8,5 +8,5 @@
 	[CuadroCaja] BIT NOT NULL,
 	FOREIGN KEY (CajaId) REFERENCES Caja(Id),
 	FOREIGN KEY (UsuarioId) REFERENCES Usuario(Id),
-	FOREIGN KEY (TurnoId) REFERENCES Registro(Id)
+	FOREIGN KEY (TurnoId) REFERENCES Defecto(Id)
 )

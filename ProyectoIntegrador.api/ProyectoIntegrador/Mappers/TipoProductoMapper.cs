@@ -9,7 +9,11 @@ namespace ProyectoIntegrador.Mappers
     {
         public TipoProductoMapper()
         {
-            CreateMap<TipoProducto, ItemSelect>();
+            CreateMap<TipoProducto, ItemSelect>()
+                .ForMember(
+                    des => des.Objeto,
+                    opt => opt.MapFrom(ori => ori)
+                );
             CreateMap<TipoProducto, TipoProductoVm>();
             CreateMap<TipoProductoVm, TipoProducto>();
         }

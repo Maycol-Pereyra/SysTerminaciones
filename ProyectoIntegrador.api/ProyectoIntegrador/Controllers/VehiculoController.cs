@@ -63,9 +63,8 @@ namespace ProyectoIntegrador.Controllers
         [HttpGet("estado-item-select")]
         public async Task<ActionResult<List<ItemSelect>>> GetEstadoItemSelect([FromQuery] VehiculoParameters parameter)
         {
-            var lista = _dbContext.Registro
-                .Where(o => o.TipoRegistroId == 25) //Estado vehiculo
-                .Where(o => o.EstaActivo)
+            var lista = _dbContext.Defecto
+                .Where(o => o.TipoDefectoId == 16) //Estado vehiculo
                 .AsNoTracking();
             lista = lista.OrderBy(o => o.Id);
             var pl = await lista.ToPagedList(parameter);

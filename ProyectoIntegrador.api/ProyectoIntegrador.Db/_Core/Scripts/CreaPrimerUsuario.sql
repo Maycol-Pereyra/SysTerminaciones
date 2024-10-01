@@ -1,7 +1,6 @@
 PRINT'EJECUTANDO CreaPrimerUsuario'
 
 SET NOCOUNT ON
-SET IDENTITY_INSERT Registro ON
 
 IF NOT EXISTS (SELECT TOP 1 * FROM Entidad) BEGIN
     INSERT INTO Entidad (Nombre, Apellido, Cedula, Rnc, Pasaporte, Correo, FechaCreacion, EstaActivo)
@@ -29,7 +28,7 @@ IF (NOT EXISTS (SELECT TOP 1 * FROM Usuario)) AND @EmpleadoId > 0 BEGIN
 END
 
 IF (NOT EXISTS (SELECT TOP 1 * FROM Perfil)) BEGIN
-    INSERT INTO Perfil (Descripcion) VALUES ('Admin')
+    INSERT INTO Perfil (Descripcion, FechaCreacion, EstaActivo) VALUES ('Admin', GETDATE(), 1)
 END
 
 DECLARE @PerfilId INT

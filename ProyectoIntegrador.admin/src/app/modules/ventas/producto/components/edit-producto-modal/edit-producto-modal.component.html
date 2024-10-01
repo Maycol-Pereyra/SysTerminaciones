@@ -19,40 +19,36 @@
     <ng-container *ngIf="vm">
       <form action="#" class="form form-label-right" [formGroup]="formGroup">
 
-        <div class="form-group row">
-          <div class="col-lg-12">
-            <label class="form-label">Descripción</label>
-            <input 
-              type="text" 
-              class="form-control form-control-lg " 
-              name="descripcion"
-              placeholder="Descripción" 
-              autocomplete="off" 
-              [class.is-invalid]="isControlInvalid('descripcion')"
-              [class.is-valid]="isControlValid('descripcion')"
-              formControlName="descripcion" />
-            <div class="invalid-feedback" *ngIf="controlHasError('required', 'descripcion')">Es requerido</div>
-            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'descripcion')">Debe tener al menos 1 caracter</div>
-            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'descripcion')">Debe tener máximo 100 caracteres</div>
-          </div>
+        <div class="form-group">
+          <label class="form-label">Descripción</label>
+          <input 
+            type="text" 
+            class="form-control form-control-md " 
+            name="descripcion"
+            placeholder="Descripción" 
+            autocomplete="off" 
+            [class.is-invalid]="isControlInvalid('descripcion')"
+            [class.is-valid]="isControlValid('descripcion')"
+            formControlName="descripcion" />
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'descripcion')">Es requerido</div>
+          <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'descripcion')">Debe tener al menos 1 caracter</div>
+          <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'descripcion')">Debe tener máximo 100 caracteres</div>
         </div>
 
-        <div class="form-group row">
-          <div class="col-lg-12">
-            <label class="form-label">Descripción para el cliente</label>
-            <input 
-              type="text" 
-              class="form-control form-control-lg " 
-              name="descripcionCliente"
-              placeholder="Descripción para el cliente" 
-              autocomplete="off" 
-              [class.is-invalid]="isControlInvalid('descripcionCliente')"
-              [class.is-valid]="isControlValid('descripcionCliente')"
-              formControlName="descripcionCliente" />
-            <div class="invalid-feedback" *ngIf="controlHasError('required', 'descripcionCliente')">Es requerido</div>
-            <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'descripcionCliente')">Debe tener al menos 1 caracter</div>
-            <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'descripcionCliente')">Debe tener máximo 100 caracteres</div>
-          </div>
+        <div class="form-group">
+          <label class="form-label">Descripción para el cliente</label>
+          <input 
+            type="text" 
+            class="form-control form-control-md " 
+            name="descripcionCliente"
+            placeholder="Descripción para el cliente" 
+            autocomplete="off" 
+            [class.is-invalid]="isControlInvalid('descripcionCliente')"
+            [class.is-valid]="isControlValid('descripcionCliente')"
+            formControlName="descripcionCliente" />
+          <div class="invalid-feedback" *ngIf="controlHasError('required', 'descripcionCliente')">Es requerido</div>
+          <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'descripcionCliente')">Debe tener al menos 1 caracter</div>
+          <div class="invalid-feedback" *ngIf="controlHasError('maxlength', 'descripcionCliente')">Debe tener máximo 100 caracteres</div>
         </div>
 
         <div class="form-group">
@@ -65,7 +61,7 @@
             formControlName="tipoProductoId"
             [class.is-invalid]="isControlInvalid('tipoProductoId')">
             <option [ngValue]="null">Seleccione Uno</option>
-            <ng-container *ngFor="let item of tipoProducto$ | async">
+            <ng-container *ngFor="let item of listaTipoProducto">
               <option [value]="item.id">{{item.descripcion}}</option>
             </ng-container>
           </select>
@@ -106,53 +102,60 @@
           <div class="invalid-feedback" *ngIf="controlHasError('required', 'colorId')">Es requerido</div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Tipo de medida</label>
-          <select 
-            class="form-control selectpicker"
-            data-size="7"
-            data-live-search="true"
-            name="tipoMedidaId"  
-            formControlName="tipoMedidaId"
-            [class.is-invalid]="isControlInvalid('tipoMedidaId')">
-            <option [ngValue]="null">Seleccione Uno</option>
-            <ng-container *ngFor="let item of listaTipoMedida">
-              <option [value]="item.id">{{item.descripcion}}</option>
+        <ng-container *ngIf="tipoProductoSeleccionado && (tipoProductoSeleccionado.usaMedidaAncho || tipoProductoSeleccionado.usaMedidaAlto)">
+          <div class="form-group">
+            <label class="form-label">Tipo de medida</label>
+            <select 
+              class="form-control selectpicker"
+              data-size="7"
+              data-live-search="true"
+              name="tipoMedidaId"  
+              formControlName="tipoMedidaId"
+              [class.is-invalid]="isControlInvalid('tipoMedidaId')">
+              <option [ngValue]="null">Seleccione Uno</option>
+              <ng-container *ngFor="let item of listaTipoMedida">
+                <option [value]="item.id">{{item.descripcion}}</option>
+              </ng-container>
+            </select>
+            <div class="invalid-feedback" *ngIf="controlHasError('required', 'tipoMedidaId')">Es requerido</div>
+          </div>
+  
+          <div class="form-group row">
+            
+            <ng-container *ngIf="tipoProductoSeleccionado.usaMedidaAncho">
+              <div class="col-lg-6">
+                <label class="form-label">Medida de ancho</label>
+                <input 
+                  type="text" 
+                  class="form-control form-control-md " 
+                  name="medidaAncho"
+                  placeholder="Medida de ancho" 
+                  autocomplete="off" 
+                  [class.is-invalid]="isControlInvalid('medidaAncho')"
+                  [class.is-valid]="isControlValid('medidaAncho')"
+                  formControlName="medidaAncho" />
+                <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'medidaAncho')">Debe tener especificar la medida en formato # #/# o #/#</div>
+              </div>
             </ng-container>
-          </select>
-          <div class="invalid-feedback" *ngIf="controlHasError('required', 'tipoMedidaId')">Es requerido</div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-lg-6">
-            <label class="form-label">Medida de ancho</label>
-            <input 
-              type="text" 
-              class="form-control form-control-lg " 
-              name="medidaAncho"
-              placeholder="Medida de ancho" 
-              autocomplete="off" 
-              [class.is-invalid]="isControlInvalid('medidaAncho')"
-              [class.is-valid]="isControlValid('medidaAncho')"
-              formControlName="medidaAncho" />
-            <div class="text-muted">Especifique en formato <b># ##/##</b></div> 
+  
+            <ng-container *ngIf="tipoProductoSeleccionado.usaMedidaAlto">
+              <div class="col-lg-6">
+                <label class="form-label">Medida de alto</label>
+                <input 
+                  type="text" 
+                  class="form-control form-control-md"
+                  name="medidaAlto"
+                  placeholder="Medida de alto" 
+                  autocomplete="off" 
+                  [class.is-invalid]="isControlInvalid('medidaAlto')"
+                  [class.is-valid]="isControlValid('medidaAlto')"
+                  formControlName="medidaAlto" />
+                  <div class="invalid-feedback" *ngIf="controlHasError('pattern', 'medidaAlto')">Debe tener especificar la medida en formato # #/# o #/#</div>
+              </div>
+            </ng-container>
           </div>
-
-          <div class="col-lg-6">
-            <label class="form-label">Medida de alto</label>
-            <input 
-              type="text" 
-              class="form-control form-control-lg " 
-              name="medidaAlto"
-              placeholder="Medida de alto" 
-              autocomplete="off" 
-              [class.is-invalid]="isControlInvalid('medidaAlto')"
-              [class.is-valid]="isControlValid('medidaAlto')"
-              formControlName="medidaAlto" />
-            <div class="text-muted">Especifique en formato <b># ##/##</b></div> 
-          </div>
-        </div>
-
+        </ng-container>
+        
         <div class="form-group">
           <label class="form-label">Suplidor</label>
           <select 

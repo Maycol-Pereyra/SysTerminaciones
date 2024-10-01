@@ -29,6 +29,6 @@
 	PRIMARY KEY (DesgloseCorrederaId, ProductoId, MedidaAnchoProducto, MedidaAltoProducto),
 	FOREIGN KEY (DesgloseCorrederaId) REFERENCES DesgloseCorredera(Id),
 	FOREIGN KEY (ProductoId) REFERENCES Producto(Id),
-	FOREIGN KEY (EstadoId) REFERENCES Registro(Id),
+	FOREIGN KEY (EstadoId) REFERENCES Defecto(Id),
 	FOREIGN KEY (UnidadId) REFERENCES Unidad(Id)
 )
